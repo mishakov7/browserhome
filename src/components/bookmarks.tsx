@@ -28,12 +28,15 @@ export default function Bookmarks() {
       "link": input2Ref.current.value
     }
 
-    let storageBookmarks = bookmarkList;
+    let storageBookmarks = bookmarkList.slice();
     storageBookmarks.push(storageBookmark);
 
     // setBookmarkList(bookmarkList, storageBookmark);
-    localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));  
     setBookmarkList(storageBookmarks);
+    localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));  
+
+    console.log(bookmarkList);
+
   }
 
   useEffect(() => {
@@ -43,9 +46,7 @@ export default function Bookmarks() {
       setBookmarkList(localBookmarks);
     }
 
-    console.log(bookmarkList);
-
-  }, [bookmarkList]);
+  }, []);
 
   return (
     <>
@@ -54,9 +55,6 @@ export default function Bookmarks() {
             {
               bookmarkList.length < 1 ? "Add a bookmark!" : bookmarkList.map(bookmark => (
                   <li className='bookmark' key={bookmark.key}>
-                    {/* <a href={bookmark.link}>
-                      <img src={bookmark.image} width="40"/>
-                    </a> */}
                     <Bookmark 
                       link={bookmark.link}
                       image={bookmark.image}
