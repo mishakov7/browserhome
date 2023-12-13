@@ -32,7 +32,10 @@
 /**********************/
 /** FONT ASSIGNMENTS **/
 /**********************/
-
+@font-face {
+  font-family: "Kalam";
+  src: url("/fonts/Kalam/Kalam-Regular.ttf");
+}
 @font-face {
   font-family: "Plus Jakarta";
   src: url("/fonts/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf");
@@ -594,10 +597,20 @@ label {
 
 /* * * * * * * * * * * * * * * * * * * * * * */
 /* BROWSER HOME STYLES */
-.searchQuery {
+.flex-row {
+  display: flex;
+}
+
+.google-container {
+  margin: 50px;
+}
+
+.search-query {
   font-family: 'Plus Jakarta';
   font-size: 2.4em;
   font-weight: 700;
+  line-height: 1.2em;
+  text-align: right;
 }
 
 .inputGroup {
@@ -627,12 +640,25 @@ input[type="text"] {
   margin: 10px;
 }
 
+/* POLAROIDS */
 .polaroid-container {
   background-color: #FFF8E5;
   padding: 20px 20px 48px 20px;
+  margin: 50px;
   border-radius: 36px;
   position: relative;
   width: max-content;
+  transform: rotate(-4deg);
+}
+
+.polaroid-container::before {
+  content: "Do it for him";
+  position: absolute;
+  font-family: 'Kalam', cursive;
+  font-size: 1.5em;
+  text-transform: lowercase;
+  top: -60px;
+  padding: 20px 5px;
 }
 
 .polaroid-container::after {
@@ -677,4 +703,43 @@ input[type="text"] {
 
 .upload-button:hover path {
   fill: var(--blurple);
+}
+
+/* BOOKMARKS */
+.bookmarks-container,
+.bookmarks-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bookmark {
+  background-color: #FFF8E5;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.20);
+  width: 75px;
+  height: 75px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.bookmark a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.create-button path {
+  transition: fill 0.2s;
+}
+
+.create-button:hover path {
+  fill: #9A9381;
 }

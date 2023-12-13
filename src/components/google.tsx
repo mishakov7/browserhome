@@ -19,8 +19,8 @@ export default function Google() {
 
   return (
     <>
-    <div>
-        <p className="searchQuery">{funnySearch}</p>
+    <div className='google-container'>
+        <p className="search-query">{funnySearch}</p>
         <div className="inputGroup"> 
           <input type="text" onChange={e => setSearch(e.target.value)}/>
           <a target="_blank" href={"https://www.google.com/search?q=" + search}>

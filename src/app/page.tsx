@@ -4,6 +4,7 @@ import Head from 'next/head'
 // Each section of the site
 import Google from '@/components/google';
 import Polaroid from '@/components/polaroid';
+import Bookmarks from '@/components/bookmarks';
 
 export default function Home() {
 
@@ -18,10 +19,15 @@ export default function Home() {
 
       <div id="main-container" className="blurple-border">
         <div id="main-wrapper">
-          <Polaroid />
-          <Google />
-          {/* Insert bills/todo component */}
-          {/* Insert bookmarks component */}
+
+          <div className='flex-row'>
+            <Polaroid />
+            <Google />
+            {/* Insert bills/todo component */}
+          </div>
+
+          <Bookmarks />
+          
         </div>
       </div>
 
