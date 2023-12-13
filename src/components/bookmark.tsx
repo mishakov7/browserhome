@@ -5,11 +5,9 @@ const Bookmark = (props: any) => {
 
   return (
     <>
-    <div className='bookmark'>
-        <a href={props.link}>
-          <img src={props.image} width="40"/>
-        </a>
-    </div>
+      <a href={props.link}>
+        <img src={props.image} width="40"/>
+      </a>
     </>
   )
 }

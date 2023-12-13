@@ -52,10 +52,14 @@ export default function Bookmarks() {
         <ul className='bookmarks-list'>
             {
               bookmarkList.length == 0 ? "Add a bookmark!" : bookmarkList.map(bookmark => (
-                  <li key={bookmark.key}>
-                    <a href={bookmark.link}>
+                  <li className='bookmark' key={bookmark.key}>
+                    {/* <a href={bookmark.link}>
                       <img src={bookmark.image} width="40"/>
-                    </a>
+                    </a> */}
+                    <Bookmark 
+                      link={bookmark.link}
+                      image={bookmark.image}
+                    />
                   </li>
               ))
             }
@@ -77,7 +81,9 @@ export default function Bookmarks() {
           ref2={input2Ref} 
           label2="Link" 
           name2="bookmark-link" 
-          submitlabel="Add Bookmark"/> 
+          submitlabel="Add Bookmark"
+          bg="breen-bg"  
+        /> 
           
         : null }
     </div>

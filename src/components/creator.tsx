@@ -5,7 +5,7 @@ const Creator = (props: any) => {
 
   return (
     <>
-    <div className={'creator' + props.bg}>
+    <div className={'creator ' + props.bg}>
         <div className="input-group">
             <label>{props.label1}</label>
             <input ref={props.ref1} type="text" name={props.name1} />

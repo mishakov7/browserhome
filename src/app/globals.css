@@ -719,7 +719,8 @@ input[type="text"] {
   width: 75px;
   height: 75px;
   border-radius: 20px;
-  margin: 10px;
+  margin: 6px;
+  list-style-type: none;
 }
 
 .bookmark a {
@@ -728,6 +729,56 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.bookmarks-container .create-button {
+  margin-left: 10px;
+}
+
+.creator {
+  position: relative;
+  padding: 20px;
+  font-size: 12px;
+  border-radius: 16px;
+  left: 20px;
+}
+
+.bookmarks-container .creator::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  border-radius: 12px;
+  transform: rotate(45deg);
+  left: -10px;
+  top: 36%;
+  z-index: -1;
+}
+
+.creator.breen-bg::before {
+  background-color: var(--breen);
+}
+
+.creator input {
+  padding: 0px 10px;
+  border: none;
+  border-radius: 12px;
+  margin: 5px 0;
+}
+
+.creator button {
+  position: absolute;
+  background: none;
+  border: none;
+  bottom: -25px;
+  right: 0;
+  font-family: 'Roboto Slab';
+  text-transform: uppercase;
+}
+
+.creator button svg {
+  margin-left: 5px;
 }
 
 .create-button {
