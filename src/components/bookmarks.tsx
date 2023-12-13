@@ -44,14 +44,15 @@ export default function Bookmarks() {
     }
 
     console.log(bookmarkList);
-  }, []);
+
+  }, [bookmarkList]);
 
   return (
     <>
     <div className='bookmarks-container'>
         <ul className='bookmarks-list'>
             {
-              bookmarkList.length == 0 ? "Add a bookmark!" : bookmarkList.map(bookmark => (
+              bookmarkList.length < 1 ? "Add a bookmark!" : bookmarkList.map(bookmark => (
                   <li className='bookmark' key={bookmark.key}>
                     {/* <a href={bookmark.link}>
                       <img src={bookmark.image} width="40"/>
