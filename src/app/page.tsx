@@ -3,6 +3,7 @@ import Head from 'next/head'
 
 // Each section of the site
 import Google from '@/components/google';
+import Polaroid from '@/components/polaroid';
 
 export default function Home() {
 
@@ -17,7 +18,7 @@ export default function Home() {
 
       <div id="main-container" className="blurple-border">
         <div id="main-wrapper">
-          {/* Insert polaroid component */}
+          <Polaroid />
           <Google />
           {/* Insert bills/todo component */}
           {/* Insert bookmarks component */}

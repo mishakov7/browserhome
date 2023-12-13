@@ -626,3 +626,7 @@ input[type="text"] {
   right: 0;
   margin: 10px;
 }
+
+.polaroid-container img {
+  aspect-ratio: 16 / 9;
+}
