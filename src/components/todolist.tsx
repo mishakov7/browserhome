@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from './creator';
 
-export default function ToDo() {
+export default function ToDoList() {
 
   const [todoList, setTodoList] = useState([]);
   const [showCreator, setCreator] = useState(false);
@@ -85,7 +85,7 @@ export default function ToDo() {
               todoList.length < 1 ? "Add a todo" : todoList.map( todo => (
                 <li className='todo-item' key={todo.key}>
                   <div className='inputGroup'>
-                    
+
                     {
                       todo.checked ? 
                       <input type='checkbox' onChange={(e) => changeChecked(e)} name={'check' + todo.key} checked/> :
