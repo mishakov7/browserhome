@@ -202,7 +202,7 @@ input, textarea {
   overflow-x: hidden!important;
   /* filter: blur(0px); */
   transition: filter 0.6s;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 
 }
 
@@ -597,6 +597,17 @@ label {
 
 /* * * * * * * * * * * * * * * * * * * * * * */
 /* BROWSER HOME STYLES */
+#main-container {
+  height: 100vh;
+}
+
+#main-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .flex-row {
   display: flex;
 }
@@ -649,6 +660,8 @@ input[type="text"] {
   position: relative;
   width: max-content;
   transform: rotate(-4deg);
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.20);
+
 }
 
 .polaroid-container::before {
@@ -676,7 +689,7 @@ input[type="text"] {
 
 .polaroid-container img {
   width: 350px;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 6px;
 }
@@ -713,11 +726,27 @@ input[type="text"] {
   align-items: center;
 }
 
+.bookmarks-container {
+  max-height: 75px;
+  margin: 40px 10px;
+}
+
 @keyframes hop {
   from {
     bottom: 0;
   } to {
-    bottom: 20px;
+    bottom: 12px;
+  }
+}
+
+@keyframes appearbounceleft {
+  from {
+    opacity: 0;
+    left: 40px;
+
+  } to {
+    opacity: 1;
+    left: 20px
   }
 }
 
@@ -730,7 +759,13 @@ input[type="text"] {
   border-radius: 20px;
   margin: 6px;
   list-style-type: none;
-  animation: hop 0.4s backwards;
+  bottom: 0;
+  transition: bottom 0.2s;
+  /* animation: hop 0.4s backwards; */
+}
+
+.bookmark:hover {
+  bottom: 12px;
 }
 
 .bookmark a {
@@ -751,6 +786,8 @@ input[type="text"] {
   font-size: 12px;
   border-radius: 16px;
   left: 20px;
+  top: -40%;
+  animation: appearbounceleft 0.4s;
 }
 
 .bookmarks-container .creator::before {
@@ -762,7 +799,7 @@ input[type="text"] {
   border-radius: 12px;
   transform: rotate(45deg);
   left: -10px;
-  top: 36%;
+  top: 56%;
   z-index: -1;
 }
 
