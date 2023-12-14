@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import searches from  './searches';
 
-export default function Google() {
+export default function Search() {
 
   const [funnySearch, setFunnySearch] = useState("");
   const [search, setSearch] = useState("");

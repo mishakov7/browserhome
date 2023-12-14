@@ -608,8 +608,9 @@ label {
   height: 100%;
 }
 
-.flex-row {
-  display: flex;
+.grid-row {
+  display: grid;
+  grid-template-columns: 2fr 4fr 1fr;
 }
 
 .google-container {
@@ -840,4 +841,39 @@ input[type="text"] {
 
 .create-button:hover path {
   fill: #9A9381;
+}
+
+/* TODO LIST */
+.todo-container {
+  border-left: solid 3px rgba(205, 199, 175, 0.15);
+  padding-left: 20px;
+}
+
+.date {
+  background-color: #FFF8E5;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.20);
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px 36px 12px 12px;
+  width: 100px;
+  height: 100px;
+}
+
+.date span:first-of-type {
+  font-family: 'Roboto Slab';
+  font-size: 1.5em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #867D64;
+}
+
+.date span:last-of-type {
+  font-family: 'Plus Jakarta';
+  font-size: 3em;
+  font-weight: 800;
+  color: #867D64;
+  margin: 10px 0;
 }

@@ -12,7 +12,6 @@ export default function Bookmarks() {
   const input2Ref = useRef(null);
 
   const toggleCreator = () => {
-    // setCreator(toggle);
     if (showCreator) {
       setCreator(false);
 

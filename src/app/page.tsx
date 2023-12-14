@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Head from 'next/head'
 
 // Each section of the site
-import Google from '@/components/google';
+import Search from '@/components/search';
 import Polaroid from '@/components/polaroid';
+import ToDo from '@/components/todo';
 import Bookmarks from '@/components/bookmarks';
 
 export default function Home() {
@@ -20,14 +21,14 @@ export default function Home() {
       <div id="main-container" className="blurple-border">
         <div id="main-wrapper">
 
-          <div className='flex-row'>
+          <div className='grid-row'>
             <Polaroid />
-            <Google />
-            {/* Insert bills/todo component */}
+            <Search />
+            <ToDo />
           </div>
 
           <Bookmarks />
-          
+
         </div>
       </div>
 
