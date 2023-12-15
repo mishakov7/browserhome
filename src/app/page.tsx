@@ -4,7 +4,7 @@ import Head from 'next/head'
 // Each section of the site
 import Search from '@/components/search';
 import Polaroid from '@/components/polaroid';
-import ToDoList from '@/components/todolist';
+import ToDoLists from '@/components/todolists';
 import Bookmarks from '@/components/bookmarks';
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
           <div className='grid-row'>
             <Polaroid />
             <Search />
-            <ToDoList />
+            <ToDoLists />
           </div>
 
           <Bookmarks />

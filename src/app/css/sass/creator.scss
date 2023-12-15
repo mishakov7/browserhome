@@ -1,16 +1,57 @@
-.creator {
+@keyframes appearbounceleft {
+    from {
+      opacity: 0;
+      left: 40px;
+  
+    } to {
+      opacity: 1;
+      left: 20px
+    }
+}
+
+.creator-wrapper {
     position: relative;
+}
+
+.creator {
+    position: absolute;
+    width: 200px;
+    margin: 20px;
     padding: 20px;
     font-size: 12px;
     border-radius: 16px;
-    left: 20px;
-    top: -40%;
+    z-index: 100;
+}
+
+.creator::before {
+    content: "";
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
+    border-radius: 12px;
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.directed-left.creator {
     animation: appearbounceleft 0.4s;
 }
 
-.creator.accent2-bg::before {
-    background-color: var(--accent2);
-}
+.directed-left.creator::before  { left: -10px; }
+.directed-right.creator::before { right: -10px; }
+.directed-below.creator::before { bottom: -10px; }
+.directed-above.creator::before { top: -10px; }  
+
+.directed-brcorner.creator::before { 
+    bottom: -10px;
+    right: 20px;
+}  
+
+
+// .creator.accent2-bg::before {
+//     background-color: var(--accent2);
+// }
 
 .creator input {
     padding: 0px 10px;
@@ -45,4 +86,22 @@
 
 .create-button:hover path {
     fill: #9A9381;
+}
+
+.todolists-container .creator {
+    left: -180px;
+    top: 200px;
+    transform: rotate(-4deg);
+}
+
+.list-container .creator {
+    transform: rotate(6deg);
+    top: -65px;
+    left: -250px;
+}
+
+.bookmarks-container .creator {
+    position: absolute;
+    bottom: 30px;
+    left: -33px;
 }

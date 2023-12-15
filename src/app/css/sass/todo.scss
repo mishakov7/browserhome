@@ -1,11 +1,9 @@
 /* TODO LIST */
-.todo-container {
-    border-left: solid 3px rgba(205, 199, 175, 0.15);
-    padding-left: 20px;
-}
-
-.list-of-lists {
-    position: relative;
+.todolists-container {
+    position: absolute;
+    right: 100px;
+    // border-left: solid 3px rgba(205, 199, 175, 0.15);
+    // padding-left: 20px;
 }
 
 .list-container {
@@ -16,29 +14,35 @@
     box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.60);
     height: 75vh;
     width: 500px;
-    top: 20vh;
-    padding: 20px;
+    top: 30vh;
+    padding: 30px;
     cursor: pointer;
     transition: border-color 0.2s, transform 0.4s;
 }
 
 div.list-container:nth-of-type(1) {
     transform: rotate(-6deg);
-    top: 30vh;
-    left: -50px;
+    top: 40vh;
+    left: -125px;
 }
 
 div.list-container:nth-of-type(2) {
     transform: rotate(-8deg);
-    top: 40vh;
-    left: -100px;
+    top: 50vh;
+    left: -150px;
+}
+
+div.list-container:nth-of-type(3) {
+    transform: rotate(-10deg);
+    top: 60vh;
+    left: -175px;
 }
 
 .list-container:hover {
     transform: rotate(-6deg);
 }
 
-.todo-container h3 {
+.list-container h3 {
     font-family: 'Roboto Slab';
     color: var(--secondary-txt);
 }
@@ -51,7 +55,7 @@ div.list-container:nth-of-type(2) {
     list-style-type: none;
 }
   
-.todo-item:not(.todo-item:last-child) {
+.todo-item {
     border-bottom: solid 2.55px var(--subtle-border);
     padding-bottom: 10px;
 }
@@ -70,27 +74,12 @@ div.list-container:nth-of-type(2) {
     text-decoration: line-through;
 }
   
-.todo-item label {
+.todo-item label:last-of-type {
     margin-left: 12px;
 }
 
 .todo-item input[type="checkbox"] {
     display: none;
-}
-  
-.todo-item .checkbox {
-    position: relative;
-    display: flex;
-    place-items: center;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    margin: 0;
-    padding: 3px;
-    border-radius: 6px;
-    cursor: pointer;
 }
 
 .selected-list {
@@ -99,9 +88,10 @@ div.list-container:nth-of-type(2) {
 }
 
 button.list-container {
-    z-index: 100;
+    position: absolute;
+    z-index: 50;
     transform: rotate(-4deg);
-    left: 130px;
+    left: 75px;
     cursor: pointer;
 }
 

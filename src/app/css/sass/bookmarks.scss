@@ -7,6 +7,7 @@
 }
 
 .bookmarks-container {
+  position: relative;
   max-height: 75px;
   margin: 40px 10px;
 }
@@ -16,17 +17,6 @@
     bottom: 0;
   } to {
     bottom: 12px;
-  }
-}
-
-@keyframes appearbounceleft {
-  from {
-    opacity: 0;
-    left: 40px;
-
-  } to {
-    opacity: 1;
-    left: 20px
   }
 }
 
@@ -58,18 +48,4 @@
 
 .bookmarks-container .create-button {
   margin-left: 10px;
-}
-
-
-.bookmarks-container .creator::before {
-  content: "";
-  width: 40px;
-  height: 40px;
-  display: block;
-  position: absolute;
-  border-radius: 12px;
-  transform: rotate(45deg);
-  left: -10px;
-  top: 56%;
-  z-index: -1;
 }

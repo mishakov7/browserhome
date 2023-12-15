@@ -3,9 +3,13 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const Creator = (props: any) => {
 
+    const checkRadio = (ref: any, e: any) => {
+        ref.current.click();
+    }
+
   return (
     <>
-    <div className={'creator ' + props.bg}>
+    <div className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
         {
             props.inputGroups.map(group => (
                     
@@ -20,7 +24,7 @@ const Creator = (props: any) => {
                                 { group.radios.map(radio => (
                                     <>
                                         <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
-                                        <label className="radio"></label>
+                                        <label onClick={(e: any) => checkRadio(radio.ref, e)} className={"radio " + radio.value + "-bg"}><span></span></label>
                                     </>
                                 ))}  
                             </div>

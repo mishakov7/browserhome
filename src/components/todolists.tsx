@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from './creator';
-import List from './list.tsx';
+import List from './list';
 
-export default function ToDoList() {
+export default function ToDoLists() {
 
   const [lists, setLists] = useState([]);
   const [showCreator, setCreator] = useState(false);
@@ -97,13 +97,13 @@ export default function ToDoList() {
 
   return (
     <>
-    <div className='todo-container'>
-        <div className='date'>
+    <div className='todolists-container'>
+        {/* <div className='date'>
             <span>{currentDate.toLocaleString('default', { month: 'short' })}</span>
             <span>{currentDate.getDate()}</span>
-        </div>
+        </div> */}
 
-        <div className='list-of-lists'>
+        {/* <div className='list-of-lists'> */}
           
           {
             lists.length < 1 ? null :
@@ -128,12 +128,13 @@ export default function ToDoList() {
             handleCreator={(e: any) => { createList(e); } } 
             inputGroups={creatorInputs}
             submitlabel="Create List"
-            bg="accent1-bg"  
+            bg="accent3"  
+            direction="right"
           /> 
             
           : null }
 
-        </div>
+        {/* </div> */}
         
     </div>
     </>
