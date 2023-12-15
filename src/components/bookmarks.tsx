@@ -89,7 +89,7 @@ export default function Bookmarks() {
           handleCreator={(e: any) => { createBookmark(e); } } 
           inputGroups={creatorInputs}
           submitlabel="Add Bookmark"
-          bg="breen-bg"  
+          bg="accent2-bg"  
         /> 
           
         : null }

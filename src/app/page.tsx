@@ -11,14 +11,14 @@ export default function Home() {
 
   return (
     <>
-    <div id="dresser" className="blurple-bg">
+    <div id="dresser" className="accent1-bg">
       <Head>
         <title>Home | Misha Lukova</title>
         <meta name="description" content="Misha Lukova's graphic and digital portfolio" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div id="main-container" className="blurple-border">
+      <div id="main-container" className="accent1-border">
         <div id="main-wrapper">
 
           <div className='grid-row'>

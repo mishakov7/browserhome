@@ -121,7 +121,7 @@ const List = (props: any) => {
           handleCreator={(e: any) => { createTodo(e); } } 
           inputGroups={creatorInputs}
           submitlabel="Add To-Do Item"
-          bg="bred-bg"  
+          bg="accent1-bg"  
         /> 
           
         : null }

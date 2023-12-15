@@ -87,7 +87,7 @@ export default function ToDoList() {
             handleCreator={(e: any) => { createList(e); } } 
             inputGroups={creatorInputs}
             submitlabel="Create List"
-            bg="bred-bg"  
+            bg="accent1-bg"  
           /> 
             
           : null }
