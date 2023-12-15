@@ -1,16 +1,25 @@
 "use client";
 import { todo } from 'node:test';
 import React, { useState, useEffect, useRef } from 'react';
+import Creator from './creator';
 
 const List = (props: any) => {
 
   const [todoList, setTodoList] = useState([]);
   const [showCreator, setCreator] = useState(false);
 
-  const currentDate = new Date();
+  const labelInput = useRef(null);
+  const linkInput = useRef(null);
 
-  const input1Ref = useRef(null);
-  const input2Ref = useRef(null);
+  const creatorInputs = [{
+    "ref": labelInput,
+    "label": "To-Do Label",
+    "name": "todo-label"
+  }, {
+    "ref": linkInput,
+    "label": "To-Do Link",
+    "name": "todo-link"
+  }];
 
   const toggleCreator = () => {
     if (showCreator) {
@@ -24,29 +33,32 @@ const List = (props: any) => {
   const createTodo = (e: any) => {
     let key = 0;
 
-    if (JSON.parse(localStorage.getItem('todos'))) {
-      key = JSON.parse(localStorage.getItem('todos')).length;
+    if (JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList) {
+      key = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList.length;
     }
 
     let storageTodo = {
       "key": key,
-      "label": input1Ref.current.value,
-      "link": input2Ref.current.value,
+      "label": labelInput.current.value,
+      "link": linkInput.current.value,
       "checked": false
     }
 
     let storageTodos = todoList.slice();
     storageTodos.push(storageTodo);
-
     setTodoList(storageTodos);
-    localStorage.setItem('todos', JSON.stringify(storageTodos));
+
+    let storageLists = JSON.parse(localStorage.getItem('lists'));
+    storageLists[props.listKey].todoList = storageTodos;
+
+    localStorage.setItem('lists', JSON.stringify(storageLists));
     toggleCreator();
   }
 
   const changeChecked = (e: any) => {
 
     let todoKey = e.target.name.split("check")[1];
-    let storageTodos = JSON.parse(localStorage.getItem('todos'));
+    let storageTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
 
     if (e.target.checked) {
         storageTodos[todoKey].checked = true;
@@ -58,8 +70,20 @@ const List = (props: any) => {
     console.log(storageTodos);
 
     setTodoList(storageTodos);
-    localStorage.setItem('todos', JSON.stringify(storageTodos));
+    // localStorage.setItem('todos', JSON.stringify(storageTodos));
+    let storageLists = JSON.parse(localStorage.getItem('lists'));
+    storageLists[props.listKey].todoList.push(storageTodos);
+    localStorage.setItem('lists', JSON.stringify(storageLists));
+    
   }
+
+  useEffect(() => {
+    const localTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
+
+    if (localTodos) {
+      setTodoList(localTodos);
+    }
+  }, []);
 
   return (
     <>
@@ -72,8 +96,8 @@ const List = (props: any) => {
                       
                       {
                         todo.checked ?
-                        <input type='checkbox' onChange={(e) => props.changeChecked(e)} name={'check' + todo.key} checked/> :
-                        <input type='checkbox' onChange={(e) => props.changeChecked(e)} name={'check' + todo.key} />
+                        <input type='checkbox' onChange={(e) => changeChecked(e)} name={'check' + todo.key} checked/> :
+                        <input type='checkbox' onChange={(e) => changeChecked(e)} name={'check' + todo.key} />
                       }
 
                       <label>
@@ -95,13 +119,8 @@ const List = (props: any) => {
 
         <Creator 
           handleCreator={(e: any) => { createTodo(e); } } 
-          ref1={input1Ref}
-          label1="Label" 
-          name1="todo-label"
-          ref2={input2Ref} 
-          label2="Link" 
-          name2="todo-link" 
-          submitlabel="Add Todo"
+          inputGroups={creatorInputs}
+          submitlabel="Add To-Do Item"
           bg="bred-bg"  
         /> 
           

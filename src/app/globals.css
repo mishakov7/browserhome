@@ -865,6 +865,18 @@ input[type="text"] {
   transition: border-color 0.2s, transform 0.4s;
 }
 
+div.list-container:nth-of-type(1) {
+  transform: rotate(-6deg);
+  top: 30vh;
+  left: -50px;
+}
+
+div.list-container:nth-of-type(2) {
+  transform: rotate(-8deg);
+  top: 40vh;
+  left: -100px;
+}
+
 .list-container:hover {
   transform: rotate(-6deg);
 }

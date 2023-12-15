@@ -1,16 +1,21 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from './creator';
+import List from './list.tsx';
 
 export default function ToDoList() {
 
   const [lists, setLists] = useState([]);
-  // const [showCreator, setCreator] = useState(false);
+  const [showCreator, setCreator] = useState(false);
 
+  const titleInput = useRef(null);
   const currentDate = new Date();
 
-  // const input1Ref = useRef(null);
-  // const input2Ref = useRef(null);
+  const creatorInputs = [{
+    "ref": titleInput,
+    "label": "Name of List",
+    "name": "list-name"
+  }];
 
   const toggleCreator = () => {
     if (showCreator) {
@@ -24,22 +29,21 @@ export default function ToDoList() {
   const createList = (e: any) => {
     let key = 0;
 
-    if (JSON.parse(localStorage.getItem('todos'))) {
-      key = JSON.parse(localStorage.getItem('todos')).length;
+    if (JSON.parse(localStorage.getItem('lists'))) {
+      key = JSON.parse(localStorage.getItem('lists')).length;
     }
 
-    let storageTodo = {
+    let storageList = {
       "key": key,
-      "label": input1Ref.current.value,
-      "link": input2Ref.current.value,
-      "checked": false
+      "title": titleInput.current.value,
+      "todoList": []
     }
 
-    let storageTodos = todoList.slice();
-    storageTodos.push(storageTodo);
+    let storageLists = lists.slice();
+    storageLists.push(storageList);
 
-    setTodoList(storageTodos);
-    localStorage.setItem('todos', JSON.stringify(storageTodos));
+    setLists(storageLists);
+    localStorage.setItem('lists', JSON.stringify(storageLists));
     toggleCreator();
   }
 
@@ -61,7 +65,32 @@ export default function ToDoList() {
 
         <div className='list-of-lists'>
           
-          <button onClick={(e: any) => createList(e)} className='list-container'></button>
+          {
+            lists.length < 1 ? null :
+            lists.map(list => (
+              <div className='list-container' key={list.key}>
+                <h3>{list.title}</h3>
+                
+                <List 
+                    listKey={list.key}
+                />
+
+              </div>
+            )) 
+          }
+          
+          <button onClick={toggleCreator} className='list-container'></button>
+
+          { showCreator ?
+
+          <Creator 
+            handleCreator={(e: any) => { createList(e); } } 
+            inputGroups={creatorInputs}
+            submitlabel="Create List"
+            bg="bred-bg"  
+          /> 
+            
+          : null }
 
         </div>
         
