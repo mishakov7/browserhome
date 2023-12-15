@@ -35,8 +35,8 @@ const List = (props: any) => {
   const createTodo = (e: any) => {
     let key = 0;
 
-    if (JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList) {
-      key = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList.length;
+    if (storageList.todoList) {
+      key = storageList.todoList.length;
     }
 
     let storageTodo = {
@@ -50,20 +50,14 @@ const List = (props: any) => {
     storageTodos.push(storageTodo);
     setTodoList(storageTodos);
 
-    let storageLists = JSON.parse(localStorage.getItem('lists'));
-    storageLists[props.listKey].todoList = storageTodos;
+    storageLists.todoList = storageTodos;
 
     localStorage.setItem('lists', JSON.stringify(storageLists));
     toggleCreator();
   }
 
   const changeChecked = (e: any, key: number) => {
-
-    // let storageTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
     let storageTodos = storageList.todoList;
-
-    console.log("todo list key: " + props.listKey);
-    console.log("todo item: " + storageTodos[key]);
 
     if (e.target.checked) {
         storageTodos[key].checked = true;
@@ -75,16 +69,13 @@ const List = (props: any) => {
     console.log(storageTodos);
 
     setTodoList(storageTodos);
-    // localStorage.setItem('todos', JSON.stringify(storageTodos));
     allStorageLists[props.listKey].todoList = storageTodos;
-    // let storageLists = JSON.parse(localStorage.getItem('lists'));
-    // storageLists[props.listKey].todoList.push(storageTodos);
     localStorage.setItem('lists', JSON.stringify(allStorageLists));
     
   }
 
   useEffect(() => {
-    const localTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
+    const localTodos = storageList.todoList;
 
     if (localTodos) {
       setTodoList(localTodos);
@@ -100,10 +91,25 @@ const List = (props: any) => {
               <li className='todo-item' key={todo.key}>
                   <div className='input-group'>
                       
-                      {
-                        todo.checked ?
-                        <input type='checkbox' onChange={(e) => changeChecked(e, todo.key)} checked/> :
-                        <input type='checkbox' onChange={(e) => changeChecked(e, todo.key)} />
+                      { todo.checked 
+                      
+                        ?
+
+                        <div>
+                          <input type="checkbox" onChange={(e) => changeChecked(e, todo.key)} checked />
+                          <label className="checkbox">
+                              <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.1862 0.55311C11.7904 -0.0510693 12.77 -0.0510693 13.3742 0.55311L14.2894 1.46829C14.8936 2.07249 14.8935 3.05205 14.2894 3.65622L6.84742 11.0982C6.24325 11.7023 5.26365 11.7024 4.65945 11.0982L0.453135 6.89188C-0.151062 6.28769 -0.151017 5.30813 0.453103 4.70395L1.36825 3.78877C1.97243 3.18456 2.95207 3.18453 3.55625 3.78873L5.75343 5.9859L11.1862 0.55311Z" fill="black"/>
+                              </svg>
+                          </label>
+                        </div>
+
+                        : 
+                        
+                        <div>
+                          <input type="checkbox" onChange={(e) => changeChecked(e, todo.key)} />
+                          <label className="checkbox"></label>
+                        </div>
                       }
 
                       <label>

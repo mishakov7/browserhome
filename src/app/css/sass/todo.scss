@@ -46,9 +46,12 @@ div.list-container:nth-of-type(2) {
 .todo-list {
     padding: 0
 }
+
+.todo-item {
+    list-style-type: none;
+}
   
 .todo-item:not(.todo-item:last-child) {
-    list-style-type: none;
     border-bottom: solid 2.55px var(--subtle-border);
     padding-bottom: 10px;
 }

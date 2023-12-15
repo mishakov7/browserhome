@@ -237,6 +237,9 @@ article {
 .accent1-border    { border-color: var(--accent1)!important; }
 .accent2-border { border-color: var(--accent2)!important; }
 .accent3-border   { border-color: var(--accent3)!important; }
+.accent1-border-hover:hover    { border-color: var(--accent1)!important; }
+.accent2-border-hover:hover { border-color: var(--accent2)!important; }
+.accent3-border-hover:hover   { border-color: var(--accent3)!important; }
 
 .accent1-fill path    { fill: var(--accent1)!important; }
 .accent2-fill path { fill: var(--accent2)!important; }

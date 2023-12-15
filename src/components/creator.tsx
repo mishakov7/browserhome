@@ -8,10 +8,27 @@ const Creator = (props: any) => {
     <div className={'creator ' + props.bg}>
         {
             props.inputGroups.map(group => (
-                <div className="input-group">
-                    <label>{group.label}</label>
-                    <input ref={group.ref} type="text" name={group.name} />
-                </div>
+                    
+                    <div className="input-group">
+
+                        <label>{group.label}</label>
+
+                        {
+                            group.type == "radio" ? 
+
+                            <div className='row'>
+                                { group.radios.map(radio => (
+                                    <>
+                                        <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
+                                        <label className="radio"></label>
+                                    </>
+                                ))}  
+                            </div>
+
+                            : <input ref={group.ref} type="text" name={group.name} /> 
+                        }
+                        
+                    </div>
             ))
         }
 

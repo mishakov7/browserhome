@@ -10,12 +10,34 @@ export default function ToDoList() {
   const [selectedList, setSelectedList] = useState(0);
 
   const titleInput = useRef(null);
+  const colorInput1 = useRef(null);
+  const colorInput2 = useRef(null);
+  const colorInput3 = useRef(null);
+  const colorInputs = [colorInput1, colorInput2, colorInput3];
+
   const currentDate = new Date();
 
   const creatorInputs = [{
     "ref": titleInput,
+    "type": "text",
     "label": "Name of List",
     "name": "list-name"
+  }, {
+    "type": "radio",
+    "label": "Color Accent",
+    "name": "list-color",
+    "radios": [
+      {
+        "ref": colorInput1,
+        "value": "accent1"
+      }, {
+        "ref": colorInput2,
+        "value": "accent2"
+      }, {
+        "ref": colorInput3,
+        "value": "accent3"
+      }
+    ]
   }];
 
   const toggleSelectedList = (e: any, key: number) => {
@@ -43,8 +65,16 @@ export default function ToDoList() {
       key = JSON.parse(localStorage.getItem('lists')).length;
     }
 
+    let selectedColor = null;
+    colorInputs.forEach(input => {
+      if (input.current.checked) {
+        selectedColor = input.current.value;
+      }
+    });
+
     let storageList = {
       "key": key,
+      "color": selectedColor,
       "title": titleInput.current.value,
       "todoList": []
     }
@@ -78,7 +108,7 @@ export default function ToDoList() {
           {
             lists.length < 1 ? null :
             lists.map(list => (
-              <div className={selectedList == list.key ? 'list-container selected-list' : 'list-container'} key={list.key} onClick={(e: any) => toggleSelectedList(e, list.key)}>
+              <div className={selectedList == list.key ? ('list-container selected-list ' + list.color + '-border-hover') : ('list-container ' + list.color + '-border-hover')} key={list.key} onClick={(e: any) => toggleSelectedList(e, list.key)}>
                 <h3>{list.title}</h3>
                 
                 <List 
