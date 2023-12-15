@@ -7,6 +7,7 @@ export default function ToDoList() {
 
   const [lists, setLists] = useState([]);
   const [showCreator, setCreator] = useState(false);
+  const [selectedList, setSelectedList] = useState(0);
 
   const titleInput = useRef(null);
   const currentDate = new Date();
@@ -16,6 +17,15 @@ export default function ToDoList() {
     "label": "Name of List",
     "name": "list-name"
   }];
+
+  const toggleSelectedList = (e: any, key: number) => {
+    if (e.target.classList.contains('selected-list')) {
+      setSelectedList(key);
+    
+    } else {
+      setSelectedList(key);
+    }
+  }
 
   const toggleCreator = () => {
     if (showCreator) {
@@ -68,7 +78,7 @@ export default function ToDoList() {
           {
             lists.length < 1 ? null :
             lists.map(list => (
-              <div className='list-container' key={list.key}>
+              <div className={selectedList == list.key ? 'list-container selected-list' : 'list-container'} key={list.key} onClick={(e: any) => toggleSelectedList(e, list.key)}>
                 <h3>{list.title}</h3>
                 
                 <List 

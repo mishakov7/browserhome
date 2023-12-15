@@ -10,6 +10,8 @@ const List = (props: any) => {
 
   const labelInput = useRef(null);
   const linkInput = useRef(null);
+  let allStorageLists = JSON.parse(localStorage.getItem('lists'));
+  let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
 
   const creatorInputs = [{
     "ref": labelInput,
@@ -55,25 +57,29 @@ const List = (props: any) => {
     toggleCreator();
   }
 
-  const changeChecked = (e: any) => {
+  const changeChecked = (e: any, key: number) => {
 
-    let todoKey = e.target.name.split("check")[1];
-    let storageTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
+    // let storageTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
+    let storageTodos = storageList.todoList;
+
+    console.log("todo list key: " + props.listKey);
+    console.log("todo item: " + storageTodos[key]);
 
     if (e.target.checked) {
-        storageTodos[todoKey].checked = true;
+        storageTodos[key].checked = true;
 
     } else {
-        storageTodos[todoKey].checked = false;
+        storageTodos[key].checked = false;
     }
 
     console.log(storageTodos);
 
     setTodoList(storageTodos);
     // localStorage.setItem('todos', JSON.stringify(storageTodos));
-    let storageLists = JSON.parse(localStorage.getItem('lists'));
-    storageLists[props.listKey].todoList.push(storageTodos);
-    localStorage.setItem('lists', JSON.stringify(storageLists));
+    allStorageLists[props.listKey].todoList = storageTodos;
+    // let storageLists = JSON.parse(localStorage.getItem('lists'));
+    // storageLists[props.listKey].todoList.push(storageTodos);
+    localStorage.setItem('lists', JSON.stringify(allStorageLists));
     
   }
 
@@ -96,8 +102,8 @@ const List = (props: any) => {
                       
                       {
                         todo.checked ?
-                        <input type='checkbox' onChange={(e) => changeChecked(e)} name={'check' + todo.key} checked/> :
-                        <input type='checkbox' onChange={(e) => changeChecked(e)} name={'check' + todo.key} />
+                        <input type='checkbox' onChange={(e) => changeChecked(e, todo.key)} checked/> :
+                        <input type='checkbox' onChange={(e) => changeChecked(e, todo.key)} />
                       }
 
                       <label>
