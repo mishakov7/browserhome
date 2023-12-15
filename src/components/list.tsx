@@ -11,13 +11,13 @@ const List = (props: any) => {
   const labelInput = useRef(null);
   const linkInput = useRef(null);
 
-  const checkboxRef = useRef(null);
+  const checkboxRefs = useRef([]);
 
   let allStorageLists = JSON.parse(localStorage.getItem('lists'));
   let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
 
-  const checkTodo = (e: any) => {
-    checkboxRef.current.click();
+  const checkTodo = (e: any, idx: number) => {
+    checkboxRefs.current[idx].click();
   }
 
   const creatorInputs = [{
@@ -99,12 +99,12 @@ const List = (props: any) => {
                         ?
 
                         <div className='row'>
-                          <label onClick={(e: any) => checkTodo(e)} className={"checkbox " + props.listColor + "a-bg"}>
+                          <label onClick={(e: any) => checkTodo(e, todo.key)} className={"checkbox " + props.listColor + "a-bg"}>
                               <svg className={props.listColor + "-fill"} width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M11.1862 0.55311C11.7904 -0.0510693 12.77 -0.0510693 13.3742 0.55311L14.2894 1.46829C14.8936 2.07249 14.8935 3.05205 14.2894 3.65622L6.84742 11.0982C6.24325 11.7023 5.26365 11.7024 4.65945 11.0982L0.453135 6.89188C-0.151062 6.28769 -0.151017 5.30813 0.453103 4.70395L1.36825 3.78877C1.97243 3.18456 2.95207 3.18453 3.55625 3.78873L5.75343 5.9859L11.1862 0.55311Z" fill="black"/>
                               </svg>
                           </label>
-                          <input ref={checkboxRef} type="checkbox" onChange={(e) => changeChecked(e, todo.key)} checked />
+                          <input ref={(el: any) => checkboxRefs.current[todo.key] = el} type="checkbox" onChange={(e) => changeChecked(e, todo.key)} checked />
                           <label>
                               <a href={todo.link} target="_blank">{todo.label}</a>
                           </label>
@@ -113,9 +113,8 @@ const List = (props: any) => {
                         : 
                         
                         <div className='row'>
-                          <label onClick={(e: any) => checkTodo(e)} className={"checkbox " + props.listColor + "a-bg"}></label>
-                          <input ref={checkboxRef} type="checkbox" onChange={(e) => changeChecked(e, todo.key)} />
-                          <label>
+                          <label onClick={(e: any) => checkTodo(e, todo.key)} className={"checkbox " + props.listColor + "a-bg"}></label>
+                          <input ref={(el: any) => checkboxRefs.current[todo.key] = el} type="checkbox" onChange={(e) => changeChecked(e, todo.key)} />                          <label>
                               <a href={todo.link} target="_blank">{todo.label}</a>
                           </label>
                         </div>
