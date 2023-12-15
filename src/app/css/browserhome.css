@@ -1,0 +1,327 @@
+/* SEARCH QUERY */
+.google-container {
+  margin: 50px;
+}
+
+.search-query {
+  font-family: "Plus Jakarta";
+  font-size: 2.4em;
+  font-weight: 700;
+  line-height: 1.2em;
+  text-align: right;
+}
+
+.inputGroup {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 10px 50px;
+}
+
+.inputGroup::before {
+  content: url("https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg");
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.inputGroup a {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  margin: 10px;
+}
+
+/* POLAROIDS */
+.polaroid-container {
+  background-color: #FFF8E5;
+  padding: 20px 20px 48px 20px;
+  margin: 50px;
+  border-radius: 36px;
+  position: relative;
+  width: max-content;
+  transform: rotate(-4deg);
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
+}
+
+.polaroid-container::before {
+  content: "Do it for him";
+  position: absolute;
+  font-family: "Kalam", cursive;
+  font-size: 1.5em;
+  text-transform: lowercase;
+  top: -60px;
+  padding: 20px 5px;
+}
+
+.polaroid-container::after {
+  content: "";
+  position: absolute;
+  background-image: url(https://cdn.pixabay.com/photo/2013/07/12/12/46/drawing-pin-146214_1280.png);
+  background-size: 60px;
+  background-repeat: no-repeat;
+  width: 75px;
+  height: 75px;
+  left: 40%;
+  right: 50%;
+  top: 0px;
+}
+
+.polaroid-container img {
+  width: 350px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.polaroid-container input[type=file] {
+  display: none;
+}
+
+.upload-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #FFF8E5;
+  padding: 10px;
+  margin: 30px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-button path {
+  transition: fill 0.2s;
+}
+
+.upload-button:hover path {
+  fill: var(--accent1);
+}
+
+/* BOOKMARKS */
+.bookmarks-container,
+.bookmarks-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bookmarks-container {
+  max-height: 75px;
+  margin: 40px 10px;
+}
+
+@keyframes hop {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: 12px;
+  }
+}
+@keyframes appearbounceleft {
+  from {
+    opacity: 0;
+    left: 40px;
+  }
+  to {
+    opacity: 1;
+    left: 20px;
+  }
+}
+.bookmark {
+  position: relative;
+  background-color: #FFF8E5;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
+  width: 75px;
+  height: 75px;
+  border-radius: 20px;
+  margin: 6px;
+  list-style-type: none;
+  bottom: 0;
+  transition: bottom 0.2s;
+  /* animation: hop 0.4s backwards; */
+}
+
+.bookmark:hover {
+  bottom: 12px;
+}
+
+.bookmark a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmarks-container .create-button {
+  margin-left: 10px;
+}
+
+.bookmarks-container .creator::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  border-radius: 12px;
+  transform: rotate(45deg);
+  left: -10px;
+  top: 56%;
+  z-index: -1;
+}
+
+.creator {
+  position: relative;
+  padding: 20px;
+  font-size: 12px;
+  border-radius: 16px;
+  left: 20px;
+  top: -40%;
+  animation: appearbounceleft 0.4s;
+}
+
+.creator.accent2-bg::before {
+  background-color: var(--accent2);
+}
+
+.creator input {
+  padding: 0px 10px;
+  border: none;
+  border-radius: 12px;
+  margin: 5px 0;
+}
+
+.creator button {
+  position: absolute;
+  background: none;
+  border: none;
+  bottom: -25px;
+  right: 0;
+  font-family: "Roboto Slab";
+  text-transform: uppercase;
+}
+
+.creator button svg {
+  margin-left: 5px;
+}
+
+.create-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.create-button path {
+  transition: fill 0.2s;
+}
+
+.create-button:hover path {
+  fill: #9A9381;
+}
+
+/* TODO LIST */
+.todo-container {
+  border-left: solid 3px rgba(205, 199, 175, 0.15);
+  padding-left: 20px;
+}
+
+.list-of-lists {
+  position: relative;
+}
+
+.list-container {
+  position: absolute;
+  background-color: #FFF8E5;
+  border: solid 2.55px #FFF8E5;
+  border-radius: 24px;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
+  height: 75vh;
+  width: 500px;
+  top: 20vh;
+  padding: 20px;
+  transition: border-color 0.2s, transform 0.4s;
+}
+
+div.list-container:nth-of-type(1) {
+  transform: rotate(-6deg);
+  top: 30vh;
+  left: -50px;
+}
+
+div.list-container:nth-of-type(2) {
+  transform: rotate(-8deg);
+  top: 40vh;
+  left: -100px;
+}
+
+.list-container:hover {
+  transform: rotate(-6deg);
+}
+
+.todo-container h3 {
+  font-family: "Roboto Slab";
+  color: var(--secondary-txt);
+}
+
+.todo-list {
+  padding: 0;
+}
+
+.todo-item:not(.todo-item:last-child) {
+  list-style-type: none;
+  border-bottom: solid 2.55px var(--subtle-border);
+  padding-bottom: 10px;
+}
+
+.todo-item a {
+  text-decoration: none;
+  font-family: var(--overpass);
+  color: var(--secondary-txt);
+}
+
+.todo-item input:checked + label {
+  text-decoration: line-through;
+}
+
+.todo-item label {
+  margin-left: 6px;
+}
+
+button.list-container {
+  transform: rotate(-4deg);
+  left: 130px;
+  cursor: pointer;
+}
+
+button.list-container::before {
+  content: "+ Add New List";
+  position: absolute;
+  display: block;
+  opacity: 0;
+  font-family: "Roboto Slab";
+  text-transform: uppercase;
+  font-size: 16px;
+  color: var(--accent3);
+  left: -90px;
+  transform: rotate(-90deg);
+  top: 75px;
+  transition: opacity 0.2s;
+}
+
+button.list-container:hover {
+  border-color: var(--accent3);
+}
+
+button.list-container:hover::before {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=browserhome.css.map */

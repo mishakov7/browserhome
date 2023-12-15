@@ -1,0 +1,98 @@
+/* TODO LIST */
+.todo-container {
+    border-left: solid 3px rgba(205, 199, 175, 0.15);
+    padding-left: 20px;
+}
+
+.list-of-lists {
+    position: relative;
+}
+
+.list-container {
+    position: absolute;
+    background-color: #FFF8E5;
+    border: solid 2.55px #FFF8E5;
+    border-radius: 24px;
+    box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.60);
+    height: 75vh;
+    width: 500px;
+    top: 20vh;
+    padding: 20px;
+
+    transition: border-color 0.2s, transform 0.4s;
+}
+
+div.list-container:nth-of-type(1) {
+    transform: rotate(-6deg);
+    top: 30vh;
+    left: -50px;
+}
+
+div.list-container:nth-of-type(2) {
+    transform: rotate(-8deg);
+    top: 40vh;
+    left: -100px;
+}
+
+.list-container:hover {
+    transform: rotate(-6deg);
+}
+
+.todo-container h3 {
+    font-family: 'Roboto Slab';
+    color: var(--secondary-txt);
+}
+  
+.todo-list {
+    padding: 0
+}
+  
+.todo-item:not(.todo-item:last-child) {
+    list-style-type: none;
+    border-bottom: solid 2.55px var(--subtle-border);
+    padding-bottom: 10px;
+}
+  
+.todo-item a {
+    text-decoration: none;
+    font-family: var(--overpass);
+    color: var(--secondary-txt);
+}
+  
+.todo-item input:checked + label {
+    text-decoration: line-through;
+}
+  
+.todo-item label {
+    margin-left: 6px;
+}
+
+button.list-container {
+    transform: rotate(-4deg);
+    left: 130px;
+    cursor: pointer;
+}
+
+button.list-container::before {
+    content: "+ Add New List";
+    position: absolute;
+    display: block;
+    opacity: 0;
+    font-family: 'Roboto Slab';
+    text-transform: uppercase;
+    font-size: 16px;
+    color: var(--accent3);
+    left: -90px;
+    transform: rotate(-90deg);
+    top: 75px;
+    transition: opacity 0.2s;
+}
+
+button.list-container:hover {
+    border-color: var(--accent3);
+}
+
+button.list-container:hover::before {
+    opacity: 1;
+}
+
