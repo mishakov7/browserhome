@@ -6,15 +6,14 @@ const Creator = (props: any) => {
   return (
     <>
     <div className={'creator ' + props.bg}>
-        <div className="input-group">
-            <label>{props.label1}</label>
-            <input ref={props.ref1} type="text" name={props.name1} />
-        </div>
-
-        <div className="input-group">
-            <label>{props.label2}</label>
-            <input ref={props.ref2} type="text" name={props.name2} />
-        </div>
+        {
+            props.inputGroups.map(group => (
+                <div className="input-group">
+                    <label>{group.label}</label>
+                    <input ref={group.ref} type="text" name={group.name} />
+                </div>
+            ))
+        }
 
         <button onClick={props.handleCreator}>
             {props.submitlabel}

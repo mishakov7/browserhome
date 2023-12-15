@@ -41,10 +41,8 @@ export default function Polaroid() {
 
   return (
     <>
-    <div className='polaroid-container'>
-          <img src={polaroidImage} width="300"/>
-          {/* <div className="polaroid-image" style={{ backgroundImage: `url(${polaroidImage})` }}></div> */}
-          
+    <div className='polaroid-container' draggable>
+          <img src={polaroidImage} width="300"/>          
           <input ref={uploadButton} type="file" onChange={(e) => uploadPolaroid(e)} accept="image/*"/>
           
           <button className='upload-button' onClick={handleClick}> 

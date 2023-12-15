@@ -11,6 +11,16 @@ export default function Bookmarks() {
   const input1Ref = useRef(null);
   const input2Ref = useRef(null);
 
+  const creatorInputs = [{
+    "ref": input1Ref,
+    "label": "Image",
+    "name": "bookmark-image"
+  }, {
+    "ref": input2Ref,
+    "label": "Link",
+    "name": "bookmark-link"
+  }];
+
   const toggleCreator = () => {
     if (showCreator) {
       setCreator(false);
@@ -77,12 +87,7 @@ export default function Bookmarks() {
 
         <Creator 
           handleCreator={(e: any) => { createBookmark(e); } } 
-          ref1={input1Ref}
-          label1="Image" 
-          name1="bookmark-image"
-          ref2={input2Ref} 
-          label2="Link" 
-          name2="bookmark-link" 
+          inputGroups={creatorInputs}
           submitlabel="Add Bookmark"
           bg="breen-bg"  
         /> 
