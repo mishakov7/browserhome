@@ -18,7 +18,7 @@
     width: 500px;
     top: 20vh;
     padding: 20px;
-
+    cursor: pointer;
     transition: border-color 0.2s, transform 0.4s;
 }
 
@@ -61,16 +61,40 @@ div.list-container:nth-of-type(2) {
     font-family: var(--overpass);
     color: var(--secondary-txt);
 }
+
+.todo-item .row {
+    align-items: center;
+}
   
 .todo-item input:checked + label {
     text-decoration: line-through;
 }
   
 .todo-item label {
-    margin-left: 6px;
+    margin-left: 12px;
+}
+
+.todo-item input[type="checkbox"] {
+    display: none;
+}
+  
+.todo-item .checkbox {
+    position: relative;
+    display: flex;
+    place-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 3px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .selected-list {
+    cursor: default;
     z-index: 20;
 }
 
@@ -89,7 +113,7 @@ button.list-container::before {
     font-family: 'Roboto Slab';
     text-transform: uppercase;
     font-size: 16px;
-    color: var(--accent3);
+    color: rgb(var(--accent3));
     left: -90px;
     transform: rotate(-90deg);
     top: 75px;
@@ -97,7 +121,7 @@ button.list-container::before {
 }
 
 button.list-container:hover {
-    border-color: var(--accent3);
+    border-color: rgb(var(--accent3));
 }
 
 button.list-container:hover::before {

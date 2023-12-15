@@ -113,6 +113,7 @@ export default function ToDoList() {
                 
                 <List 
                     listKey={list.key}
+                    listColor={list.color}
                 />
 
               </div>
