@@ -298,14 +298,26 @@ div.list-container:nth-of-type(1) {
 
 div.list-container:nth-of-type(2) {
   transform: rotate(-8deg);
-  top: 50vh;
+  top: 45vh;
   left: -150px;
 }
 
 div.list-container:nth-of-type(3) {
   transform: rotate(-10deg);
-  top: 60vh;
+  top: 50vh;
   left: -175px;
+}
+
+div.list-container:nth-of-type(4) {
+  transform: rotate(-12deg);
+  top: 55vh;
+  left: -200px;
+}
+
+div.list-container:nth-of-type(5) {
+  transform: rotate(-14deg);
+  top: 60vh;
+  left: -225px;
 }
 
 .list-container:hover {
