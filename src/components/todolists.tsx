@@ -9,6 +9,7 @@ export default function ToDoLists() {
   const [showCreator, setCreator] = useState(false);
   const [selectedList, setSelectedList] = useState(0);
 
+  const creatorRef = useRef(null);
   const titleInput = useRef(null);
   const colorInput1 = useRef(null);
   const colorInput2 = useRef(null);
@@ -87,12 +88,25 @@ export default function ToDoLists() {
     toggleCreator();
   }
 
+  const handleOutsideClick = (e: any) => {
+    if (creatorRef.current && !creatorRef.current.contains(e.target)) {
+      setCreator(false);
+    }
+  }
+
   useEffect(() => {
     const localLists = JSON.parse(localStorage.getItem('lists'));
   
     if (localLists) {
       setLists(localLists);
     }
+
+    document.addEventListener("click", handleOutsideClick, false);
+
+    return() => {
+      document.removeEventListener("click", handleOutsideClick, false);
+    }
+
   }, []);
 
   return (
@@ -119,21 +133,22 @@ export default function ToDoLists() {
               </div>
             )) 
           }
-          
-          <button onClick={toggleCreator} className='list-container'></button>
 
-          { showCreator ?
+          <div ref={creatorRef} className='creator-wrapper'>
 
-          <Creator 
-            handleCreator={(e: any) => { createList(e); } } 
-            inputGroups={creatorInputs}
-            submitlabel="Create List"
-            bg="accent3"  
-            direction="right"
-          /> 
+            <button onClick={toggleCreator} className='list-container'></button>
+
+            <Creator 
+              // handleRef={creatorRef} 
+              creatorState={showCreator}
+              handleCreator={(e: any) => { createList(e); } } 
+              inputGroups={creatorInputs}
+              submitlabel="Create List"
+              bg="accent3"  
+              direction="right"
+            /> 
+          </div>
             
-          : null }
-
         {/* </div> */}
         
     </div>

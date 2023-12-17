@@ -8,6 +8,7 @@ export default function Bookmarks() {
   const [bookmarkList, setBookmarkList] = useState([]);
   const [showCreator, setCreator] = useState(false);
 
+  const creatorRef = useRef(null);
   const input1Ref = useRef(null);
   const input2Ref = useRef(null);
 
@@ -52,11 +53,23 @@ export default function Bookmarks() {
     toggleCreator();
   }
 
+  const handleOutsideClick = (e: any) => {
+    if (creatorRef.current && !creatorRef.current.contains(e.target)) {
+      setCreator(false);
+    }
+  }
+
   useEffect(() => {
     const localBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
 
     if (localBookmarks) {
       setBookmarkList(localBookmarks);
+    }
+
+    document.addEventListener("click", handleOutsideClick, false);
+
+    return() => {
+      document.removeEventListener("click", handleOutsideClick, false);
     }
 
   }, []);
@@ -77,10 +90,10 @@ export default function Bookmarks() {
             }
         </ul>
         
-        <div className='creator-wrapper'>
-            { showCreator ?
-
+        <div ref={creatorRef} className='creator-wrapper'>
             <Creator 
+              // handleRef={creatorRef} 
+              creatorState={showCreator}
               handleCreator={(e: any) => { createBookmark(e); } } 
               inputGroups={creatorInputs}
               submitlabel="Add Bookmark"
@@ -88,8 +101,6 @@ export default function Bookmarks() {
               direction="below"
             /> 
               
-            : null }
-
             <button className='create-button' onClick={toggleCreator}>
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M23.2143 9.82143H15.1786V1.78571C15.1786 0.799665 14.3789 0 13.3929 0H11.6071C10.6211 0 9.82143 0.799665 9.82143 1.78571V9.82143H1.78571C0.799665 9.82143 0 10.6211 0 11.6071V13.3929C0 14.3789 0.799665 15.1786 1.78571 15.1786H9.82143V23.2143C9.82143 24.2003 10.6211 25 11.6071 25H13.3929C14.3789 25 15.1786 24.2003 15.1786 23.2143V15.1786H23.2143C24.2003 15.1786 25 14.3789 25 13.3929V11.6071C25 10.6211 24.2003 9.82143 23.2143 9.82143Z" fill="#CDC7AF"/>

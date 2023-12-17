@@ -1,40 +1,38 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, use } from 'react';
 
 const Creator = (props: any) => {
-
     const checkRadio = (ref: any, e: any) => {
         ref.current.click();
     }
 
   return (
     <>
-    <div className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
-        {
-            props.inputGroups.map(group => (
+    { 
+    props.creatorState ?
+    <div ref={props.handleRef} className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
+        { props.inputGroups.map(group => (
                     
-                    <div className="input-group">
+            <div className="input-group">
 
-                        <label>{group.label}</label>
+                <label>{group.label}</label>
 
-                        {
-                            group.type == "radio" ? 
+                { group.type == "radio" ? 
 
-                            <div className='row'>
-                                { group.radios.map(radio => (
-                                    <>
-                                        <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
-                                        <label onClick={(e: any) => checkRadio(radio.ref, e)} className={"radio " + radio.value + "-bg"}><span></span></label>
-                                    </>
-                                ))}  
-                            </div>
-
-                            : <input ref={group.ref} type="text" name={group.name} /> 
-                        }
-                        
+                    <div className='row'>
+                        { group.radios.map(radio => (
+                            <>
+                                <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
+                                <label onClick={(e: any) => checkRadio(radio.ref, e)} className={"radio " + radio.value + "-bg"}><span></span></label>
+                            </>
+                        ))}  
                     </div>
-            ))
-        }
+
+                    : <input ref={group.ref} type="text" name={group.name} /> 
+                }
+                
+            </div>
+        ))}
 
         <button onClick={props.handleCreator}>
             {props.submitlabel}
@@ -44,6 +42,8 @@ const Creator = (props: any) => {
         </button>
 
     </div>
+    : null
+    }
     </>
   )
 }
