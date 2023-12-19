@@ -143,7 +143,7 @@ export default function ToDoLists() {
               creatorState={showCreator}
               handleCreator={(e: any) => { createList(e); } } 
               inputGroups={creatorInputs}
-              submitlabel="Create List"
+              // submitlabel="Create List"
               bg="accent3"  
               direction="right"
             /> 

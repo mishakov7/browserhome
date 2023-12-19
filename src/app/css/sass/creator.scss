@@ -1,12 +1,24 @@
-@keyframes appearbounceleft {
-    from {
-      opacity: 0;
-      left: 40px;
+@mixin inline-animation($duration) {
+    $name: inline-#{unique-id()};
   
-    } to {
-      opacity: 1;
-      left: 20px
+    @keyframes #{$name} {
+      @content;
     }
+  
+    animation-name: $name;
+    animation-duration: $duration;
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1.0;
+    } to {
+        opacity: 0.0;
+    }
+}
+
+.hide-creator {
+    animation: fadeout 0.4s;
 }
 
 .creator-wrapper {
@@ -34,10 +46,6 @@
     z-index: -1;
 }
 
-.directed-left.creator {
-    animation: appearbounceleft 0.4s;
-}
-
 .directed-left.creator::before  { left: -10px; }
 .directed-right.creator::before { right: -10px; }
 .directed-below.creator::before { bottom: -10px; }
@@ -47,7 +55,6 @@
     bottom: -10px;
     right: 20px;
 }  
-
 
 // .creator.accent2-bg::before {
 //     background-color: var(--accent2);
@@ -62,16 +69,25 @@
 
 .creator button {
     position: absolute;
-    background: none;
+    background: var(--base-txt);
     border: none;
-    bottom: -25px;
-    right: 0;
-    font-family: 'Roboto Slab';
+    bottom: 25px;
+    right: -18px;
+    padding: 6px 8px;
+    border-radius: 10px;
+    font-family: "Roboto Slab";
     text-transform: uppercase;
+    cursor: pointer;
 }
-
-.creator button svg {
-    margin-left: 5px;
+  
+.creator button path {
+    fill: var(--base-container);
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+  
+.creator button:hover path {
+    opacity: 1.0;
 }
 
 .create-button {
@@ -88,20 +104,91 @@
     fill: #9A9381;
 }
 
+@keyframes appear-listcreator {
+    from {
+        opacity: 0;
+        top: 150px;
+    
+    } to {
+        opacity: 1;
+        top: 190px;
+    }
+}
+
 .todolists-container .creator {
-    left: -180px;
-    top: 200px;
-    transform: rotate(-4deg);
+    // position: relative;
+    left: 440px;
+    top: 190px;
+    transform: rotate(0deg);
+    animation: appear-listcreator 0.4s;
+
+    /*@include inline-animation(0.4s) {
+        from {
+            opacity: 0;
+            top: 150px;
+        
+        } to {
+            opacity: 1;
+            top: 200px;
+        }
+    }*/
+}
+
+@keyframes appear-todocreator {
+    from {
+        opacity: 0;
+        top: -100px;
+    
+    } to {
+        opacity: 1;
+        top: -65px;
+    } 
 }
 
 .list-container .creator {
     transform: rotate(6deg);
     top: -65px;
     left: -250px;
+    animation: appear-todocreator 0.4s;
+
+    /*@include inline-animation(0.4s) {
+        from {
+            opacity: 0;
+            top: -100px;
+        
+        } to {
+            opacity: 1;
+            top: -65px;
+        }
+    }*/
+}
+
+
+@keyframes appear-bookmarkscreator {
+    from {
+        opacity: 0;
+        bottom: 75px;
+    
+    } to {
+        opacity: 1;
+        bottom: 30px;
+    }
 }
 
 .bookmarks-container .creator {
     position: absolute;
     bottom: 30px;
     left: -33px;
+    animation: appear-bookmarkscreator 0.4s;
+
+    /*@include inline-animation(0.4s) {
+        from {
+            opacity: 0;
+            bottom: 75px;
+        
+        } to {
+            opacity: 1;
+            bottom: 30px;
+        }
+    }*/
 }

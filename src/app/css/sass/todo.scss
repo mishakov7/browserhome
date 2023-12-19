@@ -1,68 +1,85 @@
-/* TODO LIST */
 .todolists-container {
     position: absolute;
-    right: 100px;
-    // border-left: solid 3px rgba(205, 199, 175, 0.15);
-    // padding-left: 20px;
+    right: 0;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    width: 50vw;
 }
 
+.todolists-container::-webkit-scrollbar {
+    display: none;
+    visibility: hidden;
+}
+  
 .list-container {
     position: absolute;
     background-color: #FFF8E5;
     border: solid 2.55px #FFF8E5;
     border-radius: 24px;
-    box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.60);
+    box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
     height: 75vh;
     width: 500px;
     top: 30vh;
-    padding: 30px;
+    padding: 20px 30px;
+    left: 500px;
     cursor: pointer;
     transition: border-color 0.2s, transform 0.4s;
 }
-
+  
 div.list-container:nth-of-type(1) {
     transform: rotate(-6deg);
     top: 40vh;
-    left: -125px;
+    left: 500px;
 }
-
+  
+.list-container:nth-of-type(2) .creator { transform: rotate(8deg);}
 div.list-container:nth-of-type(2) {
     transform: rotate(-8deg);
     top: 45vh;
-    left: -150px;
+    // left: 175px;
 }
-
+  
+.list-container:nth-of-type(3) .creator { transform: rotate(10deg);}
 div.list-container:nth-of-type(3) {
     transform: rotate(-10deg);
     top: 50vh;
-    left: -175px;
+    // left: 150px;
 }
-
+  
+.list-container:nth-of-type(4) .creator { transform: rotate(12deg);}
 div.list-container:nth-of-type(4) {
     transform: rotate(-12deg);
     top: 55vh;
-    left: -200px;
+    // left: 125px;
 }
-
+  
+.list-container:nth-of-type(5) .creator { transform: rotate(14deg);}
 div.list-container:nth-of-type(5) {
     transform: rotate(-14deg);
     top: 60vh;
-    left: -225px;
+    // left: 100px;
 }
-
+  
 .list-container:hover {
     transform: rotate(-6deg);
 }
-
+  
 .list-container h3 {
-    font-family: 'Roboto Slab';
+    font-family: "Roboto Slab";
     color: var(--secondary-txt);
+    margin-bottom: 20px;
 }
   
 .todo-list {
-    padding: 0
+    padding: 0;
 }
 
+.todo-list .create-button {
+    margin: 10px 0;
+}
+  
 .todo-item {
     list-style-type: none;
 }
@@ -77,7 +94,7 @@ div.list-container:nth-of-type(5) {
     font-family: var(--overpass);
     color: var(--secondary-txt);
 }
-
+  
 .todo-item .row {
     align-items: center;
 }
@@ -89,30 +106,30 @@ div.list-container:nth-of-type(5) {
 .todo-item label:last-of-type {
     margin-left: 12px;
 }
-
-.todo-item input[type="checkbox"] {
+  
+.todo-item input[type=checkbox] {
     display: none;
 }
-
+  
 .selected-list {
     cursor: default;
     z-index: 20;
 }
-
+  
 button.list-container {
     position: absolute;
     z-index: 50;
     transform: rotate(-4deg);
-    left: 75px;
+    left: 700px;
     cursor: pointer;
 }
-
+  
 button.list-container::before {
     content: "+ Add New List";
     position: absolute;
     display: block;
     opacity: 0;
-    font-family: 'Roboto Slab';
+    font-family: "Roboto Slab";
     text-transform: uppercase;
     font-size: 16px;
     color: rgb(var(--accent3));
@@ -121,12 +138,41 @@ button.list-container::before {
     top: 75px;
     transition: opacity 0.2s;
 }
-
+  
 button.list-container:hover {
     border-color: rgb(var(--accent3));
 }
-
+  
 button.list-container:hover::before {
     opacity: 1;
 }
 
+@media only screen and (max-width: 1024px) {
+    .todolists-container {
+        width: 60vw;
+    }
+
+    button.list-container {
+        left: 500px;
+    }
+
+    div.list-container:nth-of-type(1) {
+        left: 300px;
+    }
+      
+    div.list-container:nth-of-type(2) {
+        left: 275px;
+    }
+      
+    div.list-container:nth-of-type(3) {
+        left: 250px;
+    }
+      
+    div.list-container:nth-of-type(4) {
+        left: 225px;
+    }
+      
+    div.list-container:nth-of-type(5) {
+        left: 200px;
+    }
+}

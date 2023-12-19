@@ -157,16 +157,18 @@ input[type=text] {
   margin-left: 10px;
 }
 
-@keyframes appearbounceleft {
+@keyframes fadeout {
   from {
-    opacity: 0;
-    left: 40px;
+    opacity: 1;
   }
   to {
-    opacity: 1;
-    left: 20px;
+    opacity: 0;
   }
 }
+.hide-creator {
+  animation: fadeout 0.4s;
+}
+
 .creator-wrapper {
   position: relative;
 }
@@ -190,10 +192,6 @@ input[type=text] {
   border-radius: 12px;
   transform: rotate(45deg);
   z-index: -1;
-}
-
-.directed-left.creator {
-  animation: appearbounceleft 0.4s;
 }
 
 .directed-left.creator::before {
@@ -226,16 +224,25 @@ input[type=text] {
 
 .creator button {
   position: absolute;
-  background: none;
+  background: var(--base-txt);
   border: none;
-  bottom: -25px;
-  right: 0;
+  bottom: 25px;
+  right: -18px;
+  padding: 6px 8px;
+  border-radius: 10px;
   font-family: "Roboto Slab";
   text-transform: uppercase;
+  cursor: pointer;
 }
 
-.creator button svg {
-  margin-left: 5px;
+.creator button path {
+  fill: var(--base-container);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.creator button:hover path {
+  opacity: 1;
 }
 
 .create-button {
@@ -252,28 +259,100 @@ input[type=text] {
   fill: #9A9381;
 }
 
+@keyframes appear-listcreator {
+  from {
+    opacity: 0;
+    top: 150px;
+  }
+  to {
+    opacity: 1;
+    top: 190px;
+  }
+}
 .todolists-container .creator {
-  left: -180px;
-  top: 200px;
-  transform: rotate(-4deg);
+  left: 440px;
+  top: 190px;
+  transform: rotate(0deg);
+  animation: appear-listcreator 0.4s;
+  /*@include inline-animation(0.4s) {
+      from {
+          opacity: 0;
+          top: 150px;
+
+      } to {
+          opacity: 1;
+          top: 200px;
+      }
+  }*/
 }
 
+@keyframes appear-todocreator {
+  from {
+    opacity: 0;
+    top: -100px;
+  }
+  to {
+    opacity: 1;
+    top: -65px;
+  }
+}
 .list-container .creator {
   transform: rotate(6deg);
   top: -65px;
   left: -250px;
+  animation: appear-todocreator 0.4s;
+  /*@include inline-animation(0.4s) {
+      from {
+          opacity: 0;
+          top: -100px;
+
+      } to {
+          opacity: 1;
+          top: -65px;
+      }
+  }*/
 }
 
+@keyframes appear-bookmarkscreator {
+  from {
+    opacity: 0;
+    bottom: 75px;
+  }
+  to {
+    opacity: 1;
+    bottom: 30px;
+  }
+}
 .bookmarks-container .creator {
   position: absolute;
   bottom: 30px;
   left: -33px;
+  animation: appear-bookmarkscreator 0.4s;
+  /*@include inline-animation(0.4s) {
+      from {
+          opacity: 0;
+          bottom: 75px;
+
+      } to {
+          opacity: 1;
+          bottom: 30px;
+      }
+  }*/
 }
 
-/* TODO LIST */
 .todolists-container {
   position: absolute;
-  right: 100px;
+  right: 0;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  width: 50vw;
+}
+
+.todolists-container::-webkit-scrollbar {
+  display: none;
+  visibility: hidden;
 }
 
 .list-container {
@@ -285,7 +364,8 @@ input[type=text] {
   height: 75vh;
   width: 500px;
   top: 30vh;
-  padding: 30px;
+  padding: 20px 30px;
+  left: 500px;
   cursor: pointer;
   transition: border-color 0.2s, transform 0.4s;
 }
@@ -293,31 +373,43 @@ input[type=text] {
 div.list-container:nth-of-type(1) {
   transform: rotate(-6deg);
   top: 40vh;
-  left: -125px;
+  left: 500px;
+}
+
+.list-container:nth-of-type(2) .creator {
+  transform: rotate(8deg);
 }
 
 div.list-container:nth-of-type(2) {
   transform: rotate(-8deg);
   top: 45vh;
-  left: -150px;
+}
+
+.list-container:nth-of-type(3) .creator {
+  transform: rotate(10deg);
 }
 
 div.list-container:nth-of-type(3) {
   transform: rotate(-10deg);
   top: 50vh;
-  left: -175px;
+}
+
+.list-container:nth-of-type(4) .creator {
+  transform: rotate(12deg);
 }
 
 div.list-container:nth-of-type(4) {
   transform: rotate(-12deg);
   top: 55vh;
-  left: -200px;
+}
+
+.list-container:nth-of-type(5) .creator {
+  transform: rotate(14deg);
 }
 
 div.list-container:nth-of-type(5) {
   transform: rotate(-14deg);
   top: 60vh;
-  left: -225px;
 }
 
 .list-container:hover {
@@ -327,10 +419,15 @@ div.list-container:nth-of-type(5) {
 .list-container h3 {
   font-family: "Roboto Slab";
   color: var(--secondary-txt);
+  margin-bottom: 20px;
 }
 
 .todo-list {
   padding: 0;
+}
+
+.todo-list .create-button {
+  margin: 10px 0;
 }
 
 .todo-item {
@@ -373,7 +470,7 @@ button.list-container {
   position: absolute;
   z-index: 50;
   transform: rotate(-4deg);
-  left: 75px;
+  left: 700px;
   cursor: pointer;
 }
 
@@ -398,6 +495,30 @@ button.list-container:hover {
 
 button.list-container:hover::before {
   opacity: 1;
+}
+
+@media only screen and (max-width: 1024px) {
+  .todolists-container {
+    width: 60vw;
+  }
+  button.list-container {
+    left: 500px;
+  }
+  div.list-container:nth-of-type(1) {
+    left: 300px;
+  }
+  div.list-container:nth-of-type(2) {
+    left: 275px;
+  }
+  div.list-container:nth-of-type(3) {
+    left: 250px;
+  }
+  div.list-container:nth-of-type(4) {
+    left: 225px;
+  }
+  div.list-container:nth-of-type(5) {
+    left: 200px;
+  }
 }
 
 /*# sourceMappingURL=browserhome.css.map */

@@ -96,7 +96,7 @@ export default function Bookmarks() {
               creatorState={showCreator}
               handleCreator={(e: any) => { createBookmark(e); } } 
               inputGroups={creatorInputs}
-              submitlabel="Add Bookmark"
+              // submitlabel="Add Bookmark"
               bg="accent2"
               direction="below"
             /> 
