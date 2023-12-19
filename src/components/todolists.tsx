@@ -139,11 +139,9 @@ export default function ToDoLists() {
             <button onClick={toggleCreator} className='list-container'></button>
 
             <Creator 
-              // handleRef={creatorRef} 
               creatorState={showCreator}
               handleCreator={(e: any) => { createList(e); } } 
               inputGroups={creatorInputs}
-              // submitlabel="Create List"
               bg="accent3"  
               direction="right"
             /> 

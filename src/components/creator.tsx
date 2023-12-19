@@ -2,9 +2,26 @@
 import React, { useState, useEffect, useRef, use } from 'react';
 
 const Creator = (props: any) => {
+    // const creatorRef = useRef(null);
+
     const checkRadio = (ref: any, e: any) => {
         ref.current.click();
     }
+
+    // const handleOutsideClick = (e: any) => {
+    //     if (creatorRef.current && !creatorRef.current.contains(e.target)) {
+    //       setCreator(false);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     document.addEventListener("click", handleOutsideClick, false);
+    
+    //     return() => {
+    //       document.removeEventListener("click", handleOutsideClick, false);
+    //     }
+    
+    //   }, []);
 
   return (
     <>

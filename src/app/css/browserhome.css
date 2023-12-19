@@ -215,6 +215,10 @@ input[type=text] {
   margin-left: 10px;
 }
 
+.editing-button {
+  display: flex !important;
+}
+
 @keyframes fadeout {
   from {
     opacity: 1;

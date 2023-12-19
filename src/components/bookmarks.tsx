@@ -8,6 +8,7 @@ export default function Bookmarks() {
   const [bookmarkList, setBookmarkList] = useState([]);
   const [showCreator, setCreator] = useState(false);
 
+  const currentEdit = useRef(null);
   const creatorRef = useRef(null);
   const input1Ref = useRef(null);
   const input2Ref = useRef(null);
@@ -53,6 +54,30 @@ export default function Bookmarks() {
     toggleCreator();
   }
 
+  const deleteBookmark = (e:any, key: number) => {
+    let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    storageBookmarks.splice(key, 1);
+
+    setBookmarkList(storageBookmarks);
+    localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
+
+  }
+
+  const editBookmark = (e:any, key: number, refs: any) => {
+    let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+
+    let editedBookmark = {
+      "key": key,
+      "image": refs[0].current.value,
+      "link": refs[1].current.value
+    }
+
+    storageBookmarks[key] = editedBookmark;
+    setBookmarkList(storageBookmarks);
+    localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
+    currentEdit.current.classList.remove("editing-button");
+  }
+  
   const handleOutsideClick = (e: any) => {
     if (creatorRef.current && !creatorRef.current.contains(e.target)) {
       setCreator(false);
@@ -82,8 +107,12 @@ export default function Bookmarks() {
               bookmarkList.length < 1 ? "Add a bookmark!" : bookmarkList.map(bookmark => (
                   <li className='bookmark' key={bookmark.key}>
                     <Bookmark 
+                      bookmarkKey={bookmark.key}
                       link={bookmark.link}
                       image={bookmark.image}
+                      handleDelete={(e: any) => deleteBookmark(bookmark.key)}
+                      handleEdit={editBookmark}
+                      editButton={currentEdit}
                     />
                   </li>
               ))

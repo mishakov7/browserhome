@@ -144,11 +144,9 @@ const List = (props: any) => {
               </button>
 
               <Creator
-                // handleRef={creatorRef} 
                 creatorState={showCreator}
                 handleCreator={(e: any) => { createTodo(e); } } 
                 inputGroups={creatorInputs}
-                // submitlabel="Add To-Do Item"
                 bg="accent3"  
                 direction="right"
               /> 
