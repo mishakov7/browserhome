@@ -139,6 +139,9 @@ input[type=text] {
   bottom: 0;
   transition: bottom 0.2s;
   /* animation: hop 0.4s backwards; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .bookmark:hover {
@@ -153,6 +156,61 @@ input[type=text] {
   align-items: center;
 }
 
+.bookmark .remove-button,
+.bookmark .edit-button {
+  position: absolute;
+  display: none;
+  border: none;
+}
+
+.bookmark .remove-button {
+  background: none;
+  bottom: -50px;
+  padding: 20px;
+}
+
+.bookmark .remove-button path {
+  fill: var(--secondary-txt-lt);
+  transition: fill 0.4s;
+}
+
+.bookmark .remove-button:hover path {
+  fill: var(--secondary-txt);
+}
+
+.bookmark .edit-button {
+  background-color: rgba(var(--accent2), 0.8);
+  border-radius: 10px;
+  padding: 6px;
+  top: -20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark .edit-button:hover {
+  background-color: rgba(var(--accent2), 1);
+}
+
+.bookmark .edit-button path {
+  fill: var(--base-container);
+}
+
+.bookmark:hover .remove-button,
+.bookmark:hover .edit-button {
+  display: flex;
+  cursor: pointer;
+  animation: fadein 0.2s;
+}
+
+.bookmark .edit-button svg {
+  transform: rotate(0deg);
+  transition: transform 0.4s;
+}
+
+.bookmark .edit-button:hover svg {
+  transform: rotate(360deg);
+}
+
 .bookmarks-container .create-button {
   margin-left: 10px;
 }
@@ -163,6 +221,14 @@ input[type=text] {
   }
   to {
     opacity: 0;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 .hide-creator {
