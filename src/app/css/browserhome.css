@@ -410,6 +410,10 @@ input[type=text] {
   }*/
 }
 
+.bookmark .creator {
+  left: -60px;
+}
+
 .todolists-container {
   position: absolute;
   right: 0;

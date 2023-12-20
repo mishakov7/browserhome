@@ -27,7 +27,7 @@ const Creator = (props: any) => {
     <>
     { 
     props.creatorState ?
-    <div ref={props.handleRef} className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
+    <div className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
         { props.inputGroups.map(group => (
                     
             <div className="input-group">

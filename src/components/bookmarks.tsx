@@ -8,7 +8,7 @@ export default function Bookmarks() {
   const [bookmarkList, setBookmarkList] = useState([]);
   const [showCreator, setCreator] = useState(false);
 
-  const currentEdit = useRef(null);
+  // const currentEdit = useRef(null);
   const creatorRef = useRef(null);
   const input1Ref = useRef(null);
   const input2Ref = useRef(null);
@@ -75,7 +75,7 @@ export default function Bookmarks() {
     storageBookmarks[key] = editedBookmark;
     setBookmarkList(storageBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
-    currentEdit.current.classList.remove("editing-button");
+    // currentEdit.current.classList.remove("editing-button");
   }
   
   const handleOutsideClick = (e: any) => {
@@ -112,7 +112,6 @@ export default function Bookmarks() {
                       image={bookmark.image}
                       handleDelete={(e: any) => deleteBookmark(bookmark.key)}
                       handleEdit={editBookmark}
-                      editButton={currentEdit}
                     />
                   </li>
               ))
@@ -121,11 +120,9 @@ export default function Bookmarks() {
         
         <div ref={creatorRef} className='creator-wrapper'>
             <Creator 
-              // handleRef={creatorRef} 
               creatorState={showCreator}
               handleCreator={(e: any) => { createBookmark(e); } } 
               inputGroups={creatorInputs}
-              // submitlabel="Add Bookmark"
               bg="accent2"
               direction="below"
             /> 
