@@ -45,7 +45,7 @@ const Creator = (props: any) => {
                         ))}  
                     </div>
 
-                    : <input ref={group.ref} type="text" name={group.name} /> 
+                    : <input ref={group.ref} type="text" name={group.name} value={group.value} /> 
                 }
                 
             </div>

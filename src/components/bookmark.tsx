@@ -9,14 +9,18 @@ const Bookmark = (props: any) => {
   const edit2Ref = useRef(null);
   const editButton = useRef(null);
 
+  let storageBookmark = JSON.parse(localStorage.getItem("bookmarks"))[props.bookmarkKey];
+
   const editorInputs = [{
     "ref": edit1Ref,
     "label": "Image",
-    "name": "bookmark-image"
+    "name": "bookmark-image",
+    "value": storageBookmark.image
   }, {
     "ref": edit2Ref,
     "label": "Link",
-    "name": "bookmark-link"
+    "name": "bookmark-link",
+    "value": storageBookmark.link
   }];
 
   const toggleCreator = () => {
