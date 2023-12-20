@@ -177,6 +177,8 @@ export default function ToDoLists() {
                     </button>
 
                     <Creator 
+                      isAlert={true}
+                      // offClick={setAlert(false)}
                       creatorState={showAlert}
                       handleCreator={(e: any) => deleteList(list.key)}
                       inputGroups={alertInputs}
