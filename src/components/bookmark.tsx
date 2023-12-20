@@ -25,22 +25,30 @@ const Bookmark = (props: any) => {
     } else {
       setCreator(true);
     }
+
+
   }
 
-  /*const handleOutsideClick = (e: any) => {
-    if (creatorRef.current && !creatorRef.current.contains(e.target)) {
+  const handleOutsideClick = (e: any) => {
+    console.log("creatorref? " + creatorRef.current);
+    console.log("showcreator? " + showCreator);
+    console.log("contains? " + creatorRef.current.contains(e.target));
+
+    if (creatorRef.current && showCreator && !creatorRef.current.contains(e.target)) {
       setCreator(false);
     }
   }
 
   useEffect(() => {
+    // console.log(showCreator);
+
     document.addEventListener("click", handleOutsideClick, false);
 
     return() => {
       document.removeEventListener("click", handleOutsideClick, false);
     }
 
-  }, []);*/
+  }, [showCreator]);
 
   return (
     <>
