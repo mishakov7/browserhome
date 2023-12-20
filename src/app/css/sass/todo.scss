@@ -147,6 +147,23 @@ button.list-container:hover::before {
     opacity: 1;
 }
 
+.list-container .buttons-container {
+    display: none;
+}
+
+.selected-list .buttons-container {
+    display: flex;
+    position: absolute;
+    top: -20px;
+    left: 100px;
+}
+
+.selected-list .buttons-container button {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px;
+}
+
 @media only screen and (max-width: 1024px) {
     .todolists-container {
         width: 60vw;

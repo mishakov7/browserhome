@@ -22,10 +22,12 @@ const List = (props: any) => {
 
   const creatorInputs = [{
     "ref": labelInput,
+    "type": "text",
     "label": "To-Do Label",
     "name": "todo-label"
   }, {
     "ref": linkInput,
+    "type": "text",
     "label": "To-Do Link",
     "name": "todo-link"
   }];

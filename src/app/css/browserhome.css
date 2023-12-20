@@ -180,8 +180,6 @@ input[type=text] {
 
 .bookmark .edit-button {
   background-color: rgba(var(--accent2), 0.7);
-  border-radius: 10px;
-  padding: 6px;
   top: -20px;
   justify-content: center;
   align-items: center;
@@ -200,15 +198,6 @@ input[type=text] {
   display: flex;
   cursor: pointer;
   animation: fadein 0.2s;
-}
-
-.edit-button svg {
-  transform: rotate(0deg);
-  transition: transform 0.4s;
-}
-
-.edit-button:hover svg {
-  transform: rotate(360deg);
 }
 
 .bookmarks-container .create-button {
@@ -383,6 +372,11 @@ input[type=text] {
   }*/
 }
 
+.list-container .buttons-container .creator {
+  top: -135px;
+  left: 15px;
+}
+
 @keyframes appear-bookmarkscreator {
   from {
     opacity: 0;
@@ -412,6 +406,32 @@ input[type=text] {
 
 .bookmark .creator {
   left: -60px;
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert .input-group {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.alert button {
+  position: relative;
+  width: max-content !important;
+  top: 0;
+  left: 0;
+  color: var(--base-container);
+}
+
+.alert button:first-child {
+  background: none;
+  color: var(--base-txt);
 }
 
 .todolists-container {
@@ -569,6 +589,23 @@ button.list-container:hover {
 
 button.list-container:hover::before {
   opacity: 1;
+}
+
+.list-container .buttons-container {
+  display: none;
+}
+
+.selected-list .buttons-container {
+  display: flex;
+  position: absolute;
+  top: -20px;
+  left: 100px;
+}
+
+.selected-list .buttons-container button {
+  width: 32px;
+  height: 32px;
+  margin: 0 5px;
 }
 
 @media only screen and (max-width: 1024px) {

@@ -171,6 +171,11 @@
     }*/
 }
 
+.list-container .buttons-container .creator {
+    top: -135px;
+    left: 15px;
+}
+
 
 @keyframes appear-bookmarkscreator {
     from {
@@ -203,4 +208,30 @@
 
 .bookmark .creator {
     left: -60px;
+}
+
+.alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert .input-group {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.alert button {
+    position: relative;
+    width: max-content!important;
+    top: 0;
+    left: 0;
+    color: var(--base-container);
+}
+
+.alert button:first-child {
+    background: none;
+    color: var(--base-txt);
 }

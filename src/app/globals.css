@@ -596,3 +596,28 @@ input[type="radio"]  {
 input[type="radio"]:checked + .radio span {
   background-color: var(--base-container);
 }
+
+button {
+  border: none;
+}
+
+.edit-button,
+.remove-button {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.edit-button svg {
+  transform: rotate(0deg);
+  transition: transform 0.4s;
+}
+
+.edit-button:hover svg {
+  transform: rotate(360deg);
+}
+
+.edit-button path, 
+.remove-button path {
+  fill: var(--base-container);
+}

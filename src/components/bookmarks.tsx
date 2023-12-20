@@ -15,10 +15,12 @@ export default function Bookmarks() {
 
   const creatorInputs = [{
     "ref": input1Ref,
+    "type": "text",
     "label": "Image",
     "name": "bookmark-image"
   }, {
     "ref": input2Ref,
+    "type": "text",
     "label": "Link",
     "name": "bookmark-link"
   }];

@@ -13,11 +13,13 @@ const Bookmark = (props: any) => {
 
   const editorInputs = [{
     "ref": edit1Ref,
+    "type": "text",
     "label": "Image",
     "name": "bookmark-image",
     "value": storageBookmark.image
   }, {
     "ref": edit2Ref,
+    "type": "text",
     "label": "Link",
     "name": "bookmark-link",
     "value": storageBookmark.link
