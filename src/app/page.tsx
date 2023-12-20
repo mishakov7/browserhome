@@ -9,6 +9,8 @@ import Bookmarks from '@/components/bookmarks';
 
 export default function Home() {
 
+  // const [drawer, setDrawer] = useState();
+
   return (
     <>
     <div id="dresser" className="accent1-bg">
@@ -18,6 +20,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+{/*
+      <Drawer 
+
+      />
+*/}
       <div id="main-container" className="accent1-border">
         <div id="main-wrapper">
 

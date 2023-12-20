@@ -147,7 +147,7 @@ const List = (props: any) => {
                 creatorState={showCreator}
                 handleCreator={(e: any) => { createTodo(e); } } 
                 inputGroups={creatorInputs}
-                bg="accent3"  
+                bg={props.listColor}  
                 direction="right"
               /> 
                 
