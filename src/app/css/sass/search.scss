@@ -1,0 +1,39 @@
+/* SEARCH QUERY */
+.google-container {
+    margin: 50px;
+  }
+  
+  .search-query {
+    font-family: 'Plus Jakarta';
+    font-size: 2.4em;
+    font-weight: 700;
+    line-height: 1.2em;
+    text-align: right;
+  }
+  
+  .inputGroup {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px 50px;
+  }
+  
+  .inputGroup::before {
+    content: url("https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg");
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+  }
+  
+  .inputGroup a {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    margin: 10px;
+  }

@@ -1,0 +1,635 @@
+/* SEARCH QUERY */
+.google-container {
+  margin: 50px;
+}
+
+.search-query {
+  font-family: "Plus Jakarta";
+  font-size: 2.4em;
+  font-weight: 700;
+  line-height: 1.2em;
+  text-align: right;
+}
+
+.inputGroup {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 10px 50px;
+}
+
+.inputGroup::before {
+  content: url("https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg");
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.inputGroup a {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  margin: 10px;
+}
+
+/* POLAROIDS */
+.polaroid-container {
+  background-color: #FFF8E5;
+  padding: 20px 20px 48px 20px;
+  margin: 50px;
+  border-radius: 36px;
+  position: relative;
+  width: max-content;
+  transform: rotate(-4deg);
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
+  cursor: pointer;
+}
+
+.polaroid-container::before {
+  content: "Do it for him";
+  position: absolute;
+  font-family: "Kalam", cursive;
+  font-size: 1.5em;
+  text-transform: lowercase;
+  top: -60px;
+  padding: 20px 5px;
+}
+
+.polaroid-container::after {
+  content: "";
+  position: absolute;
+  background-image: url(https://cdn.pixabay.com/photo/2013/07/12/12/46/drawing-pin-146214_1280.png);
+  background-size: 60px;
+  background-repeat: no-repeat;
+  width: 75px;
+  height: 75px;
+  left: 40%;
+  right: 50%;
+  top: 0px;
+}
+
+.polaroid-container img {
+  width: 350px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.polaroid-container input[type=file] {
+  display: none;
+}
+
+.upload-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #FFF8E5;
+  padding: 10px;
+  margin: 30px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-button path {
+  transition: fill 0.2s;
+}
+
+.upload-button:hover path {
+  fill: var(--accent1);
+}
+
+/* BOOKMARKS */
+.bookmarks-container,
+.bookmarks-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bookmarks-container {
+  position: relative;
+  max-height: 75px;
+  margin: 40px 10px;
+}
+
+@keyframes hop {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: 12px;
+  }
+}
+.bookmark {
+  position: relative;
+  background-color: #FFF8E5;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
+  width: 75px;
+  height: 75px;
+  border-radius: 20px;
+  margin: 6px;
+  list-style-type: none;
+  bottom: 0;
+  transition: bottom 0.2s;
+  /* animation: hop 0.4s backwards; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bookmark:hover {
+  bottom: 12px;
+}
+
+.bookmark a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark .remove-button,
+.bookmark .edit-button {
+  position: absolute;
+  display: none;
+  border: none;
+}
+
+.bookmark .remove-button {
+  background: none;
+  bottom: -50px;
+  padding: 20px;
+}
+
+.bookmark .remove-button path {
+  fill: var(--secondary-txt-lt);
+  transition: fill 0.4s;
+}
+
+.bookmark .remove-button:hover path {
+  fill: var(--secondary-txt);
+}
+
+.bookmark .edit-button {
+  background-color: rgba(var(--accent2), 0.7);
+  top: -20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark .edit-button:hover {
+  background-color: rgba(var(--accent2), 1);
+}
+
+.bookmark .edit-button path {
+  fill: var(--base-container);
+}
+
+.bookmark:hover .remove-button,
+.bookmark:hover .edit-button {
+  display: flex;
+  cursor: pointer;
+  animation: fadein 0.2s;
+}
+
+.bookmarks-container .create-button {
+  margin-left: 10px;
+}
+
+.editing-button {
+  display: flex !important;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.hide-creator {
+  animation: fadeout 0.4s;
+}
+
+.creator-wrapper {
+  position: relative;
+}
+
+.creator {
+  position: absolute;
+  width: 200px;
+  margin: 20px;
+  padding: 20px;
+  font-size: 12px;
+  border-radius: 16px;
+  z-index: 100;
+}
+
+.creator::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  border-radius: 12px;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.directed-left.creator::before {
+  left: -10px;
+}
+
+.directed-right.creator::before {
+  right: -10px;
+}
+
+.directed-below.creator::before {
+  bottom: -10px;
+}
+
+.directed-above.creator::before {
+  top: -10px;
+}
+
+.directed-brcorner.creator::before {
+  bottom: -10px;
+  right: 20px;
+}
+
+.creator input {
+  padding: 0px 10px;
+  border: none;
+  border-radius: 12px;
+  margin: 5px 0;
+}
+
+.creator button {
+  position: absolute;
+  background: var(--base-txt);
+  border: none;
+  bottom: 25px;
+  right: -18px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-family: "Roboto Slab";
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.creator button path {
+  fill: var(--base-container);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.creator button:hover path {
+  opacity: 1;
+}
+
+.create-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.create-button path {
+  transition: fill 0.2s;
+}
+
+.create-button:hover path {
+  fill: #9A9381;
+}
+
+@keyframes appear-listcreator {
+  from {
+    opacity: 0;
+    top: 150px;
+  }
+  to {
+    opacity: 1;
+    top: 190px;
+  }
+}
+.todolists-container .creator {
+  left: 440px;
+  top: 190px;
+  transform: rotate(0deg);
+  animation: appear-listcreator 0.4s;
+  /*@include inline-animation(0.4s) {
+      from {
+          opacity: 0;
+          top: 150px;
+
+      } to {
+          opacity: 1;
+          top: 200px;
+      }
+  }*/
+}
+
+@keyframes appear-todocreator {
+  from {
+    opacity: 0;
+    top: -100px;
+  }
+  to {
+    opacity: 1;
+    top: -65px;
+  }
+}
+.list-container .creator {
+  transform: rotate(6deg);
+  top: -65px;
+  left: -250px;
+  animation: appear-todocreator 0.4s;
+  /*@include inline-animation(0.4s) {
+      from {
+          opacity: 0;
+          top: -100px;
+
+      } to {
+          opacity: 1;
+          top: -65px;
+      }
+  }*/
+}
+
+.list-container .buttons-container .creator {
+  top: -135px;
+  left: 15px;
+}
+
+@keyframes appear-bookmarkscreator {
+  from {
+    opacity: 0;
+    bottom: 75px;
+  }
+  to {
+    opacity: 1;
+    bottom: 30px;
+  }
+}
+.bookmarks-container .creator {
+  position: absolute;
+  bottom: 30px;
+  left: -33px;
+  animation: appear-bookmarkscreator 0.4s;
+  /*@include inline-animation(0.4s) {
+      from {
+          opacity: 0;
+          bottom: 75px;
+
+      } to {
+          opacity: 1;
+          bottom: 30px;
+      }
+  }*/
+}
+
+.bookmark .creator {
+  left: -60px;
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert .input-group {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.alert button {
+  position: relative;
+  width: max-content !important;
+  top: 0;
+  left: 0;
+  color: var(--base-container);
+}
+
+.alert button:first-child {
+  background: none;
+  color: var(--base-txt);
+}
+
+.todolists-container {
+  position: absolute;
+  right: 0;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  width: 50vw;
+}
+
+.todolists-container::-webkit-scrollbar {
+  display: none;
+  visibility: hidden;
+}
+
+.list-container {
+  position: absolute;
+  background-color: #FFF8E5;
+  border: solid 2.55px #FFF8E5;
+  border-radius: 24px;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
+  height: 75vh;
+  width: 500px;
+  top: 30vh;
+  padding: 20px 30px;
+  left: 500px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.4s;
+}
+
+div.list-container:nth-of-type(1) {
+  transform: rotate(-6deg);
+  top: 40vh;
+  left: 500px;
+}
+
+.list-container:nth-of-type(2) .creator {
+  transform: rotate(8deg);
+}
+
+div.list-container:nth-of-type(2) {
+  transform: rotate(-8deg);
+  top: 45vh;
+}
+
+.list-container:nth-of-type(3) .creator {
+  transform: rotate(10deg);
+}
+
+div.list-container:nth-of-type(3) {
+  transform: rotate(-10deg);
+  top: 50vh;
+}
+
+.list-container:nth-of-type(4) .creator {
+  transform: rotate(12deg);
+}
+
+div.list-container:nth-of-type(4) {
+  transform: rotate(-12deg);
+  top: 55vh;
+}
+
+.list-container:nth-of-type(5) .creator {
+  transform: rotate(14deg);
+}
+
+div.list-container:nth-of-type(5) {
+  transform: rotate(-14deg);
+  top: 60vh;
+}
+
+.list-container:hover {
+  transform: rotate(-6deg);
+}
+
+.list-container h3 {
+  font-family: "Roboto Slab";
+  color: var(--secondary-txt);
+  margin-bottom: 20px;
+}
+
+.todo-list {
+  padding: 0;
+}
+
+.todo-list .create-button {
+  margin: 10px 0;
+}
+
+.todo-item {
+  list-style-type: none;
+}
+
+.todo-item {
+  border-bottom: solid 2.55px var(--subtle-border);
+  padding-bottom: 10px;
+}
+
+.todo-item a {
+  text-decoration: none;
+  font-family: var(--overpass);
+  color: var(--secondary-txt);
+}
+
+.todo-item .row {
+  align-items: center;
+}
+
+.todo-item input:checked + label {
+  text-decoration: line-through;
+}
+
+.todo-item label:last-of-type {
+  margin-left: 12px;
+}
+
+.todo-item input[type=checkbox] {
+  display: none;
+}
+
+.selected-list {
+  cursor: default;
+  z-index: 20;
+}
+
+button.list-container {
+  position: absolute;
+  z-index: 50;
+  transform: rotate(-4deg);
+  left: 700px;
+  cursor: pointer;
+}
+
+button.list-container::before {
+  content: "+ Add New List";
+  position: absolute;
+  display: block;
+  opacity: 0;
+  font-family: "Roboto Slab";
+  text-transform: uppercase;
+  font-size: 16px;
+  color: rgb(var(--accent3));
+  left: -90px;
+  transform: rotate(-90deg);
+  top: 75px;
+  transition: opacity 0.2s;
+}
+
+button.list-container:hover {
+  border-color: rgb(var(--accent3));
+}
+
+button.list-container:hover::before {
+  opacity: 1;
+}
+
+.list-container .buttons-container {
+  display: none;
+}
+
+.selected-list .buttons-container {
+  display: flex;
+  position: absolute;
+  top: -20px;
+  left: 100px;
+}
+
+.selected-list .buttons-container button {
+  width: 32px;
+  height: 32px;
+  margin: 0 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .todolists-container {
+    width: 60vw;
+  }
+  button.list-container {
+    left: 500px;
+  }
+  div.list-container:nth-of-type(1) {
+    left: 300px;
+  }
+  div.list-container:nth-of-type(2) {
+    left: 275px;
+  }
+  div.list-container:nth-of-type(3) {
+    left: 250px;
+  }
+  div.list-container:nth-of-type(4) {
+    left: 225px;
+  }
+  div.list-container:nth-of-type(5) {
+    left: 200px;
+  }
+}
+
+/*# sourceMappingURL=browserhome.css.map */

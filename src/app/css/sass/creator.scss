@@ -1,0 +1,237 @@
+@mixin inline-animation($duration) {
+    $name: inline-#{unique-id()};
+  
+    @keyframes #{$name} {
+      @content;
+    }
+  
+    animation-name: $name;
+    animation-duration: $duration;
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1.0;
+    } to {
+        opacity: 0.0;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0.0;
+    } to {
+        opacity: 1.0;
+    }
+}
+
+.hide-creator {
+    animation: fadeout 0.4s;
+}
+
+.creator-wrapper {
+    position: relative;
+}
+
+.creator {
+    position: absolute;
+    width: 200px;
+    margin: 20px;
+    padding: 20px;
+    font-size: 12px;
+    border-radius: 16px;
+    z-index: 100;
+}
+
+.creator::before {
+    content: "";
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
+    border-radius: 12px;
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+.directed-left.creator::before  { left: -10px; }
+.directed-right.creator::before { right: -10px; }
+.directed-below.creator::before { bottom: -10px; }
+.directed-above.creator::before { top: -10px; }  
+
+.directed-brcorner.creator::before { 
+    bottom: -10px;
+    right: 20px;
+}  
+
+// .creator.accent2-bg::before {
+//     background-color: var(--accent2);
+// }
+
+.creator input {
+    padding: 0px 10px;
+    border: none;
+    border-radius: 12px;
+    margin: 5px 0;
+}
+
+.creator button {
+    position: absolute;
+    background: var(--base-txt);
+    border: none;
+    bottom: 25px;
+    right: -18px;
+    padding: 6px 8px;
+    border-radius: 10px;
+    font-family: "Roboto Slab";
+    text-transform: uppercase;
+    cursor: pointer;
+}
+  
+.creator button path {
+    fill: var(--base-container);
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+  
+.creator button:hover path {
+    opacity: 1.0;
+}
+
+.create-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.create-button path {
+    transition: fill 0.2s;
+}
+
+.create-button:hover path {
+    fill: #9A9381;
+}
+
+@keyframes appear-listcreator {
+    from {
+        opacity: 0;
+        top: 150px;
+    
+    } to {
+        opacity: 1;
+        top: 190px;
+    }
+}
+
+.todolists-container .creator {
+    // position: relative;
+    left: 440px;
+    top: 190px;
+    transform: rotate(0deg);
+    animation: appear-listcreator 0.4s;
+
+    /*@include inline-animation(0.4s) {
+        from {
+            opacity: 0;
+            top: 150px;
+        
+        } to {
+            opacity: 1;
+            top: 200px;
+        }
+    }*/
+}
+
+@keyframes appear-todocreator {
+    from {
+        opacity: 0;
+        top: -100px;
+    
+    } to {
+        opacity: 1;
+        top: -65px;
+    } 
+}
+
+.list-container .creator {
+    transform: rotate(6deg);
+    top: -65px;
+    left: -250px;
+    animation: appear-todocreator 0.4s;
+
+    /*@include inline-animation(0.4s) {
+        from {
+            opacity: 0;
+            top: -100px;
+        
+        } to {
+            opacity: 1;
+            top: -65px;
+        }
+    }*/
+}
+
+.list-container .buttons-container .creator {
+    top: -135px;
+    left: 15px;
+}
+
+
+@keyframes appear-bookmarkscreator {
+    from {
+        opacity: 0;
+        bottom: 75px;
+    
+    } to {
+        opacity: 1;
+        bottom: 30px;
+    }
+}
+
+.bookmarks-container .creator {
+    position: absolute;
+    bottom: 30px;
+    left: -33px;
+    animation: appear-bookmarkscreator 0.4s;
+
+    /*@include inline-animation(0.4s) {
+        from {
+            opacity: 0;
+            bottom: 75px;
+        
+        } to {
+            opacity: 1;
+            bottom: 30px;
+        }
+    }*/
+}
+
+.bookmark .creator {
+    left: -60px;
+}
+
+.alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert .input-group {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.alert button {
+    position: relative;
+    width: max-content!important;
+    top: 0;
+    left: 0;
+    color: var(--base-container);
+}
+
+.alert button:first-child {
+    background: none;
+    color: var(--base-txt);
+}

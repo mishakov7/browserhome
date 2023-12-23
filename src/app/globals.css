@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,3 +26,628 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+=======
+:root {
+  --base-bg: #F5F1E1;
+  --base-container: #FFF8E5;
+  --base-txt: #1E1A35;
+  --secondary-txt: #867D64;
+  --secondary-txt-lt: #CDC7AF;
+  --subtle-border: rgba(205, 199, 175, 0.15);
+  --shadow: rgba(225, 217, 184, 0.2);
+
+  --accent1: 141, 108, 210;
+  --accent2: 108, 210, 161;
+  --accent3: 250, 63, 97;
+
+  --jakarta: "Plus Jakarta", "Roboto", "sans-serif";
+  --robo: "Roboto Slab", serif;
+  --overpass: "Overpass", "Work Sans", sans-serif;
+  --pioggia: "Pioggia", "Vidaloka", "DM Serif Display", "Libre Baskerville", serif;
+
+}
+
+/**********************/
+/** FONT ASSIGNMENTS **/
+/**********************/
+@font-face {
+  font-family: "Kalam";
+  src: url("/fonts/Kalam/Kalam-Regular.ttf");
+}
+@font-face {
+  font-family: "Plus Jakarta";
+  src: url("/fonts/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "Plus Jakarta";
+  src: url("/fonts/Plus_Jakarta_Sans/PlusJakartaSans-Italic-VariableFont_wght.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("/fonts/RobotoSlab/RobotoSlab-Light.ttf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("/fonts/RobotoSlab/RobotoSlab-Regular.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("/fonts/RobotoSlab/RobotoSlab-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Overpass";
+  src: url("/fonts/Overpass/OVERPASS-REGULAR.TTF");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Overpass";
+  src: url("/fonts/Overpass/OVERPASS-LIGHT.TTF");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Overpass";
+  src: url("/fonts/Overpass/OVERPASS-EXTRALIGHT.TTF");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Overpass";
+  src: url("/fonts/Overpass/OVERPASS-SEMIBOLD.TTF");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Overpass";
+  src: url("/fonts/Overpass/OVERPASS-EXTRABOLD.TTF");
+  font-weight: 600;
+}
+
+/********************/
+/** GENERAL STYLES **/
+/********************/
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--overpass);
+}
+
+#dresser {
+  position: relative;
+  overflow: hidden;
+  margin: 0px;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h1 span,
+h2, h2 span {
+  font-family: var(--jakarta);
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--base-txt);
+}
+
+h3, h4, h5, h6 {
+  font-family: var(--overpass);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  margin: 4px 0;
+  text-transform: uppercase;
+}
+
+p, span {
+  font-family: var(--overpass);
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--base-txt);
+}
+
+ul {
+  margin: 0;
+  padding-left: 30px;
+}
+
+li {
+  margin: 10px 0;
+}
+
+ul, li, td {
+  font-family: var(--overpass);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+label {
+  font-size: 13px;
+}
+
+input, textarea {
+  font-size: 14px;
+}
+
+#main-container {
+  background-color: var(--base-bg);
+  border-radius: 30px;
+  max-height: 100vh;
+  width: 100%;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  border: solid 12px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#main-wrapper {
+  width: auto;
+  position: relative;
+  z-index: 1;
+  overflow: hidden!important;
+  /* filter: blur(0px); */
+  transition: filter 0.6s;
+  /* min-height: 100vh; */
+
+}
+
+::-webkit-scrollbar {
+  display: none;
+  visibility: hidden;
+}
+
+section {
+  margin: 4rem 8%;
+}
+
+article {
+  background-color: var(--base-container);
+  border-radius: 20px;
+  padding: 20px;
+  border: solid 2.55px;
+}
+
+.accent1-txt    { color: rgb(var(--accent1))!important; }
+.accent2-txt { color: rgb(var(--accent2))!important; }
+.accent3-txt   { color: rgb(var(--accent3))!important; }
+
+.accent1-hover:hover    { color: rgb(var(--accent1))!important; }
+.accent2-hover:hover { color: rgb(var(--accent2))!important; }
+.accent3-hover:hover   { color: rgb(var(--accent3))!important; }
+
+.accent1-bg    { background-color: rgb(var(--accent1))!important; }
+.accent2-bg { background-color: rgb(var(--accent2))!important; }
+.accent3-bg   { background-color: rgb(var(--accent3))!important; }
+
+.accent1a-bg    { background-color: rgba(var(--accent1), 0.15)!important; }
+.accent2a-bg { background-color: rgba(var(--accent2), 0.15)!important; }
+.accent3a-bg   { background-color: rgba(var(--accent3), 0.15)!important; }
+
+.accent1-bg-hover:hover    { background-color: rgb(var(--accent1))!important; }
+.accent2-bg-hover:hover { background-color: rgb(var(--accent2))!important; }
+.accent3-bg-hover:hover   { background-color: rgb(var(--accent3))!important; }
+
+.accent1-bg-before::before    { background-color: rgb(var(--accent1))!important; }
+.accent2-bg-before::before { background-color: rgb(var(--accent2))!important; }
+.accent3-bg-before::before   { background-color: rgb(var(--accent3))!important; }
+
+.accent1-bg-after::after    { background-color: rgb(var(--accent1))!important; }
+.accent2-bg-after::after { background-color: rgb(var(--accent2))!important; }
+.accent3-bg-after::after   { background-color: rgb(var(--accent3))!important; }
+
+.accent1-bg,
+.accent2-bg,
+.accent3-bg {
+  transition: background-color 0.6s;
+}
+
+.accent1-fill-hover path,
+.accent2-fill-hover path,
+.accent3-fill-hover path {
+  transition: fill 0.2s;
+}
+
+.accent1-border    { border-color: rgb(var(--accent1))!important; }
+.accent2-border { border-color: rgb(var(--accent2))!important; }
+.accent3-border   { border-color: rgb(var(--accent3))!important; }
+.accent1-border-hover:hover    { border-color: rgb(var(--accent1))!important; }
+.accent2-border-hover:hover { border-color: rgb(var(--accent2))!important; }
+.accent3-border-hover:hover   { border-color: rgb(var(--accent3))!important; }
+
+.accent1-fill path    { fill: rgb(var(--accent1))!important; }
+.accent2-fill path { fill: rgb(var(--accent2))!important; }
+.accent3-fill path   { fill: rgb(var(--accent3))!important; }
+
+.accent1-fill rect    { fill: rgb(var(--accent1))!important; }
+.accent2-fill rect { fill: rgb(var(--accent2))!important; }
+.accent3-fill rect   { fill: rgb(var(--accent3))!important; }
+
+.accent1-fill-hover:hover path    { fill: rgb(var(--accent1))!important; }
+.accent2-fill-hover:hover path { fill: rgb(var(--accent2))!important; }
+.accent3-fill-hover:hover path   { fill: rgb(var(--accent3))!important; }
+
+.accent1-border,
+.accent2-border,
+.accent3-border{
+  transition: border-color 0.6s;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.subheading {
+  font-family: var(--robo);
+  text-transform: uppercase;
+}
+
+.card-anchor {
+  text-decoration: none;
+}
+
+.arrow-button {
+  width: max-content;
+}
+
+.list-reset {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* This means it'll be a column on mobile, row on desktop */
+.col-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.half {
+  width: 50%;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.desktop-hide,
+.show {
+  display: block;
+}
+
+@media only screen and (max-width: 1080px) {
+  .mobile-hide,
+  .mobile-hide-flex,
+  .hide {
+    display: none!important;
+  }
+}
+
+.hide {
+  display: none!important;
+}
+
+/**********************/
+/** DESKTOP SPECIFIC **/
+/**********************/
+@media only screen and (min-width: 600px) {
+  #main-container {
+    border-radius: 90px;
+    border: solid 20px;
+  }
+
+  h2, h2 span {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  section {
+    margin: 12%;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .drawer-heading h3 {
+    font-size: 18px;
+  }
+
+  p, span {
+    font-size: 1em;
+    line-height: 26px;
+  }
+  
+  ul, li, td {
+    font-size: 1em;
+    line-height: 24px;
+  }
+  
+  label {
+    font-size: 1em;
+  }
+  
+  input, textarea {
+    font-size: 1em;
+  }
+
+}
+
+@media only screen and (min-width: 800px) {
+  /* This means it'll be a column on mobile, row on desktop */
+  .col-row {
+    flex-direction: row;
+  }
+}
+
+
+@media only screen and (min-width: 1080px) {
+
+  #main-container {
+    background-color: var(--base-bg)!important;
+  }
+
+  section {
+    margin: 8rem 12rem;
+    width: auto;
+    min-width: 100%;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .drawer-heading h3 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 1.2em;
+    line-height: 30px;
+  }
+
+  span {
+    font-size: 1.1em;
+  }
+
+  .drawer-content p {
+    font-size: 1em;
+    line-height: 24px;
+  }
+
+  .date-list li {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  
+  input, textarea {
+    font-size: 1.1em;
+  }
+
+  .desktop-hide {
+    display: none!important;
+  }
+
+  .mobile-hide {
+    display: block!important;
+  }
+
+  .mobile-hide-flex {
+    display: flex;
+  }
+
+  .hide {
+    display: none!important;
+  }
+
+}
+
+@media only screen and (min-width: 1280px) {
+
+  ul, li, td {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+} 
+
+@media only screen and (min-width: 1500px) {
+  section {
+    margin: 16rem;
+  }
+}
+
+@media only screen and (width > 1920px) {
+  section {
+    margin: 5vw 25vw 5vw 25vw;
+  }
+
+}
+
+input[type="text"],
+textarea {
+  background-color: var(--base-container);
+  box-shadow: 0px 0px 4px #ECE4C7;
+  border-radius: 12px 12px 12px 12px;
+  border: none;
+  
+  font-family: var(--overpass);
+  padding: 10px;
+  line-height: 30px;
+  /* margin: 10px 40px 0 0; */
+}
+
+.google-container input[type="text"] {
+  border-radius: 12px 12px 0px 0px;
+  border: none;
+  border-bottom: solid 2.55px rgb(var(--accent1));
+}
+
+input[type="text"]:focus-visible,
+textarea:focus-visible {
+  outline-color: rgb(var(--accent1)); 
+  -moz-outline-color: rgb(var(--accent1)); 
+}
+
+label {
+  font-family: var(--robo);
+  text-transform: uppercase;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * */
+/* BROWSER HOME STYLES */
+#main-container {
+  height: 100vh;
+}
+
+#main-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: 2fr 4fr 1fr;
+}
+
+.date {
+  background-color: #FFF8E5;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.20);
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px 36px 12px 12px;
+  width: 100px;
+  height: 100px;
+}
+
+.date span:first-of-type {
+  font-family: 'Roboto Slab';
+  font-size: 1.5em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #867D64;
+}
+
+.date span:last-of-type {
+  font-family: 'Plus Jakarta';
+  font-size: 3em;
+  font-weight: 800;
+  color: #867D64;
+  margin: 10px 0;
+}
+
+.checkbox, 
+.radio {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 3px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"]  {
+  display: none;
+}
+
+.radio {
+  border: solid 2.55px var(--base-container);
+  margin: 5px;
+  transition: background-color 0.2s;
+}
+
+.radio span {
+  width: 8px;
+  height: 8px;
+  border-radius: 3px;
+  /* transition: background-color 0.2s; */
+}
+
+.radio:hover span {
+  background-color: var(--base-container);
+}
+
+/* .radio.accent1:hover { background-color: rgba(var(--accent1), 0.5); }
+.radio.accent2:hover { background-color: rgba(var(--accent2), 0.5); }
+.radio.accent3:hover { background-color: rgba(var(--accent3), 0.5); } */
+
+input[type="radio"]:checked + .radio span {
+  background-color: var(--base-container);
+}
+
+button {
+  border: none;
+}
+
+.edit-button,
+.remove-button {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.edit-button svg {
+  transform: rotate(0deg);
+  transition: transform 0.4s;
+}
+
+.edit-button:hover svg {
+  transform: rotate(360deg);
+}
+
+.edit-button path, 
+.remove-button path {
+  fill: var(--base-container);
+}
+>>>>>>> 08de958c6d20ac8120846a44bdbf52aad3513844
