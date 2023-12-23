@@ -437,10 +437,14 @@ input[type=text] {
 .todolists-container {
   position: absolute;
   right: 0;
-  height: 100vh;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
   overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-width: none;
+  height: 100vh;
   width: 50vw;
 }
 
@@ -451,23 +455,21 @@ input[type=text] {
 
 .list-container {
   position: absolute;
-  background-color: #FFF8E5;
-  border: solid 2.55px #FFF8E5;
+  background-color: var(--base-container);
+  border: solid 2.55px var(--base-container);
   border-radius: 24px;
   box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
   height: 75vh;
-  width: 500px;
-  top: 30vh;
+  width: 400px;
   padding: 20px 30px;
-  left: 500px;
   cursor: pointer;
   transition: border-color 0.2s, transform 0.4s;
+  top: 45%;
+  right: -10%;
 }
 
 div.list-container:nth-of-type(1) {
   transform: rotate(-6deg);
-  top: 40vh;
-  left: 500px;
 }
 
 .list-container:nth-of-type(2) .creator {
@@ -476,7 +478,7 @@ div.list-container:nth-of-type(1) {
 
 div.list-container:nth-of-type(2) {
   transform: rotate(-8deg);
-  top: 45vh;
+  top: 50%;
 }
 
 .list-container:nth-of-type(3) .creator {
@@ -485,7 +487,7 @@ div.list-container:nth-of-type(2) {
 
 div.list-container:nth-of-type(3) {
   transform: rotate(-10deg);
-  top: 50vh;
+  top: 55%;
 }
 
 .list-container:nth-of-type(4) .creator {
@@ -494,7 +496,7 @@ div.list-container:nth-of-type(3) {
 
 div.list-container:nth-of-type(4) {
   transform: rotate(-12deg);
-  top: 55vh;
+  top: 60%;
 }
 
 .list-container:nth-of-type(5) .creator {
@@ -503,7 +505,7 @@ div.list-container:nth-of-type(4) {
 
 div.list-container:nth-of-type(5) {
   transform: rotate(-14deg);
-  top: 60vh;
+  top: 65%;
 }
 
 .list-container:hover {
@@ -560,12 +562,17 @@ div.list-container:nth-of-type(5) {
   z-index: 20;
 }
 
-button.list-container {
+.todo-creator-wrapper {
   position: absolute;
   z-index: 50;
   transform: rotate(-4deg);
-  left: 700px;
   cursor: pointer;
+  bottom: 60%;
+  right: 50px;
+}
+
+button.list-container {
+  left: 0;
 }
 
 button.list-container::before {
@@ -612,21 +619,27 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
+
   button.list-container {
     left: 500px;
   }
+
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
+
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
+
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
+
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
+
   div.list-container:nth-of-type(5) {
     left: 200px;
   }

@@ -191,7 +191,7 @@ export default function ToDoLists() {
             )) 
           }
 
-          <div ref={creatorRef} className='creator-wrapper'>
+          <div ref={creatorRef} className='creator-wrapper todo-creator-wrapper'>
 
             <button onClick={toggleCreator} className='list-container'></button>
 

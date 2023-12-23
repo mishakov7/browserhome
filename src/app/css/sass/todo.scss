@@ -1,10 +1,15 @@
 .todolists-container {
+    // background-color: red;
     position: absolute;
     right: 0;
-    height: 100vh;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
     overflow-y: scroll;
     overflow-x: hidden;
     scrollbar-width: none;
+    height: 100vh;
     width: 50vw;
 }
 
@@ -15,51 +20,49 @@
   
 .list-container {
     position: absolute;
-    background-color: #FFF8E5;
-    border: solid 2.55px #FFF8E5;
+    background-color: var(--base-container);
+    border: solid 2.55px var(--base-container);
     border-radius: 24px;
     box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
     height: 75vh;
-    width: 500px;
-    top: 30vh;
+    width: 400px;
     padding: 20px 30px;
-    left: 500px;
     cursor: pointer;
     transition: border-color 0.2s, transform 0.4s;
+    top: 45%;
+    right: -10%;
 }
   
 div.list-container:nth-of-type(1) {
     transform: rotate(-6deg);
-    top: 40vh;
-    left: 500px;
 }
   
 .list-container:nth-of-type(2) .creator { transform: rotate(8deg);}
 div.list-container:nth-of-type(2) {
     transform: rotate(-8deg);
-    top: 45vh;
+    top: 50%;
     // left: 175px;
 }
   
 .list-container:nth-of-type(3) .creator { transform: rotate(10deg);}
 div.list-container:nth-of-type(3) {
     transform: rotate(-10deg);
-    top: 50vh;
-    // left: 150px;
+    top: 55%;
+//     // left: 150px;
 }
   
 .list-container:nth-of-type(4) .creator { transform: rotate(12deg);}
 div.list-container:nth-of-type(4) {
     transform: rotate(-12deg);
-    top: 55vh;
-    // left: 125px;
+    top: 60%;
+//     // left: 125px;
 }
   
 .list-container:nth-of-type(5) .creator { transform: rotate(14deg);}
 div.list-container:nth-of-type(5) {
     transform: rotate(-14deg);
-    top: 60vh;
-    // left: 100px;
+    top: 65%;
+//     // left: 100px;
 }
   
 .list-container:hover {
@@ -115,13 +118,18 @@ div.list-container:nth-of-type(5) {
     cursor: default;
     z-index: 20;
 }
-  
-button.list-container {
+
+.todo-creator-wrapper {
     position: absolute;
     z-index: 50;
     transform: rotate(-4deg);
-    left: 700px;
     cursor: pointer;
+    bottom: 60%;
+    right: 50px;
+}
+  
+button.list-container {
+    left: 0;
 }
   
 button.list-container::before {
