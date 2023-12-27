@@ -606,6 +606,13 @@ button {
   cursor: pointer;
   border-radius: 10px;
   padding: 6px;
+  background-color: var(--secondary-txt-lt);
+  transition: background-color 0.2s;
+}
+
+.edit-button:hover,
+.remove-button:hover {
+  background-color: var(--secondary-txt);
 }
 
 .edit-button svg {
@@ -620,4 +627,14 @@ button {
 .edit-button path, 
 .remove-button path {
   fill: var(--base-container);
+}
+
+.remove-button path:last-of-type {
+  transform-origin: right;
+  transition: transform 0.2s;
+}
+
+.remove-button:hover path:last-of-type {
+  transform: rotate(45deg);
+
 }

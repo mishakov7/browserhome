@@ -604,9 +604,9 @@ button.list-container:hover::before {
 
 .selected-list .buttons-container {
   display: flex;
-  position: absolute;
-  top: -20px;
-  left: 100px;
+  position: relative;
+  top: -38px;
+  left: 30px;
 }
 
 .selected-list .buttons-container button {

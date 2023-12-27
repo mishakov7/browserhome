@@ -93,7 +93,8 @@ export default function Bookmarks() {
     <div className='bookmarks-container'>
         <ul className='bookmarks-list'>
             {
-              bookmarkList.length < 1 ? "Add a bookmark!" : bookmarkList.map(bookmark => (
+              bookmarkList.length > 1 ? 
+              bookmarkList.map(bookmark => (
                   <li className='bookmark' key={bookmark.key}>
                     <Bookmark 
                       bookmarkKey={bookmark.key}
@@ -103,7 +104,9 @@ export default function Bookmarks() {
                       handleEdit={editBookmark}
                     />
                   </li>
-              ))
+              )) 
+              
+              : null
             }
         </ul>
         
