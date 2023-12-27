@@ -8,8 +8,6 @@ export default function Bookmarks() {
   const [bookmarkList, setBookmarkList] = useState([]);
   const [showCreator, setCreator] = useState(false);
 
-  // const currentEdit = useRef(null);
-  const creatorRef = useRef(null);
   const input1Ref = useRef(null);
   const input2Ref = useRef(null);
 
@@ -80,23 +78,12 @@ export default function Bookmarks() {
     // currentEdit.current.classList.remove("editing-button");
   }
   
-  const handleOutsideClick = (e: any) => {
-    if (creatorRef.current && !creatorRef.current.contains(e.target)) {
-      setCreator(false);
-    }
-  }
 
   useEffect(() => {
     const localBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
 
     if (localBookmarks) {
       setBookmarkList(localBookmarks);
-    }
-
-    document.addEventListener("click", handleOutsideClick, false);
-
-    return() => {
-      document.removeEventListener("click", handleOutsideClick, false);
     }
 
   }, []);
@@ -120,14 +107,18 @@ export default function Bookmarks() {
             }
         </ul>
         
-        <div ref={creatorRef} className='creator-wrapper'>
-            <Creator 
-              creatorState={showCreator}
-              handleCreator={(e: any) => { createBookmark(e); } } 
-              inputGroups={creatorInputs}
-              bg="accent2"
-              direction="below"
-            /> 
+        <div className='creator-wrapper'>
+            {
+                showCreator ?
+                <Creator 
+                  toggleCreatorState={toggleCreator}
+                  handleCreator={(e: any) => { createBookmark(e); } } 
+                  inputGroups={creatorInputs}
+                  bg="accent2"
+                  direction="below"
+                /> 
+                : null
+            }
               
             <button className='create-button' onClick={toggleCreator}>
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">

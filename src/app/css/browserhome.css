@@ -321,17 +321,17 @@ input[type=text] {
 @keyframes appear-listcreator {
   from {
     opacity: 0;
-    top: 150px;
+    top: 0px;
   }
   to {
     opacity: 1;
-    top: 190px;
+    top: -40px;
   }
 }
 .todolists-container .creator {
-  left: 440px;
-  top: 190px;
-  transform: rotate(0deg);
+  left: -250px;
+  top: -40px;
+  transform: rotate(4deg);
   animation: appear-listcreator 0.4s;
   /*@include inline-animation(0.4s) {
       from {
@@ -619,27 +619,21 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
-
   button.list-container {
     left: 500px;
   }
-
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
-
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
-
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
-
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
-
   div.list-container:nth-of-type(5) {
     left: 200px;
   }

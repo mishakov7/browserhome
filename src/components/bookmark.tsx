@@ -4,7 +4,6 @@ import Creator from './creator';
 
 const Bookmark = (props: any) => {
   const [showCreator, setCreator] = useState(false);
-  const creatorRef = useRef(null);
   const edit1Ref = useRef(null);
   const edit2Ref = useRef(null);
   const editButton = useRef(null);
@@ -38,31 +37,20 @@ const Bookmark = (props: any) => {
 
   }
 
-  const handleOutsideClick = (e: any) => {
-    if (creatorRef.current && showCreator && !creatorRef.current.contains(e.target)) {
-      toggleCreator();
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener("click", handleOutsideClick, false);
-
-    return() => {
-      document.removeEventListener("click", handleOutsideClick, false);
-    }
-
-  }, [showCreator]);
-
   return (
     <>
-      <div ref={creatorRef} className='creator-wrapper'>
+      <div className='creator-wrapper'>
+        {
+          showCreator ?
           <Creator 
-              creatorState={showCreator}
+              toggleCreatorState={toggleCreator}
               handleCreator={(e: any) => { props.handleEdit(e, props.bookmarkKey, [edit1Ref, edit2Ref]); toggleCreator(); }} 
               inputGroups={editorInputs}
               bg="accent2"
               direction="below"
           />
+          : null
+        }
       </div>
 
       <button ref={editButton} onClick={(e: any) => { toggleCreator(); }} className='edit-button'>

@@ -10,14 +10,13 @@ export default function ToDoLists() {
   const [showAlert, setAlert] = useState(false);
   const [selectedList, setSelectedList] = useState(0);
 
-  const creatorRef = useRef(null);
   const titleInput = useRef(null);
   const colorInput1 = useRef(null);
   const colorInput2 = useRef(null);
   const colorInput3 = useRef(null);
   const colorInputs = [colorInput1, colorInput2, colorInput3];
 
-  const currentDate = new Date();
+  // const currentDate = new Date();
 
   const creatorInputs = [{
     "ref": titleInput,
@@ -104,19 +103,14 @@ export default function ToDoLists() {
 
   const deleteList = (e: any, key: number) => {
 
-    console.log(key);
     let storageLists = JSON.parse(localStorage.getItem('lists'));
     storageLists.splice(key, 1);
     storageLists = reindexKeys(storageLists);
 
     setLists(storageLists);
     localStorage.setItem('lists', JSON.stringify(storageLists));
-  }
 
-  const handleOutsideClick = (e: any) => {
-    if (creatorRef.current && !creatorRef.current.contains(e.target)) {
-      setCreator(false);
-    }
+    toggleAlert();
   }
 
   function reindexKeys(storage: object) {
@@ -132,12 +126,6 @@ export default function ToDoLists() {
   
     if (localLists) {
       setLists(localLists);
-    }
-
-    document.addEventListener("click", handleOutsideClick, false);
-
-    return() => {
-      document.removeEventListener("click", handleOutsideClick, false);
     }
 
   }, []);
@@ -176,32 +164,46 @@ export default function ToDoLists() {
                         </svg>
                     </button>
 
-                    <Creator 
-                      isAlert={true}
-                      // offClick={setAlert(false)}
-                      creatorState={showAlert}
-                      handleCreator={(e: any) => deleteList(list.key)}
-                      inputGroups={alertInputs}
-                      bg={list.color}
-                      direction="below"
-                    />
+                    {
+                      showAlert ?
+
+                      <Creator 
+                          isAlert={true}
+                          toggleCreatorState={toggleAlert}
+                          handleCreator={(e: any) => { deleteList(list.key); }}
+                          inputGroups={alertInputs}
+                          bg={list.color}
+                          direction="below"
+                      />
+
+                      : null
+                    }
+                    
                 </div>
 
               </div>
             )) 
           }
 
-          <div ref={creatorRef} className='creator-wrapper todo-creator-wrapper'>
+          <div className='creator-wrapper todo-creator-wrapper'>
 
             <button onClick={toggleCreator} className='list-container'></button>
 
-            <Creator 
-              creatorState={showCreator}
-              handleCreator={(e: any) => { createList(e); } } 
-              inputGroups={creatorInputs}
-              bg="accent3"  
-              direction="right"
-            /> 
+            {
+              showCreator ?
+
+              <Creator 
+                  isAlert={false}
+                  toggleCreatorState={toggleCreator}
+                  handleCreator={(e: any) => { createList(e); } } 
+                  inputGroups={creatorInputs}
+                  bg="accent3"  
+                  direction="right"
+              /> 
+
+              : null
+            }
+            
           </div>
             
         {/* </div> */}

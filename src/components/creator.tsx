@@ -2,32 +2,30 @@
 import React, { useState, useEffect, useRef, use } from 'react';
 
 const Creator = (props: any) => {
-    // const creatorRef = useRef(null);
-
+    const creatorRef = useRef(null);
     const checkRadio = (ref: any, e: any) => {
         ref.current.click();
     }
 
-    // const handleOutsideClick = (e: any) => {
-    //     if (creatorRef.current && !creatorRef.current.contains(e.target)) {
-    //       setCreator(false);
-    //     }
-    // }
+    const handleOutsideClick = (e: any) => {
 
-    // useEffect(() => {
-    //     document.addEventListener("click", handleOutsideClick, false);
+        if (creatorRef.current && !creatorRef.current.contains(e.target)) {
+            props.toggleCreatorState();
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("click", handleOutsideClick, false);
     
-    //     return() => {
-    //       document.removeEventListener("click", handleOutsideClick, false);
-    //     }
+        return() => {
+          document.removeEventListener("click", handleOutsideClick, false);
+        }
     
-    //   }, []);
+    }, []);
 
   return (
     <>
-    { 
-    props.creatorState ?
-    <div className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
+    <div ref={creatorRef} className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
         { props.inputGroups.map(group => (
                     
             <div className="input-group">
@@ -50,7 +48,7 @@ const Creator = (props: any) => {
 
                 { group.type == "text" ? 
 
-                    <input ref={group.ref} type="text" name={group.name} value={group.value} /> 
+                    <input ref={group.ref} type="text" name={group.name} value={group.value} onKeyDown={(e: any) => { if (e.key === "Enter") { props.handleCreator(); } }} /> 
 
                     : null
                 }
@@ -61,7 +59,7 @@ const Creator = (props: any) => {
                     <div className='alert'>
                         <label>You sure about that?</label>
                         <div className='input-group'>
-                            <button onClick={props.offClick}>NVM</button>
+                            <button onClick={props.toggleCreatorState}>NVM</button>
                             <button onClick={props.handleCreator}>YEP</button>
                         </div>
                     </div>
@@ -84,8 +82,6 @@ const Creator = (props: any) => {
         }
 
     </div>
-    : null
-    }
     </>
   )
 }
