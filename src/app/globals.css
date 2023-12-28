@@ -606,22 +606,17 @@ button {
 }
 
 .edit-button,
-.remove-button {
+.remove-button,
+.color-button {
   cursor: pointer;
   border-radius: 10px;
   padding: 6px;
-  /* background-color: var(--secondary-txt-lt); */
-  /* transition: background-color 0.2s; */
-}
 
-/* .edit-button:hover,
-.remove-button:hover {
-  background-color: var(--secondary-txt);
-} */
+}
 
 .edit-button svg {
   transform: rotate(0deg);
-  transition: transform 0.4s;
+  transition: transform 0.6s;
 }
 
 .edit-button:hover svg {
@@ -629,16 +624,46 @@ button {
 }
 
 .edit-button path, 
-.remove-button path {
+.remove-button path,
+.color-button path {
   fill: var(--base-container);
 }
 
-.remove-button path:last-of-type {
-  transform-origin: right;
-  transition: transform 0.2s;
+@keyframes close-trash {
+  0% {
+    transform: translateY(0px);
+
+  } 25% {
+    transform: translateY(-1px);
+
+  } 75% {
+    transform: translateY(4px);
+
+  } 100% {
+    transform: translateY(0px);  
+  }
+}
+
+@keyframes turn-palette {
+  0% {
+    transform: rotate(0deg);
+
+  } 25% {
+    transform: rotate(60deg);
+
+  } 75% {
+    transform: rotate(-60deg);
+
+  } 100% {
+    transform: rotate(0deg);
+
+  }
 }
 
 .remove-button:hover path:last-of-type {
-  transform: rotate(45deg);
+  animation: close-trash 0.4s;
+}
 
+.color-button:hover svg {
+  animation: turn-palette 0.6s;
 }
