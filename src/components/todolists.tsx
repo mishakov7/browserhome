@@ -85,6 +85,7 @@ export default function ToDoLists() {
     } 
 
     if (isEditing && selectedList == key) {
+      
       if (editTitleInput.current.value != "") {
         confirmList(e, key);
       }
@@ -116,7 +117,7 @@ export default function ToDoLists() {
     if (selectedColor == null || selectedColor == "") {
       selectedColor = colorInput3.current.value;
     }
-    
+
     let storageList = {
       "color": selectedColor,
       "title": titleInput.current.value,

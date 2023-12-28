@@ -30,7 +30,7 @@ const List = (props: any) => {
     "type": "text",
     "label": "To-Do Link",
     "name": "todo-link",
-    "placeholder": "mishalukova.com"
+    "placeholder": ""
   }];
 
   const toggleCreator = () => {
@@ -105,7 +105,13 @@ const List = (props: any) => {
                           </label>
                           <input ref={(el: any) => checkboxRefs.current[idx] = el} type="checkbox" onChange={(e) => changeChecked(e, idx)} checked />
                           <label>
-                              <a href={todo.link} target="_blank">{todo.label}</a>
+                              {
+                                (todo.link != "") ?
+                                <a href={todo.link} target="_blank">{todo.label}</a>
+                                :
+                                <span onClick={(e: any) => checkTodo(e, idx)}>{todo.label}</span>
+                              }
+                              {/* <a href={todo.link} target="_blank">{todo.label}</a> */}
                           </label>
                         </div>
 
@@ -114,7 +120,13 @@ const List = (props: any) => {
                         <div className='row'>
                           <label onClick={(e: any) => checkTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}></label>
                           <input ref={(el: any) => checkboxRefs.current[idx] = el} type="checkbox" onChange={(e) => changeChecked(e, idx)} />                          <label>
-                              <a href={todo.link} target="_blank">{todo.label}</a>
+                              {
+                                (todo.link != "") ?
+                                <a href={todo.link} target="_blank">{todo.label}</a>
+                                :
+                                <span onClick={(e: any) => checkTodo(e, idx)}>{todo.label}</span>
+                              }
+                              {/* <a href={todo.link} target="_blank">{todo.label}</a> */}
                           </label>
                         </div>
                       }
