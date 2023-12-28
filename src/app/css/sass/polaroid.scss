@@ -11,14 +11,20 @@
     cursor: pointer;
   }
   
-  .polaroid-container::before {
-    content: "Do it for him";
+  .polaroid-txt {
     position: absolute;
-    font-family: 'Kalam', cursive;
+    font-family: 'Kalam', cursive!important;
     font-size: 1.5em;
     text-transform: lowercase;
-    top: -60px;
-    padding: 20px 5px;
+    // top: -60px;
+    padding: 0!important;
+    max-width: 350px;
+    transform: rotate(-4deg);
+    background: transparent !important;
+    box-shadow: none !important;
+    bottom: 46.5%;
+    z-index: 10;
+    left: 80px;
   }
   
   .polaroid-container::after {
