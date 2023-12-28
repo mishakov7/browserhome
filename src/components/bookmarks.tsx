@@ -41,7 +41,7 @@ export default function Bookmarks() {
     }
 
     let storageBookmarks = bookmarkList.slice();
-    storageBookmarks.push(storageBookmark);
+    storageBookmarks.unshift(storageBookmark);
 
     setBookmarkList(storageBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));  
@@ -99,25 +99,7 @@ export default function Bookmarks() {
   return (
     <>
     <div className='bookmarks-container'>
-        <ul className='bookmarks-list'>
-            {
-              bookmarkList.length > 0 ? 
-              bookmarkList.map((bookmark, idx) => (
-                  <li className='bookmark' key={idx}>
-                    <Bookmark 
-                      bookmarkKey={idx}
-                      link={bookmark.link}
-                      image={bookmark.image}
-                      handleDelete={() => deleteBookmark(idx)}
-                      handleEdit={editBookmark}
-                    />
-                  </li>
-              )) 
-              
-              : null
-            }
-        </ul>
-        
+
         <div className='creator-wrapper'>
             {
                 showCreator ?
@@ -137,6 +119,27 @@ export default function Bookmarks() {
                 </svg>
             </button>
         </div>
+
+        <ul className='bookmarks-list'>
+            {
+              bookmarkList.length > 0 ? 
+              bookmarkList.map((bookmark, idx) => (
+                  <li className='bookmark' key={idx}>
+                    <Bookmark 
+                      bookmarkKey={idx}
+                      link={bookmark.link}
+                      image={bookmark.image}
+                      handleDelete={() => deleteBookmark(idx)}
+                      handleEdit={editBookmark}
+                    />
+                  </li>
+              )) 
+              
+              : null
+            }
+        </ul>
+        
+        
     </div>
     </>
   )
