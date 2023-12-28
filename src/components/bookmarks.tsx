@@ -52,8 +52,6 @@ export default function Bookmarks() {
     let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
     storageBookmarks.splice(key, 1);
 
-    console.log("key: " + key + " | " + storageBookmarks)
-
     setBookmarkList(storageBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
 

@@ -106,12 +106,17 @@ export default function ToDoLists() {
   const createList = (e: any) => {
 
     let selectedColor = null;
+
     colorInputs.forEach(input => {
       if (input.current.checked) {
         selectedColor = input.current.value;
       }
     });
 
+    if (selectedColor == null || selectedColor == "") {
+      selectedColor = colorInput3.current.value;
+    }
+    
     let storageList = {
       "color": selectedColor,
       "title": titleInput.current.value,
@@ -126,8 +131,7 @@ export default function ToDoLists() {
     toggleCreator();
   }
 
-  const deleteList = (e: any, key: number) => {
-
+  const deleteList = (key: number) => {
     let storageLists = JSON.parse(localStorage.getItem('lists'));
     storageLists.splice(key, 1);
 
@@ -136,6 +140,12 @@ export default function ToDoLists() {
 
     toggleAlert();
   }
+
+  const setDefaults = (e: any) => {
+    if (titleInput.current.value == "" || titleInput.current.value == null) {
+      titleInput.current.value = titleInput.current.placeholder;
+    }
+  } 
 
   useEffect(() => {
     const localLists = JSON.parse(localStorage.getItem('lists'));
@@ -169,10 +179,12 @@ export default function ToDoLists() {
                   : 
 
                   <List 
+                    allLists={lists}
                     listTitle={list.title}
                     listKey={idx}
                     listColor={list.color}
                   />
+                  
                 }
 
                 <div className='buttons-container'>
@@ -208,7 +220,7 @@ export default function ToDoLists() {
                       <Creator 
                           isAlert={true}
                           toggleCreatorState={toggleAlert}
-                          handleCreator={(e: any) => { deleteList(idx); }}
+                          handleCreator={() => deleteList(idx)}
                           inputGroups={alertInputs}
                           bg={list.color}
                           direction="below"
@@ -233,7 +245,7 @@ export default function ToDoLists() {
               <Creator 
                   isAlert={false}
                   toggleCreatorState={toggleCreator}
-                  handleCreator={(e: any) => { createList(e); } } 
+                  handleCreator={(e: any) => { setDefaults(e); createList(e); } } 
                   inputGroups={creatorInputs}
                   bg="accent3"  
                   direction="right"

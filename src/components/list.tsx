@@ -82,7 +82,7 @@ const List = (props: any) => {
       setTodoList(localTodos);
     }
 
-  }, []);
+  }, [props.allLists]);
 
   return (
     <>
