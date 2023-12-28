@@ -12,9 +12,6 @@ const EditList = (props: any) => {
   const linkInput = useRef(null);
   const checkboxRefs = useRef([]);
 
-  // let allStorageLists = JSON.parse(localStorage.getItem('lists'));
-  // let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
-
   const creatorInputs = [{
     "ref": labelInput,
     "type": "text",
@@ -37,17 +34,10 @@ const EditList = (props: any) => {
   }
 
   const createTodo = (e: any) => {
-    let key = 0;
-
     let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
     let allStorageLists = JSON.parse(localStorage.getItem('lists'));
 
-    if (storageList.todoList) {
-      key = storageList.todoList.length;
-    }
-
     let storageTodo = {
-      "key": key,
       "label": labelInput.current.value,
       "link": linkInput.current.value,
       "checked": false
@@ -68,7 +58,6 @@ const EditList = (props: any) => {
     let allStorageLists = JSON.parse(localStorage.getItem('lists'));
 
     storageTodos.splice(key, 1);
-    storageTodos = reindexKeys(storageTodos);
     setTodoList(storageTodos);
 
     allStorageLists[props.listKey].todoList = storageTodos;
@@ -77,13 +66,6 @@ const EditList = (props: any) => {
 
   }
 
-  function reindexKeys(storage: object) {
-    for (let i = 0; i < storage.length; i++) {
-      storage[i].key = i;
-    }
-
-    return storage;
-  } 
 
   useEffect(() => {
     const localTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
@@ -100,11 +82,11 @@ const EditList = (props: any) => {
       <ul className='todo-list'>
           {
             todoList.length < 1 ? null :
-            todoList.map(todo => (
-              <li className='todo-item' key={todo.key}>
+            todoList.map((todo, idx) => (
+              <li className='todo-item' key={idx}>
                       
                   <div className='row'>
-                    <label onClick={(e: any) => deleteTodo(e, todo.key)} className={"checkbox " + props.listColor + "a-bg"}>
+                    <label onClick={(e: any) => deleteTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}>
                         <svg className={props.listColor + "-fill"} width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path fillRule="evenodd" clipRule="evenodd" d="M0.00501831 1.86048C0.0820692 0.758606 1.03778 -0.0721815 2.13966 0.00486939L10.1202 0.562921C11.2221 0.639972 12.0528 1.59568 11.9758 2.69756C11.8987 3.79944 10.943 4.63023 9.84115 4.55318L1.86063 3.99513C0.758755 3.91807 -0.0720326 2.96236 0.00501831 1.86048Z" fill="#FA3F61"/>
                         </svg>

@@ -87,11 +87,6 @@ export default function ToDoLists() {
   }
 
   const createList = (e: any) => {
-    let key = 0;
-
-    if (JSON.parse(localStorage.getItem('lists'))) {
-      key = JSON.parse(localStorage.getItem('lists')).length;
-    }
 
     let selectedColor = null;
     colorInputs.forEach(input => {
@@ -101,7 +96,6 @@ export default function ToDoLists() {
     });
 
     let storageList = {
-      "key": key,
       "color": selectedColor,
       "title": titleInput.current.value,
       "todoList": []
@@ -119,20 +113,11 @@ export default function ToDoLists() {
 
     let storageLists = JSON.parse(localStorage.getItem('lists'));
     storageLists.splice(key, 1);
-    storageLists = reindexKeys(storageLists);
 
     setLists(storageLists);
     localStorage.setItem('lists', JSON.stringify(storageLists));
 
     toggleAlert();
-  }
-
-  function reindexKeys(storage: object) {
-      for (let i = 0; i < storage.length; i++) {
-        storage[i].key = i;
-      }
-
-      return storage;
   }
 
   useEffect(() => {
@@ -149,17 +134,17 @@ export default function ToDoLists() {
     <div className='todolists-container'>
           {
             lists.length < 1 ? null :
-            lists.map(list => (
-              <div onClick={(e: any) => toggleSelectedList(e, list.key)} key={list.key} className={'list-container ' + (isEditing && selectedList == list.key ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' ) + (selectedList == list.key ? ' selected-list ' : '')}>
+            lists.map((list, idx) => (
+              <div onClick={(e: any) => toggleSelectedList(e, idx)} key={idx} className={'list-container ' + (isEditing && selectedList == idx ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' ) + (selectedList == idx ? ' selected-list ' : '')}>
  
                 {
-                  isEditing && selectedList == list.key
+                  isEditing && selectedList == idx
                   
                   ?
 
                   <EditList
                     listTitle={list.title}
-                    listKey={list.key}
+                    listKey={idx}
                     listColor={list.color}
                   />
 
@@ -167,15 +152,15 @@ export default function ToDoLists() {
 
                   <List 
                     listTitle={list.title}
-                    listKey={list.key}
+                    listKey={idx}
                     listColor={list.color}
                   />
                 }
 
                 <div className='buttons-container'>
-                    <button onClick={(e: any) => { toggleEditing(e, list.key) }} className={'edit-button ' + list.color + "-fill"}>
+                    <button onClick={(e: any) => { toggleEditing(e, idx) }} className={'edit-button ' + list.color + "-fill"}>
                         {
-                            isEditing && selectedList == list.key ?
+                            isEditing && selectedList == idx ?
 
                             <svg width="18" height="18" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13.6529 3.97447L11.0316 1.35316C10.7503 1.07186 10.3688 0.91382 9.97097 0.913818H1.59229C0.763848 0.913818 0.0922852 1.58538 0.0922852 2.41382V13.4138C0.0922852 14.2423 0.763848 14.9138 1.59229 14.9138H12.5923C13.4207 14.9138 14.0923 14.2423 14.0923 13.4138V5.03513C14.0923 4.63731 13.9342 4.25578 13.6529 3.97447ZM7.09229 12.9138C5.98772 12.9138 5.09229 12.0184 5.09229 10.9138C5.09229 9.80926 5.98772 8.91382 7.09229 8.91382C8.19685 8.91382 9.09229 9.80926 9.09229 10.9138C9.09229 12.0184 8.19685 12.9138 7.09229 12.9138ZM10.0923 3.39757V6.53882C10.0923 6.74591 9.92438 6.91382 9.71729 6.91382H2.46729C2.26019 6.91382 2.09229 6.74591 2.09229 6.53882V3.28882C2.09229 3.08172 2.26019 2.91382 2.46729 2.91382H9.60853C9.708 2.91382 9.80338 2.95332 9.87369 3.02366L9.98244 3.13241C10.0173 3.16723 10.0449 3.20857 10.0637 3.25406C10.0826 3.29956 10.0923 3.34832 10.0923 3.39757Z" fill="white"/>
@@ -205,7 +190,7 @@ export default function ToDoLists() {
                       <Creator 
                           isAlert={true}
                           toggleCreatorState={toggleAlert}
-                          handleCreator={(e: any) => { deleteList(list.key); }}
+                          handleCreator={(e: any) => { deleteList(idx); }}
                           inputGroups={alertInputs}
                           bg={list.color}
                           direction="below"

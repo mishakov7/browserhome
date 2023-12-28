@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import searches from  './searches';
-import Draggable from 'react-draggable';
+// import Draggable from 'react-draggable';
 
 export default function Polaroid() {
 
@@ -42,7 +42,7 @@ export default function Polaroid() {
 
   return (
     <>
-    <Draggable> 
+    {/* <Draggable>  */}
         <div className='polaroid-wrapper'>
         <div className='polaroid-container' draggable>
               <img src={polaroidImage} width="300"/>          
@@ -55,7 +55,7 @@ export default function Polaroid() {
               </button>
         </div>
         </div>
-    </Draggable>
+    {/* </Draggable> */}
     </>
   )
 }

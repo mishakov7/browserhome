@@ -33,14 +33,14 @@ export default function Bookmarks() {
   }
 
   const createBookmark = (e: any) => {
-    let key = 0;
+    // let key = 0;
 
-    if (JSON.parse(localStorage.getItem('bookmarks'))) {
-      key = JSON.parse(localStorage.getItem('bookmarks')).length;
-    }
+    // if (JSON.parse(localStorage.getItem('bookmarks'))) {
+    //   key = JSON.parse(localStorage.getItem('bookmarks')).length;
+    // }
 
     let storageBookmark = {
-      "key": key,
+      // "key": key,
       "image": input1Ref.current.value,
       "link": input2Ref.current.value
     }
@@ -67,7 +67,7 @@ export default function Bookmarks() {
     let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
 
     let editedBookmark = {
-      "key": key,
+      // "key": key,
       "image": refs[0].current.value,
       "link": refs[1].current.value
     }
@@ -93,14 +93,14 @@ export default function Bookmarks() {
     <div className='bookmarks-container'>
         <ul className='bookmarks-list'>
             {
-              bookmarkList.length > 1 ? 
-              bookmarkList.map(bookmark => (
-                  <li className='bookmark' key={bookmark.key}>
+              bookmarkList.length > 0 ? 
+              bookmarkList.map((bookmark, idx) => (
+                  <li className='bookmark' key={idx}>
                     <Bookmark 
-                      bookmarkKey={bookmark.key}
+                      bookmarkKey={idx}
                       link={bookmark.link}
                       image={bookmark.image}
-                      handleDelete={(e: any) => deleteBookmark(bookmark.key)}
+                      handleDelete={(e: any) => deleteBookmark(idx)}
                       handleEdit={editBookmark}
                     />
                   </li>
