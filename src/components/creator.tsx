@@ -37,7 +37,14 @@ const Creator = (props: any) => {
                     <div className='row'>
                         { group.radios.map(radio => (
                             <>
-                                <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
+                                {
+                                    radio.checked ? 
+                                    <input ref={radio.ref} type="radio" name={group.name} value={radio.value} checked/>
+                                    :
+                                    <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
+
+                                }
+
                                 <label onClick={(e: any) => checkRadio(radio.ref, e)} className={"radio " + radio.value + "-bg"}><span></span></label>
                             </>
                         ))}  
@@ -48,7 +55,7 @@ const Creator = (props: any) => {
 
                 { group.type == "text" ? 
 
-                    <input ref={group.ref} type="text" name={group.name} value={group.value} onKeyDown={(e: any) => { if (e.key === "Enter") { props.handleCreator(); } }} /> 
+                    <input ref={group.ref} type="text" name={group.name} placeholder={group.placeholder} value={group.value} onKeyDown={(e: any) => { if (e.key === "Enter") { props.handleCreator(); } }} /> 
 
                     : null
                 }

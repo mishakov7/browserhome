@@ -15,12 +15,14 @@ const EditList = (props: any) => {
     "ref": labelInput,
     "type": "text",
     "label": "To-Do Label",
-    "name": "todo-label"
+    "name": "todo-label",
+    "placeholder": "To-Do #1"
   }, {
     "ref": linkInput,
     "type": "text",
     "label": "To-Do Link",
-    "name": "todo-link"
+    "name": "todo-link",
+    "placeholder": "mishalukova.com"
   }];
 
   const toggleCreator = () => {

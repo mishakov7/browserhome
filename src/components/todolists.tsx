@@ -25,7 +25,8 @@ export default function ToDoLists() {
     "ref": titleInput,
     "type": "text",
     "label": "Name of List",
-    "name": "list-name"
+    "name": "list-name",
+    "placeholder": "List #1"
   }, {
     "type": "radio",
     "label": "Color Accent",
@@ -33,13 +34,16 @@ export default function ToDoLists() {
     "radios": [
       {
         "ref": colorInput1,
-        "value": "accent1"
+        "value": "accent1", 
+        "checked": true
       }, {
         "ref": colorInput2,
-        "value": "accent2"
+        "value": "accent2",
+        "checked": false
       }, {
         "ref": colorInput3,
-        "value": "accent3"
+        "value": "accent3",
+        "checked": false
       }
     ]
   }];
@@ -81,7 +85,10 @@ export default function ToDoLists() {
     } 
 
     if (isEditing && selectedList == key) {
-      confirmList(e, key);
+      if (editTitleInput.current.value != "") {
+        confirmList(e, key);
+      }
+
       setEditing(false);
     }
 

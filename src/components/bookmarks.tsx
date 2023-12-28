@@ -8,19 +8,21 @@ export default function Bookmarks() {
   const [bookmarkList, setBookmarkList] = useState([]);
   const [showCreator, setCreator] = useState(false);
 
-  const input1Ref = useRef(null);
-  const input2Ref = useRef(null);
+  const imageRef = useRef(null);
+  const linkRef = useRef(null);
 
   const creatorInputs = [{
-    "ref": input1Ref,
+    "ref": imageRef,
     "type": "text",
     "label": "Image",
-    "name": "bookmark-image"
+    "name": "bookmark-image",
+    "placeholder": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png"
   }, {
-    "ref": input2Ref,
+    "ref": linkRef,
     "type": "text",
     "label": "Link",
-    "name": "bookmark-link"
+    "name": "bookmark-link",
+    "placeholder": "mishalukova.com"
   }];
 
   const toggleCreator = () => {
@@ -33,30 +35,24 @@ export default function Bookmarks() {
   }
 
   const createBookmark = (e: any) => {
-    // let key = 0;
-
-    // if (JSON.parse(localStorage.getItem('bookmarks'))) {
-    //   key = JSON.parse(localStorage.getItem('bookmarks')).length;
-    // }
-
     let storageBookmark = {
-      // "key": key,
-      "image": input1Ref.current.value,
-      "link": input2Ref.current.value
+      "image": imageRef.current.value,
+      "link": linkRef.current.value
     }
 
     let storageBookmarks = bookmarkList.slice();
     storageBookmarks.push(storageBookmark);
 
-    // setBookmarkList(bookmarkList, storageBookmark);
     setBookmarkList(storageBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));  
     toggleCreator();
   }
 
-  const deleteBookmark = (e:any, key: number) => {
+  const deleteBookmark = (key: number) => {
     let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
     storageBookmarks.splice(key, 1);
+
+    console.log("key: " + key + " | " + storageBookmarks)
 
     setBookmarkList(storageBookmarks);
     localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
@@ -67,7 +63,6 @@ export default function Bookmarks() {
     let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
 
     let editedBookmark = {
-      // "key": key,
       "image": refs[0].current.value,
       "link": refs[1].current.value
     }
@@ -78,6 +73,21 @@ export default function Bookmarks() {
     // currentEdit.current.classList.remove("editing-button");
   }
   
+  const setDefaults = (e: any) => {
+    if (imageRef.current.value == "" || imageRef.current.value == null) {
+      imageRef.current.value = imageRef.current.placeholder;
+    }
+
+    if (linkRef.current.value == "" || linkRef.current.value == null) {
+      linkRef.current.value = linkRef.current.placeholder;
+    
+    } 
+
+    if (!linkRef.current.value.startsWith("https://")) {
+      linkRef.current.value = "https://" + linkRef.current.value;
+    }
+
+  }
 
   useEffect(() => {
     const localBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
@@ -100,7 +110,7 @@ export default function Bookmarks() {
                       bookmarkKey={idx}
                       link={bookmark.link}
                       image={bookmark.image}
-                      handleDelete={(e: any) => deleteBookmark(idx)}
+                      handleDelete={() => deleteBookmark(idx)}
                       handleEdit={editBookmark}
                     />
                   </li>
@@ -115,7 +125,7 @@ export default function Bookmarks() {
                 showCreator ?
                 <Creator 
                   toggleCreatorState={toggleCreator}
-                  handleCreator={(e: any) => { createBookmark(e); } } 
+                  handleCreator={(e: any) => { setDefaults(e); createBookmark(e); } } 
                   inputGroups={creatorInputs}
                   bg="accent2"
                   direction="below"
