@@ -17,6 +17,7 @@ export default function ToDoLists() {
   const colorInput2 = useRef(null);
   const colorInput3 = useRef(null);
   const colorInputs = [colorInput1, colorInput2, colorInput3];
+  const editTitleInput = useRef(null);
 
   // const currentDate = new Date();
 
@@ -77,12 +78,21 @@ export default function ToDoLists() {
   const toggleEditing = (e: any, key: number) => {
     if (!isEditing && selectedList == key) {
       setEditing(true);
-    
     } 
 
     if (isEditing && selectedList == key) {
+      confirmList(e, key);
       setEditing(false);
     }
+
+  }
+
+  const confirmList = (e: any, key: number) => {
+    let storageLists = JSON.parse(localStorage.getItem('lists'));
+    storageLists[key].title = editTitleInput.current.value;
+
+    setLists(storageLists);
+    localStorage.setItem('lists', JSON.stringify(storageLists));
 
   }
 
@@ -143,6 +153,7 @@ export default function ToDoLists() {
                   ?
 
                   <EditList
+                    listTitleRef={editTitleInput}
                     listTitle={list.title}
                     listKey={idx}
                     listColor={list.color}

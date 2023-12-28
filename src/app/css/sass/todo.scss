@@ -193,6 +193,22 @@ button.list-container:hover::before {
     margin: -22px -32px;
     border-radius: 25px;
     animation: border-dance 20s infinite linear;
+    z-index: -1;
+}
+
+.editing-list input {
+    box-shadow: none;
+    font-family: "Roboto Slab";
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 24px;
+    color: var(--secondary-txt);
+    border-radius: 4px;
+    width: 75%;
+    // margin-bottom: 10px;
+    background-color: var(--subtle-border);
+    padding: 6px 0;
 }
 
 @media only screen and (max-width: 1024px) {

@@ -10,7 +10,6 @@ const EditList = (props: any) => {
 
   const labelInput = useRef(null);
   const linkInput = useRef(null);
-  const checkboxRefs = useRef([]);
 
   const creatorInputs = [{
     "ref": labelInput,
@@ -78,7 +77,7 @@ const EditList = (props: any) => {
 
   return (
     <>
-      <h3>{props.listTitle}</h3>
+      <input ref={props.listTitleRef} type="text" name="list-title" placeholder={props.listTitle} />
       <ul className='todo-list'>
           {
             todoList.length < 1 ? null :
