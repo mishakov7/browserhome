@@ -2,10 +2,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from './creator';
 import List from './list';
+import EditList from './editlist';
 
 export default function ToDoLists() {
 
   const [lists, setLists] = useState([]);
+  const [isEditing, setEditing] = useState(false);
   const [showCreator, setCreator] = useState(false);
   const [showAlert, setAlert] = useState(false);
   const [selectedList, setSelectedList] = useState(0);
@@ -72,6 +74,18 @@ export default function ToDoLists() {
     }
   }
 
+  const toggleEditing = (e: any, key: number) => {
+    if (!isEditing && selectedList == key) {
+      setEditing(true);
+    
+    } 
+
+    if (isEditing && selectedList == key) {
+      setEditing(false);
+    }
+
+  }
+
   const createList = (e: any) => {
     let key = 0;
 
@@ -133,32 +147,50 @@ export default function ToDoLists() {
   return (
     <>
     <div className='todolists-container'>
-        {/* <div className='date'>
-            <span>{currentDate.toLocaleString('default', { month: 'short' })}</span>
-            <span>{currentDate.getDate()}</span>
-        </div> */}
-
-        {/* <div className='list-of-lists'> */}
-          
           {
             lists.length < 1 ? null :
             lists.map(list => (
-              <div className={selectedList == list.key ? ('list-container selected-list ' + list.color + '-border-hover') : ('list-container ' + list.color + '-border-hover')} key={list.key} onClick={(e: any) => toggleSelectedList(e, list.key)}>
-                <h3>{list.title}</h3>
-                
-                <List 
+              <div onClick={(e: any) => toggleSelectedList(e, list.key)} key={list.key} className={'list-container ' + (isEditing && selectedList == list.key ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' ) + (selectedList == list.key ? ' selected-list ' : '')}>
+ 
+                {
+                  isEditing && selectedList == list.key
+                  
+                  ?
+
+                  <EditList
+                    listTitle={list.title}
                     listKey={list.key}
                     listColor={list.color}
-                />
+                  />
+
+                  : 
+
+                  <List 
+                    listTitle={list.title}
+                    listKey={list.key}
+                    listColor={list.color}
+                  />
+                }
 
                 <div className='buttons-container'>
-                    <button className={'edit-button ' /*+ list.color + "-bg"*/}>
-                        <svg width="18" height="18" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.88837 2.83838L11.1615 6.11168L4.05401 13.2195L1.13573 13.5417C0.745059 13.5849 0.414982 13.2545 0.458447 12.8638L0.783154 9.94339L7.88837 2.83838ZM13.186 2.35105L11.6491 0.814118C11.1697 0.334707 10.3922 0.334707 9.9128 0.814118L8.46696 2.26002L11.7401 5.53331L13.186 4.08741C13.6653 3.60774 13.6653 2.83046 13.186 2.35105Z"/>
-                        </svg>
+                    <button onClick={(e: any) => { toggleEditing(e, list.key) }} className={'edit-button ' + list.color + "-fill"}>
+                        {
+                            isEditing && selectedList == list.key ?
+
+                            <svg width="18" height="18" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.6529 3.97447L11.0316 1.35316C10.7503 1.07186 10.3688 0.91382 9.97097 0.913818H1.59229C0.763848 0.913818 0.0922852 1.58538 0.0922852 2.41382V13.4138C0.0922852 14.2423 0.763848 14.9138 1.59229 14.9138H12.5923C13.4207 14.9138 14.0923 14.2423 14.0923 13.4138V5.03513C14.0923 4.63731 13.9342 4.25578 13.6529 3.97447ZM7.09229 12.9138C5.98772 12.9138 5.09229 12.0184 5.09229 10.9138C5.09229 9.80926 5.98772 8.91382 7.09229 8.91382C8.19685 8.91382 9.09229 9.80926 9.09229 10.9138C9.09229 12.0184 8.19685 12.9138 7.09229 12.9138ZM10.0923 3.39757V6.53882C10.0923 6.74591 9.92438 6.91382 9.71729 6.91382H2.46729C2.26019 6.91382 2.09229 6.74591 2.09229 6.53882V3.28882C2.09229 3.08172 2.26019 2.91382 2.46729 2.91382H9.60853C9.708 2.91382 9.80338 2.95332 9.87369 3.02366L9.98244 3.13241C10.0173 3.16723 10.0449 3.20857 10.0637 3.25406C10.0826 3.29956 10.0923 3.34832 10.0923 3.39757Z" fill="white"/>
+                            </svg>
+
+                            :
+
+                            <svg width="18" height="18" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.88837 2.83838L11.1615 6.11168L4.05401 13.2195L1.13573 13.5417C0.745059 13.5849 0.414982 13.2545 0.458447 12.8638L0.783154 9.94339L7.88837 2.83838ZM13.186 2.35105L11.6491 0.814118C11.1697 0.334707 10.3922 0.334707 9.9128 0.814118L8.46696 2.26002L11.7401 5.53331L13.186 4.08741C13.6653 3.60774 13.6653 2.83046 13.186 2.35105Z"/>
+                            </svg>
+
+                        }
                     </button>
 
-                    <button onClick={toggleAlert} className={'remove-button ' /*+ list.color + "-bg"*/}>
+                    <button onClick={toggleAlert} className={'remove-button ' + list.color + "-fill"}>
 
                         <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.78135 17.918C1.80691 18.3464 1.98699 18.7485 2.28495 19.0424C2.5829 19.3363 2.97633 19.4999 3.38515 19.5H11.6151C12.0239 19.4999 12.4173 19.3363 12.7153 19.0424C13.0132 18.7485 13.1933 18.3464 13.2189 17.918L13.9287 6H1.07153L1.78135 17.918Z" />

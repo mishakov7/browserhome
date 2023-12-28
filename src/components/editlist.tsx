@@ -3,7 +3,7 @@ import { todo } from 'node:test';
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from './creator';
 
-const List = (props: any) => {
+const EditList = (props: any) => {
 
   const [todoList, setTodoList] = useState([]);
   const [showCreator, setCreator] = useState(false);
@@ -12,12 +12,8 @@ const List = (props: any) => {
   const linkInput = useRef(null);
   const checkboxRefs = useRef([]);
 
-  let allStorageLists = JSON.parse(localStorage.getItem('lists'));
-  let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
-
-  const checkTodo = (e: any, idx: number) => {
-    checkboxRefs.current[idx].click();
-  }
+  // let allStorageLists = JSON.parse(localStorage.getItem('lists'));
+  // let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
 
   const creatorInputs = [{
     "ref": labelInput,
@@ -43,6 +39,9 @@ const List = (props: any) => {
   const createTodo = (e: any) => {
     let key = 0;
 
+    let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
+    let allStorageLists = JSON.parse(localStorage.getItem('lists'));
+
     if (storageList.todoList) {
       key = storageList.todoList.length;
     }
@@ -63,24 +62,31 @@ const List = (props: any) => {
     toggleCreator();
   }
 
-  const changeChecked = (e: any, key: number) => {
-    let storageTodos = storageList.todoList;
+  const deleteTodo = (e: any, key: number) => {
 
-    if (e.target.checked) {
-        storageTodos[key].checked = true;
+    let storageTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
+    let allStorageLists = JSON.parse(localStorage.getItem('lists'));
 
-    } else {
-        storageTodos[key].checked = false;
-    }
-
+    storageTodos.splice(key, 1);
+    storageTodos = reindexKeys(storageTodos);
     setTodoList(storageTodos);
+
     allStorageLists[props.listKey].todoList = storageTodos;
     localStorage.setItem('lists', JSON.stringify(allStorageLists));
-    
+
+
   }
 
+  function reindexKeys(storage: object) {
+    for (let i = 0; i < storage.length; i++) {
+      storage[i].key = i;
+    }
+
+    return storage;
+  } 
+
   useEffect(() => {
-    const localTodos = storageList.todoList;
+    const localTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
 
     if (localTodos) {
       setTodoList(localTodos);
@@ -97,31 +103,17 @@ const List = (props: any) => {
             todoList.map(todo => (
               <li className='todo-item' key={todo.key}>
                       
-                      { todo.checked 
-                      
-                        ?
+                  <div className='row'>
+                    <label onClick={(e: any) => deleteTodo(e, todo.key)} className={"checkbox " + props.listColor + "a-bg"}>
+                        <svg className={props.listColor + "-fill"} width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fillRule="evenodd" clipRule="evenodd" d="M0.00501831 1.86048C0.0820692 0.758606 1.03778 -0.0721815 2.13966 0.00486939L10.1202 0.562921C11.2221 0.639972 12.0528 1.59568 11.9758 2.69756C11.8987 3.79944 10.943 4.63023 9.84115 4.55318L1.86063 3.99513C0.758755 3.91807 -0.0720326 2.96236 0.00501831 1.86048Z" fill="#FA3F61"/>
+                        </svg>
+                    </label>
+                    <label>
+                        <a href={todo.link} target="_blank">{todo.label}</a>
+                    </label>
+                  </div>
 
-                        <div className='row'>
-                          <label onClick={(e: any) => checkTodo(e, todo.key)} className={"checkbox " + props.listColor + "a-bg"}>
-                              <svg className={props.listColor + "-fill"} width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" clipRule="evenodd" d="M11.1862 0.55311C11.7904 -0.0510693 12.77 -0.0510693 13.3742 0.55311L14.2894 1.46829C14.8936 2.07249 14.8935 3.05205 14.2894 3.65622L6.84742 11.0982C6.24325 11.7023 5.26365 11.7024 4.65945 11.0982L0.453135 6.89188C-0.151062 6.28769 -0.151017 5.30813 0.453103 4.70395L1.36825 3.78877C1.97243 3.18456 2.95207 3.18453 3.55625 3.78873L5.75343 5.9859L11.1862 0.55311Z" fill="black"/>
-                              </svg>
-                          </label>
-                          <input ref={(el: any) => checkboxRefs.current[todo.key] = el} type="checkbox" onChange={(e) => changeChecked(e, todo.key)} checked />
-                          <label>
-                              <a href={todo.link} target="_blank">{todo.label}</a>
-                          </label>
-                        </div>
-
-                        : 
-                        
-                        <div className='row'>
-                          <label onClick={(e: any) => checkTodo(e, todo.key)} className={"checkbox " + props.listColor + "a-bg"}></label>
-                          <input ref={(el: any) => checkboxRefs.current[todo.key] = el} type="checkbox" onChange={(e) => changeChecked(e, todo.key)} />                          <label>
-                              <a href={todo.link} target="_blank">{todo.label}</a>
-                          </label>
-                        </div>
-                      }
               </li>
             ))
           }
@@ -147,10 +139,11 @@ const List = (props: any) => {
                 
           </div>
 
+
       </ul>
 
     </>
   )
 }
 
-export default List;
+export default EditList;

@@ -260,6 +260,10 @@ article {
 .accent2-fill-hover:hover path { fill: rgb(var(--accent2))!important; }
 .accent3-fill-hover:hover path   { fill: rgb(var(--accent3))!important; }
 
+.accent1-border-dance::before { background: linear-gradient(90deg, rgb(var(--accent1)) 50%, transparent 50%), linear-gradient(90deg, rgb(var(--accent1)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent1)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent1)) 50%, transparent 50%); }
+.accent2-border-dance::before { background: linear-gradient(90deg, rgb(var(--accent2)) 50%, transparent 50%), linear-gradient(90deg, rgb(var(--accent2)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent2)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent2)) 50%, transparent 50%); }
+.accent3-border-dance::before { background: linear-gradient(90deg, rgb(var(--accent3)) 50%, transparent 50%), linear-gradient(90deg, rgb(var(--accent3)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent3)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent3)) 50%, transparent 50%); }
+
 .accent1-border,
 .accent2-border,
 .accent3-border{
@@ -606,14 +610,14 @@ button {
   cursor: pointer;
   border-radius: 10px;
   padding: 6px;
-  background-color: var(--secondary-txt-lt);
-  transition: background-color 0.2s;
+  /* background-color: var(--secondary-txt-lt); */
+  /* transition: background-color 0.2s; */
 }
 
-.edit-button:hover,
+/* .edit-button:hover,
 .remove-button:hover {
   background-color: var(--secondary-txt);
-}
+} */
 
 .edit-button svg {
   transform: rotate(0deg);
