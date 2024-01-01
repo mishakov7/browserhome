@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import searches from  './searches';
+import searches from  './silly';
 // import Draggable from 'react-draggable';
 
 export default function Polaroid() {

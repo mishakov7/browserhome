@@ -29,8 +29,8 @@ export default function Home() {
         <div id="main-wrapper">
 
           <div className='grid-row'>
-            <Polaroid />
             <Search />
+            <Polaroid />
             <ToDoLists />
           </div>
 

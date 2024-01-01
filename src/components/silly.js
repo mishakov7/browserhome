@@ -1,4 +1,4 @@
-const searches = [
+const silly = [
     { "search": "why do i have to pee so much"},
     { "search": "when i jump i hear water" }, 
     { "search": "why is my goldfish turning black" },
@@ -82,4 +82,4 @@ const searches = [
     { "search": "who invented walking" }
 ]
 
-export default searches;
+export default silly;

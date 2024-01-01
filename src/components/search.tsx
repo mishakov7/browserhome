@@ -1,10 +1,18 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import searches from  './searches';
+import affirmations from  './affirmations';
+import silly from './silly';
+import inspirations from './inspirations';
 
 export default function Search() {
 
-  const [funnySearch, setFunnySearch] = useState("");
+  const google = 'https://www.google.com/search?q=';
+  const duckduckgo = 'https://duckduckgo.com/?t=';
+  const brave = 'https://search.brave.com/search?q=';
+
+  const [searchCategory, setSearchCategory] = useState(affirmations);
+  const [searchEngine, setSearchEngine] = useState(google);
+  const [quoteSearch, setQuoteSearch] = useState("");
   const [search, setSearch] = useState("");
 
   function randomIdx(min: number, max: number) {
@@ -13,14 +21,14 @@ export default function Search() {
 
   useEffect(() => {
 
-    setFunnySearch(searches[randomIdx(0, 20)].search);
+    setQuoteSearch(inspirations[randomIdx(0, 20)].search);
 
   }, []);
 
   return (
     <>
     <div className='google-container'>
-        <p className="search-query">{funnySearch}</p>
+        <p className="search-query">{quoteSearch}</p>
         <div className="inputGroup"> 
           <input type="text" onChange={e => setSearch(e.target.value)}/>
           <a target="_blank" href={"https://www.google.com/search?q=" + search}>
