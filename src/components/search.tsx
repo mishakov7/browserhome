@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Creator from './creator';
 import affirmations from  './affirmations';
 import silly from './silly';
 import inspirations from './inspirations';
@@ -10,10 +11,42 @@ export default function Search() {
   const duckduckgo = 'https://duckduckgo.com/?t=';
   const brave = 'https://search.brave.com/search?q=';
 
+  const [showCreator, setCreator] = useState(false);
   const [searchCategory, setSearchCategory] = useState(affirmations);
   const [searchEngine, setSearchEngine] = useState(google);
   const [quoteSearch, setQuoteSearch] = useState("");
   const [search, setSearch] = useState("");
+
+  const engineRef = useRef(null);
+  const categoryRef = useRef(null);
+  const googleInput = useRef(null);
+  const duckInput = useRef(null);
+  const braveInput = useRef(null);
+
+  const creatorInputs = [{
+    "ref": engineRef,
+    "type": "dropdown",
+    "label": "Search Engines",
+    "name": "search-engines",
+    "options": [
+      {
+        "ref": googleInput,
+        "value": google,
+      },
+      {
+        "ref": duckInput,
+        "value": duckduckgo,
+      },
+      {
+        "ref": braveInput,
+        "value": brave,
+      }
+    ]
+  }, {
+    "ref": categoryRef,
+    "type": "dropdown",
+    "label": ""
+  }];
 
   function randomIdx(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min; 
@@ -37,6 +70,21 @@ export default function Search() {
             </svg>
           </a>
         </div>
+    </div>
+
+    <div className='creator-wrapper'>
+      {
+          showCreator ?
+          <Creator 
+            toggleCreatorState={toggleCreator}
+            handleCreator={(e: any) => { changeSearch(e); } } 
+            inputGroups={creatorInputs}
+            bg="accent2"
+            direction="above"
+          /> 
+          : null
+      }
+              
     </div>
     </>
   )
