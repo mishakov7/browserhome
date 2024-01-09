@@ -46,6 +46,24 @@ const Creator = (props: any) => {
                     : null
                 }
 
+                { group.type == "dropdown" ? 
+
+                    <div className='col'>
+                        { group.options.map(option => (
+                            // console.log(option.value);
+                            <>
+                                <div className='row'>
+                                    <input ref={option.ref} type="radio" name={group.name} value={option.value} />
+                                    <label onClick={(e: any) => checkRadio(option.ref, e)} className="radio"><span></span></label>
+                                    <label>{option.value.split(".")[1]}</label>
+                                </div>
+                            </>
+                        ))}
+                    </div>
+
+                    : null
+                }
+
                 { group.type == "text" ? 
 
                     <input ref={group.ref} type="text" name={group.name} placeholder={group.placeholder} value={group.value} onKeyDown={(e: any) => { if (e.key === "Enter") { props.handleCreator(); } }} /> 

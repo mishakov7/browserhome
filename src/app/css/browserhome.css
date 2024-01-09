@@ -23,12 +23,26 @@ input[type=text] {
   padding: 10px 50px;
 }
 
-.inputGroup::before {
-  content: url("https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg");
+.inputGroup .se-icon {
   position: absolute;
   width: 30px;
   height: 30px;
   margin: 10px;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.inputGroup .se-icon-google {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png");
+}
+
+.inputGroup .se-icon-duckduckgo {
+  background-image: url("https://upload.wikimedia.org/wikipedia/en/9/90/The_DuckDuckGo_Duck.png");
+}
+
+.inputGroup .se-icon-brave {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/51/Brave_icon_lionface.png");
 }
 
 .inputGroup a {
