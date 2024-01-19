@@ -13,16 +13,19 @@ export default function Search() {
   const brave = 'https://search.brave.com/search?q=';
 
   const [showCreator, setCreator] = useState(false);
-  const [searchCategory, setSearchCategory] = useState(affirmations);
+  const [searchTheme, setSearchTheme] = useState(affirmations);
   const [searchEngine, setSearchEngine] = useState(google);
-  const [quoteSearch, setQuoteSearch] = useState("");
+  const [quoteSearch, setQuoteSearch] = useState(affirmations[0].search);
   const [search, setSearch] = useState("");
 
   const engineRef = useRef(null);
-  const categoryRef = useRef(null);
+  const themeRef = useRef(null);
   const googleInput = useRef(null);
   const duckInput = useRef(null);
   const braveInput = useRef(null);
+  const sillyInput = useRef(null);
+  const inspirationsInput = useRef(null);
+  const affirmationsInput = useRef(null);
 
   const creatorInputs = [{
     "ref": engineRef,
@@ -32,22 +35,37 @@ export default function Search() {
     "options": [
       {
         "ref": googleInput,
-        "value": google,
+        "value": "google",
       },
       {
         "ref": duckInput,
-        "value": duckduckgo,
+        "value": "duckduckgo",
       },
       {
         "ref": braveInput,
-        "value": brave,
+        "value": "brave",
       }
     ]
-  }/*, {
-    "ref": categoryRef,
+  }, {
+    "ref": themeRef,
     "type": "dropdown",
-    "label": ""
-  }*/];
+    "label": "Search Theme",
+    "name": "search-theme",
+    "options": [
+      {
+        "ref": sillyInput,
+        "value": "silly",
+      }, 
+      {
+        "ref": inspirationsInput,
+        "value": "inspirations",
+      },
+      {
+        "ref": affirmationsInput,
+        "value": "affirmations",
+      }
+    ]
+  }];
 
   function randomIdx(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min; 
@@ -62,11 +80,93 @@ export default function Search() {
     }
   }
 
+  const changeSearch = (e:any) => {
+    let engineInputs = [googleInput, duckInput, braveInput];
+    let selectedEngine = null;
+
+    let themeInputs = [sillyInput, affirmationsInput, inspirationsInput];
+    let selectedTheme = null;
+
+    engineInputs.forEach(input => {
+      if (input.current.checked) {
+        selectedEngine = input.current.value;
+      }
+    });
+
+
+    themeInputs.forEach(input => {
+      if (input.current.checked) {
+        selectedTheme = input.current.value;
+      }
+    });
+
+      
+    let newSearch = {
+      "engine": selectedEngine,
+      "theme": selectedTheme
+    }
+
+    localStorage.setItem('search', JSON.stringify(newSearch));
+    assignSearchState(newSearch.engine, newSearch.theme);
+    toggleCreator();
+
+  }
+
+  const assignSearchState = (engine:string, theme:string) => {
+    switch (engine) {
+      case "google":
+        setSearchEngine(google);
+        break;
+
+      case "brave":
+        setSearchEngine(brave);
+        break;
+
+      case "duckduckgo":
+        setSearchEngine(duckduckgo);
+        break;
+    }
+
+    switch (theme) {
+      case "silly":
+        setSearchTheme(silly);
+        break;
+
+      case "inspirations":
+        setSearchTheme(inspirations);
+        break;
+
+      case "affirmations":
+        setSearchTheme(affirmations);
+        break;
+    }
+
+    setQuoteSearch(searchTheme[randomIdx(0, 20)].search);
+
+
+  }
+
   useEffect(() => {
+    const localSearch = JSON.parse(localStorage.getItem('search'));
 
-    setQuoteSearch(inspirations[randomIdx(0, 20)].search);
+    if (localSearch) {
+      assignSearchState(localSearch.engine, localSearch.theme);
 
-  }, []);
+    } else {
+
+      let defaultSearch = {
+        "engine": searchEngine,
+        "theme": searchtheme
+      }
+
+      localStorage.setItem('search', JSON.stringify(defaultSearch));
+
+    }
+
+    setQuoteSearch(searchTheme[randomIdx(0, 20)].search);
+
+
+  }, [quoteSearch]);
 
   return (
     <>
@@ -91,7 +191,7 @@ export default function Search() {
           showCreator ?
           <Creator 
             toggleCreatorState={toggleCreator}
-            // handleCreator={(e: any) => { changeSearch(e); } } 
+            handleCreator={(e: any) => { changeSearch(e); } } 
             inputGroups={creatorInputs}
             bg="accent2"
             direction="above"

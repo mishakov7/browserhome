@@ -55,7 +55,7 @@ const Creator = (props: any) => {
                                 <div className='row'>
                                     <input ref={option.ref} type="radio" name={group.name} value={option.value} />
                                     <label onClick={(e: any) => checkRadio(option.ref, e)} className="radio"><span></span></label>
-                                    <label>{option.value.split(".")[1]}</label>
+                                    <label>{option.value}</label>
                                 </div>
                             </>
                         ))}
