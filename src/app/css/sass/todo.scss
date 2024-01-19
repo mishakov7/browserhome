@@ -1,22 +1,19 @@
 .todolists-container {
-    // background-color: red;
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: relative;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    overflow-y: scroll;
-    overflow-x: hidden;
     scrollbar-width: none;
-    height: 100vh;
-    width: 50vw;
+    height: max-content;
+    width: max-content;
+    bottom: 0;
+    left: 98vw;
 }
 
-.todolists-container::-webkit-scrollbar {
-    display: none;
-    visibility: hidden;
-}
+// .todolists-container::-webkit-scrollbar {
+//     display: none;
+//     visibility: hidden;
+// }
   
 .list-container {
     position: absolute;
@@ -24,14 +21,14 @@
     border: solid 2.55px var(--base-container);
     border-radius: 24px;
     box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
-    height: 75vh;
+    height: 500px;
     width: 400px;
     padding: 20px 30px;
     cursor: pointer;
     transition: border-color 0.2s, transform 0.4s;
-    top: 45%;
-    right: -10%;
-}
+    top: 0;
+    right: 0;
+  }
   
 div.list-container:nth-of-type(1) {
     transform: rotate(-6deg);

@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 // Each section of the site
 import Search from '@/components/search';
-import Polaroid from '@/components/polaroid';
+import Stickies from '@/components/stickies';
 import ToDoLists from '@/components/todolists';
 import Bookmarks from '@/components/bookmarks';
 
@@ -30,7 +30,7 @@ export default function Home() {
 
           <div className='grid-row'>
             <Search />
-            <Polaroid />
+            <Stickies />
             <ToDoLists />
           </div>
 

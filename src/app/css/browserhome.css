@@ -467,22 +467,15 @@ input[type=text] {
 }
 
 .todolists-container {
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  overflow-y: scroll;
-  overflow-x: hidden;
   scrollbar-width: none;
-  height: 100vh;
-  width: 50vw;
-}
-
-.todolists-container::-webkit-scrollbar {
-  display: none;
-  visibility: hidden;
+  height: max-content;
+  width: max-content;
+  bottom: 0;
+  left: 98vw;
 }
 
 .list-container {
@@ -491,13 +484,13 @@ input[type=text] {
   border: solid 2.55px var(--base-container);
   border-radius: 24px;
   box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
-  height: 75vh;
+  height: 500px;
   width: 400px;
   padding: 20px 30px;
   cursor: pointer;
   transition: border-color 0.2s, transform 0.4s;
-  top: 45%;
-  right: -10%;
+  top: 0;
+  right: 0;
 }
 
 div.list-container:nth-of-type(1) {
@@ -688,21 +681,27 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
+
   button.list-container {
     left: 500px;
   }
+
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
+
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
+
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
+
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
+
   div.list-container:nth-of-type(5) {
     left: 200px;
   }
