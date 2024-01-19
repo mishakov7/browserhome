@@ -27,18 +27,13 @@ export default function Polaroid(props: any) {
     uploadButton.current.click();
   }
 
-  useEffect(() => {
-    const image = JSON.parse(localStorage.getItem('polaroid'));
+//   useEffect(() => {
 
-    if (image) {
-        setPolaroidImage(image);
-    }
-
-  }, []);
+//   }, []);
 
   return (
     <>
-        <div className='polaroid-wrapper' key={props.key}>
+        <div className='sticky polaroid' key={props.key}>
 
           <input value={props.note} type="text" className='polaroid-txt' placeholder="do it for him"/>
 
