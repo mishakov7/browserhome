@@ -15,6 +15,7 @@
 }
 
 .bookmarks-list {
+  z-index: -2;
   overflow-x: scroll;
   padding: 250px 0;
   margin: -250px 0;
