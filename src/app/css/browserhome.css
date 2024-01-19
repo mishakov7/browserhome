@@ -52,35 +52,34 @@ input[type=text] {
   margin: 10px;
 }
 
-/* POLAROIDS */
-.polaroid-container {
-  background-color: #FFF8E5;
-  padding: 20px 20px 48px 20px;
-  margin: 50px;
-  border-radius: 36px;
-  position: relative;
-  width: max-content;
-  transform: rotate(-4deg);
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
-  cursor: pointer;
+.stickies-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
 }
 
-.polaroid-txt {
-  position: relative;
-  font-family: "Kalam", cursive !important;
-  font-size: 1.5em;
-  text-transform: lowercase;
-  padding: 0 !important;
+.sticky {
+  position: absolute;
+  padding: 20px;
+  background-color: var(--base-container);
   max-width: 350px;
-  transform: rotate(-4deg);
-  background: transparent !important;
-  box-shadow: none !important;
-  bottom: -80%;
-  z-index: 10;
-  left: 80px;
+  max-height: 350px;
+  border-radius: 24px;
 }
 
-.polaroid-container::after {
+.sticky textarea,
+.sticky input {
+  position: relative;
+  background: none;
+  box-shadow: none;
+  resize: none;
+  font-family: "Kalam";
+  text-transform: lowercase;
+  letter-spacing: 1.5px;
+}
+
+.sticky::after {
   content: "";
   position: absolute;
   background-image: url(https://cdn.pixabay.com/photo/2013/07/12/12/46/drawing-pin-146214_1280.png);
@@ -88,40 +87,17 @@ input[type=text] {
   background-repeat: no-repeat;
   width: 75px;
   height: 75px;
-  left: 40%;
-  right: 50%;
   top: 0px;
+  right: 50%;
+  left: 50%;
 }
 
-.polaroid-container img {
-  width: 350px;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: 6px;
+.polaroid {
+  background: pink;
 }
 
-.polaroid-container input[type=file] {
-  display: none;
-}
-
-.upload-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #FFF8E5;
-  padding: 10px;
-  margin: 30px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-}
-
-.upload-button path {
-  transition: fill 0.2s;
-}
-
-.upload-button:hover path {
-  fill: var(--accent1);
+.note {
+  background: mintcream;
 }
 
 /* BOOKMARKS */
@@ -474,8 +450,8 @@ input[type=text] {
   scrollbar-width: none;
   height: max-content;
   width: max-content;
-  bottom: 0;
-  left: 98vw;
+  top: 150%;
+  left: 12vw;
 }
 
 .list-container {

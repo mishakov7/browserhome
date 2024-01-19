@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-// import Draggable from 'react-draggable';
+import Draggable from 'react-draggable';
 
 export default function Polaroid(props: any) {
 
@@ -33,6 +33,7 @@ export default function Polaroid(props: any) {
 
   return (
     <>
+    <Draggable>
         <div className='sticky polaroid' key={props.key}>
 
           <input value={props.note} type="text" className='polaroid-txt' placeholder="do it for him"/>
@@ -48,6 +49,7 @@ export default function Polaroid(props: any) {
                 </button>
           </div>
         </div>
+    </Draggable> 
     </>
   )
 }

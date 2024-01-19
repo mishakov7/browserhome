@@ -40,7 +40,7 @@ export default function Stickies() {
 
   return (
     <>
-        <div className='stickies-wrapper'>
+        <div className='stickies-container'>
             {
               polaroids.map((polaroid, idx) => (
                 <Polaroid 
