@@ -9,7 +9,7 @@ import inspirations from './inspirations';
 export default function Search() {
 
   const google = 'https://www.google.com/search?q=';
-  const duckduckgo = 'https://www.duckduckgo.com/?t=';
+  const duckduckgo = 'https://www.duckduckgo.com/?q=';
   const brave = 'https://search.brave.com/search?q=';
 
   const [showCreator, setCreator] = useState(false);
