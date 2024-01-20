@@ -56,7 +56,7 @@ export default function Polaroid(props: any) {
         <div ref={nodeRef} className='sticky polaroid'>
         <div className='sticky-wrapper sticky-2'>
               <div className='polaroid-container' draggable>
-                    <img src={image} width="300"/>          
+                    <img src={image} width="275"/>          
                     <input ref={uploadButton} type="file" onChange={(e) => uploadPolaroid(e)} accept="image/*"/>
                     
                     <button className='upload-button' onClick={handleClick}> 

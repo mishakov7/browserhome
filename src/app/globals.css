@@ -526,35 +526,6 @@ label {
   grid-template-columns: 4fr 2fr 1fr;
 }
 
-.date {
-  background-color: #FFF8E5;
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.20);
-  padding: 30px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px 36px 12px 12px;
-  width: 100px;
-  height: 100px;
-}
-
-.date span:first-of-type {
-  font-family: 'Roboto Slab';
-  font-size: 1.5em;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #867D64;
-}
-
-.date span:last-of-type {
-  font-family: 'Plus Jakarta';
-  font-size: 3em;
-  font-weight: 800;
-  color: #867D64;
-  margin: 10px 0;
-}
-
 .checkbox, 
 .radio {
   position: relative;
@@ -608,10 +579,17 @@ button {
 
 .edit-button,
 .remove-button,
-.color-button {
+.color-button,
+.list-button, 
+.note-button, 
+.polaroid-button {
   cursor: pointer;
   border-radius: 10px;
   padding: 6px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }
 
@@ -626,7 +604,10 @@ button {
 
 .edit-button path, 
 .remove-button path,
-.color-button path {
+.color-button path,
+.list-button path, 
+.note-button path, 
+.polaroid-button path {
   fill: var(--base-container);
 }
 
