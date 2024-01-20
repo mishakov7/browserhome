@@ -5,17 +5,21 @@ import Draggable from 'react-draggable';
 export default function Polaroid(props: any) {
 
 //   const [polaroidImage, setPolaroidImage] = useState("https://d2zp5xs5cp8zlg.cloudfront.net/image-83814-800.jpg");
-  const reader = new FileReader();
-  const uploadButton = useRef();
+  const [image, setImage] = useState(props.storage.image);
+  const [coordinates, setCoordinates] = useState({x: props.storage.xpos, y: props.storage.ypos});
+  const [notetext, setNotetext] = useState(props.storage.note);
+  // const [alignment, setAlignment] = useState(props.storage.alignment);  
 
   const nodeRef = React.useRef(null);
+  const reader = new FileReader();
+  const uploadButton = useRef();
 
   function uploadPolaroid(e: any) {
     let polaroid = e.target.files[0];
 
     reader.addEventListener('load', function() {
-      localStorage.setItem('polaroid', JSON.stringify(reader.result));
-      setPolaroidImage(reader.result);
+      // localStorage.setItem('polaroid', JSON.stringify(reader.result));
+      setImage(reader.result);
 
     });
 
@@ -29,19 +33,30 @@ export default function Polaroid(props: any) {
     uploadButton.current.click();
   }
 
-//   useEffect(() => {
+  useEffect(() => {
 
-//   }, []);
+    let updatedPolaroid = {
+      "image": image,
+      // "alignment": alignment,
+      "note": notetext,
+      "xpos": coordinates.x,
+      "ypos": coordinates.y,
+    }
+
+    props.handleChange(updatedPolaroid, props.idx);
+
+  }, [coordinates, notetext]);
 
   return (
     <>
     <Draggable 
       nodeRef={nodeRef}
-      defaultPosition={{x: props.x, y: props.y}} >
+      defaultPosition={{x: coordinates.x, y: coordinates.y}} 
+      onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}>
         <div ref={nodeRef} className='sticky polaroid'>
         <div className='sticky-wrapper sticky-2'>
               <div className='polaroid-container' draggable>
-                    <img src={props.image} width="300"/>          
+                    <img src={image} width="300"/>          
                     <input ref={uploadButton} type="file" onChange={(e) => uploadPolaroid(e)} accept="image/*"/>
                     
                     <button className='upload-button' onClick={handleClick}> 
@@ -51,7 +66,7 @@ export default function Polaroid(props: any) {
                     </button>
               </div>
 
-              <input type="text" defaultValue={props.note}/>
+              <input type="text" onChange={(e) => { setNotetext(e.target.value)}} defaultValue={notetext}/>
         </div>
         </div>
     </Draggable> 
