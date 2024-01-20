@@ -174,15 +174,28 @@ input[type=text] {
   border-radius: 6px;
 }
 
+.img-align-top {
+  object-position: top;
+}
+
+.img-align-center {
+  object-position: center;
+}
+
+.img-align-bottom {
+  object-position: bottom;
+}
+
 .polaroid-container input[type=file] {
   display: none;
 }
 
 .upload-button {
+  display: none;
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #FFF8E5;
+  background-color: rgba(255, 255, 255, 0);
   padding: 10px;
   margin: 30px;
   border-radius: 12px;
@@ -191,11 +204,7 @@ input[type=text] {
 }
 
 .upload-button path {
-  transition: fill 0.2s;
-}
-
-.upload-button:hover path {
-  fill: var(--accent1);
+  fill: var(--base-txt);
 }
 
 .stickies-wrapper .buttons-container {
@@ -221,6 +230,32 @@ input[type=text] {
 .stickies-wrapper .polaroid-button {
   top: 0px;
   left: 50px;
+}
+
+.stickies-wrapper .polaroid-container .buttons-container {
+  display: none;
+  flex-direction: row;
+  bottom: 80px;
+  left: auto;
+  right: 75px;
+}
+
+.stickies-wrapper .polaroid-container:hover .buttons-container,
+.stickies-wrapper .polaroid-container:hover .upload-button {
+  display: flex;
+}
+
+.stickies-wrapper .polaroid-container .buttons-container button {
+  margin: 2px;
+  background-color: var(--base-container);
+}
+
+.stickies-wrapper .polaroid-container .buttons-container button path {
+  stroke: var(--secondary-txt);
+}
+
+.stickies-wrapper .polaroid-container .buttons-container button rect {
+  fill: var(--secondary-txt);
 }
 
 /* BOOKMARKS */
