@@ -15,11 +15,13 @@
 }
 
 .bookmarks-list {
-  z-index: -2;
+  // z-index: -2;
   overflow-x: scroll;
-  padding: 250px 0;
+  padding: 50px 0;
+  // padding: 250px 0;
   margin: -250px 0;
 }
+
 
 .bookmarks-container .create-button {
   margin: 0 10px;

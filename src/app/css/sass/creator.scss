@@ -179,18 +179,18 @@
 @keyframes appear-bookmarkscreator {
     from {
         opacity: 0;
-        bottom: 75px;
+        bottom: 80px;
     
     } to {
         opacity: 1;
-        bottom: 30px;
+        bottom: 60px;
     }
 }
 
 .bookmarks-container .creator {
     position: absolute;
-    bottom: 30px;
-    left: -33px;
+    bottom: 60px;
+    left: -22px;
     animation: appear-bookmarkscreator 0.4s;
 
     /*@include inline-animation(0.4s) {
@@ -206,7 +206,8 @@
 }
 
 .bookmark .creator {
-    left: -60px;
+    left: -22px;
+    bottom: 60px
 }
 
 .alert {
