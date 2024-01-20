@@ -25,8 +25,7 @@ export default function Note(props: any) {
 
     let updatedNote = {
       "note": notetext,
-      // "color": notecolor,
-      "color": props.storage.color,
+      "color": noteColor,
       "xpos": coordinates.x,
       "ypos": coordinates.y,
     }
