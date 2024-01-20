@@ -11,6 +11,11 @@
   --accent2: 108, 210, 161;
   --accent3: 250, 63, 97;
 
+  --accent1-hsl: 259, 53%;
+  --accent2-hsl: 151, 53%;
+  --accent3-hsl: 349, 95%;
+
+
   --jakarta: "Plus Jakarta", "Roboto", "sans-serif";
   --robo: "Roboto Slab", serif;
   --overpass: "Overpass", "Work Sans", sans-serif;

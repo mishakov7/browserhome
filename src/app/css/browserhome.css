@@ -87,6 +87,7 @@ input[type=text] {
   position: absolute;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
 .stickies-container {
@@ -95,7 +96,6 @@ input[type=text] {
   position: absolute;
   display: flex;
   justify-content: flex-end;
-  z-index: -1;
 }
 
 .sticky {
@@ -153,15 +153,15 @@ input[type=text] {
 }
 
 .sticky-accent1 {
-  background-color: rgba(var(--accent1), 0.25);
+  background-color: hsl(var(--accent1-hsl), 90%);
 }
 
 .sticky-accent2 {
-  background-color: rgba(var(--accent2), 0.25);
+  background-color: hsl(var(--accent2-hsl), 90%);
 }
 
 .sticky-accent3 {
-  background-color: rgba(var(--accent3), 0.25);
+  background-color: hsl(var(--accent3-hsl), 90%);
 }
 
 .sticky textarea,
@@ -286,8 +286,8 @@ input[type=text] {
   display: none;
   flex-direction: row;
   bottom: 80px;
-  left: auto;
-  right: 30px;
+  left: 185px;
+  width: auto;
 }
 
 .stickies-wrapper .polaroid-container:hover .buttons-container,
