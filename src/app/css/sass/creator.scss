@@ -112,6 +112,14 @@
     fill: #9A9381;
 }
 
+.search-container .creator-wrapper {
+    left: 0;
+}
+
+.search-container .creator {
+    left: -35px;
+}
+
 @keyframes appear-listcreator {
     from {
         opacity: 0;

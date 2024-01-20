@@ -26,13 +26,14 @@ export default function Note(props: any) {
     let updatedNote = {
       "note": notetext,
       "color": noteColor,
+      "rotation": props.storage.rotation,
       "xpos": coordinates.x,
       "ypos": coordinates.y,
     }
 
     props.handleChange(updatedNote, props.idx);
 
-  }, [coordinates, notetext, noteColor]);
+  }, [coordinates, notetext, noteColor, props.storage.rotation]);
 
   return (
     <>
@@ -41,7 +42,7 @@ export default function Note(props: any) {
       defaultPosition={{x: coordinates.x, y: coordinates.y}} 
       onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}>
         <div ref={nodeRef} className='sticky note'>
-            <div className={'sticky-wrapper sticky-1 sticky-' + noteColor}>
+            <div className={props.storage.rotation + ' sticky-wrapper sticky-' + noteColor}>
                 <textarea onChange={(e) => { setNotetext(e.target.value)}} defaultValue={notetext} className="note-text"></textarea>
                 <button onClick={() => toggleColor(noteColor)} className={'color-button'}>
                     <svg className={noteColor + "-fill"} width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">

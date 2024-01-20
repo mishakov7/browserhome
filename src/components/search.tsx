@@ -156,7 +156,7 @@ export default function Search() {
 
       let defaultSearch = {
         "engine": searchEngine,
-        "theme": searchtheme
+        "theme": searchTheme
       }
 
       localStorage.setItem('search', JSON.stringify(defaultSearch));
@@ -170,7 +170,7 @@ export default function Search() {
 
   return (
     <>
-    <div className='google-container'>
+    <div className='search-container'>
         <p className="search-query">{quoteSearch}</p>
         <div className="inputGroup">
           
@@ -184,21 +184,21 @@ export default function Search() {
             </svg>
           </a>
         </div>
-    </div>
 
-    <div className='creator-wrapper'>
-      {
-          showCreator ?
-          <Creator 
-            toggleCreatorState={toggleCreator}
-            handleCreator={(e: any) => { changeSearch(e); } } 
-            inputGroups={creatorInputs}
-            bg="accent2"
-            direction="above"
-          /> 
-          : null
-      }
-              
+        <div className='creator-wrapper'>
+          {
+              showCreator ?
+              <Creator 
+                toggleCreatorState={toggleCreator}
+                handleCreator={(e: any) => { changeSearch(e); } } 
+                inputGroups={creatorInputs}
+                bg="accent2"
+                direction="above"
+              /> 
+              : null
+          }
+                  
+        </div>
     </div>
     </>
   )

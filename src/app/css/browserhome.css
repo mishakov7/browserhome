@@ -1,5 +1,5 @@
 /* SEARCH QUERY */
-.google-container {
+.search-container {
   margin: 50px;
 }
 
@@ -87,7 +87,6 @@ input[type=text] {
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: -1;
 }
 
 .stickies-container {
@@ -96,6 +95,7 @@ input[type=text] {
   position: absolute;
   display: flex;
   justify-content: flex-end;
+  z-index: -1;
 }
 
 .sticky {
@@ -117,7 +117,39 @@ input[type=text] {
 }
 
 .sticky-2 {
-  transform: rotate(-5deg);
+  transform: rotate(-3deg);
+}
+
+.sticky-3 {
+  transform: rotate(6deg);
+}
+
+.sticky-4 {
+  transform: rotate(-6deg);
+}
+
+.sticky-5 {
+  transform: rotate(8deg);
+}
+
+.sticky-6 {
+  transform: rotate(-6deg);
+}
+
+.sticky-7 {
+  transform: rotate(10deg);
+}
+
+.sticky-8 {
+  transform: rotate(-10deg);
+}
+
+.sticky-9 {
+  transform: rotate(12deg);
+}
+
+.sticky-10 {
+  transform: rotate(-12deg);
 }
 
 .sticky-accent1 {
@@ -219,12 +251,17 @@ input[type=text] {
   fill: var(--base-txt);
 }
 
-.stickies-wrapper .buttons-container {
+.stickies-wrapper .date:hover .buttons-container {
   display: flex;
+}
+
+.stickies-wrapper .buttons-container {
+  display: none;
   flex-direction: column;
   position: absolute;
   bottom: -50px;
   left: -50px;
+  width: 100%;
 }
 
 .stickies-wrapper .buttons-container button {
@@ -232,11 +269,12 @@ input[type=text] {
   background-color: var(--secondary-txt);
   padding: 8px;
   border-radius: 12px;
+  max-width: 30px;
 }
 
 .stickies-wrapper .note-button {
   top: 10px;
-  left: 5px;
+  left: 10px;
 }
 
 .stickies-wrapper .polaroid-button {
@@ -507,6 +545,14 @@ input[type=text] {
 
 .create-button:hover path {
   fill: #9A9381;
+}
+
+.search-container .creator-wrapper {
+  left: 0;
+}
+
+.search-container .creator {
+  left: -35px;
 }
 
 @keyframes appear-listcreator {
@@ -841,27 +887,21 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
-
   button.list-container {
     left: 500px;
   }
-
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
-
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
-
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
-
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
-
   div.list-container:nth-of-type(5) {
     left: 200px;
   }

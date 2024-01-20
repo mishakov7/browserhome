@@ -35,12 +35,12 @@ export default function Polaroid(props: any) {
   useEffect(() => {
 
     let updatedPolaroid = {
+      "note": notetext,
       "image": image,
       "alignment": alignment,
-      "note": notetext,
+      "rotation": props.storage.rotation,
       "xpos": coordinates.x,
       "ypos": coordinates.y,
-      // "rotation": props.storage.rotation
     }
 
     props.handleChange(updatedPolaroid, props.idx);
@@ -54,7 +54,7 @@ export default function Polaroid(props: any) {
       defaultPosition={{x: coordinates.x, y: coordinates.y}} 
       onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}>
         <div ref={nodeRef} className='sticky polaroid'>
-        <div className='sticky-wrapper sticky-2'>
+        <div className={'sticky-wrapper ' + props.storage.rotation}>
               <div className='polaroid-container' draggable>
                     <img className={'img-align-' + alignment} src={image} width="275"/>          
                     <input ref={uploadButton} type="file" onChange={(e) => uploadPolaroid(e)} accept="image/*"/>
