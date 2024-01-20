@@ -152,7 +152,19 @@ input[type=text] {
 }
 
 .sticky textarea {
+  margin-top: 20px;
+  width: 250px;
+  height: 200px;
   line-height: 200%;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.sticky textarea::-webkit-scrollbar {
+  display: none;
 }
 
 .sticky::after {
@@ -237,7 +249,7 @@ input[type=text] {
   flex-direction: row;
   bottom: 80px;
   left: auto;
-  right: 75px;
+  right: 30px;
 }
 
 .stickies-wrapper .polaroid-container:hover .buttons-container,
@@ -248,6 +260,7 @@ input[type=text] {
 .stickies-wrapper .polaroid-container .buttons-container button {
   margin: 2px;
   background-color: var(--base-container);
+  cursor: pointer;
 }
 
 .stickies-wrapper .polaroid-container .buttons-container button path {
@@ -256,6 +269,18 @@ input[type=text] {
 
 .stickies-wrapper .polaroid-container .buttons-container button rect {
   fill: var(--secondary-txt);
+}
+
+.note .color-button {
+  display: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.note:hover .color-button {
+  display: flex;
 }
 
 /* BOOKMARKS */
