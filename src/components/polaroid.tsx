@@ -45,7 +45,7 @@ export default function Polaroid(props: any) {
 
     props.handleChange(updatedPolaroid, props.idx);
 
-  }, [coordinates, notetext, image/*, alignment*/]);
+  }, [coordinates, notetext, image, alignment]);
 
   return (
     <>

@@ -33,7 +33,7 @@ export default function Note(props: any) {
 
     props.handleChange(updatedNote, props.idx);
 
-  }, [coordinates, notetext]);
+  }, [coordinates, notetext, noteColor]);
 
   return (
     <>
