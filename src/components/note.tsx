@@ -7,6 +7,8 @@ export default function Note(props: any) {
   const [coordinates, setCoordinates] = useState({x: props.storage.xpos, y: props.storage.ypos});
   const [notetext, setNotetext] = useState(props.storage.note);
   const [noteColor, setNoteColor] = useState(props.storage.color);
+  // const [topLayer, setLayer] = useState(false);
+
   const nodeRef = React.useRef(null);
 
   const toggleColor = (color: string) => {
@@ -40,8 +42,9 @@ export default function Note(props: any) {
     <Draggable 
       nodeRef={nodeRef}
       defaultPosition={{x: coordinates.x, y: coordinates.y}} 
-      onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}>
-        <div ref={nodeRef} className='sticky note'>
+      onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}
+      onStart={(e) => props.changeLayer(props.idx)}>
+        <div onClick={(e) => props.changeLayer(props.idx)} ref={nodeRef} className={'sticky note ' + (props.isSelected ? "top-sticky" : null)}>
             <div className={props.storage.rotation + ' sticky-wrapper sticky-' + noteColor}>
                 <textarea onChange={(e) => { setNotetext(e.target.value)}} defaultValue={notetext} className="note-text"></textarea>
                 <button onClick={() => toggleColor(noteColor)} className={'color-button'}>

@@ -10,6 +10,7 @@ export default function Stickies() {
 
   const [notes, setNotes] = useState([]);
   const [polaroids, setPolaroids] = useState([]);
+  const [topSticky, setTopSticky] = useState(0);
 
   const currentDate = new Date();
 
@@ -140,6 +141,8 @@ export default function Stickies() {
                     key={idx}
                     idx={idx}
                     storage={note}
+                    isSelected={topSticky == idx ? true : false}
+                    changeLayer={setTopSticky}
                     handleChange={editNote}
                     // handleDelete={deleteNote}
                 />
@@ -152,7 +155,10 @@ export default function Stickies() {
                 <Polaroid 
                     key={idx}
                     idx={idx}
+                    notes={notes.length}
                     storage={polaroid}
+                    isSelected={topSticky == (idx + notes.length) ? true : false}
+                    changeLayer={setTopSticky}
                     handleChange={editPolaroid}
                     // handleDelete={deletePolaroid}
 

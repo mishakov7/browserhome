@@ -8,6 +8,7 @@ export default function Polaroid(props: any) {
   const [coordinates, setCoordinates] = useState({x: props.storage.xpos, y: props.storage.ypos});
   const [notetext, setNotetext] = useState(props.storage.note);
   const [alignment, setAlignment] = useState(props.storage.alignment);  
+  // const [topLayer, setLayer] = useState(false);
 
   const nodeRef = React.useRef(null);
   const reader = new FileReader();
@@ -52,8 +53,9 @@ export default function Polaroid(props: any) {
     <Draggable 
       nodeRef={nodeRef}
       defaultPosition={{x: coordinates.x, y: coordinates.y}} 
-      onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}>
-        <div ref={nodeRef} className='sticky polaroid'>
+      onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}
+      onStart={(e) => props.changeLayer(props.idx + props.notes)}>
+        <div onClick={(e) => props.changeLayer(props.idx + props.notes)} ref={nodeRef} className={'sticky polaroid ' + (props.isSelected ? "top-sticky" : null)}>
         <div className={'sticky-wrapper ' + props.storage.rotation}>
               <div className='polaroid-container' draggable>
                     <img className={'img-align-' + alignment} src={image} width="275"/>          

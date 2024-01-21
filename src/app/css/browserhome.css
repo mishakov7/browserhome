@@ -101,6 +101,11 @@ input[type=text] {
 .sticky {
   position: absolute;
   cursor: grab;
+  z-index: 1;
+}
+
+.top-sticky {
+  z-index: 2;
 }
 
 .sticky-wrapper {
