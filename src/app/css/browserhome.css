@@ -157,6 +157,14 @@ input[type=text] {
   transform: rotate(-12deg);
 }
 
+.sticky-accent0 {
+  background-color: var(--base-container);
+}
+
+.sticky-accent0 path {
+  fill: var(--secondary-txt);
+}
+
 .sticky-accent1 {
   background-color: hsl(var(--accent1-hsl), 90%);
 }

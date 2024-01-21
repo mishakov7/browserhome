@@ -16,7 +16,7 @@ export default function Stickies() {
 
   const defaultNote = [{
     "note": "Change my text!",
-    "color": "accent" + randomIdx(1, 3),
+    "color": "accent" + randomIdx(0, 3),
     "rotation": "sticky-" + randomIdx(1, 10),
     "xpos": -462,
     "ypos": 175

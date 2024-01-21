@@ -12,11 +12,11 @@ export default function Note(props: any) {
   const nodeRef = React.useRef(null);
 
   const toggleColor = (color: string) => {
-    let colors = ["accent1", "accent2", "accent3"];
+    let colors = ["accent0", "accent1", "accent2", "accent3"];
     let selectedColor = color;
 
     while (selectedColor == color) {
-      selectedColor = colors[Math.floor(Math.random() * 3)];
+      selectedColor = colors[Math.floor(Math.random() * 4)];
     }
 
     setNoteColor(selectedColor);
