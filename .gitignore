@@ -13,9 +13,9 @@
 /.next/
 /out/
 
-# sass
-/css/sass
-*.scss
+## sass
+#/css/sass
+#*.scss
 
 # production
 /build

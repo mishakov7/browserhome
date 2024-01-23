@@ -56,7 +56,7 @@ export default function Polaroid(props: any) {
       onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}
       onStart={(e) => props.changeLayer(props.idx + props.notes)}>
         <div onClick={(e) => props.changeLayer(props.idx + props.notes)} ref={nodeRef} className={'sticky polaroid ' + (props.isSelected ? "top-sticky" : null)}>
-        <div className={'sticky-wrapper ' + props.storage.rotation}>
+        <div className={'polaroid-wrapper ' + props.storage.rotation}>
               <div className='polaroid-container' draggable>
                     <img className={'img-align-' + alignment} src={image} width="275"/>          
                     <input ref={uploadButton} type="file" onChange={(e) => uploadPolaroid(e)} accept="image/*"/>

@@ -7,13 +7,6 @@ import { create } from 'domain';
 
 
 export default function Stickies() {
-
-  const [notes, setNotes] = useState([]);
-  const [polaroids, setPolaroids] = useState([]);
-  const [topSticky, setTopSticky] = useState(0);
-
-  const currentDate = new Date();
-
   const defaultNote = [{
     "note": "Change my text!",
     "color": "accent" + randomIdx(0, 3),
@@ -31,12 +24,18 @@ export default function Stickies() {
     "ypos": 75
   }];
 
+  const [notes, setNotes] = useState([]);
+  const [polaroids, setPolaroids] = useState([]);
+  const [topSticky, setTopSticky] = useState(0);
+
+  const currentDate = new Date();
+
   function randomIdx(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min; 
   }
 
   const createNote = (e: any) => {
-    let storageStickies = JSON.parse(localStorage.getItem('stickies'));
+    const storageNotes = JSON.parse(localStorage.getItem('notes'));
     let newNote = {
       "note": "Change my text!",
       "color": "accent" + randomIdx(1, 3),
@@ -45,14 +44,30 @@ export default function Stickies() {
       "ypos": 175
     };
 
-    storageStickies.notes.push(newNote);
+    storageNotes.push(newNote);
 
-    setNotes(storageStickies.notes);
-    localStorage.setItem('stickies', JSON.stringify(storageStickies));
+    setNotes(storageNotes);
+    localStorage.setItem('notes', JSON.stringify(storageNotes));
   }
-  
+
+  const editNote = (update: any, idx: number) => {    
+    const storageNotes = JSON.parse(localStorage.getItem('notes'));
+    storageNotes[idx] = update;
+    
+    localStorage.setItem('notes', JSON.stringify(storageNotes));
+    setNotes(storageNotes);
+  }
+
+  const deleteNote = (idx: number) => {    
+    let storageNotes = JSON.parse(localStorage.getItem('notes'));
+    storageNotes.splice(idx, 1);
+
+    localStorage.setItem('notes', JSON.stringify(storageNotes));
+    setNotes(JSON.parse(localStorage.getItem('notes')));
+  }
+
   const createPolaroid = (e: any) => {
-    let storageStickies = JSON.parse(localStorage.getItem('stickies'));
+    let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
     let newPolaroid = {
       "note": "Hover over the image!",
       "image": "https://i.makeagif.com/media/11-12-2023/JbwsRE.gif",
@@ -62,44 +77,41 @@ export default function Stickies() {
       "ypos": 75
     };
 
-    storageStickies.polaroids.push(newPolaroid);
+    storagePolaroids.push(newPolaroid);
 
-    setPolaroids(storageStickies.polaroids);
-    localStorage.setItem('stickies', JSON.stringify(storageStickies));
+    setPolaroids(storagePolaroids);
+    localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
   }
 
-  const editNote = (update, idx) => {    
-    let storageStickies = JSON.parse(localStorage.getItem('stickies'));
-    storageStickies.notes[idx] = update;
+  const editPolaroid = (update: any, idx: number) => {    
+    let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
+    storagePolaroids[idx] = update;
     
-    localStorage.setItem('stickies', JSON.stringify(storageStickies));
-    setNotes(storageStickies.notes);
-  }
-
-  const editPolaroid = (update, idx) => {    
-    let storageStickies = JSON.parse(localStorage.getItem('stickies'));
-    storageStickies.polaroids[idx] = update;
-    
-    localStorage.setItem('stickies', JSON.stringify(storageStickies));
-    setPolaroids(storageStickies.polaroids);
+    localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
+    setPolaroids(storagePolaroids);
   }
 
   useEffect(() => {
-    const storageStickies = JSON.parse(localStorage.getItem('stickies'));
+    console.log("stickies - changes detected");
 
-    if (storageStickies) {
-      setNotes(storageStickies.notes);
-      setPolaroids(storageStickies.polaroids);
+    let storageNotes = JSON.parse(localStorage.getItem('notes'));
+    let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
+
+    if (storageNotes) {
+      setNotes(storageNotes);
+
     } else {
-      let defaultStickies = {
-        "notes": defaultNote,
-        "polaroids": defaultPolaroid
-      }
-
-      localStorage.setItem('stickies', JSON.stringify(defaultStickies));
+      localStorage.setItem('notes', JSON.stringify(defaultNote));
     }
 
-  }, []);
+    if (storagePolaroids) {
+      setPolaroids(storagePolaroids);
+
+    } else {
+      localStorage.setItem('polaroids', JSON.stringify(defaultPolaroid));
+    }
+
+  }, [localStorage.getItem('notes'), localStorage.getItem('polaroids')]);
 
   return (
     <>
@@ -144,7 +156,7 @@ export default function Stickies() {
                     isSelected={topSticky == idx ? true : false}
                     changeLayer={setTopSticky}
                     handleChange={editNote}
-                    // handleDelete={deleteNote}
+                    handleDelete={deleteNote}
                 />
                 
               ))
@@ -165,6 +177,8 @@ export default function Stickies() {
                 />
               ))
             }
+
+            <button onClick={(e) => createNote(e)}>Add note</button>
           
         </div>
     </div>

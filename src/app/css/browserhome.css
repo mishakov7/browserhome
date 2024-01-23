@@ -108,7 +108,8 @@ input[type=text] {
   z-index: 2;
 }
 
-.sticky-wrapper {
+.note-wrapper,
+.polaroid-wrapper {
   background-color: var(--base-container);
   padding: 20px;
   max-width: 350px;
@@ -332,6 +333,23 @@ input[type=text] {
 
 .note:hover .color-button {
   display: flex;
+}
+
+.sticky:hover .remove-button {
+  display: flex;
+}
+
+.sticky .remove-button {
+  display: none;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 20px;
+  right: -12px;
+}
+
+.todolists-container {
+  display: none !important;
 }
 
 /* BOOKMARKS */
