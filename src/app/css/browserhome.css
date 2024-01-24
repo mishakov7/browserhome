@@ -64,8 +64,8 @@ input[type=text] {
   height: 100px;
   position: absolute;
   z-index: 2;
-  right: 4%;
-  top: 4%;
+  right: 7%;
+  top: -2%;
   cursor: pointer;
 }
 
@@ -364,13 +364,27 @@ input[type=text] {
 .bookmarks-container {
   position: relative;
   max-height: 75px;
-  margin: 40px;
 }
 
 .bookmarks-list {
   overflow-x: scroll;
-  padding: 50px 0;
-  margin: -250px 0;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.bookmarks-list::-webkit-scrollbar {
+  display: none;
+}
+
+.bookmarks-list-creator {
+  padding: 225px 0;
+  margin: -50px 0;
+}
+
+.bookmarks-list:not(.bookmarks-list-creator):hover {
+  padding: 30px 0;
 }
 
 .bookmarks-container .create-button {
@@ -710,8 +724,8 @@ input[type=text] {
   scrollbar-width: none;
   height: max-content;
   width: max-content;
-  top: 150%;
-  left: 150%;
+  top: 75%;
+  right: -240%;
 }
 
 .list-container {

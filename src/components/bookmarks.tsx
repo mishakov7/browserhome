@@ -8,6 +8,7 @@ export default function Bookmarks() {
   const [bookmarkList, setBookmarkList] = useState([]);
   const [showCreator, setCreator] = useState(false);
 
+  const bookmarksRef = useRef(null);
   const imageRef = useRef(null);
   const linkRef = useRef(null);
 
@@ -120,13 +121,14 @@ export default function Bookmarks() {
             </button>
         </div>
 
-        <ul className='bookmarks-list'>
+        <ul className='bookmarks-list' ref={bookmarksRef}>
             {
               bookmarkList.length > 0 ? 
               bookmarkList.map((bookmark, idx) => (
                   <li className='bookmark' key={idx}>
                     <Bookmark 
                       bookmarkKey={idx}
+                      parentElmt={bookmarksRef}
                       link={bookmark.link}
                       image={bookmark.image}
                       handleDelete={() => deleteBookmark(idx)}

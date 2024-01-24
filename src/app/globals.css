@@ -187,7 +187,7 @@ input, textarea {
   /* filter: blur(0px); */
   transition: filter 0.6s;
   /* min-height: 100vh; */
-
+  
 }
 
 ::-webkit-scrollbar {
@@ -524,6 +524,7 @@ label {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  padding: 50px;
 }
 
 .grid-row {

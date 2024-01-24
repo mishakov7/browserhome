@@ -11,17 +11,29 @@
 .bookmarks-container {
   position: relative;
   max-height: 75px;
-  margin: 40px;
 }
 
 .bookmarks-list {
   // z-index: -2;
   overflow-x: scroll;
-  padding: 50px 0;
-  // padding: 250px 0;
-  margin: -250px 0;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
+.bookmarks-list::-webkit-scrollbar {
+  display: none;
+}
+
+.bookmarks-list-creator {
+  padding: 225px 0;
+  margin: -50px 0;
+}
+
+.bookmarks-list:not(.bookmarks-list-creator):hover {
+  padding: 30px 0;
+}
 
 .bookmarks-container .create-button {
   margin: 0 10px;

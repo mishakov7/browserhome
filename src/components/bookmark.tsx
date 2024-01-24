@@ -25,13 +25,19 @@ const Bookmark = (props: any) => {
   }];
 
   const toggleCreator = () => {
+
+    console.log(props.parentElmt.current);
+
     if (showCreator) {
       setCreator(false);
       editButton.current.classList.remove("editing-button");
+      props.parentElmt.current.classList.remove("bookmarks-list-creator");
 
     } else {
       setCreator(true);
       editButton.current.classList.add("editing-button");
+      props.parentElmt.current.classList.add("bookmarks-list-creator");
+
     }
 
 
