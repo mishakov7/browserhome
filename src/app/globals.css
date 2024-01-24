@@ -582,6 +582,10 @@ button {
   border: none;
 }
 
+.feature-group {
+  width: max-content;
+}
+
 .edit-button,
 .remove-button,
 .color-button,

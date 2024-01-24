@@ -1,6 +1,6 @@
 /* SEARCH QUERY */
 .search-container {
-  margin: 50px;
+  width: 40vw;
 }
 
 .search-query {
@@ -63,8 +63,10 @@ input[type=text] {
   width: 100px;
   height: 100px;
   position: absolute;
+  z-index: 2;
   right: 4%;
   top: 4%;
+  cursor: pointer;
 }
 
 .date span:first-of-type {
@@ -96,6 +98,7 @@ input[type=text] {
   position: absolute;
   display: flex;
   justify-content: flex-end;
+  z-index: 1;
 }
 
 .sticky {

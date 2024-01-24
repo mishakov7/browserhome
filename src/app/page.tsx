@@ -28,7 +28,7 @@ export default function Home() {
       <div id="main-container" className="accent1-border">
         <div id="main-wrapper">
 
-          <div className='grid-row'>
+          <div className='col feature-group'>
             <Search />
             <Stickies />
             <ToDoLists />
