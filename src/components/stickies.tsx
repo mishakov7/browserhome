@@ -105,8 +105,6 @@ export default function Stickies() {
   }
 
   useEffect(() => {
-    // console.log("stickies - changes detected");
-
     let storageNotes = JSON.parse(localStorage.getItem('notes'));
     let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
 

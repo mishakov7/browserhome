@@ -8,7 +8,6 @@ export default function Polaroid(props: any) {
   const [coordinates, setCoordinates] = useState({x: props.storage.xpos, y: props.storage.ypos});
   const [notetext, setNotetext] = useState(props.storage.note);
   const [alignment, setAlignment] = useState(props.storage.alignment);  
-  // const [topLayer, setLayer] = useState(false);
 
   const nodeRef = React.useRef(null);
   const reader = new FileReader();
@@ -19,7 +18,7 @@ export default function Polaroid(props: any) {
 
     reader.addEventListener('load', function() {
       // localStorage.setItem('polaroid', JSON.stringify(reader.result));
-      setImage(reader.result);
+      changePolaroid(reader.result);
 
     });
 
@@ -33,10 +32,57 @@ export default function Polaroid(props: any) {
     uploadButton.current.click();
   }
 
-  useEffect(() => {
+  const changeCoordinates = (coords: any) => {
+    setCoordinates(coords);
 
     let updatedPolaroid = {
       "note": notetext,
+      "image": image,
+      "alignment": alignment,
+      "rotation": props.storage.rotation,
+      "xpos": coords.x,
+      "ypos": coords.y,
+    }
+
+    props.handleChange(updatedPolaroid, props.idx);
+  }
+
+  const changePolaroid = (dataimage: any) => {
+    setImage(dataimage);
+
+    let updatedPolaroid = {
+      "note": notetext,
+      "image": dataimage,
+      "alignment": alignment,
+      "rotation": props.storage.rotation,
+      "xpos": coordinates.x,
+      "ypos": coordinates.y,
+    }
+
+    props.handleChange(updatedPolaroid, props.idx);
+    
+  }
+
+  const changeAlignment = (algnment: string) => {
+    setAlignment(algnment);
+
+    let updatedPolaroid = {
+      "note": notetext,
+      "image": image,
+      "alignment": algnment,
+      "rotation": props.storage.rotation,
+      "xpos": coordinates.x,
+      "ypos": coordinates.y,
+    }
+
+    props.handleChange(updatedPolaroid, props.idx);
+  }
+
+  const changeText = (noteValue: string) => {
+    setNotetext(noteValue);
+
+    let updatedPolaroid = {
+      "note": noteValue,
       "image": image,
       "alignment": alignment,
       "rotation": props.storage.rotation,
@@ -45,15 +91,14 @@ export default function Polaroid(props: any) {
     }
 
     props.handleChange(updatedPolaroid, props.idx);
-
-  }, [coordinates, notetext, image, alignment]);
+  }
 
   return (
     <>
     <Draggable 
       nodeRef={nodeRef}
       defaultPosition={{x: coordinates.x, y: coordinates.y}} 
-      onStop={(e, ui) => { setCoordinates({x: ui.x, y: ui.y})}}
+      onStop={(e, ui) => { changeCoordinates({x: ui.x, y: ui.y})}}
       onStart={(e) => props.changeLayer(props.idx + props.notes)}>
         <div onClick={(e) => props.changeLayer(props.idx + props.notes)} ref={nodeRef} className={'sticky polaroid ' + (props.isSelected ? "top-sticky" : null)}>
         <div className={'polaroid-wrapper ' + props.storage.rotation}>
@@ -69,7 +114,7 @@ export default function Polaroid(props: any) {
 
                     <div className='buttons-container'>
                         {/* Align Top */}
-                        <button onClick={(e) => setAlignment("top")}>
+                        <button onClick={(e) => changeAlignment("top")}>
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.68115 1.34412H15.6812" strokeWidth="2" strokeLinecap="round"/>
                                 <path d="M1.68115 15.3441H15.6812" strokeWidth="2" strokeLinecap="round"/>
@@ -78,7 +123,7 @@ export default function Polaroid(props: any) {
                         </button>
 
                         {/* Align Middle */}
-                        <button onClick={(e) => setAlignment("center")}>
+                        <button onClick={(e) => changeAlignment("center")}>
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.5564 1.34412H15.5564" strokeWidth="2" strokeLinecap="round"/>
                                 <path d="M1.5564 15.3441H15.5564" strokeWidth="2" strokeLinecap="round"/>
@@ -87,7 +132,7 @@ export default function Polaroid(props: any) {
                         </button>
 
                         {/* Align Bottom */}
-                        <button onClick={(e) => setAlignment("bottom")}>
+                        <button onClick={(e) => changeAlignment("bottom")}>
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.5564 1.34412H15.5564" strokeWidth="2" strokeLinecap="round"/>
                                 <path d="M1.5564 15.3441H15.5564" strokeWidth="2" strokeLinecap="round"/>
@@ -97,7 +142,7 @@ export default function Polaroid(props: any) {
                     </div>
               </div>
 
-              <input type="text" onChange={(e) => { setNotetext(e.target.value)}} defaultValue={notetext}/>
+              <input type="text" onChange={(e) => { changeText(e.target.value)}} defaultValue={notetext}/>
         </div>
         </div>
     </Draggable> 
