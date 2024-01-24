@@ -176,34 +176,12 @@ export default function ToDoLists() {
   return (
     <>
     <div className='todolists-container'>
+      
           {
             lists.length < 1 ? null :
             lists.map((list, idx) => (
               <div onClick={(e: any) => toggleSelectedList(e, idx)} key={idx} className={'list-container ' + (isEditing && selectedList == idx ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' ) + (selectedList == idx ? ' selected-list ' : '')}>
  
-                {
-                  isEditing && selectedList == idx
-                  
-                  ?
-
-                  <EditList
-                    listTitleRef={editTitleInput}
-                    listTitle={list.title}
-                    listKey={idx}
-                    listColor={list.color}
-                  />
-
-                  : 
-
-                  <List 
-                    allLists={lists}
-                    listTitle={list.title}
-                    listKey={idx}
-                    listColor={list.color}
-                  />
-                  
-                }
-
                 <div className='buttons-container'>
                     <button onClick={(e: any) => { toggleEditing(e, idx) }} className={'edit-button ' + list.color + "-fill"}>
                         {
@@ -253,6 +231,29 @@ export default function ToDoLists() {
                     }
                     
                 </div>
+
+                {
+                  isEditing && selectedList == idx
+                  
+                  ?
+
+                  <EditList
+                    listTitleRef={editTitleInput}
+                    listTitle={list.title}
+                    listKey={idx}
+                    listColor={list.color}
+                  />
+
+                  : 
+
+                  <List 
+                    allLists={lists}
+                    listTitle={list.title}
+                    listKey={idx}
+                    listColor={list.color}
+                  />
+                  
+                }
 
               </div>
             )) 

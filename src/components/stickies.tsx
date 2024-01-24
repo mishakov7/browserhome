@@ -199,9 +199,6 @@ export default function Stickies() {
               ))
             }
 
-            <button onClick={(e) => createNote(e)}>Add note</button>
-            <button onClick={(e) => createPolaroid(e)}>Add polaroid</button>
-          
         </div>
     </div>
     </>

@@ -348,10 +348,6 @@ input[type=text] {
   right: -12px;
 }
 
-.todolists-container {
-  display: none !important;
-}
-
 /* BOOKMARKS */
 .bookmarks-container,
 .bookmarks-list {
@@ -712,7 +708,7 @@ input[type=text] {
   height: max-content;
   width: max-content;
   top: 150%;
-  left: 12vw;
+  left: 150%;
 }
 
 .list-container {
@@ -734,13 +730,21 @@ div.list-container:nth-of-type(1) {
   transform: rotate(-6deg);
 }
 
+.list-container:nth-of-type(2) .todo-list {
+  max-height: 275px;
+}
+
 .list-container:nth-of-type(2) .creator {
   transform: rotate(8deg);
 }
 
 div.list-container:nth-of-type(2) {
   transform: rotate(-8deg);
-  top: 50%;
+  top: 40px;
+}
+
+.list-container:nth-of-type(3) .todo-list {
+  max-height: 250px;
 }
 
 .list-container:nth-of-type(3) .creator {
@@ -749,7 +753,11 @@ div.list-container:nth-of-type(2) {
 
 div.list-container:nth-of-type(3) {
   transform: rotate(-10deg);
-  top: 55%;
+  top: 70px;
+}
+
+.list-container:nth-of-type(4) .todo-list {
+  max-height: 225px;
 }
 
 .list-container:nth-of-type(4) .creator {
@@ -758,7 +766,11 @@ div.list-container:nth-of-type(3) {
 
 div.list-container:nth-of-type(4) {
   transform: rotate(-12deg);
-  top: 60%;
+  top: 100px;
+}
+
+.list-container:nth-of-type(5) .todo-list {
+  max-height: 200px;
 }
 
 .list-container:nth-of-type(5) .creator {
@@ -767,7 +779,7 @@ div.list-container:nth-of-type(4) {
 
 div.list-container:nth-of-type(5) {
   transform: rotate(-14deg);
-  top: 65%;
+  top: 130px;
 }
 
 .list-container:hover {
@@ -782,6 +794,17 @@ div.list-container:nth-of-type(5) {
 
 .todo-list {
   padding: 0;
+  overflow-y: scroll;
+  max-height: 300px;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.todo-list::-webkit-scrollbar {
+  display: none;
 }
 
 .todo-list .create-button {
@@ -814,6 +837,7 @@ div.list-container:nth-of-type(5) {
 
 .todo-item label:last-of-type {
   margin-left: 12px;
+  max-width: 90%;
 }
 
 .todo-item input[type=checkbox] {
@@ -867,9 +891,9 @@ button.list-container:hover::before {
 
 .selected-list .buttons-container {
   display: flex;
-  position: relative;
-  top: -38px;
-  left: 30px;
+  position: absolute;
+  top: 15px;
+  left: 200px;
 }
 
 .selected-list .buttons-container button {
