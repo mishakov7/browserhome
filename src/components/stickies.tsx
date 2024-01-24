@@ -26,12 +26,23 @@ export default function Stickies() {
 
   const [notes, setNotes] = useState([]);
   const [polaroids, setPolaroids] = useState([]);
+  const [letterkey, setletterKey] = useState('a');
   const [topSticky, setTopSticky] = useState(0);
 
   const currentDate = new Date();
 
   function randomIdx(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min; 
+  }
+
+  function generateKey(sticky: string, idx:number) {
+    return sticky + letterkey + idx;
+  }
+
+  function randLetter() {
+    var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var letter = letters[Math.floor(Math.random() * letters.length)];
+    return letter;
   }
 
   const createNote = (e: any) => {
@@ -58,12 +69,14 @@ export default function Stickies() {
     setNotes(storageNotes);
   }
 
-  const deleteNote = (idx: number) => {    
+  const deleteNote = (idx: number) => { 
     let storageNotes = JSON.parse(localStorage.getItem('notes'));
     storageNotes.splice(idx, 1);
 
     localStorage.setItem('notes', JSON.stringify(storageNotes));
     setNotes(JSON.parse(localStorage.getItem('notes')));
+
+    setletterKey(randLetter());
   }
 
   const createPolaroid = (e: any) => {
@@ -92,7 +105,7 @@ export default function Stickies() {
   }
 
   useEffect(() => {
-    console.log("stickies - changes detected");
+    // console.log("stickies - changes detected");
 
     let storageNotes = JSON.parse(localStorage.getItem('notes'));
     let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
@@ -150,7 +163,7 @@ export default function Stickies() {
             {
               notes.map((note, idx) => (
                 <Note 
-                    key={idx}
+                    key={generateKey("note", idx)}
                     idx={idx}
                     storage={note}
                     isSelected={topSticky == idx ? true : false}
