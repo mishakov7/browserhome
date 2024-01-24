@@ -104,6 +104,16 @@ export default function Stickies() {
     setPolaroids(storagePolaroids);
   }
 
+  const deletePolaroid = (idx: number) => { 
+    let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
+    storagePolaroids.splice(idx, 1);
+
+    localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
+    setPolaroids(JSON.parse(localStorage.getItem('polaroids')));
+
+    setletterKey(randLetter());
+  }
+
   useEffect(() => {
     let storageNotes = JSON.parse(localStorage.getItem('notes'));
     let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
@@ -176,20 +186,21 @@ export default function Stickies() {
             {
               polaroids.map((polaroid, idx) => (
                 <Polaroid 
-                    key={idx}
+                    key={generateKey("polaroid", idx)}
                     idx={idx}
                     notes={notes.length}
                     storage={polaroid}
                     isSelected={topSticky == (idx + notes.length) ? true : false}
                     changeLayer={setTopSticky}
                     handleChange={editPolaroid}
-                    // handleDelete={deletePolaroid}
+                    handleDelete={deletePolaroid}
 
                 />
               ))
             }
 
             <button onClick={(e) => createNote(e)}>Add note</button>
+            <button onClick={(e) => createPolaroid(e)}>Add polaroid</button>
           
         </div>
     </div>
