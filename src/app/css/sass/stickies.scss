@@ -1,3 +1,23 @@
+@keyframes floating {
+  0% {
+    margin-left: 1px;
+    margin-bottom: -1px;
+
+  } 25% {
+    margin-left: -1px;
+    margin-bottom: 1px;
+  } 50% {
+    margin-left: 1px;
+    margin-bottom: -1px;
+  } 75% {
+    margin-left: -1px;
+    margin-bottom: 1px;
+  } 100% {
+    margin-left: 1px;
+    margin-bottom: -1px;
+  }
+}
+
 .date {
     box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
     padding: 30px 0;
@@ -222,8 +242,8 @@
     display: none;
     flex-direction: column;
     position: absolute;
-    bottom: -50px;
-    left: -50px;
+    bottom: -40px;
+    left: -40px;
     width: 100%;
   }
   
@@ -236,13 +256,16 @@
   }
   
   .stickies-wrapper .note-button {
-    top: 10px;
-    left: 10px;
+    top: 0px;
+    left: 0px;
+    animation: floating 2s infinite;
+
   }
   
   .stickies-wrapper .polaroid-button {
     top: 0px;
-    left: 50px;
+    left: 30px;
+    animation: floating 2s infinite;
   }
   
   .stickies-wrapper .polaroid-container .buttons-container {
@@ -297,3 +320,11 @@
     top: 20px;
     right: -12px;
   }
+
+.accent0-bg {
+  background-color: var(--secondary-txt);
+}
+
+.accent0-bg path {
+  fill: #FFF;
+}

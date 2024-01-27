@@ -52,6 +52,28 @@ input[type=text] {
   margin: 10px;
 }
 
+@keyframes floating {
+  0% {
+    margin-left: 1px;
+    margin-bottom: -1px;
+  }
+  25% {
+    margin-left: -1px;
+    margin-bottom: 1px;
+  }
+  50% {
+    margin-left: 1px;
+    margin-bottom: -1px;
+  }
+  75% {
+    margin-left: -1px;
+    margin-bottom: 1px;
+  }
+  100% {
+    margin-left: 1px;
+    margin-bottom: -1px;
+  }
+}
 .date {
   box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
   padding: 30px 0;
@@ -276,8 +298,8 @@ input[type=text] {
   display: none;
   flex-direction: column;
   position: absolute;
-  bottom: -50px;
-  left: -50px;
+  bottom: -40px;
+  left: -40px;
   width: 100%;
 }
 
@@ -290,13 +312,15 @@ input[type=text] {
 }
 
 .stickies-wrapper .note-button {
-  top: 10px;
-  left: 10px;
+  top: 0px;
+  left: 0px;
+  animation: floating 2s infinite;
 }
 
 .stickies-wrapper .polaroid-button {
   top: 0px;
-  left: 50px;
+  left: 30px;
+  animation: floating 2s infinite;
 }
 
 .stickies-wrapper .polaroid-container .buttons-container {
@@ -349,6 +373,14 @@ input[type=text] {
   height: 25px;
   top: 20px;
   right: -12px;
+}
+
+.accent0-bg {
+  background-color: var(--secondary-txt);
+}
+
+.accent0-bg path {
+  fill: #FFF;
 }
 
 /* BOOKMARKS */
@@ -959,27 +991,21 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
-
   button.list-container {
     left: 500px;
   }
-
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
-
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
-
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
-
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
-
   div.list-container:nth-of-type(5) {
     left: 200px;
   }
