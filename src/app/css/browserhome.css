@@ -413,7 +413,7 @@ input[type=text] {
 }
 
 .bookmarks-list-creator {
-  padding: 225px 0;
+  padding: 250px 0;
   margin: -50px 0;
 }
 
@@ -818,7 +818,7 @@ input[type=text] {
   scrollbar-width: none;
   height: max-content;
   width: max-content;
-  top: 75%;
+  top: 50%;
   right: -240%;
 }
 

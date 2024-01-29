@@ -38,7 +38,9 @@ export default function Home() {
 
         </div>
       </div>
-
+      <footer>
+      Built by Misha Lukova | Buy me a coffee!
+      </footer>
     </div>
     </>
   )

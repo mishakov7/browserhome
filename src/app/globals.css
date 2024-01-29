@@ -516,7 +516,8 @@ label {
 /* * * * * * * * * * * * * * * * * * * * * * */
 /* BROWSER HOME STYLES */
 #main-container {
-  height: 100vh;
+  height: 95vh;
+  /* margin-bottom: 20px; */
 }
 
 #main-wrapper {
@@ -525,6 +526,17 @@ label {
   justify-content: space-between;
   height: 100%;
   padding: 50px;
+}
+
+footer {
+  text-align: center;
+  margin-top: -10px;
+  padding-bottom: 10px;
+  color: var(--base-container);
+  font-family: var(--overpass);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .grid-row {
