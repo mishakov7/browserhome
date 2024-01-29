@@ -83,8 +83,22 @@ export default function ToDoLists() {
     let colors = ["accent1", "accent2", "accent3"];
     let selectedColor = color;
 
-    while (selectedColor == color) {
-      selectedColor = colors[Math.floor(Math.random() * 3)];
+    for (let i = 0; i < colors.length; i++) {
+
+      if (selectedColor == colors[i]) {
+        
+        if (i == colors.length - 1) {
+          selectedColor = colors[0];
+          break;
+        
+        } else {
+          selectedColor = colors[i + 1];
+          break;
+        
+        }
+
+      }
+
     }
 
     let storageLists = JSON.parse(localStorage.getItem('lists'));

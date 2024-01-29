@@ -305,10 +305,14 @@ input[type=text] {
 
 .stickies-wrapper .buttons-container button {
   position: relative;
-  background-color: var(--secondary-txt);
+  background-color: var(--secondary-txt-lt);
   padding: 8px;
   border-radius: 12px;
   max-width: 30px;
+}
+
+.stickies-wrapper .buttons-container button:hover {
+  background-color: var(--secondary-txt);
 }
 
 .stickies-wrapper .note-button {
@@ -378,7 +382,7 @@ input[type=text] {
 }
 
 .accent0-bg {
-  background-color: var(--secondary-txt);
+  background-color: var(--secondary-txt-lt);
 }
 
 .accent0-bg path {

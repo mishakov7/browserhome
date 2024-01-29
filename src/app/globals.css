@@ -516,8 +516,10 @@ label {
 /* * * * * * * * * * * * * * * * * * * * * * */
 /* BROWSER HOME STYLES */
 #main-container {
-  height: 95vh;
+  height: 98vh;
   /* margin-bottom: 20px; */
+  overflow-y: hidden;
+
 }
 
 #main-wrapper {
@@ -531,7 +533,7 @@ label {
 footer {
   text-align: center;
   margin-top: -10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   color: var(--base-container);
   font-family: var(--overpass);
   font-size: 13px;
