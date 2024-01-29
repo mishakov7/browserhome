@@ -48,14 +48,14 @@ const Creator = (props: any) => {
 
                 { group.type == "dropdown" ? 
 
-                    <div className='col'>
+                    <div className='col dropdown'>
                         { group.options.map(option => (
                             // console.log(option.value);
                             <>
-                                <div className='row'>
+                                <div className='row option'>
                                     <input ref={option.ref} type="radio" name={group.name} value={option.value} />
                                     <label onClick={(e: any) => checkRadio(option.ref, e)} className="radio"><span></span></label>
-                                    <label>{option.value}</label>
+                                    <label onClick={(e: any) => checkRadio(option.ref, e)}>{option.value}</label>
                                 </div>
                             </>
                         ))}

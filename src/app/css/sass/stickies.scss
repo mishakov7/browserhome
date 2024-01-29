@@ -258,14 +258,15 @@
   .stickies-wrapper .note-button {
     top: 0px;
     left: 0px;
-    animation: floating 2s infinite;
-
+    animation: floating 6s infinite;
+    transition: background-color 0.2s;
   }
   
   .stickies-wrapper .polaroid-button {
     top: 0px;
     left: 30px;
-    animation: floating 2s infinite;
+    animation: floating 6s infinite;
+    transition: background-color 0.2s;
   }
   
   .stickies-wrapper .polaroid-container .buttons-container {

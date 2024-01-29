@@ -36,14 +36,18 @@ export default function Search() {
       {
         "ref": googleInput,
         "value": "google",
+        "selected": searchEngine == google ? true : false
       },
       {
         "ref": duckInput,
         "value": "duckduckgo",
+        "selected": searchEngine == duckduckgo ? true : false
       },
       {
         "ref": braveInput,
         "value": "brave",
+        "selected": searchEngine == brave ? true : false
+
       }
     ]
   }, {
@@ -55,14 +59,20 @@ export default function Search() {
       {
         "ref": sillyInput,
         "value": "silly",
+        "selected": searchTheme == silly ? true : false
+
       }, 
       {
         "ref": inspirationsInput,
         "value": "inspirations",
+        "selected": searchTheme == inspirations ? true : false
+
       },
       {
         "ref": affirmationsInput,
         "value": "affirmations",
+        "selected": searchTheme == affirmations ? true : false
+
       }
     ]
   }];

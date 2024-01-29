@@ -314,13 +314,15 @@ input[type=text] {
 .stickies-wrapper .note-button {
   top: 0px;
   left: 0px;
-  animation: floating 2s infinite;
+  animation: floating 6s infinite;
+  transition: background-color 0.2s;
 }
 
 .stickies-wrapper .polaroid-button {
   top: 0px;
   left: 30px;
-  animation: floating 2s infinite;
+  animation: floating 6s infinite;
+  transition: background-color 0.2s;
 }
 
 .stickies-wrapper .polaroid-container .buttons-container {
@@ -623,12 +625,68 @@ input[type=text] {
   fill: #9A9381;
 }
 
+@keyframes appear-searchcreator {
+  from {
+    opacity: 0;
+    top: 40px;
+  }
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
 .search-container .creator-wrapper {
   left: 0;
 }
 
 .search-container .creator {
   left: -35px;
+  animation: appear-searchcreator 0.4s;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+}
+
+.search-container .creator .input-group {
+  width: 100%;
+}
+
+.search-container .creator .input-group:first-of-type {
+  margin-right: 20px;
+}
+
+.creator .dropdown {
+  background-color: var(--base-container);
+  border-radius: 8px;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+.creator .option {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.creator .option label {
+  font-family: var(--overpass);
+}
+
+.search-container .creator .dropdown input + .radio {
+  content: "";
+  border: solid 2px rgb(var(--accent2));
+  width: 12px;
+  height: 12px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.search-container .creator .dropdown input:checked + .radio {
+  background-color: rgb(var(--accent2));
+}
+
+.search-container .creator .dropdown input:checked + .radio span {
+  background-color: rgb(var(--accent2));
 }
 
 @keyframes appear-listcreator {
@@ -720,6 +778,10 @@ input[type=text] {
 .bookmark .creator {
   left: -22px;
   bottom: 60px;
+}
+
+.input-group {
+  margin-bottom: 10px;
 }
 
 .alert {
@@ -904,7 +966,7 @@ div.list-container:nth-of-type(5) {
   transform: rotate(-4deg);
   cursor: pointer;
   bottom: 60%;
-  right: 50px;
+  right: 80px;
 }
 
 button.list-container {
