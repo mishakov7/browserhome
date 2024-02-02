@@ -53,29 +53,27 @@ input[type=text] {
 }
 
 @keyframes floating {
+  /*0% { 
+    border-radius: 12px 12px 12px 12px; 
+
+  } */
   0% {
-    margin-left: 1px;
-    margin-bottom: -1px;
+    border-radius: 14px 16px 14px 12px;
   }
   25% {
-    margin-left: -1px;
-    margin-bottom: 1px;
+    border-radius: 12px 14px 16px 14px;
   }
   50% {
-    margin-left: 1px;
-    margin-bottom: -1px;
+    border-radius: 14px 12px 14px 16px;
   }
   75% {
-    margin-left: -1px;
-    margin-bottom: 1px;
+    border-radius: 16px 14px 12px 14px;
   }
   100% {
-    margin-left: 1px;
-    margin-bottom: -1px;
+    border-radius: 14px 16px 14px 12px;
   }
 }
 .date {
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
   padding: 30px 0;
   display: flex;
   flex-direction: column;
@@ -94,6 +92,7 @@ input[type=text] {
   height: 100%;
   z-index: -1;
   border-radius: 10px;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
 }
 
 .date span:first-of-type {
@@ -333,14 +332,16 @@ input[type=text] {
 .stickies-wrapper .note-button {
   top: 0px;
   left: 0px;
-  animation: floating 6s infinite;
+  animation: floating 2s infinite;
+  animation-timing-function: ease-out;
   transition: background-color 0.2s;
 }
 
 .stickies-wrapper .polaroid-button {
   top: 0px;
   left: 30px;
-  animation: floating 6s infinite;
+  animation: floating 2s infinite;
+  animation-timing-function: ease-out;
   transition: background-color 0.2s;
 }
 
@@ -811,17 +812,17 @@ input[type=text] {
 @keyframes appear-todocreator {
   from {
     opacity: 0;
-    top: -100px;
+    top: -250px;
   }
   to {
     opacity: 1;
-    top: -65px;
+    top: -210px;
   }
 }
 .list-container .creator {
   transform: rotate(6deg);
-  top: -65px;
-  left: -250px;
+  top: -210px;
+  left: -35px;
   animation: appear-todocreator 0.4s;
   /*@include inline-animation(0.4s) {
       from {
@@ -847,13 +848,13 @@ input[type=text] {
   }
   to {
     opacity: 1;
-    bottom: 60px;
+    bottom: 40px;
   }
 }
 .bookmarks-container .creator {
   position: absolute;
-  bottom: 60px;
-  left: -22px;
+  bottom: 40px;
+  left: -34px;
   animation: appear-bookmarkscreator 0.4s;
   /*@include inline-animation(0.4s) {
       from {
@@ -934,7 +935,7 @@ div.list-container:nth-of-type(1) {
 }
 
 .list-container:nth-of-type(2) .todo-list {
-  max-height: 275px;
+  max-height: 150px;
 }
 
 .list-container:nth-of-type(2) .creator {
@@ -947,7 +948,7 @@ div.list-container:nth-of-type(2) {
 }
 
 .list-container:nth-of-type(3) .todo-list {
-  max-height: 250px;
+  max-height: 125px;
 }
 
 .list-container:nth-of-type(3) .creator {
@@ -960,7 +961,7 @@ div.list-container:nth-of-type(3) {
 }
 
 .list-container:nth-of-type(4) .todo-list {
-  max-height: 225px;
+  max-height: 100px;
 }
 
 .list-container:nth-of-type(4) .creator {
@@ -973,7 +974,7 @@ div.list-container:nth-of-type(4) {
 }
 
 .list-container:nth-of-type(5) .todo-list {
-  max-height: 175px;
+  max-height: 75px;
 }
 
 .list-container:nth-of-type(5) .creator {
@@ -998,18 +999,18 @@ div.list-container:nth-of-type(5) {
 .todo-list {
   padding: 0;
   overflow-y: scroll;
-  max-height: 300px;
+  max-height: 175px;
 }
 
 /* Firefox */
 .todo-list {
-  scrollbar-width: thin;
+  scrollbar-width: auto;
   scrollbar-color: var(--secondary-txt-lt) var(--subtle-border);
 }
 
 /* Chrome, Edge, and Safari */
 .todo-list::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
 }
 
 .todo-list::-webkit-scrollbar-track {
@@ -1161,27 +1162,21 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
-
   button.list-container {
     left: 500px;
   }
-
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
-
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
-
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
-
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
-
   div.list-container:nth-of-type(5) {
     left: 200px;
   }

@@ -212,18 +212,18 @@
 @keyframes appear-todocreator {
     from {
         opacity: 0;
-        top: -100px;
+        top: -250px;
     
     } to {
         opacity: 1;
-        top: -65px;
+        top: -210px;
     } 
 }
 
 .list-container .creator {
     transform: rotate(6deg);
-    top: -65px;
-    left: -250px;
+    top: -210px;
+    left: -35px;
     animation: appear-todocreator 0.4s;
 
     /*@include inline-animation(0.4s) {
@@ -251,14 +251,14 @@
     
     } to {
         opacity: 1;
-        bottom: 60px;
+        bottom: 40px;
     }
 }
 
 .bookmarks-container .creator {
     position: absolute;
-    bottom: 60px;
-    left: -22px;
+    bottom: 40px;
+    left: -34px;
     animation: appear-bookmarkscreator 0.4s;
 
     /*@include inline-animation(0.4s) {

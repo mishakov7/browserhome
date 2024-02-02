@@ -561,6 +561,10 @@ footer svg {
 }
 
 footer h4 {
+  font-family: 'Plus Jakarta';
+  font-weight: 800;
+  font-size: 2.5em;
+  letter-spacing: 2px;
   margin-top: 50px
 }
 
@@ -738,13 +742,13 @@ button {
 @keyframes show-highlight {
   0% {
     box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
-    background: rgb(255, 255, 255, 0);
+    /* background: rgb(255, 255, 255, 0); */
   } 5% {
-    box-shadow: 0px 0px 50px 20px rgb(var(--accent2));
-    background: rgb(var(--accent2), 0.75);
+    box-shadow: 0px 0px 50px 20px rgb(var(--accent3));
+    /* background: rgb(var(--accent2), 0.75); */
   } 100% {
     box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
-    background: rgb(255, 255, 255, 0);
+    /* background: rgb(255, 255, 255, 0); */
   }
 }
 

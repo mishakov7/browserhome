@@ -76,7 +76,7 @@ export default function Home() {
             <ul>
               <li onClick={() => clickFeature(searchRef)}>Change your search settings</li>
               <li onClick={() => clickFeature(bookmarkRef)}>Create a bookmark</li>
-              <li onClick={() => clickFeature(listRef)}>Create a list</li>
+              <li onClick={() => {highlightFeature(listRef); clickFeature(listRef);}}>Create a list</li>
               <li onClick={() => highlightFeature(dateRef)}>Create a note</li>
               <li onClick={() => highlightFeature(dateRef)}>Create a polaroid</li>
             </ul>

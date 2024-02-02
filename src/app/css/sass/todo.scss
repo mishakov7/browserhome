@@ -34,28 +34,28 @@ div.list-container:nth-of-type(1) {
     transform: rotate(-6deg);
 }
   
-.list-container:nth-of-type(2) .todo-list { max-height: 275px; }
+.list-container:nth-of-type(2) .todo-list { max-height: 150px; }
 .list-container:nth-of-type(2) .creator { transform: rotate(8deg);}
 div.list-container:nth-of-type(2) {
     transform: rotate(-8deg);
     top: 40px;
 }
 
-.list-container:nth-of-type(3) .todo-list { max-height: 250px; }
+.list-container:nth-of-type(3) .todo-list { max-height: 125px; }
 .list-container:nth-of-type(3) .creator { transform: rotate(10deg);}
 div.list-container:nth-of-type(3) {
     transform: rotate(-10deg);
     top: 70px;
 }
  
-.list-container:nth-of-type(4) .todo-list { max-height: 225px; }
+.list-container:nth-of-type(4) .todo-list { max-height: 100px; }
 .list-container:nth-of-type(4) .creator { transform: rotate(12deg);}
 div.list-container:nth-of-type(4) {
     transform: rotate(-12deg);
     top: 100px;
 }
   
-.list-container:nth-of-type(5) .todo-list { max-height: 175px; }
+.list-container:nth-of-type(5) .todo-list { max-height: 75px; }
 .list-container:nth-of-type(5) .creator { transform: rotate(14deg);}
 div.list-container:nth-of-type(5) {
     transform: rotate(-14deg);
@@ -75,18 +75,18 @@ div.list-container:nth-of-type(5) {
 .todo-list {
     padding: 0;
     overflow-y: scroll;
-    max-height: 300px;
+    max-height: 175px;
 }
 
 /* Firefox */
 .todo-list {
-    scrollbar-width: thin;
+    scrollbar-width: auto;
     scrollbar-color: var(--secondary-txt-lt) var(--subtle-border);
 }
 
 /* Chrome, Edge, and Safari */
 .todo-list::-webkit-scrollbar {
-    width: 8px;
+    width: 12px;
 }
 
 .todo-list::-webkit-scrollbar-track {

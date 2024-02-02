@@ -149,7 +149,7 @@ const List = (props: any) => {
                 handleCreator={(e: any) => { createTodo(e); } } 
                 inputGroups={creatorInputs}
                 bg={props.listColor}  
-                direction="right"
+                direction="below"
               /> 
               : null 
           }
