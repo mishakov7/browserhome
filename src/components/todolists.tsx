@@ -4,7 +4,7 @@ import Creator from './creator';
 import List from './list';
 import EditList from './editlist';
 
-export default function ToDoLists() {
+export default function ToDoLists(props: any) {
 
   const [lists, setLists] = useState([]);
   const [isEditing, setEditing] = useState(false);
@@ -275,7 +275,7 @@ export default function ToDoLists() {
 
           <div className='creator-wrapper todo-creator-wrapper'>
 
-            <button onClick={toggleCreator} className='list-container'></button>
+            <button ref={props.summonRef} onClick={toggleCreator} className='list-container'></button>
 
             {
               showCreator ?

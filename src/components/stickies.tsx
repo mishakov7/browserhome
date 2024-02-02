@@ -6,7 +6,7 @@ import Note from './note';
 import { create } from 'domain';
 
 
-export default function Stickies() {
+export default function Stickies(props: any) {
   const defaultNote = [{
     "note": "Change my text!",
     "color": "accent" + randomIdx(0, 3),
@@ -138,9 +138,15 @@ export default function Stickies() {
     <>
     <div className='stickies-wrapper'>
 
-        <div className='date accent1-bg'>
+        <div className='date accent1-fill'>
+
+            <svg ref={props.summonRef} className='sticky-date' width="138" height="140" viewBox="0 0 138 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M88.4366 6C88.4366 2.68629 85.7503 0 82.4366 0H12C5.37258 0 0 5.37475 0 12.0048V127.995C0 134.625 5.37258 140 12 140H126C132.627 140 138 134.625 138 127.995V54.6111C138 51.2974 135.314 48.6111 132 48.6111H100.099C93.6579 48.6111 88.4366 43.3878 88.4366 36.9444V6Z"/>
+                <path d="M136.31 34.1747C137.273 37.6519 134.453 40.8333 130.845 40.8333H102.042C98.8219 40.8333 96.2113 38.2217 96.2113 35V6.90347C96.2113 3.34534 99.3088 0.53776 102.759 1.40542C118.996 5.48797 131.852 18.0848 136.31 34.1747Z"/>
+            </svg>
+
             <span>{currentDate.toLocaleString('default', { month: 'short' })}</span>
-            <span>{currentDate.getDate()}</span>
+            <span>{currentDate.toLocaleString('default', { day: "2-digit" })}</span>
 
             <div className='buttons-container'>
                 {/* Create List */}

@@ -6,7 +6,7 @@ import affirmations from  './affirmations';
 import silly from './silly';
 import inspirations from './inspirations';
 
-export default function Search() {
+export default function Search(props: any) {
 
   const google = 'https://www.google.com/search?q=';
   const duckduckgo = 'https://www.duckduckgo.com/?q=';
@@ -184,7 +184,7 @@ export default function Search() {
         <p className="search-query">{quoteSearch}</p>
         <div className="inputGroup">
           
-          <button onClick={toggleCreator} className={'se-icon se-icon-' + searchEngine.split(".")[1]}>
+          <button ref={props.summonRef} onClick={toggleCreator} className={'se-icon se-icon-' + searchEngine.split(".")[1]}>
           </button> 
           
           <input type="text" onChange={e => setSearch(e.target.value)}/>
