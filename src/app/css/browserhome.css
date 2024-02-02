@@ -367,6 +367,27 @@ input[type=text] {
   fill: var(--secondary-txt);
 }
 
+@keyframes copy {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+.copy-button {
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+}
+
+.note .copy-button:hover rect:last-of-type {
+  animation: copy 0.4s;
+}
+
 .note .color-button {
   display: none;
   position: absolute;
@@ -375,7 +396,13 @@ input[type=text] {
   background-color: rgba(255, 255, 255, 0);
 }
 
-.note:hover .color-button {
+.note .copy-button {
+  display: none;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.note:hover .color-button,
+.note:hover .copy-button {
   display: flex;
 }
 
