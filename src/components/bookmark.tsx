@@ -26,8 +26,6 @@ const Bookmark = (props: any) => {
 
   const toggleCreator = () => {
 
-    console.log(props.parentElmt.current);
-
     if (showCreator) {
       setCreator(false);
       editButton.current.classList.remove("editing-button");

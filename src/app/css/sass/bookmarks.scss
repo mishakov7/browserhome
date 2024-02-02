@@ -5,7 +5,7 @@
   justify-content: flex-start;
   align-items: center;
   padding: 0;
-  width: 70vw;
+  width: 50vw;
 }
 
 .bookmarks-container {
@@ -16,6 +16,7 @@
 .bookmarks-list {
   // z-index: -2;
   overflow-x: scroll;
+  overflow-y: hidden;
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
@@ -37,6 +38,50 @@
 
 .bookmarks-container .create-button {
   margin: 0 10px;
+}
+
+.bookmarks-container .arrows-container {
+  position: absolute;
+  z-index: 10;
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  left: 40px;
+  height: 100%;
+}
+
+.arrows-container button {
+  position: absolute;
+  background: none;
+  height: 100%;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.arrows-container button::before {
+  content: "";
+  width: 150%;
+  height: 100%;
+  background-color: var(--base-bg);
+  position: absolute;
+  display: block;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.arrows-container .prev-button {
+  left: 5px;
+}
+
+.arrows-container .next-button {
+  right: 0px;
+}
+
+.arrows-container .next-button::before {
+  right: 10px;
 }
 
 @keyframes hop {
@@ -66,7 +111,7 @@
 }
 
 .bookmark:last-of-type {
-  margin-right: 25vw;
+  margin-right: 5vw;
 }
 
 .bookmark:hover {

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
 import Bookmark from './bookmark';
 import Creator from './creator';
 
@@ -7,10 +7,13 @@ export default function Bookmarks(props: any) {
 
   const [bookmarkList, setBookmarkList] = useState([]);
   const [showCreator, setCreator] = useState(false);
+  const [listScroll, setScroll] = useState(0);
+  const [maxScroll, setMaxScroll] = useState(0);
+  const [increment, setIncrement] = useState(0);
 
-  const bookmarksRef = useRef(null);
-  const imageRef = useRef(null);
-  const linkRef = useRef(null);
+  const bookmarksRef = useRef();
+  const imageRef = useRef();
+  const linkRef = useRef();
 
   const creatorInputs = [{
     "ref": imageRef,
@@ -89,13 +92,26 @@ export default function Bookmarks(props: any) {
   }
 
   useEffect(() => {
+
     const localBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
 
     if (localBookmarks) {
       setBookmarkList(localBookmarks);
     }
 
-  }, []);
+    bookmarksRef.current.scrollTo({left: (listScroll), behavior: "smooth"});
+
+  }, [listScroll]);
+
+  useLayoutEffect(() => {
+    if (bookmarksRef.current) {
+      setMaxScroll(bookmarksRef.current.scrollLeftMax);
+      setIncrement(bookmarksRef.current.clientWidth / 2);
+    }
+    
+    console.log("increment: " + increment);
+    console.log("max: " + maxScroll);
+  });
 
   return (
     <>
@@ -121,7 +137,7 @@ export default function Bookmarks(props: any) {
             </button>
         </div>
 
-        <ul className='bookmarks-list' ref={bookmarksRef}>
+        <ul ref={bookmarksRef} className='bookmarks-list'>
             {
               bookmarkList.length > 0 ? 
               bookmarkList.map((bookmark, idx) => (
@@ -140,6 +156,28 @@ export default function Bookmarks(props: any) {
               : null
             }
         </ul>
+
+        <div className='arrows-container'>
+
+            {
+              listScroll <= 0 ? null :
+              <button onClick={() => setScroll(bookmarksRef.current.scrollLeft + (-1 * increment))} className='prev-button accent2-fill'>
+                  <svg width="12" height="19" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0.688817 11.4128C-0.229606 10.303 -0.229606 8.69711 0.688817 7.58735L5.79471 1.41773C7.58689 -0.747822 11.1059 0.519469 11.1059 3.33044L11.1059 15.6697C11.1059 18.4806 7.58689 19.7479 5.79471 17.5824L0.688817 11.4128Z" />
+                  </svg>
+              </button>
+            }
+
+            {
+              (listScroll >= maxScroll) || (!maxScroll) ? null :
+              <button onClick={() => setScroll(bookmarksRef.current.scrollLeft + increment)} className='next-button accent2-fill'>
+                  <svg width="12" height="19" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.4171 7.58735C11.3355 8.69711 11.3355 10.303 10.4171 11.4128L5.31118 17.5824C3.519 19.7479 -1.22871e-07 18.4806 0 15.6697L5.39365e-07 3.33044C6.62236e-07 0.519467 3.519 -0.747821 5.31118 1.41773L10.4171 7.58735Z" />
+                  </svg>
+              </button>
+            }
+
+        </div>
         
         
     </div>
