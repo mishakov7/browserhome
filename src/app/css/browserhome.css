@@ -194,8 +194,9 @@ input[type=text] {
   background-color: var(--base-container);
 }
 
-.sticky-accent0 path {
-  fill: var(--secondary-txt);
+.sticky-accent0 path,
+.sticky-accent0 rect {
+  fill: var(--secondary-txt-lt);
 }
 
 .sticky-accent1 {
@@ -262,6 +263,7 @@ input[type=text] {
   aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: 6px;
+  transition: object-position 0.3s;
 }
 
 .img-align-top {
@@ -294,7 +296,9 @@ input[type=text] {
 }
 
 .upload-button path {
-  fill: var(--base-txt);
+  fill: #FFF;
+  stroke: var(--secondary-txt);
+  stroke-width: 2px;
 }
 
 .stickies-wrapper .date:hover .buttons-container {
