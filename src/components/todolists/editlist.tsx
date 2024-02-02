@@ -1,7 +1,7 @@
 "use client";
 import { todo } from 'node:test';
 import React, { useState, useEffect, useRef } from 'react';
-import Creator from './creator';
+import Creator from '../creator';
 
 const EditList = (props: any) => {
 

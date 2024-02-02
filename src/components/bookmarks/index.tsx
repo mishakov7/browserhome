@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
 import Bookmark from './bookmark';
-import Creator from './creator';
+import Creator from '../creator';
 
 export default function Bookmarks(props: any) {
 

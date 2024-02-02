@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import Creator from './creator';
+import Creator from '../creator';
 
 import affirmations from  './affirmations';
 import silly from './silly';
