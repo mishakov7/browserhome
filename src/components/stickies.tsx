@@ -8,7 +8,7 @@ import { create } from 'domain';
 
 export default function Stickies(props: any) {
   const defaultNote = [{
-    "note": "Change my text!",
+    "note": "Change what this note says!",
     "color": "accent" + randomIdx(0, 3),
     "rotation": "sticky-" + randomIdx(1, 10),
     "xpos": -462,
@@ -16,7 +16,7 @@ export default function Stickies(props: any) {
   }];
 
   const defaultPolaroid = [{
-    "note": "Hover over the image!",
+    "note": "Say something.. like.. huh?",
     "image": "https://i.makeagif.com/media/11-12-2023/JbwsRE.gif",
     "alignment": "center",
     "rotation": "sticky-" + randomIdx(1, 10),
@@ -48,7 +48,7 @@ export default function Stickies(props: any) {
   const createNote = (e: any) => {
     const storageNotes = JSON.parse(localStorage.getItem('notes'));
     let newNote = {
-      "note": "Change my text!",
+      "note": "Change what this note says!",
       "color": "accent" + randomIdx(1, 3),
       "rotation": "sticky-" + randomIdx(1, 10),
       "xpos": -1 * randomIdx(0, 1000),
@@ -82,7 +82,7 @@ export default function Stickies(props: any) {
   const createPolaroid = (e: any) => {
     let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
     let newPolaroid = {
-      "note": "Hover over the image!",
+      "note": "Say something.. like.. huh?",
       "image": "https://i.makeagif.com/media/11-12-2023/JbwsRE.gif",
       "alignment": "center",
       "rotation": "sticky-" + randomIdx(1, 10),
