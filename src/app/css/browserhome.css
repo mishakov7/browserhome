@@ -53,20 +53,16 @@ input[type=text] {
 }
 
 @keyframes floating {
-  /*0% { 
-    border-radius: 12px 12px 12px 12px; 
-
-  } */
   0% {
     border-radius: 14px 16px 14px 12px;
   }
-  25% {
+  45% {
     border-radius: 12px 14px 16px 14px;
   }
-  50% {
+  72% {
     border-radius: 14px 12px 14px 16px;
   }
-  75% {
+  90% {
     border-radius: 16px 14px 12px 14px;
   }
   100% {
@@ -332,17 +328,49 @@ input[type=text] {
 .stickies-wrapper .note-button {
   top: 0px;
   left: 0px;
-  animation: floating 2s infinite;
-  animation-timing-function: ease-out;
+  animation: floating 2.8s infinite;
+  animation-timing-function: cubic-bezier(0, 0, 0.66, 1);
   transition: background-color 0.2s;
+}
+
+.stickies-wrapper .buttons-container button::after {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  font-family: "Roboto Slab";
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--secondary-txt);
+  background-color: var(--secondary-txt-lt);
+  padding: 2px 10px;
+  border-radius: 8px;
+  transition: opacity 0.2s;
+  z-index: -1;
+}
+
+.stickies-wrapper .buttons-container button:hover::after {
+  opacity: 1;
+}
+
+.stickies-wrapper .note-button::after {
+  content: "+ Add Note";
+  top: -10px;
+  left: -80px;
 }
 
 .stickies-wrapper .polaroid-button {
   top: 0px;
   left: 30px;
-  animation: floating 2s infinite;
+  animation: floating 2.8s infinite;
+  animation-delay: 0.5s;
   animation-timing-function: ease-out;
   transition: background-color 0.2s;
+}
+
+.stickies-wrapper .polaroid-button::after {
+  content: "+ Add Polaroid";
+  left: 10px;
+  top: 15px;
 }
 
 .stickies-wrapper .polaroid-container .buttons-container {
