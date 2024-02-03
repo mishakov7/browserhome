@@ -109,8 +109,6 @@ export default function Bookmarks(props: any) {
       setIncrement(bookmarksRef.current.clientWidth / 2);
     }
     
-    console.log("increment: " + increment);
-    console.log("max: " + maxScroll);
   });
 
   return (

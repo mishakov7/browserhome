@@ -264,6 +264,7 @@
     padding: 8px;
     border-radius: 12px;
     max-width: 30px;
+    max-height: 30px;
   }
 
   .stickies-wrapper .buttons-container button path {
@@ -273,12 +274,30 @@
   .stickies-wrapper .buttons-container button:hover {
     background-color: var(--secondary-txt);
   }
-  
+
   .stickies-wrapper .note-button {
-    top: 0px;
-    left: 0px;
+    top: 12px;
+    left: 6px;
     animation: floating 2.8s infinite;
     animation-timing-function: cubic-bezier( 0, 0, 0.66, 1 );
+    transition: background-color 0.2s;
+  }
+
+  .stickies-wrapper .reset-button {
+    top: 6px;
+    left: 0px;
+    animation: floating 2.8s alternate-reverse infinite;
+    animation-timing-function: cubic-bezier( 0, 0, 0.66, 1 );
+    transition: background-color 0.2s;
+    cursor: pointer;
+  }
+
+  .stickies-wrapper .polaroid-button {
+    top: 0px;
+    left: 40px;
+    animation: floating 2.8s infinite;
+    animation-delay: 0.5s;
+    animation-timing-function: ease-out;
     transition: background-color 0.2s;
   }
 
@@ -303,23 +322,22 @@
 
   .stickies-wrapper .note-button::after {
     content: "+ Add Note";
-    top: -10px;   
+    top: 20px;   
     left: -80px;
-  }
-  
-  .stickies-wrapper .polaroid-button {
-    top: 0px;
-    left: 30px;
-    animation: floating 2.8s infinite;
-    animation-delay: 0.5s;
-    animation-timing-function: ease-out;
-    transition: background-color 0.2s;
   }
 
   .stickies-wrapper .polaroid-button::after {
     content: "+ Add Polaroid";
     left: 10px;
     top: 15px;
+  }
+
+  .stickies-wrapper .reset-button::after {
+    content: "Reset Sticky Position";
+    left: -80px;
+    top: -25px;
+    text-align: right;
+    transform: translateX(-20px);
   }
   
   .stickies-wrapper .polaroid-container .buttons-container {
