@@ -3,8 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
 
 import affirmations from  './affirmations';
-import silly from './silly';
-import inspirations from './inspirations';
+import random from './random';
+import inspirational from './inspirational';
 
 export default function Search(props: any) {
 
@@ -23,8 +23,8 @@ export default function Search(props: any) {
   const googleInput = useRef(null);
   const duckInput = useRef(null);
   const braveInput = useRef(null);
-  const sillyInput = useRef(null);
-  const inspirationsInput = useRef(null);
+  const randomInput = useRef(null);
+  const inspirationalInput = useRef(null);
   const affirmationsInput = useRef(null);
 
   const creatorInputs = [{
@@ -57,15 +57,15 @@ export default function Search(props: any) {
     "name": "search-theme",
     "options": [
       {
-        "ref": sillyInput,
-        "value": "silly",
-        "selected": searchTheme == silly ? true : false
+        "ref": randomInput,
+        "value": "random",
+        "selected": searchTheme == random ? true : false
 
       }, 
       {
-        "ref": inspirationsInput,
-        "value": "inspirations",
-        "selected": searchTheme == inspirations ? true : false
+        "ref": inspirationalInput,
+        "value": "inspirational",
+        "selected": searchTheme == inspirational ? true : false
 
       },
       {
@@ -94,7 +94,7 @@ export default function Search(props: any) {
     let engineInputs = [googleInput, duckInput, braveInput];
     let selectedEngine = null;
 
-    let themeInputs = [sillyInput, affirmationsInput, inspirationsInput];
+    let themeInputs = [randomInput, affirmationsInput, inspirationalInput];
     let selectedTheme = null;
 
     engineInputs.forEach(input => {
@@ -138,12 +138,12 @@ export default function Search(props: any) {
     }
 
     switch (theme) {
-      case "silly":
-        setSearchTheme(silly);
+      case "random":
+        setSearchTheme(random);
         break;
 
-      case "inspirations":
-        setSearchTheme(inspirations);
+      case "inspirational":
+        setSearchTheme(inspirational);
         break;
 
       case "affirmations":
@@ -151,7 +151,7 @@ export default function Search(props: any) {
         break;
     }
 
-    setQuoteSearch(searchTheme[randomIdx(0, 20)].search);
+    setQuoteSearch(searchTheme[randomIdx(0, searchTheme.length - 1)].search);
 
 
   }
