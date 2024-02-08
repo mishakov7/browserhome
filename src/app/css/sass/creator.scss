@@ -194,7 +194,7 @@
 .todolists-container .creator {
     left: -250px;
     top: -40px;
-    transform: rotate(4deg);
+    // transform: rotate(4deg);
     animation: appear-listcreator 0.4s;
 
     /*@include inline-animation(0.4s) {
@@ -221,9 +221,9 @@
 }
 
 .list-container .creator {
-    transform: rotate(6deg);
+    // transform: rotate(6deg);
     top: -210px;
-    left: -35px;
+    left: -40px;
     animation: appear-todocreator 0.4s;
 
     /*@include inline-animation(0.4s) {

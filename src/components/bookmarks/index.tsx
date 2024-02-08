@@ -60,11 +60,9 @@ export default function Bookmarks(props: any) {
       
       if (response.statusCode === 200) {
         createBookmark(imageLink, link);
-        console.log("image gotted.");
 
       } else {
         imageRef.current.classList.add("highlight");
-        console.log("failed to get image");
         setTimeout(() => {
           imageRef.current.classList.remove("highlight");
         }, 2000);
@@ -72,7 +70,6 @@ export default function Bookmarks(props: any) {
 
     }).on('error', (e) => {
         imageRef.current.classList.add("highlight");
-        console.log("failed to get image");
         setTimeout(() => {
           imageRef.current.classList.remove("highlight");
         }, 2000);

@@ -842,7 +842,6 @@ input[type=text] {
 .todolists-container .creator {
   left: -250px;
   top: -40px;
-  transform: rotate(4deg);
   animation: appear-listcreator 0.4s;
   /*@include inline-animation(0.4s) {
       from {
@@ -867,9 +866,8 @@ input[type=text] {
   }
 }
 .list-container .creator {
-  transform: rotate(6deg);
   top: -210px;
-  left: -35px;
+  left: -40px;
   animation: appear-todocreator 0.4s;
   /*@include inline-animation(0.4s) {
       from {
@@ -952,14 +950,14 @@ input[type=text] {
 
 .todolists-container {
   position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  display: inline-block;
   scrollbar-width: none;
-  height: max-content;
-  width: max-content;
-  top: 50%;
-  right: -240%;
+  max-height: max-content;
+  max-width: max-content;
+  min-width: 50vw;
+  min-height: 50vh;
+  right: -45vw;
+  bottom: -20vh;
 }
 
 .list-container {
@@ -982,11 +980,7 @@ div.list-container:nth-of-type(1) {
 }
 
 .list-container:nth-of-type(2) .todo-list {
-  max-height: 150px;
-}
-
-.list-container:nth-of-type(2) .creator {
-  transform: rotate(8deg);
+  max-height: 225px;
 }
 
 div.list-container:nth-of-type(2) {
@@ -995,11 +989,7 @@ div.list-container:nth-of-type(2) {
 }
 
 .list-container:nth-of-type(3) .todo-list {
-  max-height: 125px;
-}
-
-.list-container:nth-of-type(3) .creator {
-  transform: rotate(10deg);
+  max-height: 200px;
 }
 
 div.list-container:nth-of-type(3) {
@@ -1008,11 +998,7 @@ div.list-container:nth-of-type(3) {
 }
 
 .list-container:nth-of-type(4) .todo-list {
-  max-height: 100px;
-}
-
-.list-container:nth-of-type(4) .creator {
-  transform: rotate(12deg);
+  max-height: 175px;
 }
 
 div.list-container:nth-of-type(4) {
@@ -1021,11 +1007,7 @@ div.list-container:nth-of-type(4) {
 }
 
 .list-container:nth-of-type(5) .todo-list {
-  max-height: 75px;
-}
-
-.list-container:nth-of-type(5) .creator {
-  transform: rotate(14deg);
+  max-height: 150px;
 }
 
 div.list-container:nth-of-type(5) {
@@ -1046,7 +1028,7 @@ div.list-container:nth-of-type(5) {
 .todo-list {
   padding: 0;
   overflow-y: scroll;
-  max-height: 175px;
+  max-height: 300px;
 }
 
 /* Firefox */
@@ -1075,6 +1057,14 @@ div.list-container:nth-of-type(5) {
   position: relative;
   top: 18px;
   left: -2px;
+}
+
+.todo-list + .creator-wrapper .creator {
+  left: -100px;
+}
+
+.todo-list + .creator-wrapper .creator::before {
+  right: 88px;
 }
 
 .todo-item {
@@ -1119,9 +1109,8 @@ div.list-container:nth-of-type(5) {
 .todo-creator-wrapper {
   position: absolute;
   z-index: 50;
-  transform: rotate(-4deg);
   cursor: pointer;
-  bottom: 60%;
+  bottom: 100%;
   right: 80px;
 }
 
