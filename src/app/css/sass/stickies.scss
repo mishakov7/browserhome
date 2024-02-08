@@ -76,7 +76,7 @@
   
   .sticky {
     position: absolute;
-    cursor: grab;
+    cursor: move;
     z-index: 1;
   }
   
@@ -222,6 +222,10 @@
     object-position: bottom;
   }
   
+  .polaroid-container {
+    cursor: default;
+  }
+
   .polaroid-container input[type=file] {
     display: none;
   }

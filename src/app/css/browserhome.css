@@ -128,7 +128,7 @@ input[type=text] {
 
 .sticky {
   position: absolute;
-  cursor: grab;
+  cursor: move;
   z-index: 1;
 }
 
@@ -272,6 +272,10 @@ input[type=text] {
 
 .img-align-bottom {
   object-position: bottom;
+}
+
+.polaroid-container {
+  cursor: default;
 }
 
 .polaroid-container input[type=file] {
