@@ -251,14 +251,14 @@
     
     } to {
         opacity: 1;
-        bottom: 40px;
+        bottom: 60px;
     }
 }
 
 .bookmarks-container .creator {
     position: absolute;
-    bottom: 40px;
-    left: -34px;
+    bottom: 60px;
+    left: -32px;
     animation: appear-bookmarkscreator 0.4s;
 
     /*@include inline-animation(0.4s) {

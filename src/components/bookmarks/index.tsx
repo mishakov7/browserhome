@@ -63,10 +63,15 @@ export default function Bookmarks(props: any) {
 
   const editBookmark = (e:any, key: number, refs: any) => {
     let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    let bookmarkLink = refs[1].current.value;
+    
+    if (!bookmarkLink.startsWith("http://") || !bookmarkLink.startsWith("https://")) {
+      bookmarkLink = "https://" + bookmarkLink;
+    }
 
     let editedBookmark = {
       "image": refs[0].current.value,
-      "link": refs[1].current.value
+      "link": bookmarkLink
     }
 
     storageBookmarks[key] = editedBookmark;
@@ -84,10 +89,6 @@ export default function Bookmarks(props: any) {
       linkRef.current.value = linkRef.current.placeholder;
     
     } 
-
-    if (!linkRef.current.value.startsWith("https://")) {
-      linkRef.current.value = "https://" + linkRef.current.value;
-    }
 
   }
 

@@ -895,13 +895,13 @@ input[type=text] {
   }
   to {
     opacity: 1;
-    bottom: 40px;
+    bottom: 60px;
   }
 }
 .bookmarks-container .creator {
   position: absolute;
-  bottom: 40px;
-  left: -34px;
+  bottom: 60px;
+  left: -32px;
   animation: appear-bookmarkscreator 0.4s;
   /*@include inline-animation(0.4s) {
       from {
@@ -1209,21 +1209,27 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
+
   button.list-container {
     left: 500px;
   }
+
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
+
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
+
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
+
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
+
   div.list-container:nth-of-type(5) {
     left: 200px;
   }

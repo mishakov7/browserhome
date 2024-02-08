@@ -66,7 +66,7 @@ const Creator = (props: any) => {
 
                 { group.type == "text" ? 
 
-                    <input ref={group.ref} type="text" name={group.name} placeholder={group.placeholder} value={group.value} onKeyDown={(e: any) => { if (e.key === "Enter") { props.handleCreator(); } }} /> 
+                    <input ref={group.ref} type="text" name={group.name} placeholder={group.placeholder} defaultValue={group.value} onKeyDown={(e: any) => { if (e.key === "Enter") { props.handleCreator(); } }} /> 
 
                     : null
                 }

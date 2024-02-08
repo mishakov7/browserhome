@@ -29,17 +29,23 @@ const Bookmark = (props: any) => {
     if (showCreator) {
       setCreator(false);
       editButton.current.classList.remove("editing-button");
-      props.parentElmt.current.classList.remove("bookmarks-list-creator");
 
     } else {
       setCreator(true);
       editButton.current.classList.add("editing-button");
-      props.parentElmt.current.classList.add("bookmarks-list-creator");
-
     }
 
-
   }
+
+  useEffect(() => {
+    if (showCreator) {
+      props.parentElmt.current.classList.add("bookmarks-list-creator");
+
+    } else {
+      props.parentElmt.current.classList.remove("bookmarks-list-creator");
+    }
+
+  }, [])
 
   return (
     <>
