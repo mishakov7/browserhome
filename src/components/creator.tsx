@@ -26,18 +26,18 @@ const Creator = (props: any) => {
   return (
     <>
     <div ref={creatorRef} className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
-        { props.inputGroups.map((group, idx) => (
+        { props.inputGroups.map((group, gdx) => (
                     
-            <div key={idx} className="input-group">
+            <div key={gdx} className="input-group">
 
                 <label>{group.label}</label>
 
                 { group.type == "radio" ? 
 
                     <div className='row'>
-                        { group.radios.map((radio, idx) => (
+                        { group.radios.map((radio, rdx) => (
                             <>
-                            <div key={idx}>
+                            <div key={gdx + "-" + rdx}>
                                 <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
                                 <label onClick={(e: any) => checkRadio(radio.ref, e)} className={"radio " + radio.value + "-bg"}><span></span></label>
                             </div>
@@ -51,10 +51,11 @@ const Creator = (props: any) => {
                 { group.type == "dropdown" ? 
 
                     <div className='col dropdown'>
-                        { group.options.map((option, idx) => (
-                            // console.log(option.value);
+                        { group.options.map((option, odx) => (
                             <>
-                                <div key={idx} className='row option'>
+                                <div key={"option" + gdx + "-" + odx} className='row option'>
+                                    {/* <span>{"option" + gdx + "-" + odx}</span> */}
+
                                     <input ref={option.ref} type="radio" name={group.name} value={option.value} />
                                     <label onClick={(e: any) => checkRadio(option.ref, e)} className="radio"><span></span></label>
                                     <label onClick={(e: any) => checkRadio(option.ref, e)}>{option.value}</label>
@@ -73,8 +74,7 @@ const Creator = (props: any) => {
                     : null
                 }
 
-                {
-                    group.type == "alert" ?
+                { group.type == "alert" ?
 
                     <div className='alert'>
                         <label>You sure about that?</label>
@@ -87,8 +87,7 @@ const Creator = (props: any) => {
                     : null
                 }
 
-                {
-                    group.type == "message" ?
+                { group.type == "message" ?
 
                     <div className='message'>
                         <label>{group.message}</label>
