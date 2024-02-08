@@ -47,7 +47,7 @@ const affirmations = [
     {"search": "i'm going to take a chance!"},
     {"search": "i am prepared to succeed"},
     {"search": "i'm starting a new chapter today!"},
-    {"search": "i am important."},
+    {"search": "i am important."}
 ]
 
 export default affirmations;

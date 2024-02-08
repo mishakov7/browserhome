@@ -46,7 +46,9 @@ const List = (props: any) => {
     if (linkInput.current.value.startsWith("https://") || linkInput.current.value.startsWith("http://")) {
       linkInput.current.value = linkInput.current.value;
     } else {
-      linkInput.current.value = "https://" + linkInput.current.value;
+      if (linkInput.current.value != "") {
+        linkInput.current.value = "https://" + linkInput.current.value;
+      }
     }
 
     let storageTodo = {
@@ -108,7 +110,7 @@ const List = (props: any) => {
                                 <path fillRule="evenodd" clipRule="evenodd" d="M11.1862 0.55311C11.7904 -0.0510693 12.77 -0.0510693 13.3742 0.55311L14.2894 1.46829C14.8936 2.07249 14.8935 3.05205 14.2894 3.65622L6.84742 11.0982C6.24325 11.7023 5.26365 11.7024 4.65945 11.0982L0.453135 6.89188C-0.151062 6.28769 -0.151017 5.30813 0.453103 4.70395L1.36825 3.78877C1.97243 3.18456 2.95207 3.18453 3.55625 3.78873L5.75343 5.9859L11.1862 0.55311Z" fill="black"/>
                               </svg>
                           </label>
-                          <input ref={(el: any) => checkboxRefs.current[idx] = el} type="checkbox" onChange={(e) => changeChecked(e, idx)} checked />
+                          <input ref={(el: any) => checkboxRefs.current[idx] = el} type="checkbox" onChange={(e) => changeChecked(e, idx)} defaultChecked />
                           <label>
                               {
                                 (todo.link != "") ?

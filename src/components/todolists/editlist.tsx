@@ -35,6 +35,14 @@ const EditList = (props: any) => {
   }
 
   const createTodo = (e: any) => {
+    if (linkInput.current.value.startsWith("https://") || linkInput.current.value.startsWith("http://")) {
+      linkInput.current.value = linkInput.current.value;
+    } else {
+      if (linkInput.current.value != "") {
+        linkInput.current.value = "https://" + linkInput.current.value;
+      }
+    }
+    
     let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
     let allStorageLists = JSON.parse(localStorage.getItem('lists'));
 

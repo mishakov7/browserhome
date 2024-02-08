@@ -47,8 +47,7 @@ const random = [
     { "search": "I hate it when Voldemort uses my shampoo"},
     { "search": "I hate it when the Loch Ness monster asks me for $3.50"},
     { "search": "I have no mouth and I must scream"},
-    { "search": "What the heck is a salad?"},
-
+    { "search": "What the heck is a salad?"}
 ]
 
 export default random;

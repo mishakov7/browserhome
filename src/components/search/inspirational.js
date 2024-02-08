@@ -1,5 +1,4 @@
 const inspirational = [
-
     { "search":"Life isn't about getting and having, it's about giving and being.","author":"Kevin Kruse"},
     { "search":"Strive not to be a success, but rather to be of value.","author":"Albert Einstein"},
     { "search":"You miss 100% of the shots you don't take.","author":"Wayne Gretzky"},
@@ -47,7 +46,7 @@ const inspirational = [
     { "search":"It's not the years in your life that count. It's the life in your years.","author":"Abraham Lincoln"},
     { "search":"Change your thoughts and you change your world.","author":"Norman Vincent Peale"},
     { "search":"Either write something worth reading or do something worth writing.","author":"Benjamin Franklin"},
-    { "search":"Nothing is impossible, the word itself says, “I'm possible!”","author":"–Audrey Hepburn"},
+    { "search":"Nothing is impossible, the word itself says, “I'm possible!”","author":"-Audrey Hepburn"},
     { "search":"The only way to do great work is to love what you do.","author":"Steve Jobs"},
     { "search":"If you can dream it, you can achieve it.","author":"Zig Ziglar"}
 ]
