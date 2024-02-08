@@ -43,6 +43,11 @@ const List = (props: any) => {
   }
 
   const createTodo = (e: any) => {
+    if (linkInput.current.value.startsWith("https://") || linkInput.current.value.startsWith("http://")) {
+      linkInput.current.value = linkInput.current.value;
+    } else {
+      linkInput.current.value = "https://" + linkInput.current.value;
+    }
 
     let storageTodo = {
       "label": labelInput.current.value,

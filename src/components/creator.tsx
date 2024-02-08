@@ -26,19 +26,21 @@ const Creator = (props: any) => {
   return (
     <>
     <div ref={creatorRef} className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
-        { props.inputGroups.map(group => (
+        { props.inputGroups.map((group, idx) => (
                     
-            <div className="input-group">
+            <div key={idx} className="input-group">
 
                 <label>{group.label}</label>
 
                 { group.type == "radio" ? 
 
                     <div className='row'>
-                        { group.radios.map(radio => (
+                        { group.radios.map((radio, idx) => (
                             <>
+                            <div key={idx}>
                                 <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
                                 <label onClick={(e: any) => checkRadio(radio.ref, e)} className={"radio " + radio.value + "-bg"}><span></span></label>
+                            </div>
                             </>
                         ))}  
                     </div>
@@ -49,10 +51,10 @@ const Creator = (props: any) => {
                 { group.type == "dropdown" ? 
 
                     <div className='col dropdown'>
-                        { group.options.map(option => (
+                        { group.options.map((option, idx) => (
                             // console.log(option.value);
                             <>
-                                <div className='row option'>
+                                <div key={idx} className='row option'>
                                     <input ref={option.ref} type="radio" name={group.name} value={option.value} />
                                     <label onClick={(e: any) => checkRadio(option.ref, e)} className="radio"><span></span></label>
                                     <label onClick={(e: any) => checkRadio(option.ref, e)}>{option.value}</label>

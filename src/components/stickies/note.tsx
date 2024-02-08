@@ -11,18 +11,6 @@ export default function Note(props: any) {
   const nodeRef = React.useRef(null);
   const textareaRef = useRef();
 
-  // const debounce = (fn: any, delay: number) => {
-  //   let debounceTimer;
-  //   return function() {
-  //     const context = this;
-  //     const args = arguments;
-  //     clearTimeout(debounceTimer);
-  //     debounceTimer = setTimeout(() => {
-  //       fn.apply(context, args)
-  //     }, delay);
-  //   }
-  // }
-
   const copyNoteText = (e: any) => {
     textareaRef.current.select();
     navigator.clipboard.writeText(textareaRef.current.value);
