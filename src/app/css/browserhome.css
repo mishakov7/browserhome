@@ -274,10 +274,6 @@ input[type=text] {
   object-position: bottom;
 }
 
-.polaroid-container {
-  cursor: default;
-}
-
 .polaroid-container input[type=file] {
   display: none;
 }
