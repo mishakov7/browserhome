@@ -24,7 +24,7 @@ const EditList = (props: any) => {
     "name": "todo-link",
     "placeholder": "mishalukova.com"
   }];
-
+  
   const toggleCreator = () => {
     if (showCreator) {
       setCreator(false);

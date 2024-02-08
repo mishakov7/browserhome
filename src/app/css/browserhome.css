@@ -954,10 +954,8 @@ input[type=text] {
   scrollbar-width: none;
   max-height: max-content;
   max-width: max-content;
-  min-width: 50vw;
-  min-height: 50vh;
-  right: -45vw;
-  bottom: -20vh;
+  right: -95vw;
+  bottom: -10vh;
 }
 
 .list-container {

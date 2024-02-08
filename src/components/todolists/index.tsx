@@ -10,7 +10,10 @@ export default function ToDoLists(props: any) {
   const [isEditing, setEditing] = useState(false);
   const [showCreator, setCreator] = useState(false);
   const [showAlert, setAlert] = useState(false);
+  const [showMessage, setMessage] = useState(false);
   const [selectedList, setSelectedList] = useState(0);
+
+  const maxLists = 5;
 
   const titleInput = useRef(null);
   const colorInput1 = useRef(null);
@@ -18,8 +21,6 @@ export default function ToDoLists(props: any) {
   const colorInput3 = useRef(null);
   const colorInputs = [colorInput1, colorInput2, colorInput3];
   const editTitleInput = useRef(null);
-
-  // const currentDate = new Date();
 
   const creatorInputs = [{
     "ref": titleInput,
@@ -52,6 +53,12 @@ export default function ToDoLists(props: any) {
     "type": "alert"
   }];
 
+  const messageInputs = [{
+    "type": "message",
+    "message": "You can have a maximum of five lists. Please delete an existing list to add a new list."
+  }];
+
+
   const toggleSelectedList = (e: any, key: number) => {
     if (e.target.classList.contains('selected-list')) {
       setSelectedList(key);
@@ -76,6 +83,15 @@ export default function ToDoLists(props: any) {
 
     } else {
       setAlert(true);
+    }
+  }
+
+  const toggleMessage = () => {
+    if (showMessage) {
+      setMessage(false);
+
+    } else {
+      setMessage(true);
     }
   }
   
@@ -275,16 +291,31 @@ export default function ToDoLists(props: any) {
 
           <div className='creator-wrapper todo-creator-wrapper'>
 
-            <button ref={props.summonRef} onClick={toggleCreator} className='list-container'></button>
+            <button ref={props.summonRef} onClick={() => { lists.length == maxLists ? toggleMessage() : toggleCreator() }} className='list-container'></button>
 
             {
-              showCreator ?
+              showCreator && lists.length < maxLists ?
 
               <Creator 
                   isAlert={false}
                   toggleCreatorState={toggleCreator}
                   handleCreator={(e: any) => { setDefaults(e); createList(e); } } 
                   inputGroups={creatorInputs}
+                  bg="accent3"  
+                  direction="right"
+              /> 
+
+              : null
+            }
+
+            {
+              showMessage && lists.length == maxLists ?
+
+              <Creator 
+                  isAlert={false}
+                  isMessage={true}
+                  toggleCreatorState={toggleMessage}
+                  inputGroups={messageInputs}
                   bg="accent3"  
                   direction="right"
               /> 
