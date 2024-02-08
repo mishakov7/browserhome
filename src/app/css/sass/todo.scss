@@ -9,11 +9,6 @@
     top: 50%;
     right: -240%;
 }
-
-// .todolists-container::-webkit-scrollbar {
-//     display: none;
-//     visibility: hidden;
-// }
   
 .list-container {
     position: absolute;
@@ -120,6 +115,7 @@ div.list-container:nth-of-type(5) {
     text-decoration: none;
     font-family: var(--overpass);
     color: var(--secondary-txt);
+    font-size: 1.1em;
 }
   
 .todo-item .row {

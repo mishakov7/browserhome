@@ -1091,6 +1091,7 @@ div.list-container:nth-of-type(5) {
   text-decoration: none;
   font-family: var(--overpass);
   color: var(--secondary-txt);
+  font-size: 1.1em;
 }
 
 .todo-item .row {

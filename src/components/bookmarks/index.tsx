@@ -38,10 +38,52 @@ export default function Bookmarks(props: any) {
     }
   }
 
-  const createBookmark = (e: any) => {
+  const checkBookmark = (e: any) => {
+    let imageLink = "";
+    let link = "";
+
+    if (imageRef.current.value.startsWith("https://") || imageRef.current.value.startsWith("http://")) {
+      imageLink = imageRef.current.value;
+    } else {
+      imageLink = "https://" + imageRef.current.value;
+    }
+
+    if (linkRef.current.value.startsWith("https://") || linkRef.current.value.startsWith("http://")) {
+      link = linkRef.current.value;
+    } else {
+      link = "https://" + linkRef.current.value;
+
+    }
+
+    let https = require("https");
+    https.get(imageRef.current.value, response => {
+      
+      if (response.statusCode === 200) {
+        createBookmark(imageLink, link);
+        console.log("image gotted.");
+
+      } else {
+        imageRef.current.classList.add("highlight");
+        console.log("failed to get image");
+        setTimeout(() => {
+          imageRef.current.classList.remove("highlight");
+        }, 2000);
+      }
+
+    }).on('error', (e) => {
+        imageRef.current.classList.add("highlight");
+        console.log("failed to get image");
+        setTimeout(() => {
+          imageRef.current.classList.remove("highlight");
+        }, 2000);
+    });
+  }
+
+  const createBookmark = (image: string, link: string) => {
+
     let storageBookmark = {
-      "image": imageRef.current.value,
-      "link": linkRef.current.value
+      "image": image,
+      "link": link
     }
 
     let storageBookmarks = bookmarkList.slice();
@@ -121,7 +163,7 @@ export default function Bookmarks(props: any) {
                 showCreator ?
                 <Creator 
                   toggleCreatorState={toggleCreator}
-                  handleCreator={(e: any) => { setDefaults(e); createBookmark(e); } } 
+                  handleCreator={(e: any) => { setDefaults(e); checkBookmark(e); } } 
                   inputGroups={creatorInputs}
                   bg="accent2"
                   direction="below"

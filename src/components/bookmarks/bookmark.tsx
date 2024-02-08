@@ -33,19 +33,10 @@ const Bookmark = (props: any) => {
     } else {
       setCreator(true);
       editButton.current.classList.add("editing-button");
+      props.parentElmt.current.classList.add("bookmarks-list-creator");
     }
 
   }
-
-  useEffect(() => {
-    if (showCreator) {
-      props.parentElmt.current.classList.add("bookmarks-list-creator");
-
-    } else {
-      props.parentElmt.current.classList.remove("bookmarks-list-creator");
-    }
-
-  }, [])
 
   return (
     <>
@@ -54,6 +45,7 @@ const Bookmark = (props: any) => {
           showCreator ?
           <Creator 
               toggleCreatorState={toggleCreator}
+              parentRef={props.parentElmt.current}
               handleCreator={(e: any) => { props.handleEdit(e, props.bookmarkKey, [edit1Ref, edit2Ref]); toggleCreator(); }} 
               inputGroups={editorInputs}
               bg="accent2"
@@ -63,7 +55,7 @@ const Bookmark = (props: any) => {
         }
       </div>
 
-      <button ref={editButton} onClick={(e: any) => { toggleCreator(); }} className='edit-button'>
+      <button ref={editButton} onClick={(e: any) => { props.parentElmt.current.classList.remove("bookmarks-list-creator"); toggleCreator(); }} className='edit-button'>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.88837 2.83838L11.1615 6.11168L4.05401 13.2195L1.13573 13.5417C0.745059 13.5849 0.414982 13.2545 0.458447 12.8638L0.783154 9.94339L7.88837 2.83838ZM13.186 2.35105L11.6491 0.814118C11.1697 0.334707 10.3922 0.334707 9.9128 0.814118L8.46696 2.26002L11.7401 5.53331L13.186 4.08741C13.6653 3.60774 13.6653 2.83046 13.186 2.35105Z"/>
           </svg>
