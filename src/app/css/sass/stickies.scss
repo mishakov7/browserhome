@@ -387,7 +387,8 @@
     bottom: 20px;
   }
   
-  .note .copy-button:hover rect:last-of-type {
+  .note .copy-button:hover path:nth-of-type(2),
+  .note .copy-button:hover path:nth-of-type(3) {
     animation: copy 0.4s;
   }
   

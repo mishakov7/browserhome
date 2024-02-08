@@ -118,10 +118,17 @@ export default function Note(props: any) {
                 </button>
 
                 <button onClick={(e) => { copyNoteText(e)}} className={'copy-button ' + noteColor + '-fill'}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect y="6" width="18" height="18" rx="2" fill="#FEF7E3" fillOpacity="0.4"/>
                         <rect x="6" width="18" height="18" rx="2" fill="#FEF7E3"/>
+                    </svg> */}
+                    <svg width="22" height="22" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4 7C1.79086 7 0 8.79083 0 11V25C0 27.2092 1.79086 29 4 29H18C20.2091 29 22 27.2092 22 25H8C5.79086 25 4 23.2092 4 21V7Z" fill="#8D6CD2"/>
+                        <path d="M7 4C7 1.79083 8.79086 0 11 0H18C19.1046 0 20 0.89543 20 2V7C20 8.10457 20.8954 9 22 9H27C28.1046 9 29 9.89543 29 11V18C29 20.2092 27.2091 22 25 22H11C8.79086 22 7 20.2092 7 18V4Z" fill="#8D6CD2"/>
+                        <path d="M26.6732 7C27.876 7 28.8222 5.9257 28.3439 4.82209C27.5366 2.95897 26.0411 1.46342 24.1779 0.65608C23.0743 0.17786 22 1.12404 22 2.3268V5C22 6.10457 22.8954 7 24 7H26.6732Z" fill="#8D6CD2"/>
                     </svg>
+
+
                 </button>
 
             </div>
