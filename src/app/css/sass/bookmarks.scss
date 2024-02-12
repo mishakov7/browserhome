@@ -1,0 +1,177 @@
+/* BOOKMARKS */
+.bookmarks-container,
+.bookmarks-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  width: 50vw;
+}
+
+.bookmarks-container {
+  position: relative;
+  max-height: 75px;
+}
+
+.bookmarks-list {
+  // z-index: -2;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.bookmarks-list::-webkit-scrollbar {
+  display: none;
+}
+
+.bookmarks-list-creator {
+  padding: 250px 0;
+  margin: -50px 0;
+}
+
+.bookmarks-list:not(.bookmarks-list-creator):hover {
+  padding: 30px 0;
+}
+
+.bookmarks-container .create-button {
+  margin: 0 10px;
+}
+
+.bookmarks-container .arrows-container {
+  position: absolute;
+  z-index: 10;
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  left: 40px;
+  height: 0;
+}
+
+.arrows-container button {
+  position: absolute;
+  background: none;
+  height: 100px;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.arrows-container button::before {
+  content: "";
+  width: 150%;
+  height: 100%;
+  background-color: var(--base-bg);
+  position: absolute;
+  display: block;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+.arrows-container .prev-button {
+  left: -12px;
+}
+
+.arrows-container .next-button {
+  right: 0;
+}
+
+.arrows-container .next-button::before {
+  right: 20px;
+}
+
+@keyframes hop {
+  from {
+    bottom: 0;
+  } to {
+    bottom: 12px;
+  }
+}
+
+.bookmark {
+  position: relative;
+  background-color: #FFF8E5;
+  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.20);
+  min-width: 75px;
+  min-height: 75px;
+  border-radius: 20px;
+  margin: 6px;
+  list-style-type: none;
+  bottom: 0;
+  transition: bottom 0.2s;
+  /* animation: hop 0.4s backwards; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookmark:last-of-type {
+  margin-right: 5vw;
+}
+
+.bookmark:hover {
+  bottom: 12px;
+}
+
+.bookmark a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark .remove-button,
+.bookmark .edit-button {
+  position: absolute;
+  display: none;
+  border: none;
+}
+
+.bookmark .remove-button {
+  background: none;
+  bottom: -50px;
+  padding: 20px;
+}
+
+.bookmark .remove-button path {
+  fill: var(--secondary-txt-lt);
+  transition: fill 0.4s;
+}
+
+.bookmark .remove-button:hover path {
+  fill: var(--secondary-txt);
+}
+
+.bookmark .edit-button {
+  background-color: rgba(var(--accent2), 0.7);
+  top: -20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark .edit-button:hover {
+  background-color: rgba(var(--accent2), 1.0);
+}
+
+.bookmark .edit-button path {
+  fill: var(--base-container);
+}
+
+.bookmark:hover .remove-button,
+.bookmark:hover .edit-button {
+  display: flex;
+  cursor: pointer;
+  animation: fadein 0.2s;
+}
+
+
+.editing-button {
+  display: flex!important;
+}
