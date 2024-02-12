@@ -592,6 +592,30 @@ input[type=text] {
   justify-content: center;
 }
 
+.bookmark:hover::before {
+  opacity: 1;
+}
+
+.bookmark::before {
+  content: attr(datalink);
+  display: flex;
+  opacity: 0;
+  position: absolute;
+  width: max-content;
+  height: 20px;
+  top: -12px;
+  left: 60px;
+  font-family: "Roboto Slab";
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--secondary-txt);
+  background-color: var(--secondary-txt-lt);
+  padding: 2px 10px 6px 10px;
+  border-radius: 8px;
+  z-index: 20;
+  transition: opacity 0.2s;
+}
+
 .bookmark:last-of-type {
   margin-right: 5vw;
 }
@@ -606,6 +630,10 @@ input[type=text] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.bookmark img {
+  border-radius: 12px;
 }
 
 .bookmark .remove-button,
@@ -1198,27 +1226,21 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
-
   button.list-container {
     left: 500px;
   }
-
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
-
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
-
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
-
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
-
   div.list-container:nth-of-type(5) {
     left: 200px;
   }

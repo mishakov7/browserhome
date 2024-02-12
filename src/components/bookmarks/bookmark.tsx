@@ -10,13 +10,13 @@ const Bookmark = (props: any) => {
 
   let storageBookmark = JSON.parse(localStorage.getItem("bookmarks"))[props.bookmarkKey];
 
-  const editorInputs = [{
+  const editorInputs = [/*{
     "ref": edit1Ref,
     "type": "text",
     "label": "Image",
     "name": "bookmark-image",
     "value": storageBookmark.image
-  }, {
+  }, */{
     "ref": edit2Ref,
     "type": "text",
     "label": "Link",

@@ -12,16 +12,16 @@ export default function Bookmarks(props: any) {
   const [increment, setIncrement] = useState(0);
 
   const bookmarksRef = useRef();
-  const imageRef = useRef();
+  // const imageRef = useRef();
   const linkRef = useRef();
 
-  const creatorInputs = [{
+  const creatorInputs = [/*{
     "ref": imageRef,
     "type": "text",
     "label": "Image",
     "name": "bookmark-image",
     "placeholder": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png"
-  }, {
+  },*/ {
     "ref": linkRef,
     "type": "text",
     "label": "Link",
@@ -39,41 +39,17 @@ export default function Bookmarks(props: any) {
   }
 
   const checkBookmark = (e: any) => {
-    let imageLink = "";
     let link = "";
-
-    if (imageRef.current.value.startsWith("https://") || imageRef.current.value.startsWith("http://")) {
-      imageLink = imageRef.current.value;
-    } else {
-      imageLink = "https://" + imageRef.current.value;
-    }
 
     if (linkRef.current.value.startsWith("https://") || linkRef.current.value.startsWith("http://")) {
       link = linkRef.current.value;
     } else {
       link = "https://" + linkRef.current.value;
-
     }
 
-    let https = require("https");
-    https.get(imageRef.current.value, response => {
-      
-      if (response.statusCode === 200) {
-        createBookmark(imageLink, link);
+    let imageLink = "https://api.faviconkit.com/" + link.split("//")[1] + "/144";
+    createBookmark(imageLink, link);
 
-      } else {
-        imageRef.current.classList.add("highlight");
-        setTimeout(() => {
-          imageRef.current.classList.remove("highlight");
-        }, 2000);
-      }
-
-    }).on('error', (e) => {
-        imageRef.current.classList.add("highlight");
-        setTimeout(() => {
-          imageRef.current.classList.remove("highlight");
-        }, 2000);
-    });
   }
 
   const createBookmark = (image: string, link: string) => {
@@ -120,9 +96,9 @@ export default function Bookmarks(props: any) {
   }
   
   const setDefaults = (e: any) => {
-    if (imageRef.current.value == "" || imageRef.current.value == null) {
-      imageRef.current.value = imageRef.current.placeholder;
-    }
+    // if (imageRef.current.value == "" || imageRef.current.value == null) {
+    //   imageRef.current.value = imageRef.current.placeholder;
+    // }
 
     if (linkRef.current.value == "" || linkRef.current.value == null) {
       linkRef.current.value = linkRef.current.placeholder;
@@ -179,7 +155,7 @@ export default function Bookmarks(props: any) {
             {
               bookmarkList.length > 0 ? 
               bookmarkList.map((bookmark, idx) => (
-                  <li className='bookmark' key={idx}>
+                  <li className='bookmark' key={idx} dataLink={bookmark.link.split("//")[1]}>
                     <Bookmark 
                       bookmarkKey={idx}
                       parentElmt={bookmarksRef}
