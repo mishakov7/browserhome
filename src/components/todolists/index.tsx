@@ -205,7 +205,7 @@ export default function ToDoLists(props: any) {
 
   return (
     <>
-    <div className='todolists-container'>
+    <div className='todolists-container mobile-hide-flex'>
       
           {
             lists.length < 1 ? null :

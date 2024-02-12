@@ -12,16 +12,9 @@ export default function Bookmarks(props: any) {
   const [increment, setIncrement] = useState(0);
 
   const bookmarksRef = useRef();
-  // const imageRef = useRef();
   const linkRef = useRef();
 
-  const creatorInputs = [/*{
-    "ref": imageRef,
-    "type": "text",
-    "label": "Image",
-    "name": "bookmark-image",
-    "placeholder": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png"
-  },*/ {
+  const creatorInputs = [{
     "ref": linkRef,
     "type": "text",
     "label": "Link",
@@ -96,10 +89,6 @@ export default function Bookmarks(props: any) {
   }
   
   const setDefaults = (e: any) => {
-    // if (imageRef.current.value == "" || imageRef.current.value == null) {
-    //   imageRef.current.value = imageRef.current.placeholder;
-    // }
-
     if (linkRef.current.value == "" || linkRef.current.value == null) {
       linkRef.current.value = linkRef.current.placeholder;
     
@@ -120,11 +109,26 @@ export default function Bookmarks(props: any) {
   }, [listScroll]);
 
   useLayoutEffect(() => {
+    window.addEventListener("resize", function() {
+      if (bookmarksRef.current) {
+        setMaxScroll(bookmarksRef.current.scrollLeftMax);
+        setIncrement(bookmarksRef.current.clientWidth / 2);
+      }
+    })
+
     if (bookmarksRef.current) {
       setMaxScroll(bookmarksRef.current.scrollLeftMax);
       setIncrement(bookmarksRef.current.clientWidth / 2);
     }
     
+    return () => {
+      window.removeEventListener("resize", function() {
+        if (bookmarksRef.current) {
+          setMaxScroll(bookmarksRef.current.scrollLeftMax);
+          setIncrement(bookmarksRef.current.clientWidth / 2);
+        }
+      })
+    }
   });
 
   return (

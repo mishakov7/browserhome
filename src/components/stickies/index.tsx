@@ -203,7 +203,7 @@ export default function Stickies(props: any) {
             </div>
         </div>
 
-        <div className='stickies-container'>
+        <div className='stickies-container mobile-hide-flex'>
 
             {
               notes.map((note, idx) => (

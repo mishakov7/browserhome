@@ -23,7 +23,6 @@ export default function Home() {
 
   const highlightFeature = (ref: any) => {   
     window.scrollTo({top: 0, behavior: "smooth"});
-    console.log(ref);
     ref.current.classList.add("highlight");
 
     setTimeout(() => {
@@ -74,8 +73,8 @@ export default function Home() {
             <h4 className='uppercase'>Homebase</h4>
             <p>Welcome to your homebase! Here are some of the fun things you can do here: </p>
             <ul>
-              <li onClick={() => clickFeature(searchRef)}>Change your search settings</li>
-              <li onClick={() => clickFeature(bookmarkRef)}>Create a bookmark</li>
+              <li onClick={() => {highlightFeature(searchRef); clickFeature(searchRef);}}>Change your search settings</li>
+              <li onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef);}}>Create a bookmark</li>
               <li onClick={() => {highlightFeature(listRef); clickFeature(listRef);}}>Create a list</li>
               <li onClick={() => highlightFeature(dateRef)}>Create a note</li>
               <li onClick={() => highlightFeature(dateRef)}>Create a polaroid</li>

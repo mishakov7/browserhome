@@ -38,6 +38,7 @@
 
 .bookmarks-container .create-button {
   margin: 0 10px;
+  border-radius: 12px;
 }
 
 .bookmarks-container .arrows-container {
@@ -74,15 +75,15 @@
 }
 
 .arrows-container .prev-button {
-  left: -12px;
+  left: 5px;
 }
 
 .arrows-container .next-button {
-  right: 0;
+  right: 20px;
 }
 
 .arrows-container .next-button::before {
-  right: 20px;
+  right: 10px;
 }
 
 @keyframes hop {
@@ -112,13 +113,13 @@
 }
 
 .bookmark:hover::before {
-  opacity: 1;
+  display: flex;
 }
 
 .bookmark::before {
   content: attr(datalink);
-  display: flex;
-  opacity: 0;
+  display: none;
+  // opacity: 0;
   position: absolute;
   width: max-content;
   height: 20px;
@@ -133,7 +134,7 @@
   padding: 2px 10px 6px 10px;
   border-radius: 8px;
   z-index: 20;
-  transition: opacity 0.2s;
+  // transition: opacity 0.2s;
 }
 
 .bookmark:last-of-type {
@@ -203,4 +204,52 @@
 
 .editing-button {
   display: flex!important;
+}
+
+@media only screen and (max-width: 1080px) {
+  .bookmarks-container {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    width: 100%;
+    max-height: none;
+  }
+
+  .bookmarks-list {
+    overflow-x: visible;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 40px 0;
+  } 
+
+  .arrows-container {
+    display: none!important;
+  }
+
+  .bookmarks-list:not(.bookmarks-list-creator):hover {
+    padding: 40px 0;
+  }
+
+  .bookmark {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 12px;
+  }
+
+  .bookmark img {
+    width: 30px;
+  }
+
+  .bookmark:hover .remove-button,
+  .bookmark:hover .edit-button {
+    display: none;
+  } 
+
+  .bookmark:hover::before {
+    display: none;
+  }
+
+  .bookmarks-container .create-button svg {
+    width: 18px;
+  }
+
 }

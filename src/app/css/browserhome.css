@@ -32,6 +32,7 @@ input[type=text] {
   background-repeat: no-repeat;
   background-size: 30px 30px;
   background-color: rgba(255, 255, 255, 0);
+  border-radius: 12px;
 }
 
 .inputGroup .se-icon-google {
@@ -53,6 +54,19 @@ input[type=text] {
   margin: 10px;
 }
 
+@media only screen and (max-width: 1080px) {
+  .search-container {
+    width: 90%;
+  }
+  .search-query {
+    font-size: 2em;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .search-query {
+    font-size: 1.6em;
+  }
+}
 @keyframes floating {
   0% {
     border-radius: 14px 16px 14px 12px;
@@ -424,7 +438,7 @@ input[type=text] {
     transform: translate(0px, 0px);
   }
   50% {
-    transform: translate(-2px, 2px);
+    transform: translate(-3px, 3px);
   }
   100% {
     transform: translate(0px, 0px);
@@ -484,6 +498,16 @@ input[type=text] {
   fill: #FFF;
 }
 
+@media only screen and (max-width: 1080px) {
+  .stickies-wrapper {
+    position: relative;
+    width: max-content;
+    margin-right: 25px;
+  }
+  .date {
+    position: relative;
+  }
+}
 /* BOOKMARKS */
 .bookmarks-container,
 .bookmarks-list {
@@ -523,6 +547,7 @@ input[type=text] {
 
 .bookmarks-container .create-button {
   margin: 0 10px;
+  border-radius: 12px;
 }
 
 .bookmarks-container .arrows-container {
@@ -559,15 +584,15 @@ input[type=text] {
 }
 
 .arrows-container .prev-button {
-  left: -12px;
+  left: 5px;
 }
 
 .arrows-container .next-button {
-  right: 0;
+  right: 20px;
 }
 
 .arrows-container .next-button::before {
-  right: 20px;
+  right: 10px;
 }
 
 @keyframes hop {
@@ -597,13 +622,12 @@ input[type=text] {
 }
 
 .bookmark:hover::before {
-  opacity: 1;
+  display: flex;
 }
 
 .bookmark::before {
   content: attr(datalink);
-  display: flex;
-  opacity: 0;
+  display: none;
   position: absolute;
   width: max-content;
   height: 20px;
@@ -617,7 +641,6 @@ input[type=text] {
   padding: 2px 10px 6px 10px;
   border-radius: 8px;
   z-index: 20;
-  transition: opacity 0.2s;
 }
 
 .bookmark:last-of-type {
@@ -688,6 +711,44 @@ input[type=text] {
   display: flex !important;
 }
 
+@media only screen and (max-width: 1080px) {
+  .bookmarks-container {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    width: 100%;
+    max-height: none;
+  }
+  .bookmarks-list {
+    overflow-x: visible;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 40px 0;
+  }
+  .arrows-container {
+    display: none !important;
+  }
+  .bookmarks-list:not(.bookmarks-list-creator):hover {
+    padding: 40px 0;
+  }
+  .bookmark {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 12px;
+  }
+  .bookmark img {
+    width: 30px;
+  }
+  .bookmark:hover .remove-button,
+  .bookmark:hover .edit-button {
+    display: none;
+  }
+  .bookmark:hover::before {
+    display: none;
+  }
+  .bookmarks-container .create-button svg {
+    width: 18px;
+  }
+}
 @keyframes fadeout {
   from {
     opacity: 1;
@@ -988,7 +1049,7 @@ input[type=text] {
   max-height: max-content;
   max-width: max-content;
   right: -95vw;
-  bottom: -10vh;
+  bottom: -4vh;
 }
 
 .list-container {
@@ -1011,7 +1072,7 @@ div.list-container:nth-of-type(1) {
 }
 
 .list-container:nth-of-type(2) .todo-list {
-  max-height: 225px;
+  max-height: 175px;
 }
 
 div.list-container:nth-of-type(2) {
@@ -1020,7 +1081,7 @@ div.list-container:nth-of-type(2) {
 }
 
 .list-container:nth-of-type(3) .todo-list {
-  max-height: 200px;
+  max-height: 150px;
 }
 
 div.list-container:nth-of-type(3) {
@@ -1029,7 +1090,7 @@ div.list-container:nth-of-type(3) {
 }
 
 .list-container:nth-of-type(4) .todo-list {
-  max-height: 175px;
+  max-height: 125px;
 }
 
 div.list-container:nth-of-type(4) {
@@ -1038,7 +1099,7 @@ div.list-container:nth-of-type(4) {
 }
 
 .list-container:nth-of-type(5) .todo-list {
-  max-height: 150px;
+  max-height: 100px;
 }
 
 div.list-container:nth-of-type(5) {
@@ -1059,7 +1120,7 @@ div.list-container:nth-of-type(5) {
 .todo-list {
   padding: 0;
   overflow-y: scroll;
-  max-height: 300px;
+  max-height: 225px;
 }
 
 /* Firefox */
@@ -1211,7 +1272,7 @@ button.list-container:hover::before {
   z-index: -1;
 }
 
-.editing-list input {
+.editing-list input:not(.creator input) {
   box-shadow: none;
   font-family: "Roboto Slab";
   font-size: 18px;

@@ -338,6 +338,57 @@ article {
   .hide {
     display: none!important;
   }
+
+  .feature-group {
+    width: 100%!important;
+    flex-direction: row-reverse;
+  }
+
+  #main-wrapper {
+    justify-content: flex-start!important;
+  }
+
+  footer {
+    padding: 0 4rem!important;
+  }
+
+}
+
+@media only screen and (max-width: 980px) {
+
+  footer {
+    margin-top: -18px!important;
+  }
+
+  footer .row div:last-child {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  footer .row div:last-child p {
+    display: flex;
+    align-items: center;
+  }
+
+  footer .row div:last-child svg {
+    width: 15px;
+  }
+
+  footer .row {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  footer .row div:last-child {
+    justify-content: center;
+  }
+
+  footer .row div:last-child p:last-child {
+    display: none;
+  }
 }
 
 .hide {
@@ -535,7 +586,7 @@ footer {
   font-family: var(--overpass);
   font-size: 13px;
   letter-spacing: 0.5px;
-  padding: 0 10rem 1rem 10rem;
+  padding: 0 6rem 1rem 6rem;
   margin-top: -24px;
 }
 
@@ -739,7 +790,7 @@ button {
   animation: turn-palette 0.6s;
 }
 
-@keyframes show-highlight {
+@keyframes highlight-shadow {
   0% {
     box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
     /* background: rgb(255, 255, 255, 0); */
@@ -752,6 +803,22 @@ button {
   }
 }
 
+@keyframes highlight-bg {
+  0% {
+    background-color: rgb(255, 255, 255, 0);
+  } 5% {
+    background-color: rgb(var(--accent3), 0.75);
+  } 100% {
+    background-color: rgb(255, 255, 255, 0);
+  }
+}
+
 .highlight {
-  animation: show-highlight 3s;
+  animation: highlight-shadow 3s;
+}
+
+.sticky-date.highlight,
+.se-icon.highlight,
+.bookmarks-container .create-button.highlight {
+  animation: highlight-shadow 3s, highlight-bg 3s;
 }
