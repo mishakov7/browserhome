@@ -140,7 +140,7 @@
 
   .sticky-accent0 path,
   .sticky-accent0 rect {
-    fill: var(--secondary-txt-lt);
+    fill: var(--secondary-txt);
   }
   
   .sticky-accent1 {
@@ -209,7 +209,7 @@
     border-radius: 6px;
     transition: object-position 0.3s;
   }
-  
+
   .img-align-top {
     object-position: top;
   }
@@ -429,6 +429,10 @@
 
 .accent0-bg {
   background-color: var(--secondary-txt-lt);
+}
+
+.sticky .accent0-bg {
+  background-color: var(--secondary-txt);
 }
 
 .accent0-bg path {
