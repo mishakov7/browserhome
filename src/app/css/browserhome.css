@@ -963,16 +963,6 @@ input[type=text] {
   top: -210px;
   left: -40px;
   animation: appear-todocreator 0.4s;
-  /*@include inline-animation(0.4s) {
-      from {
-          opacity: 0;
-          top: -100px;
-
-      } to {
-          opacity: 1;
-          top: -65px;
-      }
-  }*/
 }
 
 .list-container .buttons-container .creator {
@@ -980,7 +970,7 @@ input[type=text] {
   left: 15px;
 }
 
-@keyframes appear-bookmarkscreator {
+@keyframes appear-bookmarkcreator {
   from {
     opacity: 0;
     bottom: 80px;
@@ -990,26 +980,27 @@ input[type=text] {
     bottom: 60px;
   }
 }
-.bookmarks-container .creator {
-  position: absolute;
-  bottom: 60px;
-  left: -32px;
-  animation: appear-bookmarkscreator 0.4s;
-  /*@include inline-animation(0.4s) {
-      from {
-          opacity: 0;
-          bottom: 75px;
-
-      } to {
-          opacity: 1;
-          bottom: 30px;
-      }
-  }*/
+@keyframes appear-bookmarkscreator {
+  from {
+    opacity: 0;
+    bottom: 60px;
+  }
+  to {
+    opacity: 1;
+    bottom: 40px;
+  }
 }
-
-.bookmark .creator {
+.bookmarks-container .bookmarks-list .creator {
+  position: absolute;
   left: -22px;
   bottom: 60px;
+  animation: appear-bookmarkcreator 0.4s;
+}
+
+.bookmarks-container .creator {
+  left: -33px;
+  bottom: 40px;
+  animation: appear-bookmarkscreator 0.4s;
 }
 
 .input-group {
