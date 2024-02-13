@@ -156,7 +156,7 @@ export default function Stickies(props: any) {
       localStorage.setItem('polaroids', JSON.stringify(defaultPolaroid));
     }
 
-  }, [notes, polaroids]);
+  }, [localStorage.getItem('notes'), localStorage.getItem('polaroids')]);
 
   return (
     <>
