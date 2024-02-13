@@ -12,8 +12,8 @@ const List = (props: any) => {
   const linkInput = useRef<HTMLInputElement>(null);
   const checkboxRefs = useRef<HTMLInputElement[]>([]);
 
-  let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
-  let storageList = JSON.parse(String(localStorage.getItem('lists')))[props.listKey];
+  // let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
+  // let storageList = JSON.parse(String(localStorage.getItem('lists')))[props.listKey];
 
   const checkTodo = (e: any, idx: number) => {
     if (checkboxRefs.current[idx]) {
@@ -46,6 +46,7 @@ const List = (props: any) => {
 
   const createTodo = (e: any) => {
     let storageTodo = { "label": "", "link": "", "checked": false };
+    let allStorageLists = props.allLists;
 
     if (labelInput.current) {
       storageTodo.label = labelInput.current.value;
@@ -69,28 +70,41 @@ const List = (props: any) => {
     allStorageLists[props.listKey].todoList = storageTodos;
 
     setTodoList(storageTodos);
-    localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    props.setAllLists(allStorageLists);
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    }
+
     toggleCreator();
   }
 
   const changeChecked = (e: any, key: number) => {
-    let storageTodos = storageList.todoList;
+    let allStorageLists = props.allLists;
+    let storageTodos = allStorageLists[props.listKey].todoList;
 
     if (e.target.checked) {
         storageTodos[key].checked = true;
+        console.log("checked")
 
     } else {
         storageTodos[key].checked = false;
+        console.log("unchecked")
     }
 
-    setTodoList(storageTodos);
     allStorageLists[props.listKey].todoList = storageTodos;
-    localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    setTodoList(storageTodos);
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(allStorageLists));
+      props.setAllLists(JSON.parse(String(localStorage.getItem('lists'))));
+
+    }
     
   }
 
   useEffect(() => {
-    const localTodos = storageList.todoList;
+    const localTodos = JSON.parse(String(localStorage.getItem('lists')))[props.listKey].todoList;
 
     if (localTodos) {
       setTodoList(localTodos);
@@ -125,7 +139,6 @@ const List = (props: any) => {
                                 :
                                 <span onClick={(e: any) => checkTodo(e, idx)}>{todo.label}</span>
                               }
-                              {/* <a href={todo.link} target="_blank">{todo.label}</a> */}
                           </label>
                         </div>
 
@@ -133,7 +146,8 @@ const List = (props: any) => {
                         
                         <div className='row'>
                           <label onClick={(e: any) => checkTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}></label>
-                          <input ref={(el: any) => checkboxRefs.current[idx] = el } type="checkbox" onChange={(e) => changeChecked(e, idx)} />                          <label>
+                          <input ref={(el: any) => checkboxRefs.current[idx] = el } type="checkbox" onChange={(e) => changeChecked(e, idx)} />                          
+                          <label>
                               {
                                 (todo.link != "") ?
                                 <a href={todo.link} target="_blank">{todo.label}</a>

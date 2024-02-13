@@ -46,8 +46,10 @@ export default function Stickies(props: any) {
   }
 
   const resetStickies = () => {
-    const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
-    const storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
+    // const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    // const storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
+    const storageNotes = notes;
+    const storagePolaroids = polaroids;
 
     storageNotes.forEach((note: any) => {
       note.xpos = defaultNote[0].xpos,
@@ -59,9 +61,11 @@ export default function Stickies(props: any) {
       polaroid.ypos = defaultPolaroid[0].ypos
     });
 
-    localStorage.setItem('notes', JSON.stringify(storageNotes));
-    localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
-
+    if (typeof window !== undefined) {
+      localStorage.setItem('notes', JSON.stringify(storageNotes));
+      localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));  
+    }
+    
     setNotes(storageNotes);
     setPolaroids(storagePolaroids);
     setletterKey(randLetter());
@@ -69,7 +73,9 @@ export default function Stickies(props: any) {
   }
 
   const createNote = (e: any) => {
-    const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    // const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    const storageNotes : any = notes;
+
     let newNote = {
       "note": "Change what this note says!",
       "color": "accent" + randomIdx(1, 3),
@@ -81,30 +87,42 @@ export default function Stickies(props: any) {
     storageNotes.push(newNote);
 
     setNotes(storageNotes);
-    localStorage.setItem('notes', JSON.stringify(storageNotes));
+    if (typeof window !== undefined) {
+      localStorage.setItem('notes', JSON.stringify(storageNotes));
+    }
   }
 
   const editNote = (update: any, idx: number) => {    
-    const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
-    ;
+    // const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    const storageNotes : any = notes;
+
     storageNotes[idx] = update;
     
-    localStorage.setItem('notes', JSON.stringify(storageNotes));
+    if (typeof window !== undefined) {
+      localStorage.setItem('notes', JSON.stringify(storageNotes));
+    }
+
     setNotes(storageNotes);
   }
 
   const deleteNote = (idx: number) => { 
-    let storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    // let storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    let storageNotes = notes;
     storageNotes.splice(idx, 1);
 
-    localStorage.setItem('notes', JSON.stringify(storageNotes));
-    setNotes(JSON.parse(String(localStorage.getItem('notes'))));
+    if (typeof window !== undefined) {
+      localStorage.setItem('notes', JSON.stringify(storageNotes));
+    }
+
+    setNotes(storageNotes);
 
     setletterKey(randLetter());
   }
 
   const createPolaroid = (e: any) => {
-    let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
+    // let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
+    let storagePolaroids : any = polaroids;
+
     let newPolaroid = {
       "note": "Say something.. like.. huh?",
       "image": "https://i.makeagif.com/media/11-12-2023/JbwsRE.gif",
@@ -117,23 +135,34 @@ export default function Stickies(props: any) {
     storagePolaroids.push(newPolaroid);
 
     setPolaroids(storagePolaroids);
-    localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
+    }
   }
 
   const editPolaroid = (update: any, idx: number) => {    
-    let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
+    // let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
+    let storagePolaroids : any = polaroids;
     storagePolaroids[idx] = update;
     
-    localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
+    if (typeof window !== undefined) {
+      localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
+    }
+
     setPolaroids(storagePolaroids);
   }
 
   const deletePolaroid = (idx: number) => { 
-    let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
+    // let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
+    let storagePolaroids = polaroids;
     storagePolaroids.splice(idx, 1);
 
-    localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
-    setPolaroids(JSON.parse(String(localStorage.getItem('polaroids'))));
+    if (typeof window !== undefined) {
+      localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
+    }
+
+    setPolaroids(storagePolaroids);
 
     setletterKey(randLetter());
   }
@@ -156,7 +185,7 @@ export default function Stickies(props: any) {
       localStorage.setItem('polaroids', JSON.stringify(defaultPolaroid));
     }
 
-  }, [localStorage.getItem('notes'), localStorage.getItem('polaroids')]);
+  }, [/*localStorage.getItem('notes'), localStorage.getItem('polaroids')*/]);
 
   return (
     <>

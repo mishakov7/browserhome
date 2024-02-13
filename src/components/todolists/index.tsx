@@ -118,11 +118,15 @@ export default function ToDoLists(props: any) {
 
     }
 
-    let storageLists = JSON.parse(String(localStorage.getItem('lists')));
+    let storageLists = lists;
+    // let storageLists = JSON.parse(String(localStorage.getItem('lists')));
     storageLists[key].color = selectedColor;
 
     setLists(storageLists);
-    localStorage.setItem('lists', JSON.stringify(storageLists));
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(storageLists));
+    }
     
   }
 
@@ -145,14 +149,18 @@ export default function ToDoLists(props: any) {
   }
 
   const confirmList = (e: any, key: number) => {
-    let storageLists = JSON.parse(String(localStorage.getItem('lists')));
+    let storageLists = lists;
+    // let storageLists = JSON.parse(String(localStorage.getItem('lists')));
 
     if (editTitleInput.current) {
       storageLists[key].title = editTitleInput.current.value;
     }
 
     setLists(storageLists);
-    localStorage.setItem('lists', JSON.stringify(storageLists));
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(storageLists));
+    }
 
   }
 
@@ -189,16 +197,24 @@ export default function ToDoLists(props: any) {
     storageLists.push(storageList);
 
     setLists(storageLists);
-    localStorage.setItem('lists', JSON.stringify(storageLists));
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(storageLists));
+    }
+
     toggleCreator();
   }
 
   const deleteList = (key: number) => {
-    let storageLists = JSON.parse(String(localStorage.getItem('lists')));
+    let storageLists = lists;
+    // let storageLists = JSON.parse(String(localStorage.getItem('lists')));
     storageLists.splice(key, 1);
 
     setLists(storageLists);
-    localStorage.setItem('lists', JSON.stringify(storageLists));
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(storageLists));
+    }
 
     toggleAlert();
   }
@@ -285,6 +301,8 @@ export default function ToDoLists(props: any) {
                   ?
 
                   <EditList
+                    allLists={lists}
+                    setAllLists={setLists}
                     listTitleRef={editTitleInput}
                     listTitle={list.title}
                     listKey={idx}
@@ -295,6 +313,7 @@ export default function ToDoLists(props: any) {
 
                   <List 
                     allLists={lists}
+                    setAllLists={setLists}
                     listTitle={list.title}
                     listKey={idx}
                     listColor={list.color}

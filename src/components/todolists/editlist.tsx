@@ -36,6 +36,7 @@ const EditList = (props: any) => {
 
   const createTodo = (e: any) => {
     let storageTodo = { "label": "", "link": "", "checked": false };
+    let allStorageLists = props.allLists;
 
     if (labelInput.current) {
       storageTodo.label = labelInput.current.value;
@@ -54,15 +55,20 @@ const EditList = (props: any) => {
 
     }
 
-    let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
     let storageTodos = todoList.slice();
     storageTodos.push(storageTodo);
     allStorageLists[props.listKey].todoList = storageTodos;
 
     setTodoList(storageTodos);
-    localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    props.setAllLists(allStorageLists);
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    }
+
     toggleCreator();
   }
+
 
   const deleteTodo = (e: any, key: number) => {
 

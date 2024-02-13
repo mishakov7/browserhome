@@ -65,18 +65,21 @@ export default function Bookmarks(props: any) {
   }
 
   const deleteBookmark = (key: number) => {
-    // let storageBookmarks = {};
-  
-    let storageBookmarks : any = JSON.parse(String(localStorage.getItem('bookmarks')));
+    let storageBookmarks = bookmarkList;
+    // let storageBookmarks : any = JSON.parse(String(localStorage.getItem('bookmarks')));
     storageBookmarks.splice(key, 1);
 
     setBookmarkList(storageBookmarks);
-    localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
+    
+    if (typeof window !== undefined) {
+      localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
+    }
 
   }
 
   const editBookmark = (e:any, key: number, refs: any) => {
-    let storageBookmarks = JSON.parse(String(localStorage.getItem('bookmarks')));
+    let storageBookmarks : any = bookmarkList;
+    // let storageBookmarks = JSON.parse(String(localStorage.getItem('bookmarks')));
     let bookmarkLink = refs[1].current.value;
     
     if (!bookmarkLink.startsWith("http://") || !bookmarkLink.startsWith("https://")) {
@@ -90,7 +93,10 @@ export default function Bookmarks(props: any) {
 
     storageBookmarks[key] = editedBookmark;
     setBookmarkList(storageBookmarks);
-    localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
+    }
     // currentEdit.current.classList.remove("editing-button");
   }
   
