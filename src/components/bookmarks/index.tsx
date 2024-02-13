@@ -3,6 +3,7 @@ import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
 import Bookmark from './bookmark';
 import Creator from '../creator';
 
+
 export default function Bookmarks(props: any) {
 
   const [bookmarkList, setBookmarkList] = useState([]);
@@ -11,8 +12,8 @@ export default function Bookmarks(props: any) {
   const [maxScroll, setMaxScroll] = useState(0);
   const [increment, setIncrement] = useState(0);
 
-  const bookmarksRef = useRef();
-  const linkRef = useRef();
+  const bookmarksRef = useRef<HTMLUListElement>(null);
+  const linkRef = useRef<HTMLInputElement>(null);
 
   const creatorInputs = [{
     "ref": linkRef,
@@ -34,11 +35,14 @@ export default function Bookmarks(props: any) {
   const checkBookmark = (e: any) => {
     let link = "";
 
-    if (linkRef.current.value.startsWith("https://") || linkRef.current.value.startsWith("http://")) {
-      link = linkRef.current.value;
-    } else {
-      link = "https://" + linkRef.current.value;
+    if (linkRef.current) {
+      if (linkRef.current.value.startsWith("https://") || linkRef.current.value.startsWith("http://")) {
+        link = linkRef.current.value;
+      } else {
+        link = "https://" + linkRef.current.value;
+      }
     }
+
 
     let imageLink = "https://api.faviconkit.com/" + link.split("//")[1] + "/144";
     createBookmark(imageLink, link);
@@ -47,12 +51,12 @@ export default function Bookmarks(props: any) {
 
   const createBookmark = (image: string, link: string) => {
 
-    let storageBookmark = {
+    let storageBookmark : any = {
       "image": image,
       "link": link
     }
 
-    let storageBookmarks = bookmarkList.slice();
+    let storageBookmarks : any = bookmarkList.slice();
     storageBookmarks.unshift(storageBookmark);
 
     setBookmarkList(storageBookmarks);
@@ -61,7 +65,9 @@ export default function Bookmarks(props: any) {
   }
 
   const deleteBookmark = (key: number) => {
-    let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    // let storageBookmarks = {};
+  
+    let storageBookmarks : any = JSON.parse(String(localStorage.getItem('bookmarks')));
     storageBookmarks.splice(key, 1);
 
     setBookmarkList(storageBookmarks);
@@ -70,7 +76,7 @@ export default function Bookmarks(props: any) {
   }
 
   const editBookmark = (e:any, key: number, refs: any) => {
-    let storageBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    let storageBookmarks = JSON.parse(String(localStorage.getItem('bookmarks')));
     let bookmarkLink = refs[1].current.value;
     
     if (!bookmarkLink.startsWith("http://") || !bookmarkLink.startsWith("https://")) {
@@ -89,42 +95,44 @@ export default function Bookmarks(props: any) {
   }
   
   const setDefaults = (e: any) => {
-    if (linkRef.current.value == "" || linkRef.current.value == null) {
-      linkRef.current.value = linkRef.current.placeholder;
-    
-    } 
+    if (linkRef.current) {
+      if (linkRef.current.value == "" || linkRef.current.value == null) {
+        linkRef.current.value = linkRef.current.placeholder;
+      }   
+    }
 
   }
 
   useEffect(() => {
-
-    const localBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    const localBookmarks = JSON.parse(String(localStorage.getItem('bookmarks')));
 
     if (localBookmarks) {
       setBookmarkList(localBookmarks);
     }
 
-    bookmarksRef.current.scrollTo({left: (listScroll), behavior: "smooth"});
+    if (bookmarksRef.current) {
+      bookmarksRef.current.scrollTo({left: (listScroll), behavior: "smooth"});
+    }
 
   }, [listScroll]);
 
   useLayoutEffect(() => {
     window.addEventListener("resize", function() {
       if (bookmarksRef.current) {
-        setMaxScroll(bookmarksRef.current.scrollLeftMax);
+        setMaxScroll(bookmarksRef.current.scrollWidth - bookmarksRef.current.offsetWidth);
         setIncrement(bookmarksRef.current.clientWidth / 2);
       }
     })
 
     if (bookmarksRef.current) {
-      setMaxScroll(bookmarksRef.current.scrollLeftMax);
+      setMaxScroll(bookmarksRef.current.scrollWidth - bookmarksRef.current.offsetWidth);
       setIncrement(bookmarksRef.current.clientWidth / 2);
     }
     
     return () => {
       window.removeEventListener("resize", function() {
         if (bookmarksRef.current) {
-          setMaxScroll(bookmarksRef.current.scrollLeftMax);
+          setMaxScroll(bookmarksRef.current.scrollWidth - bookmarksRef.current.offsetWidth);
           setIncrement(bookmarksRef.current.clientWidth / 2);
         }
       })
@@ -158,8 +166,8 @@ export default function Bookmarks(props: any) {
         <ul ref={bookmarksRef} className='bookmarks-list'>
             {
               bookmarkList.length > 0 ? 
-              bookmarkList.map((bookmark, idx) => (
-                  <li className='bookmark' key={idx} dataLink={bookmark.link.split("//")[1]}>
+              bookmarkList.map((bookmark: any, idx: number) => (
+                  <li className='bookmark' key={idx} data-link={bookmark.link.split("//")[1]}>
                     <Bookmark 
                       bookmarkKey={idx}
                       parentElmt={bookmarksRef}
@@ -179,7 +187,7 @@ export default function Bookmarks(props: any) {
 
             {
               listScroll <= 0 ? null :
-              <button onClick={() => setScroll(bookmarksRef.current.scrollLeft + (-1 * increment))} className='prev-button accent2-fill'>
+              <button onClick={() => { if (bookmarksRef.current) { setScroll(bookmarksRef.current.scrollLeft + (-1 * increment)) }}} className='prev-button accent2-fill'>
                   <svg width="12" height="19" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0.688817 11.4128C-0.229606 10.303 -0.229606 8.69711 0.688817 7.58735L5.79471 1.41773C7.58689 -0.747822 11.1059 0.519469 11.1059 3.33044L11.1059 15.6697C11.1059 18.4806 7.58689 19.7479 5.79471 17.5824L0.688817 11.4128Z" />
                   </svg>
@@ -188,7 +196,7 @@ export default function Bookmarks(props: any) {
 
             {
               (listScroll >= maxScroll) || (!maxScroll) ? null :
-              <button onClick={() => setScroll(bookmarksRef.current.scrollLeft + increment)} className='next-button accent2-fill'>
+              <button onClick={() => { if (bookmarksRef.current) { setScroll(bookmarksRef.current.scrollLeft + increment) }}} className='next-button accent2-fill'>
                   <svg width="12" height="19" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M10.4171 7.58735C11.3355 8.69711 11.3355 10.303 10.4171 11.4128L5.31118 17.5824C3.519 19.7479 -1.22871e-07 18.4806 0 15.6697L5.39365e-07 3.33044C6.62236e-07 0.519467 3.519 -0.747821 5.31118 1.41773L10.4171 7.58735Z" />
                   </svg>

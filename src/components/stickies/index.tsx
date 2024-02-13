@@ -46,8 +46,8 @@ export default function Stickies(props: any) {
   }
 
   const resetStickies = () => {
-    const storageNotes = JSON.parse(localStorage.getItem('notes'));
-    const storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
+    const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    const storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
 
     storageNotes.forEach((note: any) => {
       note.xpos = defaultNote[0].xpos,
@@ -69,7 +69,7 @@ export default function Stickies(props: any) {
   }
 
   const createNote = (e: any) => {
-    const storageNotes = JSON.parse(localStorage.getItem('notes'));
+    const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
     let newNote = {
       "note": "Change what this note says!",
       "color": "accent" + randomIdx(1, 3),
@@ -85,7 +85,8 @@ export default function Stickies(props: any) {
   }
 
   const editNote = (update: any, idx: number) => {    
-    const storageNotes = JSON.parse(localStorage.getItem('notes'));
+    const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    ;
     storageNotes[idx] = update;
     
     localStorage.setItem('notes', JSON.stringify(storageNotes));
@@ -93,17 +94,17 @@ export default function Stickies(props: any) {
   }
 
   const deleteNote = (idx: number) => { 
-    let storageNotes = JSON.parse(localStorage.getItem('notes'));
+    let storageNotes = JSON.parse(String(localStorage.getItem('notes')));
     storageNotes.splice(idx, 1);
 
     localStorage.setItem('notes', JSON.stringify(storageNotes));
-    setNotes(JSON.parse(localStorage.getItem('notes')));
+    setNotes(JSON.parse(String(localStorage.getItem('notes'))));
 
     setletterKey(randLetter());
   }
 
   const createPolaroid = (e: any) => {
-    let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
+    let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
     let newPolaroid = {
       "note": "Say something.. like.. huh?",
       "image": "https://i.makeagif.com/media/11-12-2023/JbwsRE.gif",
@@ -120,7 +121,7 @@ export default function Stickies(props: any) {
   }
 
   const editPolaroid = (update: any, idx: number) => {    
-    let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
+    let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
     storagePolaroids[idx] = update;
     
     localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
@@ -128,18 +129,18 @@ export default function Stickies(props: any) {
   }
 
   const deletePolaroid = (idx: number) => { 
-    let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
+    let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
     storagePolaroids.splice(idx, 1);
 
     localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
-    setPolaroids(JSON.parse(localStorage.getItem('polaroids')));
+    setPolaroids(JSON.parse(String(localStorage.getItem('polaroids'))));
 
     setletterKey(randLetter());
   }
 
   useEffect(() => {
-    let storageNotes = JSON.parse(localStorage.getItem('notes'));
-    let storagePolaroids = JSON.parse(localStorage.getItem('polaroids'));
+    let storageNotes = JSON.parse(String(localStorage.getItem('notes')));
+    let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
 
     if (storageNotes) {
       setNotes(storageNotes);
@@ -155,7 +156,7 @@ export default function Stickies(props: any) {
       localStorage.setItem('polaroids', JSON.stringify(defaultPolaroid));
     }
 
-  }, [localStorage.getItem('notes'), localStorage.getItem('polaroids')]);
+  }, [notes, polaroids]);
 
   return (
     <>

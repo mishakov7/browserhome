@@ -2,15 +2,17 @@
 import React, { useState, useEffect, useRef, use } from 'react';
 
 const Creator = (props: any) => {
-    const creatorRef = useRef(null);
+    const creatorRef = useRef<HTMLDivElement>(null);
     const checkRadio = (ref: any, e: any) => {
         ref.current.click();
     }
 
     const handleOutsideClick = (e: any) => {
 
-        if (creatorRef.current && !creatorRef.current.contains(e.target)) {
-            props.toggleCreatorState();
+        if (creatorRef.current) {
+            if (!creatorRef.current.contains(e.target)) {
+                props.toggleCreatorState();
+            }
         }
     }
 
@@ -26,7 +28,7 @@ const Creator = (props: any) => {
   return (
     <>
     <div ref={creatorRef} className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
-        { props.inputGroups.map((group, gdx) => (
+        { props.inputGroups.map((group: any, gdx: number) => (
                     
             <div key={gdx} className="input-group">
 
@@ -35,7 +37,7 @@ const Creator = (props: any) => {
                 { group.type == "radio" ? 
 
                     <div className='row'>
-                        { group.radios.map((radio, rdx) => (
+                        { group.radios.map((radio: any, rdx: number) => (
                             <>
                             <div key={gdx + "-" + rdx}>
                                 <input ref={radio.ref} type="radio" name={group.name} value={radio.value} />
@@ -51,7 +53,7 @@ const Creator = (props: any) => {
                 { group.type == "dropdown" ? 
 
                     <div className='col dropdown'>
-                        { group.options.map((option, odx) => (
+                        { group.options.map((option: any, odx: number) => (
                             <>
                                 <div key={"option" + gdx + "-" + odx} className='row option'>
                                     {/* <span>{"option" + gdx + "-" + odx}</span> */}

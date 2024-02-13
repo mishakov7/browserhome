@@ -11,13 +11,12 @@ export default function Polaroid(props: any) {
 
   const nodeRef = React.useRef(null);
   const reader = new FileReader();
-  const uploadButton = useRef();
+  const uploadButton = useRef<HTMLInputElement>(null);
 
   function uploadPolaroid(e: any) {
     let polaroid = e.target.files[0];
 
     reader.addEventListener('load', function() {
-      // localStorage.setItem('polaroid', JSON.stringify(reader.result));
       changePolaroid(reader.result);
 
     });
@@ -29,7 +28,9 @@ export default function Polaroid(props: any) {
   }
 
   function handleClick(e: any) {
-    uploadButton.current.click();
+    if (uploadButton.current) {
+      uploadButton.current.click();
+    }
   }
 
   const changeCoordinates = (coords: any) => {

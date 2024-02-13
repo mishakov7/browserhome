@@ -3,10 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
 import List from './list';
 import EditList from './editlist';
+import { title } from 'process';
 
 export default function ToDoLists(props: any) {
 
-  const [lists, setLists] = useState([]);
+  const [lists, setLists] = useState([{"color": "", "title": "", "todoList": []}]);
   const [isEditing, setEditing] = useState(false);
   const [showCreator, setCreator] = useState(false);
   const [showAlert, setAlert] = useState(false);
@@ -15,12 +16,12 @@ export default function ToDoLists(props: any) {
 
   const maxLists = 5;
 
-  const titleInput = useRef(null);
-  const colorInput1 = useRef(null);
-  const colorInput2 = useRef(null);
-  const colorInput3 = useRef(null);
+  const titleInput = useRef<HTMLInputElement>(null);
+  const colorInput1 = useRef<HTMLInputElement>(null);
+  const colorInput2 = useRef<HTMLInputElement>(null);
+  const colorInput3 = useRef<HTMLInputElement>(null);
   const colorInputs = [colorInput1, colorInput2, colorInput3];
-  const editTitleInput = useRef(null);
+  const editTitleInput = useRef<HTMLInputElement>(null);
 
   const creatorInputs = [{
     "ref": titleInput,
@@ -117,7 +118,7 @@ export default function ToDoLists(props: any) {
 
     }
 
-    let storageLists = JSON.parse(localStorage.getItem('lists'));
+    let storageLists = JSON.parse(String(localStorage.getItem('lists')));
     storageLists[key].color = selectedColor;
 
     setLists(storageLists);
@@ -132,8 +133,10 @@ export default function ToDoLists(props: any) {
 
     if (isEditing && selectedList == key) {
 
-      if (editTitleInput.current.value != "") {
-        confirmList(e, key);
+      if (editTitleInput.current) {
+        if (editTitleInput.current.value != "") {
+          confirmList(e, key);
+        }
       }
 
       setEditing(false);
@@ -142,8 +145,11 @@ export default function ToDoLists(props: any) {
   }
 
   const confirmList = (e: any, key: number) => {
-    let storageLists = JSON.parse(localStorage.getItem('lists'));
-    storageLists[key].title = editTitleInput.current.value;
+    let storageLists = JSON.parse(String(localStorage.getItem('lists')));
+
+    if (editTitleInput.current) {
+      storageLists[key].title = editTitleInput.current.value;
+    }
 
     setLists(storageLists);
     localStorage.setItem('lists', JSON.stringify(storageLists));
@@ -152,22 +158,31 @@ export default function ToDoLists(props: any) {
 
   const createList = (e: any) => {
 
-    let selectedColor = null;
+    let selectedColor = "";
 
     colorInputs.forEach(input => {
-      if (input.current.checked) {
-        selectedColor = input.current.value;
+      if (input.current) {
+        if (input.current.checked) {
+          selectedColor = input.current.value;
+        }
       }
     });
 
     if (selectedColor == null || selectedColor == "") {
-      selectedColor = colorInput3.current.value;
+      if (colorInput3.current) {
+        selectedColor = colorInput3.current.value;
+      }
     }
 
     let storageList = {
       "color": selectedColor,
-      "title": titleInput.current.value,
+      "title": "",
+      // "title": titleInput.current.value,
       "todoList": []
+    }
+
+    if (titleInput.current) {
+      storageList.title = titleInput.current.value;
     }
 
     let storageLists = lists.slice();
@@ -179,7 +194,7 @@ export default function ToDoLists(props: any) {
   }
 
   const deleteList = (key: number) => {
-    let storageLists = JSON.parse(localStorage.getItem('lists'));
+    let storageLists = JSON.parse(String(localStorage.getItem('lists')));
     storageLists.splice(key, 1);
 
     setLists(storageLists);
@@ -189,13 +204,15 @@ export default function ToDoLists(props: any) {
   }
 
   const setDefaults = (e: any) => {
-    if (titleInput.current.value == "" || titleInput.current.value == null) {
-      titleInput.current.value = titleInput.current.placeholder;
+    if (titleInput.current) {
+      if (titleInput.current.value == "" || titleInput.current.value == null) {
+        titleInput.current.value = titleInput.current.placeholder;
+      }
     }
   } 
 
   useEffect(() => {
-    const localLists = JSON.parse(localStorage.getItem('lists'));
+    const localLists = JSON.parse(String(localStorage.getItem('lists')));
   
     if (localLists) {
       setLists(localLists);

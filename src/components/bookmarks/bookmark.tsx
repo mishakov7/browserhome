@@ -4,36 +4,34 @@ import Creator from '../creator';
 
 const Bookmark = (props: any) => {
   const [showCreator, setCreator] = useState(false);
-  const edit1Ref = useRef(null);
-  const edit2Ref = useRef(null);
-  const editButton = useRef(null);
+  const edit2Ref = useRef<HTMLInputElement>(null);
+  const editButton = useRef<HTMLButtonElement>(null);
 
-  let storageBookmark = JSON.parse(localStorage.getItem("bookmarks"))[props.bookmarkKey];
-
-  const editorInputs = [/*{
-    "ref": edit1Ref,
-    "type": "text",
-    "label": "Image",
-    "name": "bookmark-image",
-    "value": storageBookmark.image
-  }, */{
+  const editorInputs = [{
     "ref": edit2Ref,
     "type": "text",
     "label": "Link",
     "name": "bookmark-link",
-    "value": storageBookmark.link
+    "value": props.link
   }];
 
   const toggleCreator = () => {
 
     if (showCreator) {
       setCreator(false);
-      editButton.current.classList.remove("editing-button");
+
+      if (editButton.current) {
+        editButton.current.classList.remove("editing-button");
+      }
 
     } else {
       setCreator(true);
-      editButton.current.classList.add("editing-button");
-      props.parentElmt.current.classList.add("bookmarks-list-creator");
+
+      if (editButton.current) {
+        editButton.current.classList.add("editing-button");
+        props.parentElmt.current.classList.add("bookmarks-list-creator");
+      }
+      
     }
 
   }
@@ -46,7 +44,7 @@ const Bookmark = (props: any) => {
           <Creator 
               toggleCreatorState={toggleCreator}
               parentRef={props.parentElmt.current}
-              handleCreator={(e: any) => { props.handleEdit(e, props.bookmarkKey, [edit1Ref, edit2Ref]); toggleCreator(); }} 
+              handleCreator={(e: any) => { props.handleEdit(e, props.bookmarkKey, [edit2Ref]); toggleCreator(); }} 
               inputGroups={editorInputs}
               bg="accent2"
               direction="below"

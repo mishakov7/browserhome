@@ -18,14 +18,14 @@ export default function Search(props: any) {
   const [quoteSearch, setQuoteSearch] = useState(affirmations[0].search);
   const [search, setSearch] = useState("");
 
-  const engineRef = useRef(null);
-  const themeRef = useRef(null);
-  const googleInput = useRef(null);
-  const duckInput = useRef(null);
-  const braveInput = useRef(null);
-  const randomInput = useRef(null);
-  const inspirationalInput = useRef(null);
-  const affirmationsInput = useRef(null);
+  const engineRef = useRef<HTMLInputElement>(null);
+  const themeRef = useRef<HTMLInputElement>(null);
+  const googleInput = useRef<HTMLInputElement>(null);
+  const duckInput = useRef<HTMLInputElement>(null);
+  const braveInput = useRef<HTMLInputElement>(null);
+  const randomInput = useRef<HTMLInputElement>(null);
+  const inspirationalInput = useRef<HTMLInputElement>(null);
+  const affirmationsInput = useRef<HTMLInputElement>(null);
 
   const creatorInputs = [{
     "ref": engineRef,
@@ -98,15 +98,19 @@ export default function Search(props: any) {
     let selectedTheme = null;
 
     engineInputs.forEach(input => {
-      if (input.current.checked) {
-        selectedEngine = input.current.value;
+      if (input.current) {
+        if (input.current.checked) {
+          selectedEngine = input.current.value;
+        }
       }
     });
 
 
     themeInputs.forEach(input => {
-      if (input.current.checked) {
-        selectedTheme = input.current.value;
+      if (input.current) {
+        if (input.current.checked) {
+          selectedTheme = input.current.value;
+        }
       }
     });
 
@@ -117,7 +121,7 @@ export default function Search(props: any) {
     }
 
     localStorage.setItem('search', JSON.stringify(newSearch));
-    assignSearchState(newSearch.engine, newSearch.theme);
+    assignSearchState(String(newSearch.engine), String(newSearch.theme));
     toggleCreator();
 
   }
@@ -157,7 +161,7 @@ export default function Search(props: any) {
   }
 
   useEffect(() => {
-    const localSearch = JSON.parse(localStorage.getItem('search'));
+    const localSearch = JSON.parse(String(localStorage.getItem('search')));
 
     if (localSearch) {
       assignSearchState(localSearch.engine, localSearch.theme);

@@ -5,11 +5,11 @@ import Creator from '../creator';
 
 const EditList = (props: any) => {
 
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState([{"label": "", "link": "", "checked": false}]);
   const [showCreator, setCreator] = useState(false);
 
-  const labelInput = useRef(null);
-  const linkInput = useRef(null);
+  const labelInput = useRef<HTMLInputElement>(null);
+  const linkInput = useRef<HTMLInputElement>(null);
 
   const creatorInputs = [{
     "ref": labelInput,
@@ -35,23 +35,26 @@ const EditList = (props: any) => {
   }
 
   const createTodo = (e: any) => {
-    if (linkInput.current.value.startsWith("https://") || linkInput.current.value.startsWith("http://")) {
-      linkInput.current.value = linkInput.current.value;
-    } else {
-      if (linkInput.current.value != "") {
-        linkInput.current.value = "https://" + linkInput.current.value;
-      }
+    let storageTodo = { "label": "", "link": "", "checked": false };
+
+    if (labelInput.current) {
+      storageTodo.label = labelInput.current.value;
     }
     
-    let storageList = JSON.parse(localStorage.getItem('lists'))[props.listKey];
-    let allStorageLists = JSON.parse(localStorage.getItem('lists'));
+    if (linkInput.current) {
+        if (linkInput.current.value.startsWith("https://") || linkInput.current.value.startsWith("http://")) {
+          linkInput.current.value = linkInput.current.value;
+        } else {
+          if (linkInput.current.value != "") {
+            linkInput.current.value = "https://" + linkInput.current.value;
+          }
+        }
 
-    let storageTodo = {
-      "label": labelInput.current.value,
-      "link": linkInput.current.value,
-      "checked": false
+        storageTodo.link = linkInput.current.value;
+
     }
 
+    let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
     let storageTodos = todoList.slice();
     storageTodos.push(storageTodo);
     allStorageLists[props.listKey].todoList = storageTodos;
@@ -63,8 +66,8 @@ const EditList = (props: any) => {
 
   const deleteTodo = (e: any, key: number) => {
 
-    let storageTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
-    let allStorageLists = JSON.parse(localStorage.getItem('lists'));
+    let storageTodos = JSON.parse(String(localStorage.getItem('lists')))[props.listKey].todoList;
+    let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
 
     storageTodos.splice(key, 1);
     setTodoList(storageTodos);
@@ -77,7 +80,7 @@ const EditList = (props: any) => {
 
 
   useEffect(() => {
-    const localTodos = JSON.parse(localStorage.getItem('lists'))[props.listKey].todoList;
+    const localTodos = JSON.parse(String(localStorage.getItem('lists')))[props.listKey].todoList;
 
     if (localTodos) {
       setTodoList(localTodos);
@@ -105,7 +108,7 @@ const EditList = (props: any) => {
                           (todo.link != "") ?
                           <a href={todo.link} target="_blank">{todo.label}</a>
                           :
-                          <span onClick={(e: any) => checkTodo(e, idx)}>{todo.label}</span>
+                          <span>{todo.label}</span>
                         }
                         {/* <a href={todo.link} target="_blank">{todo.label}</a> */}                    </label>
                   </div>

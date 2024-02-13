@@ -87,7 +87,7 @@ export default function Home() {
               <li><a href="https://support.microsoft.com/en-us/microsoft-edge/change-your-browser-home-page-a531e1b8-ed54-d057-0262-cc5983a065c6" target="_blank">Edge</a></li>
             </ul>
 
-            <p>Using the magic of local storage in the browser, this page will remember all changes, deletions, and additions made every session. As the warning indicates, it is possible that you can lose all the progress you've made building this out if you clear all your cache. If you want to preserve your data here, I recommend managing your cache instead of clearing it entirely.</p>
+            <p>Using the magic of local storage in the browser, this page will remember all changes, deletions, and additions made every session. As the warning indicates, it is possible that you can lose all the progress you&apos;ve made building this out if you clear all your cache. If you want to preserve your data here, I recommend managing your cache instead of clearing it entirely.</p>
           
             <p>I just built this app recently, but I do intend on updating it with some new features in the future. If you have any suggestions, I would love to hear them!</p>
             
