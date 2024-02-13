@@ -5,7 +5,7 @@ import Creator from '../creator';
 
 const EditList = (props: any) => {
 
-  const [todoList, setTodoList] = useState([/*{"label": "", "link": "", "checked": false}*/]);
+  const [todoList, setTodoList] : any = useState([/*{"label": "", "link": "", "checked": false}*/]);
   const [showCreator, setCreator] = useState(false);
 
   const labelInput = useRef<HTMLInputElement>(null);
@@ -55,7 +55,7 @@ const EditList = (props: any) => {
 
     }
 
-    let storageTodos = todoList.slice();
+    let storageTodos : any = todoList.slice();
     storageTodos.push(storageTodo);
     allStorageLists[props.listKey].todoList = storageTodos;
 
@@ -100,7 +100,7 @@ const EditList = (props: any) => {
       <ul className='todo-list'>
           {
             todoList.length < 1 ? null :
-            todoList.map((todo, idx) => (
+            todoList.map((todo: any, idx: number) => (
               <li className='todo-item' key={idx}>
                       
                   <div className='row'>

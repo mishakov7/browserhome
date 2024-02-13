@@ -7,7 +7,7 @@ import { title } from 'process';
 
 export default function ToDoLists(props: any) {
 
-  const [lists, setLists] = useState([/*{"color": "", "title": "", "todoList": []}*/]);
+  const [lists, setLists] : any = useState([/*{"color": "", "title": "", "todoList": []}*/]);
   const [isEditing, setEditing] = useState(false);
   const [showCreator, setCreator] = useState(false);
   const [showAlert, setAlert] = useState(false);
@@ -242,7 +242,7 @@ export default function ToDoLists(props: any) {
       
           {
             lists.length < 1 ? null :
-            lists.map((list, idx) => (
+            lists.map((list: any, idx: number) => (
               <div onClick={(e: any) => toggleSelectedList(e, idx)} key={idx} className={'list-container ' + (isEditing && selectedList == idx ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' ) + (selectedList == idx ? ' selected-list ' : '')}>
  
                 <div className='buttons-container'>
