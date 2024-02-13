@@ -5,7 +5,7 @@ import Creator from '../creator';
 
 const EditList = (props: any) => {
 
-  const [todoList, setTodoList] = useState([{"label": "", "link": "", "checked": false}]);
+  const [todoList, setTodoList] = useState([/*{"label": "", "link": "", "checked": false}*/]);
   const [showCreator, setCreator] = useState(false);
 
   const labelInput = useRef<HTMLInputElement>(null);
@@ -86,9 +86,9 @@ const EditList = (props: any) => {
 
 
   useEffect(() => {
-    const localTodos = JSON.parse(String(localStorage.getItem('lists')))[props.listKey].todoList;
-
-    if (localTodos) {
+    let localTodos;
+    if (localStorage.getItem('lists')) {
+      localTodos = JSON.parse(String(localStorage.getItem('lists')))[props.listKey].todoList;
       setTodoList(localTodos);
     }
 

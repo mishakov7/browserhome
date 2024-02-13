@@ -7,7 +7,7 @@ import { title } from 'process';
 
 export default function ToDoLists(props: any) {
 
-  const [lists, setLists] = useState([{"color": "", "title": "", "todoList": []}]);
+  const [lists, setLists] = useState([/*{"color": "", "title": "", "todoList": []}*/]);
   const [isEditing, setEditing] = useState(false);
   const [showCreator, setCreator] = useState(false);
   const [showAlert, setAlert] = useState(false);
