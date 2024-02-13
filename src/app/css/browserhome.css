@@ -626,7 +626,7 @@ input[type=text] {
 }
 
 .bookmark::before {
-  content: attr(datalink);
+  content: attr(data-link);
   display: none;
   position: absolute;
   width: max-content;

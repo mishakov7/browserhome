@@ -11,7 +11,6 @@ const List = (props: any) => {
   const labelInput = useRef<HTMLInputElement>(null);
   const linkInput = useRef<HTMLInputElement>(null);
   const checkboxRefs = useRef<HTMLInputElement[]>([]);
-  // const checkboxRefs = useRef([]);
 
   let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
   let storageList = JSON.parse(String(localStorage.getItem('lists')))[props.listKey];
@@ -19,7 +18,6 @@ const List = (props: any) => {
   const checkTodo = (e: any, idx: number) => {
     if (checkboxRefs.current[idx]) {
       checkboxRefs.current[idx].click();
-
     }
   }
 
