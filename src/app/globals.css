@@ -354,7 +354,7 @@ article {
 
 }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 1280px) {
 
   footer {
     margin-top: -18px!important;
@@ -379,6 +379,27 @@ article {
     display: flex;
     flex-direction: column-reverse;
   }
+
+  footer ul li {
+    font-size: 16px!important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+
+  footer .readme {
+    width: 100%!important;
+  }
+
+  footer .guide details,
+  footer .guide summary {
+    max-width: 100%!important;
+  }
+
+  footer .guide li {
+    width: 100%;
+  }
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -601,6 +622,57 @@ footer .row div:last-child {
   text-align: right;
 }
 
+.guide {
+  padding: 0;
+}
+
+.guide li {
+  /* position: relative; */
+  display: flex;
+  align-items: center;
+  width: max-content;
+  border-bottom: solid 2px rgba(255, 255, 255, 0.2);
+  padding-bottom: 6px;
+}
+
+.guide li:last-child {
+  border: none;
+}
+
+.guide details,
+.guide summary {
+  max-width: 400px;
+  line-height: 24px;
+}
+
+footer .guide p {
+  font-size: 16px!important;
+  margin-top: 10px;
+}
+
+.guide li button {
+  /* position: absolute; */
+  width: max-content;
+  right: 0;
+  top: 0;
+  background-color: var(--base-container);
+  border-radius: 4px;
+  border: none;
+  font-family: var(--robo);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  margin-left: 10px;
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.4s;
+}
+
+.guide li button:hover {
+  opacity: 0.6;
+}
+
 .uppercase {
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -635,9 +707,9 @@ footer a {
   margin-left: 5px;
 }
 
-/* footer ul {
-  padding: 0;
-} */
+footer ul {
+  padding-left: 20px;
+}
 
 footer ul li {
   /* list-style-type: none; */

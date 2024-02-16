@@ -71,13 +71,41 @@ export default function Home() {
 
         <div className='readme'>
             <h4 className='uppercase'>Homebase</h4>
-            <p>Welcome to your homebase! Here are some of the fun things you can do here: </p>
-            <ul>
-              <li onClick={() => {highlightFeature(searchRef); clickFeature(searchRef);}}>Change your search settings</li>
-              <li onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef);}}>Create a bookmark</li>
-              <li onClick={() => {highlightFeature(listRef); clickFeature(listRef);}}>Create a list</li>
-              <li onClick={() => highlightFeature(dateRef)}>Create a note</li>
-              <li onClick={() => highlightFeature(dateRef)}>Create a polaroid</li>
+            <p>Welcome to your homebase! </p>
+            <p>If you've gotten ahold of this link, congrats! You are one of my beta testers. If you experience any issues with a feature, please report it.</p>
+            <p>Here are some of the fun things you can do here: </p>
+            <ul className='guide'>
+              <li>
+                  <details>
+                      <summary>Change your search settings!</summary>
+                      <p>Currently you can choose between setting your search engine to Google, DuckDuckGo, or Brave. You can also set what type of text you want to see every time you open the page.</p>
+                  </details>
+                  <button onClick={() => {highlightFeature(searchRef); clickFeature(searchRef);}}>Show me!</button>
+              </li>
+              <li>
+                  <details>
+                      <summary>Create a bookmark</summary>
+                      <p>You can enter as many bookmarks as you want so that you can have easy access to all of your websites. You can also delete and edit them.</p>
+                      <p>** More will be planned for this feature in the future!</p>
+                  </details>
+                  <button onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef);}}>Show me!</button>
+              </li>
+              <li>
+                  <details>
+                      <summary>Create a list</summary>
+                      <p>You can create up to five lists, and add as many todos as you want. You can also add links to each todo if you want, but that is not required. </p>
+                      <p>** More will be planned for this feature in the future!</p>
+                  </details>
+                  <button onClick={() => {highlightFeature(listRef); clickFeature(listRef);}}>Show me!</button>
+              </li>
+              <li>
+                  <details>
+                      <summary>Add a sticky!</summary>
+                      <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart's content. If you happen to lose a sticky and you can't click on it, that's what the reset button is for!</p>
+                      <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
+                  </details>
+                  <button onClick={() => highlightFeature(dateRef)}>Show me!</button>
+              </li>
             </ul>
 
             <p>This page is intended to be your browser home screen, meaning that every time you click on your browser, this will be the first page that appears. If you need it, here are some guides on how to change your browser startup page:</p>
