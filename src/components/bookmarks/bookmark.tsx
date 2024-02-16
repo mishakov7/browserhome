@@ -4,11 +4,11 @@ import Creator from '../creator';
 
 const Bookmark = (props: any) => {
   const [showCreator, setCreator] = useState(false);
-  const edit2Ref = useRef<HTMLInputElement>(null);
+  const linkRef = useRef<HTMLInputElement>(null);
   const editButton = useRef<HTMLButtonElement>(null);
 
   const editorInputs = [{
-    "ref": edit2Ref,
+    "ref": linkRef,
     "type": "text",
     "label": "Link",
     "name": "bookmark-link",
@@ -44,7 +44,7 @@ const Bookmark = (props: any) => {
           <Creator 
               toggleCreatorState={toggleCreator}
               parentRef={props.parentElmt.current}
-              handleCreator={(e: any) => { props.handleEdit(e, props.bookmarkKey, [edit2Ref]); toggleCreator(); }} 
+              handleCreator={(e: any) => { props.handleEdit(e, props.bookmarkKey, linkRef); toggleCreator(); }} 
               inputGroups={editorInputs}
               bg="accent2"
               direction="below"

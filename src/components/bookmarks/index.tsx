@@ -65,39 +65,37 @@ export default function Bookmarks(props: any) {
   }
 
   const deleteBookmark = (key: number) => {
-    let storageBookmarks = bookmarkList;
-    // let storageBookmarks : any = JSON.parse(String(localStorage.getItem('bookmarks')));
+    let storageBookmarks = bookmarkList.slice();
     storageBookmarks.splice(key, 1);
-
-    setBookmarkList(storageBookmarks);
     
     if (typeof window !== undefined) {
       localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
     }
+
+    setBookmarkList(storageBookmarks);
 
   }
 
   const editBookmark = (e:any, key: number, refs: any) => {
-    let storageBookmarks : any = bookmarkList;
-    // let storageBookmarks = JSON.parse(String(localStorage.getItem('bookmarks')));
-    let bookmarkLink = refs[1].current.value;
-    
-    if (!bookmarkLink.startsWith("http://") || !bookmarkLink.startsWith("https://")) {
+    let storageBookmarks : any = bookmarkList.slice();
+    let bookmarkLink = refs.current.value;
+
+    if (!bookmarkLink.startsWith("http://") && !bookmarkLink.startsWith("https://")) {
       bookmarkLink = "https://" + bookmarkLink;
     }
 
     let editedBookmark = {
-      "image": refs[0].current.value,
+      "image": "https://api.faviconkit.com/" + bookmarkLink.split("//")[1] + "/144",
       "link": bookmarkLink
     }
 
     storageBookmarks[key] = editedBookmark;
-    setBookmarkList(storageBookmarks);
 
     if (typeof window !== undefined) {
       localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
     }
-    // currentEdit.current.classList.remove("editing-button");
+
+    setBookmarkList(storageBookmarks);
   }
   
   const setDefaults = (e: any) => {
