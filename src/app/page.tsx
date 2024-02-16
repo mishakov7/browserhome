@@ -72,7 +72,7 @@ export default function Home() {
         <div className='readme'>
             <h4 className='uppercase'>Homebase</h4>
             <p>Welcome to your homebase! </p>
-            <p>If you've gotten ahold of this link, congrats! You are one of my beta testers. If you experience any issues with a feature, please report it.</p>
+            <p>If you&apos;ve gotten ahold of this link, congrats! You are one of my beta testers. If you experience any issues with a feature, please report it.</p>
             <p>Here are some of the fun things you can do here: </p>
             <ul className='guide'>
               <li>
@@ -101,7 +101,7 @@ export default function Home() {
               <li>
                   <details>
                       <summary>Add a sticky!</summary>
-                      <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart's content. If you happen to lose a sticky and you can't click on it, that's what the reset button is for!</p>
+                      <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>
                   <button onClick={() => highlightFeature(dateRef)}>Show me!</button>
