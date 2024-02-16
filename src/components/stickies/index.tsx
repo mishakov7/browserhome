@@ -74,7 +74,7 @@ export default function Stickies(props: any) {
 
   const createNote = (e: any) => {
     // const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
-    const storageNotes : any = notes;
+    const storageNotes : any = notes.slice();
 
     let newNote = {
       "note": "Change what this note says!",
@@ -84,17 +84,20 @@ export default function Stickies(props: any) {
       "ypos": randomIdx(0, 500)
     };
 
+    console.log("Creating note...")
     storageNotes.push(newNote);
 
-    setNotes(storageNotes);
     if (typeof window !== undefined) {
       localStorage.setItem('notes', JSON.stringify(storageNotes));
     }
+
+    setNotes(storageNotes);
+
   }
 
   const editNote = (update: any, idx: number) => {    
     // const storageNotes = JSON.parse(String(localStorage.getItem('notes')));
-    const storageNotes : any = notes;
+    const storageNotes : any = notes.slice();
 
     storageNotes[idx] = update;
     
@@ -107,7 +110,7 @@ export default function Stickies(props: any) {
 
   const deleteNote = (idx: number) => { 
     // let storageNotes = JSON.parse(String(localStorage.getItem('notes')));
-    let storageNotes = notes;
+    let storageNotes = notes.slice();
     storageNotes.splice(idx, 1);
 
     if (typeof window !== undefined) {
@@ -121,7 +124,7 @@ export default function Stickies(props: any) {
 
   const createPolaroid = (e: any) => {
     // let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
-    let storagePolaroids : any = polaroids;
+    let storagePolaroids : any = polaroids.slice();
 
     let newPolaroid = {
       "note": "Say something.. like.. huh?",
@@ -132,18 +135,23 @@ export default function Stickies(props: any) {
       "ypos": randomIdx(0, 500)
     };
 
+    console.log("creating polaroid");
+
     storagePolaroids.push(newPolaroid);
 
-    setPolaroids(storagePolaroids);
+    console.log(polaroids);
 
     if (typeof window !== undefined) {
       localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
     }
+
+    setPolaroids(storagePolaroids);
+
   }
 
   const editPolaroid = (update: any, idx: number) => {    
     // let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
-    let storagePolaroids : any = polaroids;
+    let storagePolaroids : any = polaroids.slice();
     storagePolaroids[idx] = update;
     
     if (typeof window !== undefined) {
@@ -155,7 +163,7 @@ export default function Stickies(props: any) {
 
   const deletePolaroid = (idx: number) => { 
     // let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
-    let storagePolaroids = polaroids;
+    let storagePolaroids = polaroids.slice();
     storagePolaroids.splice(idx, 1);
 
     if (typeof window !== undefined) {
@@ -171,21 +179,38 @@ export default function Stickies(props: any) {
     let storageNotes = JSON.parse(String(localStorage.getItem('notes')));
     let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
 
-    if (storageNotes) {
-      setNotes(storageNotes);
+    // console.log(notes.length)
+    if (notes.length == 0) {
+        // console.log("zeeero!")
+        // console.log(storageNotes);
+
+        if (storageNotes) {
+          setNotes(storageNotes);
+        } else {
+          localStorage.setItem('notes', JSON.stringify(defaultNote));
+        }
 
     } else {
-      localStorage.setItem('notes', JSON.stringify(defaultNote));
+        localStorage.setItem('notes', JSON.stringify(notes));
     }
 
-    if (storagePolaroids) {
-      setPolaroids(storagePolaroids);
+    // console.log(polaroids.length)
+    if (polaroids.length == 0) {
+        // console.log("zeeero!")
+        // console.log(storagePolaroids);
+
+        if (storagePolaroids) {
+          setPolaroids(storagePolaroids);
+        } else {
+          localStorage.setItem('polaroids', JSON.stringify(defaultPolaroid));
+        }
 
     } else {
-      localStorage.setItem('polaroids', JSON.stringify(defaultPolaroid));
+        localStorage.setItem('polaroids', JSON.stringify(polaroids));
     }
 
-  }, [/*localStorage.getItem('notes'), localStorage.getItem('polaroids')*/]);
+
+  }, [/*localStorage.getItem('notes'), localStorage.getItem('polaroids')*/notes, polaroids]);
 
   return (
     <>
