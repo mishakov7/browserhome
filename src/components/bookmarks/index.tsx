@@ -11,6 +11,7 @@ export default function Bookmarks(props: any) {
   const [listScroll, setScroll] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
   const [increment, setIncrement] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
 
   const bookmarksRef = useRef<HTMLUListElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
@@ -114,34 +115,49 @@ export default function Bookmarks(props: any) {
       setBookmarkList(localBookmarks);
     }
 
-    if (bookmarksRef.current) {
+    if (bookmarksRef.current && !scrolling) {
       bookmarksRef.current.scrollTo({left: (listScroll), behavior: "smooth"});
     }
 
   }, [listScroll]);
 
   useLayoutEffect(() => {
+
     window.addEventListener("resize", function() {
       if (bookmarksRef.current) {
         setMaxScroll(bookmarksRef.current.scrollWidth - bookmarksRef.current.offsetWidth);
-        setIncrement(bookmarksRef.current.clientWidth / 2);
+        setIncrement(bookmarksRef.current.clientWidth);
       }
     })
 
     if (bookmarksRef.current) {
       setMaxScroll(bookmarksRef.current.scrollWidth - bookmarksRef.current.offsetWidth);
-      setIncrement(bookmarksRef.current.clientWidth / 2);
+      setIncrement(bookmarksRef.current.clientWidth);
+
+      bookmarksRef.current.addEventListener("scroll", function() {
+        if (bookmarksRef.current) { setScroll(bookmarksRef.current.scrollLeft); }
+        setScrolling(true);
+      })
     }
     
     return () => {
       window.removeEventListener("resize", function() {
         if (bookmarksRef.current) {
           setMaxScroll(bookmarksRef.current.scrollWidth - bookmarksRef.current.offsetWidth);
-          setIncrement(bookmarksRef.current.clientWidth / 2);
+          setIncrement(bookmarksRef.current.scrollWidth / 3);
         }
       })
+
+      if (bookmarksRef.current) {
+        setScrolling(false);
+
+        bookmarksRef.current.removeEventListener("scroll", function() {
+          if (bookmarksRef.current) { setScroll(bookmarksRef.current.scrollLeft); }
+          setScrolling(true);
+        })
+      }
     }
-  });
+  }, [scrolling]);
 
   return (
     <>

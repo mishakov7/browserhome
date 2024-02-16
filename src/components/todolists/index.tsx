@@ -206,10 +206,10 @@ export default function ToDoLists(props: any) {
   }
 
   const deleteList = (key: number) => {
-    let storageLists = lists;
-    // let storageLists = JSON.parse(String(localStorage.getItem('lists')));
+    let storageLists = lists.slice();
     storageLists.splice(key, 1);
-
+    
+    setSelectedList(selectedList - 1);
     setLists(storageLists);
 
     if (typeof window !== undefined) {
