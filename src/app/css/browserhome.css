@@ -228,7 +228,6 @@ input[type=text] {
   box-shadow: none;
   resize: none;
   font-family: "Kalam";
-  text-transform: lowercase;
   letter-spacing: 1.5px;
   padding: 10px;
 }
@@ -247,13 +246,38 @@ input[type=text] {
   line-height: 200%;
   overflow-x: hidden;
   -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
   /* Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: var(--secondary-txt-lt) var(--subtle-border);
 }
 
+.sticky-accent1 textarea {
+  scrollbar-color: rgba(var(--accent1), 0.5) rgba(var(--accent1), 0.02);
+}
+
+.sticky-accent2 textarea {
+  scrollbar-color: rgba(var(--accent2), 0.5) rgba(var(--accent2), 0.02);
+}
+
+.sticky-accent3 textarea {
+  scrollbar-color: rgba(var(--accent3), 0.5) rgba(var(--accent3), 0.02);
+}
+
+/* Chrome, Edge, and Safari */
 .sticky textarea::-webkit-scrollbar {
-  display: none;
+  width: 4px;
+  height: 4px;
+}
+
+.sticky textarea::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-txt-lt);
+  border-radius: 10px;
+  border: 0px none #ffffff;
+}
+
+.sticky textarea::-webkit-scrollbar-track {
+  background: var(--subtle-border);
+  border-radius: 10px;
 }
 
 .sticky::after {
