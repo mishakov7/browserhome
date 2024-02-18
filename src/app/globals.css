@@ -356,10 +356,6 @@ article {
 
 @media only screen and (max-width: 1280px) {
 
-  footer {
-    margin-top: -18px!important;
-  }
-
   footer .row div:last-child {
     display: flex;
     width: 100%;
@@ -386,6 +382,9 @@ article {
 }
 
 @media only screen and (max-width: 800px) {
+  footer {
+    margin-top: -18px!important;
+  }
 
   footer .readme {
     width: 100%!important;

@@ -1,19 +1,22 @@
 "use client";
-import { todo } from 'node:test';
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
+import Todo from './todo';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 
 const List = (props: any) => {
 
   const [todoList, setTodoList] : any = useState([/*{"label": "", "link": "", "checked": false}*/]);
   const [showCreator, setCreator] = useState(false);
+  const [moveIdx, setMoveIdx] : any | number = useState(null);
 
   const labelInput = useRef<HTMLInputElement>(null);
   const linkInput = useRef<HTMLInputElement>(null);
-  const checkboxRefs = useRef<HTMLInputElement[]>([]);
+  const checkboxRefs = useRef<HTMLElement[]>([]);
 
-  // let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
-  // let storageList = JSON.parse(String(localStorage.getItem('lists')))[props.listKey];
+  const todoRefs = useRef<HTMLLIElement[]>([]);
 
   const checkTodo = (e: any, idx: number) => {
     if (checkboxRefs.current[idx]) {
@@ -79,6 +82,29 @@ const List = (props: any) => {
     toggleCreator();
   }
 
+  const moveTodo = (initial: number, target: number) => {
+    let storageTodos : any = todoList.slice();
+    let todoValue = storageTodos[initial];
+    let allStorageLists = props.allLists;
+
+    setMoveIdx(target);
+    
+    storageTodos.splice(initial, 1)
+    storageTodos.splice(target, 0, todoValue)
+
+    allStorageLists[props.listKey].todoList = storageTodos;
+
+    setTodoList(storageTodos);
+    props.setAllLists(allStorageLists);
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    }
+
+
+
+  }
+
   const changeChecked = (e: any, key: number) => {
     let allStorageLists = props.allLists;
     let storageTodos = allStorageLists[props.listKey].todoList;
@@ -115,54 +141,31 @@ const List = (props: any) => {
   return (
     <>
       <h3>{props.listTitle}</h3>
-      <ul className='todo-list'>
-          {
-            todoList.length < 1 ? null :
-            todoList.map((todo: any, idx: number) => (
-              <li className='todo-item' key={idx}>
-                      
-                      { todo.checked 
-                      
-                        ?
+      <DndProvider backend={HTML5Backend}>
+          <ul className='todo-list'>
+              {
+                todoList.length < 1 ? null :
+                todoList.map((todo: any, idx: number) => ( 
+                    <Todo   
+                        key={"todo-" + idx}
+                        allRefs={todoRefs}
+                        idx={idx}
+                        isMoving={moveIdx == idx ? true : false}
+                        setMoving={setMoveIdx}
+                        isChecked={todo.checked}
+                        handleMove={moveTodo}
+                        handleCheck={checkTodo}
+                        handleChange={changeChecked}
+                        listColor={props.listColor}
+                        checkboxes={checkboxRefs}
+                        label={todo.label}
+                        link={todo.link}
+                    /> 
+                ))
+              }
 
-                        <div className='row'>
-                          <label onClick={(e: any) => checkTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}>
-                              <svg className={props.listColor + "-fill"} width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" clipRule="evenodd" d="M11.1862 0.55311C11.7904 -0.0510693 12.77 -0.0510693 13.3742 0.55311L14.2894 1.46829C14.8936 2.07249 14.8935 3.05205 14.2894 3.65622L6.84742 11.0982C6.24325 11.7023 5.26365 11.7024 4.65945 11.0982L0.453135 6.89188C-0.151062 6.28769 -0.151017 5.30813 0.453103 4.70395L1.36825 3.78877C1.97243 3.18456 2.95207 3.18453 3.55625 3.78873L5.75343 5.9859L11.1862 0.55311Z" fill="black"/>
-                              </svg>
-                          </label>
-                          <input ref={(el: any) => checkboxRefs.current[idx] = el } type="checkbox" onChange={(e) => changeChecked(e, idx)} defaultChecked />
-                          <label>
-                              {
-                                (todo.link != "") ?
-                                <a href={todo.link} target="_blank">{todo.label}</a>
-                                :
-                                <span onClick={(e: any) => checkTodo(e, idx)}>{todo.label}</span>
-                              }
-                          </label>
-                        </div>
-
-                        : 
-                        
-                        <div className='row'>
-                          <label onClick={(e: any) => checkTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}></label>
-                          <input ref={(el: any) => checkboxRefs.current[idx] = el } type="checkbox" onChange={(e) => changeChecked(e, idx)} />                          
-                          <label>
-                              {
-                                (todo.link != "") ?
-                                <a href={todo.link} target="_blank">{todo.label}</a>
-                                :
-                                <span onClick={(e: any) => checkTodo(e, idx)}>{todo.label}</span>
-                              }
-                              {/* <a href={todo.link} target="_blank">{todo.label}</a> */}
-                          </label>
-                        </div>
-                      }
-              </li>
-            ))
-          }
-
-      </ul>
+          </ul>
+      </DndProvider>
       <div className='creator-wrapper'>
 
         <button className='create-button' onClick={toggleCreator}>

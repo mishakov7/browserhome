@@ -120,7 +120,7 @@ const Bookmark = (props: any) => {
     }),
   });
 
-  const opacity = isDragging ? 0.5 : 1;
+  const opacity = isDragging ? 0.1 : 1;
   drag(drop(bookmarkRef))
 
   return (

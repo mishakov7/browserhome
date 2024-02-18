@@ -109,12 +109,50 @@ div.list-container:nth-of-type(5) {
 }
   
 .todo-item {
+    margin: 0;
     list-style-type: none;
-}
-  
-.todo-item {
     border-bottom: solid 2.55px var(--subtle-border);
-    padding-bottom: 10px;
+    padding: 10px;
+    transition: background-color 0.2s;
+    cursor: move;
+}
+
+.todo-item.dragging-accent1 {
+    border-top: solid 2.55px rgb(var(--accent1));
+    background-color: var(--subtle-border);
+}
+
+.todo-item.dragging-accent2 {
+    border-top: solid 2.55px rgb(var(--accent2));
+    background-color: var(--subtle-border);
+}
+
+.todo-item.dragging-accent3 {
+    border-top: solid 2.55px rgb(var(--accent3));
+    background-color: var(--subtle-border);
+}
+
+.todo-item:first-of-type {
+    border-radius: 10px 10px 0 0;
+}
+
+.todo-item:first-of-type.dragging-accent1,
+.todo-item:first-of-type.dragging-accent2,
+.todo-item:first-of-type.dragging-accent3 {
+    border-radius: 0;
+}
+
+
+.todo-item:last-of-type {
+    border-radius: 0 0 10px 10px;
+}
+
+.todo-item:hover {
+    background-color: var(--subtle-border);
+}
+
+.todo-item:last-of-type {
+    border-bottom: none;
 }
   
 .todo-item a,
