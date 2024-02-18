@@ -1,11 +1,14 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
+import { useDrag, useDrop } from 'react-dnd';
 
 const Bookmark = (props: any) => {
   const [showCreator, setCreator] = useState(false);
   const linkRef = useRef<HTMLInputElement>(null);
   const editButton = useRef<HTMLButtonElement>(null);
+
+  const bookmarkRef = useRef(null);
 
   const editorInputs = [{
     "ref": linkRef,
@@ -36,15 +39,73 @@ const Bookmark = (props: any) => {
 
   }
 
+  const [{ handlerId }, drop] : any = useDrop({
+    accept: 'bookmark',
+    
+    // ...
+    collect(monitor) {
+        return {
+          handlerId: monitor.getHandlerId(),
+        }
+
+
+    },
+
+    // ...
+    hover(item: any, monitor: any) {
+        if (bookmarkRef.current) {
+            const target = item.idx;
+            const initial = props.bookmarkIdx;
+    
+            // bookmarkRef.current?.classList.add("dragging-bookmark");
+
+            const hoverArea = bookmarkRef.current.getBoundingClientRect();
+            const hoverMiddle = hoverArea.width / 2
+            const clientOffset = monitor.getClientOffset();
+            const clientX = clientOffset.x - hoverArea.left;
+
+            // Dragged left ?
+            if (target < initial && clientX > hoverMiddle) {
+              console.log("canceled - left");
+              return;
+            }
+            // Dragging right ?
+            if (target > initial && clientX < hoverMiddle) {
+              console.log("canceled - right");
+              return;
+            }
+
+            props.handleMove(initial, target);
+            item.index = initial;
+        }
+    }
+  })
+
+  const [{ isDragging }, drag] : any = useDrag({
+      type: 'bookmark',
+      item: () => {
+          let key = props.bookmarkKey;
+          let idx = props.bookmarkIdx;
+          return { key, idx }
+      },
+      collect: (monitor) => ({
+          isDragging: monitor.isDragging(),
+      })
+  });
+
+  const opacity = isDragging ? 0 : 1
+  drag(drop(bookmarkRef))
+
   return (
     <>
+    <li ref={bookmarkRef} /**style={{opacity}}**/ data-handler-id={handlerId} className='bookmark' data-link={props.link.split("//")[1]}>
       <div className='creator-wrapper'>
         {
           showCreator ?
           <Creator 
               toggleCreatorState={toggleCreator}
               parentRef={props.parentElmt.current}
-              handleCreator={(e: any) => { props.handleEdit(e, props.bookmarkKey, linkRef); toggleCreator(); }} 
+              handleCreator={(e: any) => { props.handleEdit(e, props.bookmarkIdx, linkRef); toggleCreator(); }} 
               inputGroups={editorInputs}
               bg="accent2"
               direction="below"
@@ -70,6 +131,7 @@ const Bookmark = (props: any) => {
               <path d="M10.4464 1.12501H14.4643C14.6064 1.12501 14.7426 1.18427 14.8431 1.28976C14.9436 1.39525 15 1.53832 15 1.68751V2.81251C15 2.96169 14.9436 3.10476 14.8431 3.21025C14.7426 3.31574 14.6064 3.37501 14.4643 3.37501H0.535714C0.393634 3.37501 0.257373 3.31574 0.156907 3.21025C0.0564412 3.10476 0 2.96169 0 2.81251V1.68751C0 1.53832 0.0564412 1.39525 0.156907 1.28976C0.257373 1.18427 0.393634 1.12501 0.535714 1.12501H4.55357L4.8683 0.467584C4.93385 0.326845 5.03582 0.208338 5.16255 0.125642C5.28927 0.0429453 5.43562 -0.000596081 5.58482 6.16384e-06H9.41183C9.56137 -0.000106452 9.70798 0.043598 9.83515 0.126203C9.96233 0.208807 10.065 0.327034 10.1317 0.467584L10.4464 1.12501Z" />
           </svg>
       </button>
+    </li>
     </>
   )
 }

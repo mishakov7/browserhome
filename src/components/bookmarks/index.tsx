@@ -2,7 +2,8 @@
 import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
 import Bookmark from './bookmark';
 import Creator from '../creator';
-
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 export default function Bookmarks(props: any) {
 
@@ -12,6 +13,7 @@ export default function Bookmarks(props: any) {
   const [maxScroll, setMaxScroll] = useState(0);
   const [increment, setIncrement] = useState(0);
   const [scrolling, setScrolling] = useState(false);
+  const [letterkey, setletterKey] = useState('a');
 
   const bookmarksRef = useRef<HTMLUListElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
@@ -23,6 +25,16 @@ export default function Bookmarks(props: any) {
     "name": "bookmark-link",
     "placeholder": "mishalukova.com"
   }];
+
+  function generateKey(idx:number) {
+    return "bookmark-" + letterkey + idx;
+  }
+
+  function randLetter() {
+    var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var letter = letters[Math.floor(Math.random() * letters.length)];
+    return letter;
+  }
 
   const toggleCreator = () => {
     if (showCreator) {
@@ -97,6 +109,21 @@ export default function Bookmarks(props: any) {
     }
 
     setBookmarkList(storageBookmarks);
+  }
+
+  const moveBookmark = (initial: number, target: number) => {
+    let storageBookmarks : any = bookmarkList.slice();
+    let bookmarkValue = storageBookmarks[initial];
+
+    storageBookmarks.splice(initial, 1)
+    storageBookmarks.splice(target, 0, bookmarkValue)
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));
+    }
+
+    setBookmarkList(storageBookmarks);
+
   }
   
   const setDefaults = (e: any) => {
@@ -183,25 +210,28 @@ export default function Bookmarks(props: any) {
             </button>
         </div>
 
+				<DndProvider backend={HTML5Backend}>
         <ul ref={bookmarksRef} className='bookmarks-list'>
             {
               bookmarkList.length > 0 ? 
               bookmarkList.map((bookmark: any, idx: number) => (
-                  <li className='bookmark' key={idx} data-link={bookmark.link.split("//")[1]}>
-                    <Bookmark 
-                      bookmarkKey={idx}
-                      parentElmt={bookmarksRef}
-                      link={bookmark.link}
-                      image={bookmark.image}
-                      handleDelete={() => deleteBookmark(idx)}
-                      handleEdit={editBookmark}
-                    />
-                  </li>
+                  <Bookmark 
+                    key={generateKey(idx)}
+                    bookmaryKey={generateKey(idx)}
+                    bookmarkIdx={idx}
+                    parentElmt={bookmarksRef}
+                    link={bookmark.link}
+                    image={bookmark.image}
+                    handleDelete={() => deleteBookmark(idx)}
+                    handleEdit={editBookmark}
+                    handleMove={moveBookmark}
+                  />
               )) 
               
               : null
             }
         </ul>
+        </DndProvider>
 
         <div className='arrows-container'>
 
