@@ -5,7 +5,6 @@ import Todo from './todo';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-
 const List = (props: any) => {
 
   const [todoList, setTodoList] : any = useState([/*{"label": "", "link": "", "checked": false}*/]);
@@ -111,11 +110,9 @@ const List = (props: any) => {
 
     if (e.target.checked) {
         storageTodos[key].checked = true;
-        console.log("checked")
 
     } else {
         storageTodos[key].checked = false;
-        console.log("unchecked")
     }
 
     allStorageLists[props.listKey].todoList = storageTodos;
@@ -160,6 +157,8 @@ const List = (props: any) => {
                         checkboxes={checkboxRefs}
                         label={todo.label}
                         link={todo.link}
+
+                        isEditing={false}
                     /> 
                 ))
               }

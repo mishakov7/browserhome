@@ -1,15 +1,20 @@
 "use client";
-import { todo } from 'node:test';
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
+import Todo from './todo';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const EditList = (props: any) => {
 
   const [todoList, setTodoList] : any = useState([/*{"label": "", "link": "", "checked": false}*/]);
   const [showCreator, setCreator] = useState(false);
+  const [moveIdx, setMoveIdx] : any | number = useState(null);
 
   const labelInput = useRef<HTMLInputElement>(null);
   const linkInput = useRef<HTMLInputElement>(null);
+
+  const todoRefs = useRef<HTMLLIElement[]>([]);
 
   const creatorInputs = [{
     "ref": labelInput,
@@ -69,6 +74,28 @@ const EditList = (props: any) => {
     toggleCreator();
   }
 
+  const moveTodo = (initial: number, target: number) => {
+    let storageTodos : any = todoList.slice();
+    let todoValue = storageTodos[initial];
+    let allStorageLists = props.allLists;
+
+    setMoveIdx(target);
+    
+    storageTodos.splice(initial, 1)
+    storageTodos.splice(target, 0, todoValue)
+
+    allStorageLists[props.listKey].todoList = storageTodos;
+
+    setTodoList(storageTodos);
+    props.setAllLists(allStorageLists);
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    }
+
+
+
+  }
 
   const deleteTodo = (e: any, key: number) => {
 
@@ -97,34 +124,52 @@ const EditList = (props: any) => {
   return (
     <>
       <input ref={props.listTitleRef} type="text" name="list-title" placeholder={props.listTitle} />
-      <ul className='todo-list'>
-          {
-            todoList.length < 1 ? null :
-            todoList.map((todo: any, idx: number) => (
-              <li className='todo-item' key={idx}>
-                      
-                  <div className='row'>
-                    <label onClick={(e: any) => deleteTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}>
-                        <svg className={props.listColor + "-fill"} width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path fillRule="evenodd" clipRule="evenodd" d="M0.00501831 1.86048C0.0820692 0.758606 1.03778 -0.0721815 2.13966 0.00486939L10.1202 0.562921C11.2221 0.639972 12.0528 1.59568 11.9758 2.69756C11.8987 3.79944 10.943 4.63023 9.84115 4.55318L1.86063 3.99513C0.758755 3.91807 -0.0720326 2.96236 0.00501831 1.86048Z" fill="#FA3F61"/>
-                        </svg>
-                    </label>
-                    <label>
-                        {
-                          (todo.link != "") ?
-                          <a href={todo.link} target="_blank">{todo.label}</a>
-                          :
-                          <span>{todo.label}</span>
-                        }
-                        {/* <a href={todo.link} target="_blank">{todo.label}</a> */}                    </label>
-                  </div>
+      <DndProvider backend={HTML5Backend}>
+          <ul className='todo-list'>
+              {
+                todoList.length < 1 ? null :
+                todoList.map((todo: any, idx: number) => (
+                  <Todo 
+                      key={"etodo-" + idx}
+                      allRefs={todoRefs}
+                      idx={idx}
+                      isMoving={moveIdx == idx ? true : false}
+                      setMoving={setMoveIdx}
+                      isChecked={todo.checked}
+                      handleMove={moveTodo}
+                      handleCheck={deleteTodo}
+                      handleChange={null}
+                      listColor={props.listColor}
+                      checkboxes={null}
+                      label={todo.label}
+                      link={todo.link}
 
-              </li>
-            ))
-          }
+                      isEditing={true}
+                  />
+                  // <li className='todo-item' key={idx}>
+                          
+                  //     <div className='row'>
+                  //       <label onClick={(e: any) => deleteTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}>
+                  //           <svg className={props.listColor + "-fill"} width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  //             <path fillRule="evenodd" clipRule="evenodd" d="M0.00501831 1.86048C0.0820692 0.758606 1.03778 -0.0721815 2.13966 0.00486939L10.1202 0.562921C11.2221 0.639972 12.0528 1.59568 11.9758 2.69756C11.8987 3.79944 10.943 4.63023 9.84115 4.55318L1.86063 3.99513C0.758755 3.91807 -0.0720326 2.96236 0.00501831 1.86048Z" fill="#FA3F61"/>
+                  //           </svg>
+                  //       </label>
+                  //       <label>
+                  //           {
+                  //             (todo.link != "") ?
+                  //             <a href={todo.link} target="_blank">{todo.label}</a>
+                  //             :
+                  //             <span>{todo.label}</span>
+                  //           }
+                  //       </label>
+                  //     </div>
 
+                  // </li>
+                ))
+              }
 
-      </ul>
+          </ul>
+      </DndProvider>
 
       <div className='creator-wrapper'>
           <button className='create-button' onClick={toggleCreator}>

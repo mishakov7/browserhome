@@ -59,11 +59,24 @@ div.list-container:nth-of-type(5) {
 .list-container:hover {
     transform: rotate(-6deg);
 }
+
+.list-container:hover h3:not(.selected-list:hover h3) {
+    // position: absolute;
+    left: -200px;
+    top: -20px;
+    text-align: right;
+    padding: 0 20px;
+}
   
 .list-container h3 {
+    position: relative;
+    left: 0;
+    top: 0;
     font-family: "Roboto Slab";
     color: var(--secondary-txt);
     margin-bottom: 20px;
+    width: 50%;
+    transition: left 0.2s, top 0.2s;
 }
   
 .todo-list {
@@ -164,7 +177,11 @@ div.list-container:nth-of-type(5) {
 }
   
 .todo-item .row {
-    align-items: center;
+    align-items: flex-start;
+}
+
+.todo-item .checkbox {
+    top: 3px;
 }
   
 .todo-item input:checked + label {
@@ -271,7 +288,7 @@ button.list-container:hover::before {
     line-height: 24px;
     color: var(--secondary-txt);
     border-radius: 4px;
-    width: 75%;
+    width: 50%;
     margin-bottom: 16px;
     background-color: var(--subtle-border);
     padding: 6px 0;

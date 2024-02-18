@@ -52,19 +52,9 @@ const Todo = (props: any) => {
                 return;
             }
 
-            // props.allRefs.current[dragIndex].classList.add("dragging-" + props.listColor);
             props.handleMove(dragIndex, hoverIndex);
             item.idx = hoverIndex;
-
-            // console.log(monitor.getDropResult())
         },
-        // drop(item: DragItem, monitor) {
-        //     console.log("smth was dropped ?");
-        //     console.log(monitor.getDropResult())
-        //     if (monitor.didDrop()) {
-        //         props.setMoving(null);
-        //     }
-        // }
     });
 
     const [{ isDragging }, drag] = useDrag({
@@ -89,7 +79,7 @@ const Todo = (props: any) => {
         <>
         <li style={{opacity}} ref={(el: any) => { props.allRefs.current[props.idx] = el; }} data-handler-id={handlerId} className={props.isMoving ? "todo-item dragging-" + props.listColor : "todo-item"} key={props.idx}>
             {
-                props.isChecked ?
+                props.isChecked && !props.isEditing ?
 
                 <div className='row'>
                     <label onClick={(e: any) => props.handleCheck(e, props.idx)} className={"checkbox " + props.listColor + "a-bg"}>
@@ -108,8 +98,11 @@ const Todo = (props: any) => {
                     </label>
                 </div>
 
-                : 
+                : null               
+            }
 
+            {
+                !props.isChecked && !props.isEditing ?
                 <div className='row'>
                     <label onClick={(e: any) => props.handleCheck(e, props.idx)} className={"checkbox " + props.listColor + "a-bg"}></label>
                     <input ref={(el: any) => props.checkboxes.current[props.idx] = el } type="checkbox" onChange={(e) => props.handleChange(e, props.idx)} />                          
@@ -122,7 +115,29 @@ const Todo = (props: any) => {
                         }
                     </label>
                 </div>
+                : null
             }
+
+            {
+                props.isEditing ? 
+                <div className='row'>
+                    <label onClick={(e: any) => props.handleCheck(e, props.idx)} className={"checkbox " + props.listColor + "a-bg"}>
+                        <svg className={props.listColor + "-fill"} width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M0.00501831 1.86048C0.0820692 0.758606 1.03778 -0.0721815 2.13966 0.00486939L10.1202 0.562921C11.2221 0.639972 12.0528 1.59568 11.9758 2.69756C11.8987 3.79944 10.943 4.63023 9.84115 4.55318L1.86063 3.99513C0.758755 3.91807 -0.0720326 2.96236 0.00501831 1.86048Z" fill="#FA3F61"/>
+                        </svg>
+                    </label>
+                    <label>
+                        {
+                        (props.link != "") ?
+                        <a href={props.link} target="_blank">{props.label}</a>
+                        :
+                        <span>{props.label}</span>
+                        }
+                    </label>
+                </div>
+                : null
+            }
+
         </li>
         </>
 
