@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useRef, useCallback } from 'react';
 import Bookmark from './bookmark';
 import Creator from '../creator';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+// import update from 'immutability-helper';
 
 export default function Bookmarks(props: any) {
 
@@ -112,6 +113,7 @@ export default function Bookmarks(props: any) {
   }
 
   const moveBookmark = (initial: number, target: number) => {
+    console.log("move bookmark called: " + initial )
     let storageBookmarks : any = bookmarkList.slice();
     let bookmarkValue = storageBookmarks[initial];
 

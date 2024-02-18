@@ -1,7 +1,15 @@
 "use client";
+import type { Identifier, XYCoord } from "dnd-core";
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
 import { useDrag, useDrop } from 'react-dnd';
+import { init } from 'next/dist/compiled/webpack/webpack';
+
+interface DragItem {
+  idx: number;
+  id: string;
+  type: string;
+}
 
 const Bookmark = (props: any) => {
   const [showCreator, setCreator] = useState(false);
@@ -39,66 +47,85 @@ const Bookmark = (props: any) => {
 
   }
 
-  const [{ handlerId }, drop] : any = useDrop({
+  const [{ handlerId }, drop] = useDrop<
+    DragItem,
+    void,
+    { handlerId: Identifier | null }
+  >({
     accept: 'bookmark',
-    
-    // ...
     collect(monitor) {
-        return {
-          handlerId: monitor.getHandlerId(),
-        }
-
-
+      return {
+        handlerId: monitor.getHandlerId(),
+      };
     },
+    hover(item: DragItem, monitor) {
+      if (!bookmarkRef.current) {
+        return;
+      }
+      const dragIndex = item.idx;
+      const hoverIndex = props.bookmarkIdx;
 
-    // ...
-    hover(item: any, monitor: any) {
-        if (bookmarkRef.current) {
-            const target = item.idx;
-            const initial = props.bookmarkIdx;
-    
-            // bookmarkRef.current?.classList.add("dragging-bookmark");
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) {
+        return;
+      }
 
-            const hoverArea = bookmarkRef.current.getBoundingClientRect();
-            const hoverMiddle = hoverArea.width / 2
-            const clientOffset = monitor.getClientOffset();
-            const clientX = clientOffset.x - hoverArea.left;
+      // Determine rectangle on screen
+      const hoverBoundingRect = bookmarkRef.current?.getBoundingClientRect();
 
-            // Dragged left ?
-            if (target < initial && clientX > hoverMiddle) {
-              console.log("canceled - left");
-              return;
-            }
-            // Dragging right ?
-            if (target > initial && clientX < hoverMiddle) {
-              console.log("canceled - right");
-              return;
-            }
+      // Get vertical middle
+      const hoverMiddle =
+        (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
 
-            props.handleMove(initial, target);
-            item.index = initial;
-        }
-    }
-  })
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
 
-  const [{ isDragging }, drag] : any = useDrag({
-      type: 'bookmark',
-      item: () => {
-          let key = props.bookmarkKey;
-          let idx = props.bookmarkIdx;
-          return { key, idx }
-      },
-      collect: (monitor) => ({
-          isDragging: monitor.isDragging(),
-      })
+      // Get pixels to the top
+      const hoverClientX = (clientOffset as XYCoord).x - hoverBoundingRect.left;
+
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientX < hoverMiddle) {
+        return;
+      }
+
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientX > hoverMiddle) {
+        return;
+      }
+
+      // Time to actually perform the action
+      props.handleMove(dragIndex, hoverIndex);
+
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.idx = hoverIndex;
+    },
   });
 
-  const opacity = isDragging ? 0 : 1
+  const [{ isDragging }, drag] = useDrag({
+    type: 'bookmark',
+    item: () => {
+      let idx = props.bookmarkIdx;
+      let key = props.bookmarkKey;
+      return { key, idx };
+    },
+    collect: (monitor: any) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const opacity = isDragging ? 0.5 : 1;
   drag(drop(bookmarkRef))
 
   return (
     <>
-    <li ref={bookmarkRef} /**style={{opacity}}**/ data-handler-id={handlerId} className='bookmark' data-link={props.link.split("//")[1]}>
+    <li ref={bookmarkRef} style={{opacity}} data-handler-id={handlerId} className={isDragging ? "bookmark dragging-bookmark" : "bookmark"} data-link={props.link.split("//")[1]}>
       <div className='creator-wrapper'>
         {
           showCreator ?

@@ -138,6 +138,22 @@
   // transition: opacity 0.2s;
 }
 
+// .dragging-bookmark + .bookmark{
+//   margin: 0 20px;
+// }
+
+// .dragging-bookmark + .bookmark::after {
+//   content: "";
+//   position: absolute;
+//   width: 6px;
+//   height: 80%;
+//   background-color: var(--secondary-txt-lt);
+//   left: -10px;
+//   opacity: 0.4;
+//   border-radius: 10px;
+//   margin: 0 5px;
+// }
+
 .bookmark:last-of-type {
   margin-right: 10vw;
 }
