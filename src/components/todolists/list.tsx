@@ -101,7 +101,6 @@ const List = (props: any) => {
     }
 
 
-
   }
 
   const changeChecked = (e: any, key: number) => {

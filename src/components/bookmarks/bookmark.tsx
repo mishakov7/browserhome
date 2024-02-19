@@ -118,6 +118,11 @@ const Bookmark = (props: any) => {
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
+    end: () => {
+      props.setMovingLeft(null);
+      props.setMovingRight(null);
+
+    }
   });
 
   const opacity = isDragging ? 0.1 : 1;
@@ -125,7 +130,7 @@ const Bookmark = (props: any) => {
 
   return (
     <>
-    <li ref={bookmarkRef} style={{opacity}} data-handler-id={handlerId} className={isDragging ? "bookmark dragging-bookmark" : "bookmark"} data-link={props.link.split("//")[1]}>
+    <li ref={bookmarkRef} style={{opacity}} data-handler-id={handlerId} className={'bookmark ' + (props.isMovingLeft ? ' dragging-left ' : '') + (props.isMovingRight ? ' dragging-right' : '')} data-link={props.link.split("//")[1]}>
       <div className='creator-wrapper'>
         {
           showCreator ?

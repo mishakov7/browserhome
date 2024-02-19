@@ -12,7 +12,7 @@ export default function ToDoLists(props: any) {
   const [showCreator, setCreator] = useState(false);
   const [showAlert, setAlert] = useState(false);
   const [showMessage, setMessage] = useState(false);
-  const [selectedList, setSelectedList] = useState(0);
+  // const [selectedList, setSelectedList] = useState(0);
 
   const maxLists = 5;
 
@@ -58,16 +58,6 @@ export default function ToDoLists(props: any) {
     "type": "message",
     "message": "You can have a maximum of five lists. Please delete an existing list to add a new list."
   }];
-
-
-  const toggleSelectedList = (e: any, key: number) => {
-    if (e.target.classList.contains('selected-list')) {
-      setSelectedList(key);
-    
-    } else {
-      setSelectedList(key);
-    }
-  }
 
   const toggleCreator = () => {
     if (showCreator) {
@@ -119,7 +109,6 @@ export default function ToDoLists(props: any) {
     }
 
     let storageLists = lists;
-    // let storageLists = JSON.parse(String(localStorage.getItem('lists')));
     storageLists[key].color = selectedColor;
 
     setLists(storageLists);
@@ -131,13 +120,16 @@ export default function ToDoLists(props: any) {
   }
 
   const toggleEditing = (e: any, key: number) => {
-    if (!isEditing && selectedList == key) {
+    if (!isEditing) {
       setEditing(true);
     } 
 
-    if (isEditing && selectedList == key) {
+    if (isEditing) {
+      console.log(lists);
 
       if (editTitleInput.current) {
+        console.log(editTitleInput.current.value);
+
         if (editTitleInput.current.value != "") {
           confirmList(e, key);
         }
@@ -150,7 +142,6 @@ export default function ToDoLists(props: any) {
 
   const confirmList = (e: any, key: number) => {
     let storageLists = lists;
-    // let storageLists = JSON.parse(String(localStorage.getItem('lists')));
 
     if (editTitleInput.current) {
       storageLists[key].title = editTitleInput.current.value;
@@ -209,7 +200,7 @@ export default function ToDoLists(props: any) {
     let storageLists = lists.slice();
     storageLists.splice(key, 1);
     
-    setSelectedList(selectedList - 1);
+    // setSelectedList(selectedList - 1);
     setLists(storageLists);
 
     if (typeof window !== undefined) {
@@ -217,6 +208,20 @@ export default function ToDoLists(props: any) {
     }
 
     toggleAlert();
+  }
+
+  const swapList = (key: number) => {
+    let storageLists = lists.slice();
+    let listValue = storageLists[key];
+
+    storageLists.splice(key, 1)
+    storageLists.splice(0, 0, listValue);
+
+    setLists(storageLists);
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(storageLists));
+    }
   }
 
   const setDefaults = (e: any) => {
@@ -243,12 +248,12 @@ export default function ToDoLists(props: any) {
           {
             lists.length < 1 ? null :
             lists.map((list: any, idx: number) => (
-              <div onClick={(e: any) => toggleSelectedList(e, idx)} key={idx} className={'list-container ' + (isEditing && selectedList == idx ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' ) + (selectedList == idx ? ' selected-list ' : '')}>
+              <div onClick={(e: any) => swapList(idx)} key={idx} className={'list-container ' + (idx === 0 ? 'selected-list' : '') + (isEditing ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' )}>
  
                 <div className='buttons-container'>
                     <button onClick={(e: any) => { toggleEditing(e, idx) }} className={'edit-button ' + list.color + "-fill"}>
                         {
-                            isEditing && selectedList == idx ?
+                            isEditing ?
 
                             <svg width="18" height="18" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13.6529 3.97447L11.0316 1.35316C10.7503 1.07186 10.3688 0.91382 9.97097 0.913818H1.59229C0.763848 0.913818 0.0922852 1.58538 0.0922852 2.41382V13.4138C0.0922852 14.2423 0.763848 14.9138 1.59229 14.9138H12.5923C13.4207 14.9138 14.0923 14.2423 14.0923 13.4138V5.03513C14.0923 4.63731 13.9342 4.25578 13.6529 3.97447ZM7.09229 12.9138C5.98772 12.9138 5.09229 12.0184 5.09229 10.9138C5.09229 9.80926 5.98772 8.91382 7.09229 8.91382C8.19685 8.91382 9.09229 9.80926 9.09229 10.9138C9.09229 12.0184 8.19685 12.9138 7.09229 12.9138ZM10.0923 3.39757V6.53882C10.0923 6.74591 9.92438 6.91382 9.71729 6.91382H2.46729C2.26019 6.91382 2.09229 6.74591 2.09229 6.53882V3.28882C2.09229 3.08172 2.26019 2.91382 2.46729 2.91382H9.60853C9.708 2.91382 9.80338 2.95332 9.87369 3.02366L9.98244 3.13241C10.0173 3.16723 10.0449 3.20857 10.0637 3.25406C10.0826 3.29956 10.0923 3.34832 10.0923 3.39757Z" fill="white"/>
@@ -296,7 +301,7 @@ export default function ToDoLists(props: any) {
                 </div>
 
                 {
-                  isEditing && selectedList == idx
+                  isEditing
                   
                   ?
 

@@ -93,8 +93,6 @@ const EditList = (props: any) => {
       localStorage.setItem('lists', JSON.stringify(allStorageLists));
     }
 
-
-
   }
 
   const deleteTodo = (e: any, key: number) => {
@@ -106,8 +104,11 @@ const EditList = (props: any) => {
     setTodoList(storageTodos);
 
     allStorageLists[props.listKey].todoList = storageTodos;
-    localStorage.setItem('lists', JSON.stringify(allStorageLists));
-
+    props.setAllLists(allStorageLists);
+    
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    }
 
   }
 

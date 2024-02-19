@@ -105,7 +105,7 @@
   margin: 6px;
   list-style-type: none;
   bottom: 0;
-  transition: bottom 0.2s;
+  transition: bottom 0.2s, margin 0.2s;
   /* animation: hop 0.4s backwards; */
   display: flex;
   flex-direction: row;
@@ -138,21 +138,32 @@
   // transition: opacity 0.2s;
 }
 
-// .dragging-bookmark + .bookmark{
-//   margin: 0 20px;
-// }
+.bookmark.dragging-left::after,
+.bookmark.dragging-right::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 80%;
+  background-color: var(--secondary-txt-lt);
+  opacity: 0.4;
+  border-radius: 10px;
+}
 
-// .dragging-bookmark + .bookmark::after {
-//   content: "";
-//   position: absolute;
-//   width: 6px;
-//   height: 80%;
-//   background-color: var(--secondary-txt-lt);
-//   left: -10px;
-//   opacity: 0.4;
-//   border-radius: 10px;
-//   margin: 0 5px;
-// }
+.bookmark.dragging-left::after {
+  left: -16px;
+}
+
+.bookmark.dragging-right::after {
+  right: -16px;
+}
+
+.bookmark.dragging-left {
+  margin-left: 20px;
+}
+
+.bookmark.dragging-right {
+  margin-right: 20px;
+}
 
 .bookmark:last-of-type {
   margin-right: 10vw;

@@ -4,6 +4,7 @@ import Bookmark from './bookmark';
 import Creator from '../creator';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { init } from 'next/dist/compiled/webpack/webpack';
 
 export default function Bookmarks(props: any) {
 
@@ -14,6 +15,8 @@ export default function Bookmarks(props: any) {
   const [increment, setIncrement] = useState(0);
   const [scrolling, setScrolling] = useState(false);
   const [letterkey, setletterKey] = useState('a');
+  const [moveLeftIdx, setMoveLeft] : any | number = useState(null);
+  const [moveRightIdx, setMoveRight] : any | number = useState(null);
 
   const bookmarksRef = useRef<HTMLUListElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
@@ -114,6 +117,18 @@ export default function Bookmarks(props: any) {
   const moveBookmark = (initial: number, target: number) => {
     let storageBookmarks : any = bookmarkList.slice();
     let bookmarkValue = storageBookmarks[initial];
+
+    if (initial > target) {
+        setMoveLeft(target);
+        setMoveRight(null);
+
+    }
+
+    if (initial < target) {
+        setMoveRight(target);
+        setMoveLeft(null);
+
+    }
 
     storageBookmarks.splice(initial, 1)
     storageBookmarks.splice(target, 0, bookmarkValue)
@@ -222,6 +237,10 @@ export default function Bookmarks(props: any) {
                     parentElmt={bookmarksRef}
                     link={bookmark.link}
                     image={bookmark.image}
+                    isMovingLeft={moveLeftIdx == idx ? true : false}
+                    isMovingRight={moveRightIdx == idx ? true : false}
+                    setMovingLeft={setMoveLeft}
+                    setMovingRight={setMoveRight}
                     handleDelete={() => deleteBookmark(idx)}
                     handleEdit={editBookmark}
                     handleMove={moveBookmark}
