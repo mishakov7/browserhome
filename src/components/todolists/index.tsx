@@ -125,10 +125,8 @@ export default function ToDoLists(props: any) {
     } 
 
     if (isEditing) {
-      console.log(lists);
 
       if (editTitleInput.current) {
-        console.log(editTitleInput.current.value);
 
         if (editTitleInput.current.value != "") {
           confirmList(e, key);
@@ -196,11 +194,10 @@ export default function ToDoLists(props: any) {
     toggleCreator();
   }
 
-  const deleteList = (key: number) => {
+  const deleteList = () => {
     let storageLists = lists.slice();
-    storageLists.splice(key, 1);
-    
-    // setSelectedList(selectedList - 1);
+    storageLists.shift();
+
     setLists(storageLists);
 
     if (typeof window !== undefined) {
@@ -208,19 +205,23 @@ export default function ToDoLists(props: any) {
     }
 
     toggleAlert();
+    
   }
 
   const swapList = (key: number) => {
-    let storageLists = lists.slice();
-    let listValue = storageLists[key];
 
-    storageLists.splice(key, 1)
-    storageLists.splice(0, 0, listValue);
-
-    setLists(storageLists);
-
-    if (typeof window !== undefined) {
-      localStorage.setItem('lists', JSON.stringify(storageLists));
+    if (key != 0) {
+      let storageLists = lists.slice();
+      let listValue = storageLists[key];
+  
+      storageLists.splice(key, 1)
+      storageLists.splice(0, 0, listValue);
+  
+      setLists(storageLists);
+  
+      if (typeof window !== undefined) {
+        localStorage.setItem('lists', JSON.stringify(storageLists));
+      }
     }
   }
 
@@ -248,7 +249,7 @@ export default function ToDoLists(props: any) {
           {
             lists.length < 1 ? null :
             lists.map((list: any, idx: number) => (
-              <div onClick={(e: any) => swapList(idx)} key={idx} className={'list-container ' + (idx === 0 ? 'selected-list' : '') + (isEditing ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' )}>
+              <div onClick={(e: any) => swapList(idx)} key={idx} className={'list-container ' + (idx === 0 ? 'selected-list' : '') + (isEditing && idx == 0 ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' )}>
  
                 <div className='buttons-container'>
                     <button onClick={(e: any) => { toggleEditing(e, idx) }} className={'edit-button ' + list.color + "-fill"}>
@@ -289,7 +290,7 @@ export default function ToDoLists(props: any) {
                       <Creator 
                           isAlert={true}
                           toggleCreatorState={toggleAlert}
-                          handleCreator={() => deleteList(idx)}
+                          handleCreator={() => deleteList()}
                           inputGroups={alertInputs}
                           bg={list.color}
                           direction="below"
@@ -299,23 +300,12 @@ export default function ToDoLists(props: any) {
                     }
                     
                 </div>
-
-                {
-                  isEditing
-                  
-                  ?
-
-                  <EditList
-                    allLists={lists}
-                    setAllLists={setLists}
-                    listTitleRef={editTitleInput}
-                    listTitle={list.title}
-                    listKey={idx}
-                    listColor={list.color}
-                  />
-
-                  : 
-
+                    {
+                      idx != 0 ? 
+                      <span className='list-label'>{list.title}</span>
+                      : null
+                    }
+                    
                   <List 
                     allLists={lists}
                     setAllLists={setLists}
@@ -323,8 +313,6 @@ export default function ToDoLists(props: any) {
                     listKey={idx}
                     listColor={list.color}
                   />
-                  
-                }
 
               </div>
             )) 
