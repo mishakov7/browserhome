@@ -24,12 +24,18 @@
     right: 30px;
   }
   
+
+div.list-container:not(.list-container:first-of-type):hover ul,
+div.list-container:not(.list-container:first-of-type):hover .creator-wrapper {
+    filter: blur(2px);
+}
+
 div.list-container:nth-of-type(1) {
     transform: rotate(-8deg);
 }
   
 .list-container:nth-of-type(2) .todo-list { max-height: 175px; }
-// .list-container:nth-of-type(2):hover .list-label { left: -82px; }
+div.list-container:nth-of-type(2):hover { transform: translate(-100px, 0) rotate(-12deg); }
 div.list-container:nth-of-type(2) {
     transform: rotate(-12deg);
     top: 40px;
@@ -37,7 +43,7 @@ div.list-container:nth-of-type(2) {
 }
 
 .list-container:nth-of-type(3) .todo-list { max-height: 150px; }
-// .list-container:nth-of-type(3):hover .list-label { left: -92px; }
+div.list-container:nth-of-type(3):hover { transform: translate(-100px, 0) rotate(-16deg); }
 div.list-container:nth-of-type(3) {
     transform: rotate(-16deg);
     top: 70px;
@@ -45,7 +51,7 @@ div.list-container:nth-of-type(3) {
 }
  
 .list-container:nth-of-type(4) .todo-list { max-height: 125px; }
-// .list-container:nth-of-type(4):hover .list-label { left: -88px; }
+div.list-container:nth-of-type(4):hover { transform: translate(-100px, 0) rotate(-20deg); }
 div.list-container:nth-of-type(4) {
     transform: rotate(-20deg);
     top: 100px;
@@ -53,35 +59,54 @@ div.list-container:nth-of-type(4) {
 }
   
 .list-container:nth-of-type(5) .todo-list { max-height: 100px; }
-// .list-container:nth-of-type(5):hover .list-label { left: -75px; }
+div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate(-24deg); }
 div.list-container:nth-of-type(5) {
     transform: rotate(-24deg);
     top: 130px;
     z-index: 7;
 }
-  
-.list-container:hover {
-    transform: rotate(-6deg);
+
+@keyframes pulseacc1 {
+    0% {
+        background-color: var(--base-container);
+    } 50% {
+        background-color: hsl(var(--accent1-hsl), 95%);
+    } 100% {
+        background-color: var(--base-container);
+    }
 }
 
-.list-label:not(.selected-list .list-label) {
-    position: absolute;
-    left: 50px;
-    top: 22px;
-    width: 50%;
-    text-align: left;
-    padding: 2px 15px;
-    font-family: var(--robo);
-    font-size: 14px;
-    text-transform: uppercase;
-    border-radius: 10px;
-    color: #FFF;
-    transition: left 0.2s;
+@keyframes pulseacc2 {
+    0% {
+        background-color: var(--base-container);
+    } 50% {
+        background-color: hsl(var(--accent2-hsl), 95%);
+    } 100% {
+        background-color: var(--base-container);
+    }
 }
 
-.list-container:hover .list-label { 
-    left: -100px; 
+@keyframes pulseacc3 {
+    0% {
+        background-color: var(--base-container);
+    } 50% {
+        background-color: hsl(var(--accent3-hsl), 95%);
+    } 100% {
+        background-color: var(--base-container);
+    }
 }
+
+// .accent1-border-hover.list-container:not(.list-container:first-of-type):hover {
+//     animation: pulseacc1 2s infinite;
+// }
+
+// .accent2-border-hover.list-container:not(.list-container:first-of-type):hover {
+//     animation: pulseacc2 2s infinite;
+// }
+
+// .accent3-border-hover.list-container:not(.list-container:first-of-type):hover {
+//     animation: pulseacc3 2s infinite;
+// }
 
 .accent1-border-hover.list-container .list-label:not(.selected-list .list-label) {
     background-color: rgb(var(--accent1));

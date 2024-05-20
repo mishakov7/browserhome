@@ -300,12 +300,7 @@ export default function ToDoLists(props: any) {
                     }
                     
                 </div>
-                    {
-                      idx != 0 ? 
-                      <span className='list-label'>{list.title}</span>
-                      : null
-                    }
-                    
+                
                   <List 
                     allLists={lists}
                     setAllLists={setLists}

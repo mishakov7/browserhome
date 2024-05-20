@@ -1,7 +1,22 @@
 /* SEARCH QUERY */
 .search-container {
     width: 40vw;
+    backdrop-filter: blur(20px);
+    position: relative;
+    padding: 20px;
+    border-radius: 24px;
 }
+
+// .search-container::after {
+//     content: "";
+//     position: absolute;
+//     inset: 0;
+//     z-index: -1;
+ 
+//     background: red;
+//     mask: linear-gradient(to top, transparent, var(--base-bg) 35%);
+//     backdrop-filter: blur(2px);
+//  }
 
 .search-query {
     font-family: 'Plus Jakarta';
