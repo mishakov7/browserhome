@@ -852,6 +852,10 @@ button {
   }
 }
 
+.trash-animation path:last-of-type {
+  animation: close-trash 0.8s infinite;
+}
+
 .remove-button:hover path:last-of-type {
   animation: close-trash 0.4s;
 }

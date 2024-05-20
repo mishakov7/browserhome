@@ -2,8 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
 import Todo from './todo';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const List = (props: any) => {
 
@@ -125,6 +123,23 @@ const List = (props: any) => {
     
   }
 
+  const deleteTodo = (key: number) => {
+
+    let storageTodos = JSON.parse(String(localStorage.getItem('lists')))[props.listKey].todoList;
+    let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
+
+    storageTodos.splice(key, 1);
+    setTodoList(storageTodos);
+
+    allStorageLists[props.listKey].todoList = storageTodos;
+    props.setAllLists(allStorageLists);
+    
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    }
+
+  }
+
   useEffect(() => {
     let localTodos;
     if (localStorage.getItem('lists')) {
@@ -137,8 +152,7 @@ const List = (props: any) => {
   return (
     <>
       <h3>{props.listTitle}</h3>
-      <DndProvider backend={HTML5Backend}>
-          <ul className='todo-list'>
+      <ul className='todo-list'>
               {
                 todoList.length < 1 ? null :
                 todoList.map((todo: any, idx: number) => ( 
@@ -152,6 +166,8 @@ const List = (props: any) => {
                         handleMove={moveTodo}
                         handleCheck={checkTodo}
                         handleChange={changeChecked}
+                        handleDelete={deleteTodo}
+                        trashRef={props.trashDrop.current[idx]}
                         listColor={props.listColor}
                         checkboxes={checkboxRefs}
                         label={todo.label}
@@ -162,8 +178,7 @@ const List = (props: any) => {
                 ))
               }
 
-          </ul>
-      </DndProvider>
+      </ul>
       <div className='creator-wrapper'>
 
         <button className='create-button' onClick={toggleCreator}>

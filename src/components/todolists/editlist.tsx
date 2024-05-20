@@ -2,8 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
 import Todo from './todo';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const EditList = (props: any) => {
 
@@ -95,7 +93,7 @@ const EditList = (props: any) => {
 
   }
 
-  const deleteTodo = (e: any, key: number) => {
+  const deleteTodo = (key: number) => {
 
     let storageTodos = JSON.parse(String(localStorage.getItem('lists')))[props.listKey].todoList;
     let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
@@ -125,8 +123,7 @@ const EditList = (props: any) => {
   return (
     <>
       <input ref={props.listTitleRef} type="text" name="list-title" placeholder={props.listTitle} />
-      <DndProvider backend={HTML5Backend}>
-          <ul className='todo-list'>
+      <ul className='todo-list'>
               {
                 todoList.length < 1 ? null :
                 todoList.map((todo: any, idx: number) => (
@@ -138,7 +135,9 @@ const EditList = (props: any) => {
                       setMoving={setMoveIdx}
                       isChecked={todo.checked}
                       handleMove={moveTodo}
-                      handleCheck={deleteTodo}
+                      handleDelete={deleteTodo}
+                      trashRef={props.trashDrop.current[idx]}
+                      // handleCheck={deleteTodo}
                       handleChange={null}
                       listColor={props.listColor}
                       checkboxes={null}
@@ -151,9 +150,9 @@ const EditList = (props: any) => {
                           
                   //     <div className='row'>
                   //       <label onClick={(e: any) => deleteTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}>
-                  //           <svg className={props.listColor + "-fill"} width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  //             <path fillRule="evenodd" clipRule="evenodd" d="M0.00501831 1.86048C0.0820692 0.758606 1.03778 -0.0721815 2.13966 0.00486939L10.1202 0.562921C11.2221 0.639972 12.0528 1.59568 11.9758 2.69756C11.8987 3.79944 10.943 4.63023 9.84115 4.55318L1.86063 3.99513C0.758755 3.91807 -0.0720326 2.96236 0.00501831 1.86048Z" fill="#FA3F61"/>
-                  //           </svg>
+                            // <svg className={props.listColor + "-fill"} width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            //   <path fillRule="evenodd" clipRule="evenodd" d="M0.00501831 1.86048C0.0820692 0.758606 1.03778 -0.0721815 2.13966 0.00486939L10.1202 0.562921C11.2221 0.639972 12.0528 1.59568 11.9758 2.69756C11.8987 3.79944 10.943 4.63023 9.84115 4.55318L1.86063 3.99513C0.758755 3.91807 -0.0720326 2.96236 0.00501831 1.86048Z" fill="#FA3F61"/>
+                            // </svg>
                   //       </label>
                   //       <label>
                   //           {
@@ -169,8 +168,7 @@ const EditList = (props: any) => {
                 ))
               }
 
-          </ul>
-      </DndProvider>
+      </ul>
 
       <div className='creator-wrapper'>
           <button className='create-button' onClick={toggleCreator}>
