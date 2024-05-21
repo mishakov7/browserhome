@@ -155,7 +155,7 @@
     background-color: hsl(var(--accent3-hsl), 90%);
   }
   
-  .sticky textarea,
+  .sticky .textarea,
   .sticky input {
     position: relative;
     background: none;
@@ -168,51 +168,52 @@
     padding: 10px;
   }
   
-  .sticky textarea:focus,
-  .sticky textarea:focus-visible,
+  .sticky .textarea:focus,
+  .sticky .textarea:focus-visible,
   .sticky input:focus,
   .sticky input:focus-visible {
     outline: none;
   }
   
-  .sticky textarea {
+  .sticky .textarea {
     margin-top: 20px;
     width: 250px;
     height: 200px;
     line-height: 200%;
     overflow-x: hidden;
     -ms-overflow-style: none;
+    cursor: text;
 
     /* Firefox */
     scrollbar-width: auto;
     scrollbar-color: var(--secondary-txt-lt) var(--subtle-border);
   }
   
-  .sticky-accent1 textarea {
+  .sticky-accent1 .textarea {
     scrollbar-color: rgba(var(--accent1), 0.5) rgba(var(--accent1), 0.02);
   }
 
-  .sticky-accent2 textarea {
+  .sticky-accent2 .textarea {
     scrollbar-color: rgba(var(--accent2), 0.5) rgba(var(--accent2), 0.02);
   }
 
-  .sticky-accent3 textarea {
+  .sticky-accent3 .textarea {
     scrollbar-color: rgba(var(--accent3), 0.5) rgba(var(--accent3), 0.02);
   }
 
   /* Chrome, Edge, and Safari */
-  .sticky textarea::-webkit-scrollbar {
+  .sticky .textarea::-webkit-scrollbar {
     width: 4px;
     height: 4px;
   }
 
-  .sticky textarea::-webkit-scrollbar-thumb {
+  .sticky .textarea::-webkit-scrollbar-thumb {
     background-color: var(--secondary-txt-lt);
     border-radius: 10px;
     border: 0px none #ffffff;
   }
 
-  .sticky textarea::-webkit-scrollbar-track {
+  .sticky .textarea::-webkit-scrollbar-track {
     background: var(--subtle-border);
     border-radius: 10px;
   }
