@@ -380,7 +380,7 @@ button.list-container:hover::before {
     z-index: -1;
 }
 
-.editing-list input:not(.creator input) {
+.editing-list:first-of-type input:not(.creator input) {
     box-shadow: none;
     font-family: "Roboto Slab";
     font-size: 18px;

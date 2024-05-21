@@ -12,12 +12,12 @@ import { title } from 'process';
 
 export default function ToDoLists(props: any) {
 
-  const [lists, setLists] : any = useState([/*{"color": "", "title": "", "todoList": []}*/]);
+  const [lists, setLists] : any = useState([]);
+  const [selectedColor, setColor] = useState("");
   const [isEditing, setEditing] = useState(false);
   const [showCreator, setCreator] = useState(false);
   const [showAlert, setAlert] = useState(false);
   const [showMessage, setMessage] = useState(false);
-  // const [selectedList, setSelectedList] = useState(0);
 
   const maxLists = 5;
 
@@ -95,18 +95,18 @@ export default function ToDoLists(props: any) {
   
   const toggleColor = (key: number, color: string) => {
     let colors = ["accent1", "accent2", "accent3"];
-    let selectedColor = color;
+    let currentColor = color;
 
     for (let i = 0; i < colors.length; i++) {
 
-      if (selectedColor == colors[i]) {
+      if (currentColor == colors[i]) {
         
         if (i == colors.length - 1) {
-          selectedColor = colors[0];
+          currentColor = colors[0];
           break;
         
         } else {
-          selectedColor = colors[i + 1];
+          currentColor = colors[i + 1];
           break;
         
         }
@@ -115,8 +115,10 @@ export default function ToDoLists(props: any) {
 
     }
 
+    setColor(currentColor);
+
     let storageLists = lists;
-    storageLists[key].color = selectedColor;
+    storageLists[key].color = currentColor;
 
     setLists(storageLists);
 
@@ -245,6 +247,7 @@ export default function ToDoLists(props: any) {
   
     if (localLists) {
       setLists(localLists);
+      setColor(localLists[0].color);
     }
 
   }, []);
@@ -259,9 +262,9 @@ export default function ToDoLists(props: any) {
               <div onClick={(e: any) => swapList(idx)} key={idx} className={'list-container ' + (idx === 0 ? 'selected-list' : '') + (isEditing && idx == 0 ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' )}>
                 <DndProvider backend={HTML5Backend}>
                 <div className='buttons-container'>
-                    <button onClick={(e: any) => { toggleEditing(e, idx) }} className={'edit-button ' + list.color + "-fill"}>
+                    <button onClick={(e: any) => { toggleEditing(e, idx) }} className={(idx == 0 ? selectedColor : '') +  'edit-button ' + list.color + "-fill"}>
                         {
-                            isEditing ?
+                            isEditing && idx == 0 ?
 
                             <svg width="18" height="18" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13.6529 3.97447L11.0316 1.35316C10.7503 1.07186 10.3688 0.91382 9.97097 0.913818H1.59229C0.763848 0.913818 0.0922852 1.58538 0.0922852 2.41382V13.4138C0.0922852 14.2423 0.763848 14.9138 1.59229 14.9138H12.5923C13.4207 14.9138 14.0923 14.2423 14.0923 13.4138V5.03513C14.0923 4.63731 13.9342 4.25578 13.6529 3.97447ZM7.09229 12.9138C5.98772 12.9138 5.09229 12.0184 5.09229 10.9138C5.09229 9.80926 5.98772 8.91382 7.09229 8.91382C8.19685 8.91382 9.09229 9.80926 9.09229 10.9138C9.09229 12.0184 8.19685 12.9138 7.09229 12.9138ZM10.0923 3.39757V6.53882C10.0923 6.74591 9.92438 6.91382 9.71729 6.91382H2.46729C2.26019 6.91382 2.09229 6.74591 2.09229 6.53882V3.28882C2.09229 3.08172 2.26019 2.91382 2.46729 2.91382H9.60853C9.708 2.91382 9.80338 2.95332 9.87369 3.02366L9.98244 3.13241C10.0173 3.16723 10.0449 3.20857 10.0637 3.25406C10.0826 3.29956 10.0923 3.34832 10.0923 3.39757Z" fill="white"/>
@@ -302,7 +305,7 @@ export default function ToDoLists(props: any) {
                 </div>
 
                   {
-                    isEditing ? 
+                    isEditing && idx == 0 ? 
 
                     <EditList 
                         trashDrop={trashcan}
