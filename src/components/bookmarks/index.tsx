@@ -4,7 +4,7 @@ import Bookmark from './bookmark';
 import Creator from '../creator';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { init } from 'next/dist/compiled/webpack/webpack';
+// import { init } from 'next/dist/compiled/webpack/webpack';
 
 export default function Bookmarks(props: any) {
 

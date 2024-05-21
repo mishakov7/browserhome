@@ -192,7 +192,7 @@ export default function ToDoLists(props: any) {
     }
 
     let storageLists = lists.slice();
-    storageLists.push(storageList);
+    storageLists.unshift(storageList);
 
     setLists(storageLists);
 
@@ -262,7 +262,7 @@ export default function ToDoLists(props: any) {
               <div onClick={(e: any) => swapList(idx)} key={idx} className={'list-container ' + (idx === 0 ? 'selected-list' : '') + (isEditing && idx == 0 ? ' editing-list ' + list.color + '-border-dance' : ' ' + list.color + '-border-hover ' )}>
                 <DndProvider backend={HTML5Backend}>
                 <div className='buttons-container'>
-                    <button onClick={(e: any) => { toggleEditing(e, idx) }} className={(idx == 0 ? selectedColor : '') +  'edit-button ' + list.color + "-fill"}>
+                    <button onClick={(e: any) => { toggleEditing(e, idx) }} className={(idx == 0 ? selectedColor : '') +  ' edit-button ' + list.color + "-fill"}>
                         {
                             isEditing && idx == 0 ?
 
@@ -279,7 +279,7 @@ export default function ToDoLists(props: any) {
                         }
                     </button>
 
-                    <Trashcan color={list.color} />
+                    <Trashcan handleClick={toggleAlert} color={list.color} />
 
                     <button onClick={() => toggleColor(idx, list.color)} className={'color-button ' + list.color + "-fill"}>
                         <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -295,7 +295,7 @@ export default function ToDoLists(props: any) {
                           toggleCreatorState={toggleAlert}
                           handleCreator={() => deleteList()}
                           inputGroups={alertInputs}
-                          bg={list.color}
+                          bg="alert"
                           direction="below"
                       />
 

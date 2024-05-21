@@ -90,9 +90,9 @@ input[type=text] {
   }
 }
 .more-options-container {
-  position: absolute;
-  top: 40vh;
-  left: -8vw;
+  position: relative;
+  top: 0vh;
+  left: -135px;
   width: 24vh;
   height: 50px;
   background: rgb(var(--accent1));
@@ -138,25 +138,17 @@ input[type=text] {
 }
 
 .date {
-  padding: 30px 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px 36px 12px 12px;
   width: 100px;
   height: 100px;
   position: absolute;
   z-index: 2;
   right: 7%;
   top: -2%;
-  cursor: pointer;
-}
-
-.sticky-date {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  border-radius: 10px;
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
 }
 
 .date span:first-of-type {
@@ -863,6 +855,7 @@ input[type=text] {
   font-size: 12px;
   border-radius: 16px;
   z-index: 100;
+  box-shadow: 0px 0px 22px 2px rgba(0, 0, 0, 0.1);
 }
 
 .creator::before {
@@ -876,8 +869,14 @@ input[type=text] {
   z-index: -1;
 }
 
+.creator.alert-bg {
+  margin: 0;
+  padding-bottom: 0;
+}
+
 .directed-left.creator::before {
   left: -10px;
+  bottom: 25px;
 }
 
 .directed-right.creator::before {
@@ -1073,11 +1072,28 @@ input[type=text] {
     bottom: 40px;
   }
 }
+@keyframes appear-bookmarkalert {
+  from {
+    opacity: 0;
+    left: 100px;
+  }
+  to {
+    opacity: 1;
+    left: 70px;
+  }
+}
 .bookmarks-container .bookmarks-list .creator {
   position: absolute;
   left: -22px;
   bottom: 60px;
   animation: appear-bookmarkcreator 0.4s;
+}
+
+.bookmarks-container .bookmarks-list .alert-bg.creator {
+  position: absolute;
+  left: 70px;
+  bottom: -50px;
+  animation: appear-bookmarkalert 0.4s;
 }
 
 .bookmarks-container .creator {
@@ -1195,6 +1211,10 @@ div.list-container:nth-of-type(2):hover + div.list-container {
 
 div.list-container:nth-of-type(2):hover + div.list-container + div.list-container {
   transform: translate(-105px, 0) rotate(-20deg);
+}
+
+div.list-container:nth-of-type(2):hover + div.list-container + div.list-container + div.list-container {
+  transform: translate(-110px, 0) rotate(-24deg);
 }
 
 div.list-container:nth-of-type(3):hover {
@@ -1470,7 +1490,7 @@ button.list-container:hover::before {
   left: 200px;
 }
 
-.selected-list .buttons-container button {
+.selected-list .buttons-container button:not(.creator button) {
   width: 32px;
   height: 32px;
   margin: 0 5px;

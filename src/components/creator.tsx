@@ -27,7 +27,7 @@ const Creator = (props: any) => {
 
   return (
     <>
-    <div ref={creatorRef} className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
+    <div onMouseLeave={props.handleMouseLeave} ref={creatorRef} className={'creator ' + props.bg + '-bg ' + props.bg + '-bg-before directed-' + props.direction}>
         { props.inputGroups.map((group: any, gdx: number) => (
                     
             <div key={gdx} className="input-group">

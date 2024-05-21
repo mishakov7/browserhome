@@ -111,7 +111,7 @@ const Todo = (props: any) => {
             handlerId: monitor.getHandlerId(),
         }),
         end: (item: any, monitor: any) => {
-            if (monitor.getDropResult().name == "trashcan") {
+            if (monitor.getDropResult() && monitor.getDropResult().name == "trashcan") {
                 props.handleDelete(item.idx);
             }
             

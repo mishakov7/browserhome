@@ -20,7 +20,7 @@ const Trashcan = (props: any) => {
 
     return (
         <>
-        <button ref={drop} className={'remove-button ' + props.color + "-fill " + (isActive ? "trash-animation" : "")} data-testid="trashcan">
+        <button ref={drop} onClick={() => props.handleClick()} className={'remove-button ' + props.color + "-fill " + (isActive ? "trash-animation" : "")} data-testid="trashcan">
 
             <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.78135 17.918C1.80691 18.3464 1.98699 18.7485 2.28495 19.0424C2.5829 19.3363 2.97633 19.4999 3.38515 19.5H11.6151C12.0239 19.4999 12.4173 19.3363 12.7153 19.0424C13.0132 18.7485 13.1933 18.3464 13.2189 17.918L13.9287 6H1.07153L1.78135 17.918Z" />

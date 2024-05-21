@@ -70,6 +70,7 @@ div.list-container:nth-of-type(5) {
 div.list-container:nth-of-type(2):hover { transform: translate(-100px, 0) rotate(-12deg); }
 div.list-container:nth-of-type(2):hover + div.list-container { transform: translate(-100px, 0) rotate(-16deg); }
 div.list-container:nth-of-type(2):hover + div.list-container + div.list-container { transform: translate(-105px, 0) rotate(-20deg); }
+div.list-container:nth-of-type(2):hover + div.list-container + div.list-container + div.list-container{ transform: translate(-110px, 0) rotate(-24deg); }
 div.list-container:nth-of-type(3):hover { transform: translate(-100px, 0) rotate(-16deg); }
 div.list-container:nth-of-type(3):hover + div.list-container { transform: translate(-100px, 0) rotate(-20deg); }
 div.list-container:nth-of-type(3):hover + div.list-container + div.list-container { transform: translate(-100px, 0) rotate(-24deg); }
@@ -350,7 +351,7 @@ button.list-container:hover::before {
     left: 200px;
 }
 
-.selected-list .buttons-container button {
+.selected-list .buttons-container button:not(.creator button) {
     width: 32px;
     height: 32px;
     margin: 0 5px;
