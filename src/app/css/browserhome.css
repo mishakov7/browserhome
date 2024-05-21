@@ -1098,7 +1098,7 @@ input[type=text] {
   max-height: max-content;
   max-width: max-content;
   right: -95vw;
-  bottom: -4vh;
+  bottom: 0vh;
 }
 
 .list-container {
@@ -1278,6 +1278,12 @@ div.list-container:nth-of-type(5):hover {
   border: 0px none #ffffff;
 }
 
+.todo-item + .creator-wrapper {
+  position: absolute;
+  left: -210px;
+  top: 200px;
+}
+
 .todo-list + .creator-wrapper {
   margin: 10px 0;
   position: relative;
@@ -1315,6 +1321,26 @@ div.list-container:nth-of-type(5):hover {
 .todo-item.dragging-accent3 {
   border-top: solid 2.55px rgb(var(--accent3));
   background-color: var(--subtle-border);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.editing-todo .checkbox path {
+  fill: var(--base-bg) !important;
+  opacity: 0.7;
+  transform-origin: center;
+  animation: rotate 4s infinite;
+  animation-timing-function: linear;
+}
+
+.editing-todo .checkbox {
+  background-color: var(--base-txt) !important;
 }
 
 .todo-item:first-of-type {

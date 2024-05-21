@@ -110,6 +110,44 @@ const EditList = (props: any) => {
 
   }
 
+  const editTodo = (key: number, refs: any) => {
+    let storageTodos : any = todoList.slice();
+    let allStorageLists = JSON.parse(String(localStorage.getItem('lists')));
+    let storageTodo = storageTodos[key];
+
+    if (refs[0].ref.current) {
+      storageTodo.label = refs[0].ref.current.value;
+    }
+    
+    if (refs[1].ref.current) {
+        if (refs[1].ref.current.value.startsWith("https://") || refs[1].ref.current.value.startsWith("http://")) {
+          refs[1].ref.current.value = refs[1].ref.current.value;
+        } else {
+          if (refs[1].ref.current.value != "") {
+            refs[1].ref.current.value = "https://" + refs[1].ref.current.value;
+          }
+        }
+
+        storageTodo.link = refs[1].ref.current.value;
+
+    }
+
+    let editedTodo = {
+      "label": storageTodo.label,
+      "link": storageTodo.link
+    }
+
+    storageTodos[key] = editedTodo;
+    setTodoList(storageTodos);
+
+    allStorageLists[props.listKey].todoList = storageTodos;
+    props.setAllLists(allStorageLists);
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('lists', JSON.stringify(allStorageLists));
+    }
+
+  }
 
   useEffect(() => {
     let localTodos;
@@ -127,6 +165,7 @@ const EditList = (props: any) => {
               {
                 todoList.length < 1 ? null :
                 todoList.map((todo: any, idx: number) => (
+                  
                   <Todo 
                       key={"etodo-" + idx}
                       allRefs={todoRefs}
@@ -137,7 +176,7 @@ const EditList = (props: any) => {
                       handleMove={moveTodo}
                       handleDelete={deleteTodo}
                       trashRef={props.trashDrop.current[idx]}
-                      // handleCheck={deleteTodo}
+                      handleCheck={editTodo}
                       handleChange={null}
                       listColor={props.listColor}
                       checkboxes={null}
@@ -146,28 +185,10 @@ const EditList = (props: any) => {
 
                       isEditing={true}
                   />
-                  // <li className='todo-item' key={idx}>
-                          
-                  //     <div className='row'>
-                  //       <label onClick={(e: any) => deleteTodo(e, idx)} className={"checkbox " + props.listColor + "a-bg"}>
-                            // <svg className={props.listColor + "-fill"} width="12" height="5" viewBox="0 0 12 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            //   <path fillRule="evenodd" clipRule="evenodd" d="M0.00501831 1.86048C0.0820692 0.758606 1.03778 -0.0721815 2.13966 0.00486939L10.1202 0.562921C11.2221 0.639972 12.0528 1.59568 11.9758 2.69756C11.8987 3.79944 10.943 4.63023 9.84115 4.55318L1.86063 3.99513C0.758755 3.91807 -0.0720326 2.96236 0.00501831 1.86048Z" fill="#FA3F61"/>
-                            // </svg>
-                  //       </label>
-                  //       <label>
-                  //           {
-                  //             (todo.link != "") ?
-                  //             <a href={todo.link} target="_blank">{todo.label}</a>
-                  //             :
-                  //             <span>{todo.label}</span>
-                  //           }
-                  //       </label>
-                  //     </div>
-
-                  // </li>
+                 
                 ))
               }
-
+                  
       </ul>
 
       <div className='creator-wrapper'>
