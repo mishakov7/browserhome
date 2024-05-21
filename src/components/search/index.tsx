@@ -184,7 +184,7 @@ export default function Search(props: any) {
 
   return (
     <>
-    <div className='search-container'>
+    <div ref={props.parentRef} className='search-container'>
         <p className="search-query">{quoteSearch}</p>
         <div className="inputGroup">
           

@@ -84,7 +84,6 @@ export default function Stickies(props: any) {
       "ypos": randomIdx(0, 500)
     };
 
-    console.log("Creating note...")
     storageNotes.push(newNote);
 
     if (typeof window !== undefined) {
@@ -135,11 +134,7 @@ export default function Stickies(props: any) {
       "ypos": randomIdx(0, 500)
     };
 
-    console.log("creating polaroid");
-
     storagePolaroids.push(newPolaroid);
-
-    console.log(polaroids);
 
     if (typeof window !== undefined) {
       localStorage.setItem('polaroids', JSON.stringify(storagePolaroids));
@@ -179,11 +174,7 @@ export default function Stickies(props: any) {
     let storageNotes = JSON.parse(String(localStorage.getItem('notes')));
     let storagePolaroids = JSON.parse(String(localStorage.getItem('polaroids')));
 
-    // console.log(notes.length)
     if (notes.length == 0) {
-        // console.log("zeeero!")
-        // console.log(storageNotes);
-
         if (storageNotes) {
           setNotes(storageNotes);
         } else {
@@ -194,11 +185,7 @@ export default function Stickies(props: any) {
         localStorage.setItem('notes', JSON.stringify(notes));
     }
 
-    // console.log(polaroids.length)
     if (polaroids.length == 0) {
-        // console.log("zeeero!")
-        // console.log(storagePolaroids);
-
         if (storagePolaroids) {
           setPolaroids(storagePolaroids);
         } else {
@@ -214,7 +201,7 @@ export default function Stickies(props: any) {
 
   return (
     <>
-    <div className='more-options-container'>
+    <div ref={props.summonRef} className='more-options-container'>
         More Options
         <div className='buttons-container'>
               {/* Reset Position */}
@@ -240,7 +227,7 @@ export default function Stickies(props: any) {
               </button>
         </div>
     </div>
-    <div className='stickies-wrapper'>
+    <div ref={props.parentRef} className='stickies-wrapper'>
 
         <div className='date accent1-bg'>
             <span>{currentDate.toLocaleString('default', { month: 'short' })}</span>

@@ -11,6 +11,8 @@ import Bookmarks from '@/components/bookmarks';
 export default function Home() {
 
   // const [drawer, setDrawer] = useState();
+  // const mainWrapper = useRef(null);
+  const blurLayers = useRef<HTMLDivElement[]>([]);
   const searchRef = useRef(null);
   const bookmarkRef = useRef(null);
   const listRef = useRef(null);
@@ -23,11 +25,78 @@ export default function Home() {
 
   const highlightFeature = (ref: any) => {   
     window.scrollTo({top: 0, behavior: "smooth"});
+
+    switch(ref.current) {
+      case searchRef.current:
+        blurLayers.current[1].classList.add("blur");
+        blurLayers.current[2].classList.add("blur");
+        blurLayers.current[3].classList.add("blur");
+        break;
+      
+      case dateRef.current:
+        blurLayers.current[0].classList.add("blur");
+        blurLayers.current[1].classList.add("blur");
+        blurLayers.current[2].classList.add("blur");
+        blurLayers.current[3].classList.add("blur");
+        break;
+
+      case listRef.current:
+        blurLayers.current[0].classList.add("blur");
+        blurLayers.current[1].classList.add("blur");
+        blurLayers.current[3].classList.add("blur");
+        break;
+
+      case bookmarkRef.current:
+        blurLayers.current[0].classList.add("blur");
+        blurLayers.current[1].classList.add("blur");
+        blurLayers.current[2].classList.add("blur");
+        break;
+    }
+
     ref.current.classList.add("highlight");
 
     setTimeout(() => {
+      blurLayers.current[0].classList.remove("blur");
+      blurLayers.current[1].classList.remove("blur");
+      blurLayers.current[2].classList.remove("blur");
+      blurLayers.current[3].classList.remove("blur");
       ref.current.classList.remove("highlight");
-    }, 2000);
+    
+    }, 4000);
+  }
+
+  function blurAllLayers(layers: any, idx: number) {
+    for (let i = 0; i < layers.length; i++) {
+      if (i != idx) {
+          layers.current[i].classList.add("blur");
+      }
+    }
+  }
+
+  function findParent(child: any, parents: any) {
+    let featureParents = getParents(child);
+
+    for (let x = 0; x < parents.length; x++) {
+      for (let y = 0; y < featureParents.length; y++) {
+          if (parents[x] == featureParents[y]) {
+            return x;
+          }
+      }
+    } 
+
+  }
+
+  function getParents(el: any) {
+      var parents = [];
+      var p = el.parentNode;
+      
+      while (p !== mainWrapper.current) {
+          var o = p;
+          parents.push(o);
+          p = o.parentNode;
+      }
+      
+      return parents;
   }
 
   return (
@@ -39,24 +108,19 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-{/*
-      <Drawer 
+      { /** Drawer */ }
 
-      />
-*/}
       <div id="main-container" className="accent1-border">
         
-        { /** Drawer */ }
-
-        <div id="main-wrapper">
+        <div /*ref={mainWrapper}*/ id="main-wrapper" >
 
           <div className='col feature-group'>
-            <Search summonRef={searchRef} />
-            <Stickies summonRef={dateRef} />
-            <ToDoLists summonRef={listRef} />
+            <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
+            <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={dateRef} />
+            <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
           </div>
-
-          <Bookmarks summonRef={bookmarkRef} />
+ 
+          <Bookmarks parentRef={(el: any) => (blurLayers.current[3] = el)} summonRef={bookmarkRef} />
 
         </div>
       </div>
@@ -107,7 +171,7 @@ export default function Home() {
                       <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>
-                  <button onClick={() => highlightFeature(dateRef)}>Show me!</button>
+                  <button onClick={() => {highlightFeature(dateRef); clickFeature(dateRef);}}>Show me!</button>
               </li>
             </ul>
 
