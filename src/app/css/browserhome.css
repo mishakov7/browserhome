@@ -89,6 +89,54 @@ input[type=text] {
     border-radius: 14px 16px 14px 12px;
   }
 }
+.more-options-container {
+  position: absolute;
+  top: 40vh;
+  left: -8vw;
+  width: 24vh;
+  height: 50px;
+  background: rgb(var(--accent1));
+  border-radius: 0 0 20px 20px;
+  color: #FFF;
+  font-family: var(--robo);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 20px;
+  transform: rotate(-90deg);
+  cursor: pointer;
+}
+
+.more-options-container::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: rgb(var(--accent1));
+  top: 15px;
+  left: 40%;
+  border-radius: 0 0 12px 0;
+  transform: rotate(45deg);
+  z-index: -1;
+  transition: top 0.2s;
+}
+
+.more-options-container:hover::before {
+  top: 30px;
+}
+
+.more-options-container::after {
+  content: "";
+  position: relative;
+  display: block;
+  width: 150px;
+  height: 25px;
+  background: transparent;
+  bottom: -10px;
+  left: -5px;
+  z-index: -1;
+}
+
 .date {
   padding: 30px 0;
   display: flex;
@@ -341,99 +389,75 @@ input[type=text] {
   stroke-width: 2px;
 }
 
-.stickies-wrapper .date:hover .buttons-container {
+.more-options-container:hover .buttons-container {
+  bottom: -50px;
+}
+
+.more-options-container .buttons-container {
   display: flex;
-}
-
-.stickies-wrapper .buttons-container {
-  display: none;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   position: absolute;
-  bottom: -75px;
-  left: -40px;
+  bottom: 100px;
+  transition: bottom 0.4s;
+  left: 0;
   width: 100%;
+  z-index: -1;
 }
 
-.stickies-wrapper .buttons-container button {
+.more-options-container .buttons-container button {
   position: relative;
-  background-color: var(--secondary-txt-lt);
+  display: flex;
+  justify-content: center;
+  background-color: rgb(var(--accent1));
   padding: 8px;
   border-radius: 12px;
   max-width: 30px;
   max-height: 30px;
-}
-
-.stickies-wrapper .buttons-container button path {
-  fill: #FFF !important;
-}
-
-.stickies-wrapper .buttons-container button:hover {
-  background-color: var(--secondary-txt);
-}
-
-.stickies-wrapper .note-button {
-  top: 12px;
-  left: 6px;
-  animation: floating 2.8s infinite;
-  animation-timing-function: cubic-bezier(0, 0, 0.66, 1);
-  transition: background-color 0.2s;
-}
-
-.stickies-wrapper .reset-button {
-  top: 6px;
-  left: 0px;
-  animation: floating 2.8s alternate-reverse infinite;
-  animation-timing-function: cubic-bezier(0, 0, 0.66, 1);
-  transition: background-color 0.2s;
+  margin: 0 4px;
   cursor: pointer;
 }
 
-.stickies-wrapper .polaroid-button {
-  top: 0px;
-  left: 40px;
-  animation: floating 2.8s infinite;
-  animation-delay: 0.5s;
-  animation-timing-function: ease-out;
-  transition: background-color 0.2s;
+.more-options-container .buttons-container button path {
+  transition: fill 0.2s;
+  fill: #FFF;
 }
 
-.stickies-wrapper .buttons-container button::after {
+.more-options-container .buttons-container button:hover path {
+  fill: hsl(var(--accent1-hsl), 98%);
+}
+
+.more-options-container .buttons-container button::after {
   position: absolute;
-  display: block;
-  opacity: 0;
+  display: flex;
+  min-width: max-content;
   font-family: "Roboto Slab";
   text-transform: uppercase;
   font-size: 12px;
   color: var(--secondary-txt);
-  background-color: var(--secondary-txt-lt);
-  padding: 2px 10px;
-  border-radius: 8px;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  transform: rotate(90deg);
+  top: 104px;
+  width: 150px;
+  opacity: 0;
   transition: opacity 0.2s;
-  z-index: -1;
 }
 
-.stickies-wrapper .buttons-container button:hover::after {
+.more-options-container .buttons-container button:hover::after {
   opacity: 1;
 }
 
-.stickies-wrapper .note-button::after {
+.more-options-container .note-button::after {
   content: "+ Add Note";
-  top: 20px;
-  left: -80px;
 }
 
-.stickies-wrapper .polaroid-button::after {
+.more-options-container .polaroid-button::after {
   content: "+ Add Polaroid";
-  left: 10px;
-  top: 15px;
 }
 
-.stickies-wrapper .reset-button::after {
+.more-options-container .reset-button::after {
   content: "Reset Sticky Position";
-  left: -80px;
-  top: -25px;
-  text-align: right;
-  transform: translateX(-20px);
 }
 
 .stickies-wrapper .polaroid-container .buttons-container {
