@@ -350,33 +350,9 @@ article {
     justify-content: flex-start!important;
   }
 
-  footer {
-    padding: 0 4rem!important;
-  }
-
 }
 
 @media only screen and (max-width: 1280px) {
-
-  footer .row div:last-child {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  footer .row div:last-child p {
-    display: flex;
-    align-items: center;
-  }
-
-  footer .row div:last-child svg {
-    width: 15px;
-  }
-
-  footer .row {
-    display: flex;
-    flex-direction: column-reverse;
-  }
 
   footer ul li {
     font-size: 16px!important;
@@ -384,9 +360,6 @@ article {
 }
 
 @media only screen and (max-width: 800px) {
-  footer {
-    margin-top: -18px!important;
-  }
 
   footer .readme {
     width: 100%!important;
@@ -401,16 +374,6 @@ article {
     width: 100%;
   }
 
-}
-
-@media only screen and (max-width: 600px) {
-  footer .row div:last-child {
-    justify-content: center;
-  }
-
-  footer .row div:last-child p:last-child {
-    display: none;
-  }
 }
 
 .hide {
@@ -608,19 +571,108 @@ footer {
   font-family: var(--overpass);
   font-size: 13px;
   letter-spacing: 0.5px;
-  padding: 0 6rem 1rem 6rem;
+  padding: 0 1rem;
   margin-top: -24px;
 }
 
 footer .row {
+  position: relative;
   align-items: flex-start;
   justify-content: space-between;
   text-align: left;
   padding: 2px 0;
 }
 
-footer .row div:last-child {
-  text-align: right;
+footer .cache-button {
+  background: none;
+  border: none;
+  margin-top: -5px;
+}
+
+footer .cache-button,
+footer .kofi-button {
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+}
+
+footer .cache-button path,
+footer .kofi-button path {
+  fill: hsl(var(--accent1-hsl), 75%);
+  transition: fill 0.2s;
+}
+
+footer .cache-button:hover path,
+footer .kofi-button:hover path {
+  fill: #FFF;
+}
+
+
+footer .cache-button:hover::before,
+footer .cache-button:hover::after,
+footer .kofi-button:hover::before,
+footer .kofi-button:hover::after {
+  opacity: 1;
+}
+
+footer .kofi-button:hover::before,
+footer .cache-button:hover::after {
+  top: -10px;
+}
+
+footer .kofi-button::before,
+footer .cache-button::after {
+  position: absolute;
+  opacity: 0;
+  color: var(--base-txt);
+  font-family: var(--overpass);
+  font-size: 12px;
+  padding: 10px;
+  text-transform: uppercase;
+  text-align: left;
+  border-radius: 12px;
+  transition: opacity 0.2s, top 0.2s;
+}
+
+footer .kofi-button::after,
+footer .cache-button::before {
+  content: "";
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  display: block;
+  position: absolute;
+  border-radius: 8px;
+  transform: rotate(45deg);
+  z-index: -1;
+  transition: opacity 0.2s;
+}
+
+footer .kofi-button::before {
+  content: "Want to donate? Get me some kofi!";
+  background-color: hsl(var(--accent2-hsl), 75%);
+  width: 200px;
+  top: -20px;
+  right: 45px;
+}
+
+footer .kofi-button::after {
+  background-color: hsl(var(--accent2-hsl), 75%);
+  right: 38px;
+  top: 0;
+}
+
+footer .cache-button::after {
+  content: "Be careful when you clear your cache! You could delete all your storage off this site.";
+  background-color: hsl(var(--accent3-hsl), 75%);
+  width: 300px;
+  top: -20px;
+  left: 50px;
+}
+
+footer .cache-button::before {
+  background-color: hsl(var(--accent3-hsl), 75%);
+  left: 42px;
 }
 
 .guide {
@@ -679,11 +731,6 @@ footer .guide p {
   letter-spacing: 1px;
 }
 
-footer svg {
-  margin-right: 10px;
-  margin-top: -3px;
-}
-
 footer h4 {
   font-family: 'Plus Jakarta';
   font-weight: 800;
@@ -721,6 +768,7 @@ footer ul li {
 
 footer .readme {
   width: 50vw;
+  padding: 0 4rem;
 }
 
 footer .readme p, 
