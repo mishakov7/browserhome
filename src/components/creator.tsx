@@ -16,6 +16,10 @@ const Creator = (props: any) => {
             if (!creatorRef.current.contains(e.target) && !optionsRef.current.contains(e.target)) {
                 props.toggleCreatorState();
             }
+        } else if (creatorRef.current && dropdownRef.current) {
+            if (!creatorRef.current.contains(e.target)) {
+                props.toggleCreatorState();
+            }
         } else if (creatorRef.current && dropdownRef.current == null) {
             if (!creatorRef.current.contains(e.target)) {
                 props.toggleCreatorState();
