@@ -18,58 +18,49 @@ export default function Search(props: any) {
   const [quoteSearch, setQuoteSearch] = useState(affirmations[0].search);
   const [search, setSearch] = useState("");
 
-  const engineRef = useRef<HTMLInputElement>(null);
-  const themeRef = useRef<HTMLInputElement>(null);
-  const googleInput = useRef<HTMLInputElement>(null);
-  const duckInput = useRef<HTMLInputElement>(null);
-  const braveInput = useRef<HTMLInputElement>(null);
-  const randomInput = useRef<HTMLInputElement>(null);
-  const inspirationalInput = useRef<HTMLInputElement>(null);
-  const affirmationsInput = useRef<HTMLInputElement>(null);
-
   const creatorInputs = [{
-    "ref": engineRef,
+    // "ref": engineRef,
     "type": "dropdown",
     "label": "Search Engines",
     "name": "search-engines",
     "options": [
       {
-        "ref": googleInput,
+        // "ref": googleInput,
         "value": "google",
         "selected": searchEngine == google ? true : false
       },
       {
-        "ref": duckInput,
+        // "ref": duckInput,
         "value": "duckduckgo",
         "selected": searchEngine == duckduckgo ? true : false
       },
       {
-        "ref": braveInput,
+        // "ref": braveInput,
         "value": "brave",
         "selected": searchEngine == brave ? true : false
 
       }
     ]
   }, {
-    "ref": themeRef,
+    // "ref": themeRef,
     "type": "dropdown",
     "label": "Search Theme",
     "name": "search-theme",
     "options": [
       {
-        "ref": randomInput,
+        // "ref": randomInput,
         "value": "random",
         "selected": searchTheme == random ? true : false
 
       }, 
       {
-        "ref": inspirationalInput,
+        // "ref": inspirationalInput,
         "value": "inspirational",
         "selected": searchTheme == inspirational ? true : false
 
       },
       {
-        "ref": affirmationsInput,
+        // "ref": affirmationsInput,
         "value": "affirmations",
         "selected": searchTheme == affirmations ? true : false
 
@@ -90,30 +81,22 @@ export default function Search(props: any) {
     }
   }
 
-  const changeSearch = (e:any) => {
-    let engineInputs = [googleInput, duckInput, braveInput];
+  const changeSearch = (e: any) => {
+    
     let selectedEngine = null;
-
-    let themeInputs = [randomInput, affirmationsInput, inspirationalInput];
     let selectedTheme = null;
 
-    engineInputs.forEach(input => {
-      if (input.current) {
-        if (input.current.checked) {
-          selectedEngine = input.current.value;
+    for (let x = 0; x < creatorInputs.length; x++) {
+      for (let y = 0; y < creatorInputs[x].options.length; y++) {
+        if (creatorInputs[x].name == "search-engines" && creatorInputs[x].options[y].selected) {
+          selectedEngine = creatorInputs[x].options[y].value;
+        }
+
+        if (creatorInputs[x].name == "search-theme" && creatorInputs[x].options[y].selected) {
+          selectedTheme = creatorInputs[x].options[y].value;
         }
       }
-    });
-
-
-    themeInputs.forEach(input => {
-      if (input.current) {
-        if (input.current.checked) {
-          selectedTheme = input.current.value;
-        }
-      }
-    });
-
+    }
       
     let newSearch = {
       "engine": selectedEngine,
@@ -204,7 +187,7 @@ export default function Search(props: any) {
               showCreator ?
               <Creator 
                 toggleCreatorState={toggleCreator}
-                handleCreator={(e: any) => { changeSearch(e); } } 
+                handleCreator={changeSearch} 
                 inputGroups={creatorInputs}
                 bg="accent2"
                 direction="above"

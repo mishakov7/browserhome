@@ -362,7 +362,7 @@ export default function ToDoLists(props: any) {
                   isMessage={true}
                   toggleCreatorState={toggleMessage}
                   inputGroups={messageInputs}
-                  bg="accent3"  
+                  bg="confirm"  
                   direction="right"
               /> 
 

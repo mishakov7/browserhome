@@ -70,10 +70,6 @@
     right: 20px;
 }  
 
-// .creator.accent2-bg::before {
-//     background-color: var(--accent2);
-// }
-
 .creator input {
     padding: 0px 10px;
     border: none;
@@ -138,8 +134,7 @@
     left: -35px;
     animation: appear-searchcreator 0.4s;
     width: 100%;
-    max-width: 400px;
-    display: flex;
+    max-width: 200px;
 }
 
 .search-container .creator .input-group {
@@ -152,39 +147,53 @@
 
 
 .creator .dropdown {
-    // border: solid 2px var(--base-container);
-    background-color: var(--base-container);
-    border-radius: 8px;
+    position: relative;
     padding: 8px;
     margin: 5px 0;
+}
+
+.creator .selected-option {
+    background-color: var(--base-container);
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 8px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+// .creator .selected-option::after {
+//     content: "";
+//     display: flex;
+//     position: absolute;
+//     right: 0;
+// }
+
+.creator .options {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--base-container);
+    border: solid 2px rgb(var(--accent2));
+    border-radius: 8px;
+    width: 100%;
+    padding: 8px;
+    top: 45px;
+    z-index: 1;
 }
 
 .creator .option {
     display: flex;
     align-items: center;
-    margin: 0;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin: 2px 0;
+    cursor: pointer;
 }
 
 .creator .option label {
     font-family: var(--overpass);
 }
 
-.search-container .creator .dropdown input + .radio {
-    content: "";
-    border: solid 2px rgb(var(--accent2));
-    width: 12px;
-    height: 12px;
-    border-radius: 5px;
-    margin-right: 5px;
-}
-
-.search-container .creator .dropdown input:checked + .radio {
-    background-color: rgb(var(--accent2));
-}
-
-.search-container .creator .dropdown input:checked + .radio span {
-    background-color: rgb(var(--accent2));
-}
 
 @keyframes appear-listcreator {
     from {
@@ -217,11 +226,11 @@
 @keyframes appear-todotrash {
     from {
         opacity: 0;
-        top: -180px;
+        top: -130px;
     
     } to {
         opacity: 1;
-        top: -160px;
+        top: -115px;
     } 
 }
 
@@ -232,8 +241,8 @@
 }
 
 .list-container .buttons-container .creator {
-    top: -160px;
-    left: 4px;
+    top: -115px;
+    left: 23px;
     animation: appear-todotrash 0.4s;
 }
 

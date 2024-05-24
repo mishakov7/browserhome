@@ -216,6 +216,7 @@ article {
 .accent2-bg { background-color: rgb(var(--accent2))!important; }
 .accent3-bg   { background-color: rgb(var(--accent3))!important; }
 .alert-bg { background-color: var(--secondary-txt)!important; }
+.confirm-bg { background-color: var(--secondary-txt-lt)!important; }
 
 .accent1a-bg    { background-color: rgba(var(--accent1), 0.15)!important; }
 .accent2a-bg { background-color: rgba(var(--accent2), 0.15)!important; }
@@ -229,6 +230,7 @@ article {
 .accent2-bg-before::before { background-color: rgb(var(--accent2))!important; }
 .accent3-bg-before::before   { background-color: rgb(var(--accent3))!important; }
 .alert-bg-before::before { background-color: var(--secondary-txt)!important; }
+.confirm-bg-before::before { background-color: var(--secondary-txt-lt)!important; }
 
 .accent1-bg-after::after    { background-color: rgb(var(--accent1))!important; }
 .accent2-bg-after::after { background-color: rgb(var(--accent2))!important; }
