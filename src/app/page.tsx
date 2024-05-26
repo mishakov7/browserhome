@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
+
+import Drawers from '@/components/utilities/drawers';
 
 // Each section of the site
 import Search from '@/components/search';
@@ -10,7 +12,9 @@ import Bookmarks from '@/components/bookmarks';
 
 export default function Home() {
 
-  // const [drawer, setDrawer] = useState();
+  // const [drawer, setDrawer] = useState("");
+  const [DrawerComponent, setDrawerComponent] = useState(null);
+
   // const mainWrapper = useRef(null);
   const blurLayers = useRef<HTMLDivElement[]>([]);
   const searchRef = useRef(null);
@@ -99,6 +103,30 @@ export default function Home() {
       return parents;
   }
 
+  function changeDrawer(drawer: any) {
+    if (drawer != null) {
+      console.log(Drawers);
+      Drawers.map((x: any) => {
+        console.log("x.file: " + x.file);
+        console.log("drawer: " + drawer);
+
+        if (x.file == drawer) {
+          console.log("drawer matched");
+          x.element = <x.tag />
+          setDrawerComponent(x.element);
+        }
+      });
+    
+    } else {
+      setDrawerComponent(null);
+    }
+  }
+
+  // useEffect(() => {
+  //   changeDrawer();
+
+  // }, [drawer]);
+
   return (
     <>
     <div id="dresser" className="accent1-bg">
@@ -108,15 +136,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      { /** Drawer */ }
+      { DrawerComponent }
 
       <div id="main-container" className="accent1-border">
-        
+  
         <div /*ref={mainWrapper}*/ id="main-wrapper" >
 
           <div className='col feature-group'>
             <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
-            <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={dateRef} />
+            <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={dateRef} openTheme={changeDrawer} />
             <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
           </div>
  
@@ -124,6 +152,13 @@ export default function Home() {
 
         </div>
       </div>
+
+      {/* { 
+        drawer == "right" ? 
+        { DrawerComponent }
+        : null
+      } */}
+
       <footer>
         <div className='row'>
             <button className="cache-button">

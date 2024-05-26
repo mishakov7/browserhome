@@ -24,6 +24,7 @@ export default function Stickies(props: any) {
     "ypos": 75
   }];
 
+  const [opened, setOpened] = useState(false);
   const [notes, setNotes] = useState([]);
   const [polaroids, setPolaroids] = useState([]);
   const [letterkey, setletterKey] = useState('a');
@@ -197,11 +198,11 @@ export default function Stickies(props: any) {
     }
 
 
-  }, [/*localStorage.getItem('notes'), localStorage.getItem('polaroids')*/notes, polaroids]);
+  }, [/*notes, polaroids*/]);
 
   return (
     <>
-    <div ref={props.summonRef} className='more-options-container'>
+    <div onClick={() => { if (opened == false) { setOpened(true); props.openTheme('theme') } else { setOpened(false); props.openTheme(null); }  }} ref={props.summonRef} className='more-options-container'>
         More Options
         <div className='buttons-container'>
               {/* Reset Position */}

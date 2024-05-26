@@ -106,8 +106,8 @@ body {
   position: relative;
   overflow: hidden;
   margin: 0px;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 * {
@@ -162,6 +162,10 @@ input, textarea {
   font-size: 14px;
 }
 
+#drawer + #main-container {
+  width: 75%;
+}
+
 #main-container {
   background-color: var(--base-bg);
   border-radius: 30px;
@@ -185,7 +189,12 @@ input, textarea {
   overflow: hidden!important;
   transition: filter 0.6s;
   /* min-height: 100vh; */
-  
+}
+
+#drawer {
+  width: 25%;
+  padding: 3rem 1rem 3rem 3rem;
+  margin: 2rem 0;
 }
 
 ::-webkit-scrollbar {
@@ -567,6 +576,7 @@ label {
 }
 
 footer {
+  width: 100%;
   color: var(--base-container);
   font-family: var(--overpass);
   font-size: 13px;
