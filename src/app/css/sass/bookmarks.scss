@@ -213,14 +213,14 @@
 }
 
 .bookmark .edit-button {
-  background-color: rgba(var(--accent2), 0.7);
+  background-color: hsla(var(--accent2), 0.7);
   top: -20px;
   justify-content: center;
   align-items: center;
 }
 
 .bookmark .edit-button:hover {
-  background-color: rgba(var(--accent2), 1.0);
+  background-color: hsla(var(--accent2), 1.0);
 }
 
 .bookmark .edit-button path {

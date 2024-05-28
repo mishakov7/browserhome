@@ -82,7 +82,7 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
     0% {
         background-color: var(--base-container);
     } 50% {
-        background-color: hsl(var(--accent1-hsl), 95%);
+        background-color: hsl(var(--accent1-lt), 95%);
     } 100% {
         background-color: var(--base-container);
     }
@@ -92,7 +92,7 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
     0% {
         background-color: var(--base-container);
     } 50% {
-        background-color: hsl(var(--accent2-hsl), 95%);
+        background-color: hsl(var(--accent2-lt), 95%);
     } 100% {
         background-color: var(--base-container);
     }
@@ -102,7 +102,7 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
     0% {
         background-color: var(--base-container);
     } 50% {
-        background-color: hsl(var(--accent3-hsl), 95%);
+        background-color: hsl(var(--accent3-lt), 95%);
     } 100% {
         background-color: var(--base-container);
     }
@@ -121,15 +121,15 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
 // }
 
 .accent1-border-hover.list-container .list-label:not(.selected-list .list-label) {
-    background-color: rgb(var(--accent1));
+    background-color: hsl(var(--accent1));
 }
 
 .accent2-border-hover.list-container .list-label:not(.selected-list .list-label) {
-    background-color: rgb(var(--accent2));
+    background-color: hsl(var(--accent2));
 }
 
 .accent3-border-hover.list-container .list-label:not(.selected-list .list-label) {
-    background-color: rgb(var(--accent3));
+    background-color: hsl(var(--accent3));
 }
 
   
@@ -201,17 +201,17 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
 }
 
 .todo-item.dragging-accent1 {
-    border-top: solid 2.55px rgb(var(--accent1));
+    border-top: solid 2.55px hsl(var(--accent1));
     background-color: var(--subtle-border);
 }
 
 .todo-item.dragging-accent2 {
-    border-top: solid 2.55px rgb(var(--accent2));
+    border-top: solid 2.55px hsl(var(--accent2));
     background-color: var(--subtle-border);
 }
 
 .todo-item.dragging-accent3 {
-    border-top: solid 2.55px rgb(var(--accent3));
+    border-top: solid 2.55px hsl(var(--accent3));
     background-color: var(--subtle-border);
 }
 
@@ -236,15 +236,15 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
 }
 
 // .accent1-border-dance .editing-todo {
-//     background-color: hsl(var(--accent1-hsl), 95%);
+//     background-color: hsl(var(--accent1-lt), 95%);
 // }
 
 // .accent2-border-dance .editing-todo {
-//     background-color: hsl(var(--accent2-hsl), 95%);
+//     background-color: hsl(var(--accent2-lt), 95%);
 // }
 
 // .accent3-border-dance .editing-todo {
-//     background-color: hsl(var(--accent3-hsl), 95%);
+//     background-color: hsl(var(--accent3-lt), 95%);
 // }
 
 .todo-item:first-of-type {
@@ -325,7 +325,7 @@ button.list-container::before {
     font-family: "Roboto Slab";
     text-transform: uppercase;
     font-size: 16px;
-    color: rgb(var(--accent3));
+    color: hsl(var(--accent3));
     left: -90px;
     transform: rotate(-90deg);
     top: 75px;
@@ -333,7 +333,7 @@ button.list-container::before {
 }
   
 button.list-container:hover {
-    border-color: rgb(var(--accent3));
+    border-color: hsl(var(--accent3));
 }
   
 button.list-container:hover::before {

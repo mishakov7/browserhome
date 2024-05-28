@@ -23,7 +23,7 @@
   left: -135px;
   width: 24vh;
   height: 50px;
-  background: rgb(var(--accent1));
+  background: hsl(var(--accent1));
   border-radius: 0 0 20px 20px;
   color: #FFF;
   font-family: var(--robo);
@@ -43,7 +43,7 @@
   display: block;
   width: 30px;
   height: 30px;
-  background: rgb(var(--accent1));
+  background: hsl(var(--accent1));
   top: 0px;
   left: 40%;
   border-radius: 0 0 12px 0;
@@ -197,15 +197,15 @@
 }
 
 .sticky-accent1 {
-  background-color: hsl(var(--accent1-hsl), 90%);
+  background-color: hsl(var(--accent1-lt), 90%);
 }
 
 .sticky-accent2 {
-  background-color: hsl(var(--accent2-hsl), 90%);
+  background-color: hsl(var(--accent2-lt), 90%);
 }
 
 .sticky-accent3 {
-  background-color: hsl(var(--accent3-hsl), 90%);
+  background-color: hsl(var(--accent3-lt), 90%);
 }
 
 .sticky .textarea,
@@ -243,15 +243,15 @@
 }
 
 .sticky-accent1 .textarea {
-  scrollbar-color: rgba(var(--accent1), 0.5) rgba(var(--accent1), 0.02);
+  scrollbar-color: hsla(var(--accent1), 0.5) hsla(var(--accent1), 0.02);
 }
 
 .sticky-accent2 .textarea {
-  scrollbar-color: rgba(var(--accent2), 0.5) rgba(var(--accent2), 0.02);
+  scrollbar-color: hsla(var(--accent2), 0.5) hsla(var(--accent2), 0.02);
 }
 
 .sticky-accent3 .textarea {
-  scrollbar-color: rgba(var(--accent3), 0.5) rgba(var(--accent3), 0.02);
+  scrollbar-color: hsla(var(--accent3), 0.5) hsla(var(--accent3), 0.02);
 }
 
 /* Chrome, Edge, and Safari */
@@ -350,7 +350,7 @@
   position: relative;
   display: flex;
   justify-content: center;
-  background-color: rgb(var(--accent1));
+  background-color: hsl(var(--accent1));
   padding: 8px;
   border-radius: 12px;
   max-width: 30px;
@@ -366,7 +366,7 @@
 }
 
 .more-options-container .buttons-container button:hover path {
-  fill: hsl(var(--accent1-hsl), 98%);
+  fill: hsl(var(--accent1-lt), 98%);
 }
 
 .more-options-container .buttons-container button::after {

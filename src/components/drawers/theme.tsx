@@ -1,25 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
+// document.documentElement.style.setProperty('--base',this.state.color);
 const Drawer = (props : any) => {
+    const [theme, setTheme] = useState("light");
+    // const [accent1, setAccent1] = useState("141, 108, 210");
+    // const [accent2, setAccent2] = useState("108, 210, 161");
+    // const [accent3, setAccent3] = useState("250, 63, 97");
+    const [accent1, setAccent1] = useState("223, 78%, 62%");
+    const [accent2, setAccent2] = useState("130, 66%, 63%");
+    const [accent3, setAccent3] = useState("191, 100%, 63%");
+
+    useEffect(() => {
+        const localSettings = JSON.parse(String(localStorage.getItem('settings')));
+    
+        if (localSettings) {
+            setTheme(localSettings.theme);
+            setAccent1(localSettings.accent1);
+            setAccent2(localSettings.accent2);
+            setAccent3(localSettings.accent3);
+        
+        } else  {
+            let defaultSettings = {
+                "theme": theme,
+                "accent1": accent1,
+                "accent2": accent2,
+                "accent3": accent3
+            }
+
+            localStorage.setItem("settings", JSON.stringify(defaultSettings));
+        }
+
+        document.documentElement.style.setProperty('--accent1', accent1);
+        document.documentElement.style.setProperty('--accent2', accent2);
+        document.documentElement.style.setProperty('--accent3', accent3);
+
+        document.documentElement.style.setProperty('--accent1-lt', localSettings.accent1.split("%")[0] + "%");
+        document.documentElement.style.setProperty('--accent2-lt', localSettings.accent2.split("%")[0] + "%");
+        document.documentElement.style.setProperty('--accent3-lt', localSettings.accent3.split("%")[0] + "%");
+    
+    
+    }, []);
 
     return(
         <>
 
         <div id="drawer">
             
-            <div className="drawer-heading">
-                <h3>kjdnskjdfkj</h3>
-                <svg className="desktop-hide" width="19" height="12" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.4125 10.4171C10.3027 11.3355 8.69687 11.3355 7.58711 10.4171L1.41749 5.31118C-0.748066 3.519 0.519224 -2.45743e-07 3.33019 0L15.6694 1.07873e-06C18.4804 1.32447e-06 19.7477 3.519 17.5821 5.31118L11.4125 10.4171Z" fill="#FFF8E5"/></svg>            
-            </div>
-
-            <div className="drawer-content">
-                <p>A drawing application with capabilities similar to that of Microsoft Paint, that allows you to draw on a canvas, erase from the canvas, fill the canvas, and more. It was created with JavaScript and the Canvas API.</p>
-            </div>
-
-            <div className="drawer-buttons">
-                <a className="button" href="https://mishalukov-draw.netlify.app/" target="_blank" rel="noreferrer">View Live</a>
-                <a className="button" href="https://github.com/mishakov7/drawing-application" target="_blank" rel="noreferrer">View Code</a>
-            </div>
+            <h2>Choose Colors</h2>
 
         </div>
 

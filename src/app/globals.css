@@ -7,13 +7,21 @@
   --subtle-border: rgba(205, 199, 175, 0.15);
   --shadow: rgba(225, 217, 184, 0.2);
 
-  --accent1: 141, 108, 210;
+  /* --accent1: 141, 108, 210;
   --accent2: 108, 210, 161;
-  --accent3: 250, 63, 97;
+  --accent3: 250, 63, 97; */
 
-  --accent1-hsl: 259, 53%;
-  --accent2-hsl: 151, 53%;
-  --accent3-hsl: 349, 95%;
+  --accent1: 259, 53%, 62%;
+  --accent2: 151, 53%, 62%;
+  --accent3: 349, 95%, 61%;
+
+  /* --accent1: "";
+  --accent2: "";
+  --accent3: ""; */
+
+  --accent1-lt: 259, 53%;
+  --accent2-lt: 151, 53%;
+  --accent3-lt: 349, 95%;
 
   --jakarta: "Plus Jakarta", "Roboto", "sans-serif";
   --robo: "Roboto Slab", serif;
@@ -87,6 +95,27 @@
   src: url("/fonts/Overpass/OVERPASS-EXTRABOLD.TTF");
   font-weight: 600;
 }
+
+@keyframes opendrawer {
+  from {
+    right: -100vw;
+    width: 0%;
+  } to {
+    right: 0;
+    width: 25vw;
+  }
+}
+
+@keyframes closedrawer {
+  from {
+    right: 0;
+    width: 25vw;
+  } to {
+    right: -100vw;
+    width: 0%;
+  }
+}
+
 
 /********************/
 /** GENERAL STYLES **/
@@ -163,7 +192,7 @@ input, textarea {
 }
 
 #drawer + #main-container {
-  width: 75%;
+  width: 75vw;
 }
 
 #main-container {
@@ -192,10 +221,12 @@ input, textarea {
 }
 
 #drawer {
-  width: 25%;
+  width: 25vw;
   padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;
+  animation: opendrawer 1s;
 }
+
 
 ::-webkit-scrollbar {
   display: none;
@@ -213,37 +244,37 @@ article {
   border: solid 2.55px;
 }
 
-.accent1-txt    { color: rgb(var(--accent1))!important; }
-.accent2-txt { color: rgb(var(--accent2))!important; }
-.accent3-txt   { color: rgb(var(--accent3))!important; }
+.accent1-txt    { color: hsl(var(--accent1))!important; }
+.accent2-txt { color: hsl(var(--accent2))!important; }
+.accent3-txt   { color: hsl(var(--accent3))!important; }
 
-.accent1-hover:hover    { color: rgb(var(--accent1))!important; }
-.accent2-hover:hover { color: rgb(var(--accent2))!important; }
-.accent3-hover:hover   { color: rgb(var(--accent3))!important; }
+.accent1-hover:hover    { color: hsl(var(--accent1))!important; }
+.accent2-hover:hover { color: hsl(var(--accent2))!important; }
+.accent3-hover:hover   { color: hsl(var(--accent3))!important; }
 
-.accent1-bg    { background-color: rgb(var(--accent1))!important; }
-.accent2-bg { background-color: rgb(var(--accent2))!important; }
-.accent3-bg   { background-color: rgb(var(--accent3))!important; }
+.accent1-bg    { background-color: hsl(var(--accent1))!important; }
+.accent2-bg { background-color: hsl(var(--accent2))!important; }
+.accent3-bg   { background-color: hsl(var(--accent3))!important; }
 .alert-bg { background-color: var(--secondary-txt)!important; }
 .confirm-bg { background-color: var(--secondary-txt-lt)!important; }
 
-.accent1a-bg    { background-color: rgba(var(--accent1), 0.15)!important; }
-.accent2a-bg { background-color: rgba(var(--accent2), 0.15)!important; }
-.accent3a-bg   { background-color: rgba(var(--accent3), 0.15)!important; }
+.accent1a-bg    { background-color: hsla(var(--accent1), 0.15)!important; }
+.accent2a-bg { background-color: hsla(var(--accent2), 0.15)!important; }
+.accent3a-bg   { background-color: hsla(var(--accent3), 0.15)!important; }
 
-.accent1-bg-hover:hover    { background-color: rgb(var(--accent1))!important; }
-.accent2-bg-hover:hover { background-color: rgb(var(--accent2))!important; }
-.accent3-bg-hover:hover   { background-color: rgb(var(--accent3))!important; }
+.accent1-bg-hover:hover    { background-color: hsl(var(--accent1))!important; }
+.accent2-bg-hover:hover { background-color: hsl(var(--accent2))!important; }
+.accent3-bg-hover:hover   { background-color: hsl(var(--accent3))!important; }
 
-.accent1-bg-before::before    { background-color: rgb(var(--accent1))!important; }
-.accent2-bg-before::before { background-color: rgb(var(--accent2))!important; }
-.accent3-bg-before::before   { background-color: rgb(var(--accent3))!important; }
+.accent1-bg-before::before    { background-color: hsl(var(--accent1))!important; }
+.accent2-bg-before::before { background-color: hsl(var(--accent2))!important; }
+.accent3-bg-before::before   { background-color: hsl(var(--accent3))!important; }
 .alert-bg-before::before { background-color: var(--secondary-txt)!important; }
 .confirm-bg-before::before { background-color: var(--secondary-txt-lt)!important; }
 
-.accent1-bg-after::after    { background-color: rgb(var(--accent1))!important; }
-.accent2-bg-after::after { background-color: rgb(var(--accent2))!important; }
-.accent3-bg-after::after   { background-color: rgb(var(--accent3))!important; }
+.accent1-bg-after::after    { background-color: hsl(var(--accent1))!important; }
+.accent2-bg-after::after { background-color: hsl(var(--accent2))!important; }
+.accent3-bg-after::after   { background-color: hsl(var(--accent3))!important; }
 
 .accent1-bg,
 .accent2-bg,
@@ -257,28 +288,28 @@ article {
   transition: fill 0.2s;
 }
 
-.accent1-border    { border-color: rgb(var(--accent1))!important; }
-.accent2-border { border-color: rgb(var(--accent2))!important; }
-.accent3-border   { border-color: rgb(var(--accent3))!important; }
-.accent1-border-hover:hover    { border-color: rgb(var(--accent1))!important; }
-.accent2-border-hover:hover { border-color: rgb(var(--accent2))!important; }
-.accent3-border-hover:hover   { border-color: rgb(var(--accent3))!important; }
+.accent1-border    { border-color: hsl(var(--accent1))!important; }
+.accent2-border { border-color: hsl(var(--accent2))!important; }
+.accent3-border   { border-color: hsl(var(--accent3))!important; }
+.accent1-border-hover:hover    { border-color: hsl(var(--accent1))!important; }
+.accent2-border-hover:hover { border-color: hsl(var(--accent2))!important; }
+.accent3-border-hover:hover   { border-color: hsl(var(--accent3))!important; }
 
-.accent1-fill path    { fill: rgb(var(--accent1))!important; }
-.accent2-fill path { fill: rgb(var(--accent2))!important; }
-.accent3-fill path   { fill: rgb(var(--accent3))!important; }
+.accent1-fill path    { fill: hsl(var(--accent1))!important; }
+.accent2-fill path { fill: hsl(var(--accent2))!important; }
+.accent3-fill path   { fill: hsl(var(--accent3))!important; }
 
-.accent1-fill rect    { fill: rgb(var(--accent1))!important; }
-.accent2-fill rect { fill: rgb(var(--accent2))!important; }
-.accent3-fill rect   { fill: rgb(var(--accent3))!important; }
+.accent1-fill rect    { fill: hsl(var(--accent1))!important; }
+.accent2-fill rect { fill: hsl(var(--accent2))!important; }
+.accent3-fill rect   { fill: hsl(var(--accent3))!important; }
 
-.accent1-fill-hover:hover path    { fill: rgb(var(--accent1))!important; }
-.accent2-fill-hover:hover path { fill: rgb(var(--accent2))!important; }
-.accent3-fill-hover:hover path   { fill: rgb(var(--accent3))!important; }
+.accent1-fill-hover:hover path    { fill: hsl(var(--accent1))!important; }
+.accent2-fill-hover:hover path { fill: hsl(var(--accent2))!important; }
+.accent3-fill-hover:hover path   { fill: hsl(var(--accent3))!important; }
 
-.accent1-border-dance::before { background: linear-gradient(90deg, rgb(var(--accent1)) 50%, transparent 50%), linear-gradient(90deg, rgb(var(--accent1)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent1)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent1)) 50%, transparent 50%); }
-.accent2-border-dance::before { background: linear-gradient(90deg, rgb(var(--accent2)) 50%, transparent 50%), linear-gradient(90deg, rgb(var(--accent2)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent2)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent2)) 50%, transparent 50%); }
-.accent3-border-dance::before { background: linear-gradient(90deg, rgb(var(--accent3)) 50%, transparent 50%), linear-gradient(90deg, rgb(var(--accent3)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent3)) 50%, transparent 50%), linear-gradient(0deg, rgb(var(--accent3)) 50%, transparent 50%); }
+.accent1-border-dance::before { background: linear-gradient(90deg, hsl(var(--accent1)) 50%, transparent 50%), linear-gradient(90deg, hsl(var(--accent1)) 50%, transparent 50%), linear-gradient(0deg, hsl(var(--accent1)) 50%, transparent 50%), linear-gradient(0deg, hsl(var(--accent1)) 50%, transparent 50%); }
+.accent2-border-dance::before { background: linear-gradient(90deg, hsl(var(--accent2)) 50%, transparent 50%), linear-gradient(90deg, hsl(var(--accent2)) 50%, transparent 50%), linear-gradient(0deg, hsl(var(--accent2)) 50%, transparent 50%), linear-gradient(0deg, hsl(var(--accent2)) 50%, transparent 50%); }
+.accent3-border-dance::before { background: linear-gradient(90deg, hsl(var(--accent3)) 50%, transparent 50%), linear-gradient(90deg, hsl(var(--accent3)) 50%, transparent 50%), linear-gradient(0deg, hsl(var(--accent3)) 50%, transparent 50%), linear-gradient(0deg, hsl(var(--accent3)) 50%, transparent 50%); }
 
 .accent1-border,
 .accent2-border,
@@ -544,13 +575,13 @@ textarea {
 .google-container input[type="text"] {
   border-radius: 12px 12px 0px 0px;
   border: none;
-  border-bottom: solid 2.55px rgb(var(--accent1));
+  border-bottom: solid 2.55px hsl(var(--accent1));
 }
 
 input[type="text"]:focus-visible,
 textarea:focus-visible {
-  outline-color: rgb(var(--accent1)); 
-  -moz-outline-color: rgb(var(--accent1)); 
+  outline-color: hsl(var(--accent1)); 
+  -moz-outline-color: hsl(var(--accent1)); 
 }
 
 label {
@@ -608,7 +639,7 @@ footer .kofi-button {
 
 footer .cache-button path,
 footer .kofi-button path {
-  fill: hsl(var(--accent1-hsl), 75%);
+  fill: hsl(var(--accent1-lt), 75%);
   transition: fill 0.2s;
 }
 
@@ -660,28 +691,28 @@ footer .cache-button::before {
 
 footer .kofi-button::before {
   content: "Want to donate? Get me some kofi!";
-  background-color: hsl(var(--accent2-hsl), 75%);
+  background-color: hsl(var(--accent2-lt), 75%);
   width: 200px;
   top: -20px;
   right: 45px;
 }
 
 footer .kofi-button::after {
-  background-color: hsl(var(--accent2-hsl), 75%);
+  background-color: hsl(var(--accent2-lt), 75%);
   right: 38px;
   top: 0;
 }
 
 footer .cache-button::after {
   content: "Be careful when you clear your cache! You could delete all your storage off this site.";
-  background-color: hsl(var(--accent3-hsl), 75%);
+  background-color: hsl(var(--accent3-lt), 75%);
   width: 300px;
   top: -20px;
   left: 50px;
 }
 
 footer .cache-button::before {
-  background-color: hsl(var(--accent3-hsl), 75%);
+  background-color: hsl(var(--accent3-lt), 75%);
   left: 42px;
 }
 
@@ -968,7 +999,7 @@ button {
 }
 
 .more-options-container.highlight {
-  background: linear-gradient(180deg, rgb(var(--accent1)) 50%, hsl(var(--accent1-hsl), 55%) 100%);
+  background: linear-gradient(180deg, hsl(var(--accent1)) 50%, hsl(var(--accent1-lt), 55%) 100%);
 }
 
 .sticky-date.highlight,

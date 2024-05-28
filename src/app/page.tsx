@@ -12,10 +12,8 @@ import Bookmarks from '@/components/bookmarks';
 
 export default function Home() {
 
-  // const [drawer, setDrawer] = useState("");
   const [DrawerComponent, setDrawerComponent] = useState(null);
 
-  // const mainWrapper = useRef(null);
   const blurLayers = useRef<HTMLDivElement[]>([]);
   const searchRef = useRef(null);
   const bookmarkRef = useRef(null);
@@ -122,8 +120,21 @@ export default function Home() {
     }
   }
 
-  // useEffect(() => {
-  //   changeDrawer();
+  useEffect(() => {
+    const localSettings = JSON.parse(String(localStorage.getItem('settings')));
+
+    if (localSettings) {
+        document.documentElement.style.setProperty('--accent1', localSettings.accent1);
+        document.documentElement.style.setProperty('--accent2', localSettings.accent2);
+        document.documentElement.style.setProperty('--accent3', localSettings.accent3);
+    
+        document.documentElement.style.setProperty('--accent1-lt', localSettings.accent1.split("%")[0] + "%");
+        document.documentElement.style.setProperty('--accent2-lt', localSettings.accent2.split("%")[0] + "%");
+        document.documentElement.style.setProperty('--accent3-lt', localSettings.accent3.split("%")[0] + "%");
+    
+    } 
+
+}, []);  //   changeDrawer();
 
   // }, [drawer]);
 

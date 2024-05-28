@@ -96,7 +96,7 @@ input[type=text] {
   left: -135px;
   width: 24vh;
   height: 50px;
-  background: rgb(var(--accent1));
+  background: hsl(var(--accent1));
   border-radius: 0 0 20px 20px;
   color: #FFF;
   font-family: var(--robo);
@@ -116,7 +116,7 @@ input[type=text] {
   display: block;
   width: 30px;
   height: 30px;
-  background: rgb(var(--accent1));
+  background: hsl(var(--accent1));
   top: 0px;
   left: 40%;
   border-radius: 0 0 12px 0;
@@ -261,15 +261,15 @@ input[type=text] {
 }
 
 .sticky-accent1 {
-  background-color: hsl(var(--accent1-hsl), 90%);
+  background-color: hsl(var(--accent1-lt), 90%);
 }
 
 .sticky-accent2 {
-  background-color: hsl(var(--accent2-hsl), 90%);
+  background-color: hsl(var(--accent2-lt), 90%);
 }
 
 .sticky-accent3 {
-  background-color: hsl(var(--accent3-hsl), 90%);
+  background-color: hsl(var(--accent3-lt), 90%);
 }
 
 .sticky .textarea,
@@ -304,15 +304,15 @@ input[type=text] {
 }
 
 .sticky-accent1 .textarea {
-  scrollbar-color: rgba(var(--accent1), 0.5) rgba(var(--accent1), 0.02);
+  scrollbar-color: hsla(var(--accent1), 0.5) hsla(var(--accent1), 0.02);
 }
 
 .sticky-accent2 .textarea {
-  scrollbar-color: rgba(var(--accent2), 0.5) rgba(var(--accent2), 0.02);
+  scrollbar-color: hsla(var(--accent2), 0.5) hsla(var(--accent2), 0.02);
 }
 
 .sticky-accent3 .textarea {
-  scrollbar-color: rgba(var(--accent3), 0.5) rgba(var(--accent3), 0.02);
+  scrollbar-color: hsla(var(--accent3), 0.5) hsla(var(--accent3), 0.02);
 }
 
 /* Chrome, Edge, and Safari */
@@ -407,7 +407,7 @@ input[type=text] {
   position: relative;
   display: flex;
   justify-content: center;
-  background-color: rgb(var(--accent1));
+  background-color: hsl(var(--accent1));
   padding: 8px;
   border-radius: 12px;
   max-width: 30px;
@@ -422,7 +422,7 @@ input[type=text] {
 }
 
 .more-options-container .buttons-container button:hover path {
-  fill: hsl(var(--accent1-hsl), 98%);
+  fill: hsl(var(--accent1-lt), 98%);
 }
 
 .more-options-container .buttons-container button::after {
@@ -769,14 +769,14 @@ input[type=text] {
 }
 
 .bookmark .edit-button {
-  background-color: rgba(var(--accent2), 0.7);
+  background-color: hsla(var(--accent2), 0.7);
   top: -20px;
   justify-content: center;
   align-items: center;
 }
 
 .bookmark .edit-button:hover {
-  background-color: rgba(var(--accent2), 1);
+  background-color: hsla(var(--accent2), 1);
 }
 
 .bookmark .edit-button path {
@@ -998,7 +998,7 @@ input[type=text] {
   display: flex;
   flex-direction: column;
   background-color: var(--base-container);
-  border: solid 2px rgb(var(--accent2));
+  border: solid 2px hsl(var(--accent2));
   border-radius: 8px;
   width: 100%;
   padding: 8px;
@@ -1261,7 +1261,7 @@ div.list-container:nth-of-type(5):hover {
     background-color: var(--base-container);
   }
   50% {
-    background-color: hsl(var(--accent1-hsl), 95%);
+    background-color: hsl(var(--accent1-lt), 95%);
   }
   100% {
     background-color: var(--base-container);
@@ -1272,7 +1272,7 @@ div.list-container:nth-of-type(5):hover {
     background-color: var(--base-container);
   }
   50% {
-    background-color: hsl(var(--accent2-hsl), 95%);
+    background-color: hsl(var(--accent2-lt), 95%);
   }
   100% {
     background-color: var(--base-container);
@@ -1283,22 +1283,22 @@ div.list-container:nth-of-type(5):hover {
     background-color: var(--base-container);
   }
   50% {
-    background-color: hsl(var(--accent3-hsl), 95%);
+    background-color: hsl(var(--accent3-lt), 95%);
   }
   100% {
     background-color: var(--base-container);
   }
 }
 .accent1-border-hover.list-container .list-label:not(.selected-list .list-label) {
-  background-color: rgb(var(--accent1));
+  background-color: hsl(var(--accent1));
 }
 
 .accent2-border-hover.list-container .list-label:not(.selected-list .list-label) {
-  background-color: rgb(var(--accent2));
+  background-color: hsl(var(--accent2));
 }
 
 .accent3-border-hover.list-container .list-label:not(.selected-list .list-label) {
-  background-color: rgb(var(--accent3));
+  background-color: hsl(var(--accent3));
 }
 
 .list-container h3 {
@@ -1369,17 +1369,17 @@ div.list-container:nth-of-type(5):hover {
 }
 
 .todo-item.dragging-accent1 {
-  border-top: solid 2.55px rgb(var(--accent1));
+  border-top: solid 2.55px hsl(var(--accent1));
   background-color: var(--subtle-border);
 }
 
 .todo-item.dragging-accent2 {
-  border-top: solid 2.55px rgb(var(--accent2));
+  border-top: solid 2.55px hsl(var(--accent2));
   background-color: var(--subtle-border);
 }
 
 .todo-item.dragging-accent3 {
-  border-top: solid 2.55px rgb(var(--accent3));
+  border-top: solid 2.55px hsl(var(--accent3));
   background-color: var(--subtle-border);
 }
 
@@ -1479,7 +1479,7 @@ button.list-container::before {
   font-family: "Roboto Slab";
   text-transform: uppercase;
   font-size: 16px;
-  color: rgb(var(--accent3));
+  color: hsl(var(--accent3));
   left: -90px;
   transform: rotate(-90deg);
   top: 75px;
@@ -1487,7 +1487,7 @@ button.list-container::before {
 }
 
 button.list-container:hover {
-  border-color: rgb(var(--accent3));
+  border-color: hsl(var(--accent3));
 }
 
 button.list-container:hover::before {
