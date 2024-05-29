@@ -227,6 +227,22 @@ input, textarea {
   animation: opendrawer 1s;
 }
 
+#drawer h2,
+#drawer label,
+#drawer span, 
+#drawer p {
+  color: #FFF;
+}
+
+.theme-drawer .row {
+  position: relative;
+}
+
+.theme-drawer .w-color-colorful:not(.w-color-colorful .w-color-colorful) {
+  top: 0;
+  left: 175px;
+  z-index: 2;
+}
 
 ::-webkit-scrollbar {
   display: none;

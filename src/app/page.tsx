@@ -103,13 +103,8 @@ export default function Home() {
 
   function changeDrawer(drawer: any) {
     if (drawer != null) {
-      console.log(Drawers);
       Drawers.map((x: any) => {
-        console.log("x.file: " + x.file);
-        console.log("drawer: " + drawer);
-
         if (x.file == drawer) {
-          console.log("drawer matched");
           x.element = <x.tag />
           setDrawerComponent(x.element);
         }
@@ -160,7 +155,6 @@ export default function Home() {
           </div>
  
           <Bookmarks parentRef={(el: any) => (blurLayers.current[3] = el)} summonRef={bookmarkRef} />
-
         </div>
       </div>
 
