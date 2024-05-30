@@ -10,6 +10,26 @@ import Stickies from '@/components/stickies';
 import ToDoLists from '@/components/todolists';
 import Bookmarks from '@/components/bookmarks';
 
+const lightTheme = [
+  ["--base-bg", "#F5F1E1"],
+  ["--base-container", "#FFF8E5"],
+  ["--base-txt", "#1E1A35"],
+  ["--secondary-txt", "#867D64"],
+  ["--secondary-txt-lt", "#CDC7AF"],
+  ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
+  ["--shadow", "rgba(225, 217, 184, 0.2)"]
+]
+
+const darkTheme = [
+  ["--base-bg", "#1C202C"],
+  ["--base-container", "#171B28"],
+  ["--base-txt", "#F6F6F6"],
+  ["--secondary-txt", "#616A82"],
+  ["--secondary-txt-lt", "#949AAA"],
+  ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
+  ["--shadow", "rgba(225, 217, 184, 0.2)"]
+]
+
 export default function Home() {
 
   const [DrawerComponent, setDrawerComponent] = useState(null);
@@ -19,6 +39,7 @@ export default function Home() {
   const bookmarkRef = useRef(null);
   const listRef = useRef(null);
   const dateRef = useRef(null);
+  
 
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
@@ -65,6 +86,19 @@ export default function Home() {
       ref.current.classList.remove("highlight");
     
     }, 4000);
+  }
+
+  function setCSSTheme(theme: string) {
+      if (theme == "light") {
+          darkTheme.forEach(item => {
+              document.documentElement.style.setProperty(item[0], item[1]); 
+          });
+
+      } else {
+          lightTheme.forEach(item => {
+              document.documentElement.style.setProperty(item[0], item[1]); 
+          });        
+      }
   }
 
   function blurAllLayers(layers: any, idx: number) {
@@ -119,6 +153,7 @@ export default function Home() {
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
 
     if (localSettings) {
+        setCSSTheme(localSettings.theme);
         document.documentElement.style.setProperty('--accent1', localSettings.accent1);
         document.documentElement.style.setProperty('--accent2', localSettings.accent2);
         document.documentElement.style.setProperty('--accent3', localSettings.accent3);

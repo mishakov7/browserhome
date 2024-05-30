@@ -9,11 +9,30 @@ interface ColorResult {
     a: number;
 }
 
+const lightTheme = [
+    ["--base-bg", "#F5F1E1"],
+    ["--base-container", "#FFF8E5"],
+    ["--base-txt", "#1E1A35"],
+    ["--secondary-txt", "#867D64"],
+    ["--secondary-txt-lt", "#CDC7AF"],
+    ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
+    ["--shadow", "rgba(225, 217, 184, 0.2)"]
+]
+
+const darkTheme = [
+    ["--base-bg", "#1C202C"],
+    ["--base-container", "#171B28"],
+    ["--base-txt", "#F6F6F6"],
+    ["--secondary-txt", "#616A82"],
+    ["--secondary-txt-lt", "#949AAA"],
+    ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
+    ["--shadow", "rgba(225, 217, 184, 0.2)"]
+]
+
 // document.documentElement.style.setProperty('--base',this.state.color);
 const Drawer = (props : any) => {
     const [theme, setTheme] = useState("light");
 
-    // const colorfulRef = useRef<HTMLDivElement[]>([]);
     const colorfulRef = useRef<HTMLDivElement>(null);
     const [colorful, setColorful] = useState(-1);
 
@@ -33,7 +52,32 @@ const Drawer = (props : any) => {
         return hsvaToHslString(hsl).split("(")[1].split(")")[0];
     }
 
-    function setCSSVar(accent: string) {
+    function setCSSTheme() {
+        let storageSettings = JSON.parse(String(localStorage.getItem('settings')));
+
+        if (theme == "light") {
+            setTheme("dark");
+            storageSettings.theme = "dark";
+
+            darkTheme.forEach(item => {
+                document.documentElement.style.setProperty(item[0], item[1]); 
+            });
+
+        } else {
+            setTheme("light");
+            storageSettings.theme = "light";
+
+            lightTheme.forEach(item => {
+                document.documentElement.style.setProperty(item[0], item[1]); 
+            });        
+        }
+
+        if (typeof window !== undefined) {
+            localStorage.setItem('settings', JSON.stringify(storageSettings));
+        }
+    }
+
+    function setCSSAccent(accent: string) {
         let storageSettings = JSON.parse(String(localStorage.getItem('settings')));
         let color;
 
@@ -97,10 +141,13 @@ const Drawer = (props : any) => {
 
         if (localSettings) {
             setTheme(localSettings.theme);
+
             setAccent1(localSettings.accent1);
             setHsva1(hslStringToHsva("hsl(" + localSettings.accent1 + ")"));
+            
             setAccent2(localSettings.accent2);
             setHsva2(hslStringToHsva("hsl(" + localSettings.accent2 + ")"));
+            
             setAccent3(localSettings.accent3);
             setHsva3(hslStringToHsva("hsl(" + localSettings.accent3 + ")"));
         } 
@@ -122,11 +169,18 @@ const Drawer = (props : any) => {
             <h2>Choose Colors</h2>
 
             <div className='row'>
+                <label>Theme</label>
+                <div onClick={() => setCSSTheme()} className={theme + '-toggle toggle'}>
+                    <span className="switch"></span>
+                </div>
+            </div>
+
+            <div className='row'>
                 <label>Accent Color 1 - </label>
                 <label onClick={(e: any) => { toggleColorful(0) }} className={"radio " + "accent1-bg"}></label>   
                 {
                     colorful == 0 ? 
-                    <Colorful style={{position: "absolute"}} ref={colorfulRef} color={hsva1} /*onMouseOut={() => { setCSSVar("accent1") }}*/ onMouseUp={() => { setCSSVar("accent1") }} onChange={(color) => { setHsva1(color.hsva); setAccent1(cleanHsl(color.hsva)); }} disableAlpha />    
+                    <Colorful style={{position: "absolute"}} ref={colorfulRef} color={hsva1} /*onMouseOut={() => { setCSSAccent("accent1") }}*/ onMouseUp={() => { setCSSAccent("accent1") }} onChange={(color) => { setHsva1(color.hsva); setAccent1(cleanHsl(color.hsva)); }} disableAlpha />    
                     : null
                 }
             </div>
@@ -136,7 +190,7 @@ const Drawer = (props : any) => {
                 <label onClick={(e: any) => { toggleColorful(1)  }} className={"radio " + "accent2-bg"}></label>   
                 {
                     colorful == 1 ? 
-                    <Colorful style={{position: "absolute"}} ref={colorfulRef} color={hsva2} /*onMouseOut={() => { setCSSVar("accent1") }}*/ onMouseUp={() => { setCSSVar("accent2") }} onChange={(color) => { setHsva2(color.hsva); setAccent2(cleanHsl(color.hsva)); }} disableAlpha />    
+                    <Colorful style={{position: "absolute"}} ref={colorfulRef} color={hsva2} /*onMouseOut={() => { setCSSAccent("accent1") }}*/ onMouseUp={() => { setCSSAccent("accent2") }} onChange={(color) => { setHsva2(color.hsva); setAccent2(cleanHsl(color.hsva)); }} disableAlpha />    
                     : null
                 }
             </div>
@@ -146,7 +200,7 @@ const Drawer = (props : any) => {
                 <label onClick={(e: any) => { toggleColorful(2) }} className={"radio " + "accent3-bg"}></label>   
                 {
                     colorful == 2 ? 
-                    <Colorful style={{position: "absolute"}} ref={colorfulRef} color={hsva3} /*onMouseOut={() => { setCSSVar("accent1") }}*/ onMouseUp={() => { setCSSVar("accent3") }} onChange={(color) => { setHsva3(color.hsva); setAccent3(cleanHsl(color.hsva)); }} disableAlpha />    
+                    <Colorful style={{position: "absolute"}} ref={colorfulRef} color={hsva3} /*onMouseOut={() => { setCSSAccent("accent1") }}*/ onMouseUp={() => { setCSSAccent("accent3") }} onChange={(color) => { setHsva3(color.hsva); setAccent3(cleanHsl(color.hsva)); }} disableAlpha />    
                     : null
                 }
             </div>

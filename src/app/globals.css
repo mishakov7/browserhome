@@ -7,17 +7,9 @@
   --subtle-border: rgba(205, 199, 175, 0.15);
   --shadow: rgba(225, 217, 184, 0.2);
 
-  /* --accent1: 141, 108, 210;
-  --accent2: 108, 210, 161;
-  --accent3: 250, 63, 97; */
-
   --accent1: 259, 53%, 62%;
   --accent2: 151, 53%, 62%;
   --accent3: 349, 95%, 61%;
-
-  /* --accent1: "";
-  --accent2: "";
-  --accent3: ""; */
 
   --accent1-lt: 259, 53%;
   --accent2-lt: 151, 53%;
@@ -577,6 +569,7 @@ article {
 
 input[type="text"],
 textarea {
+  color: var(--base-txt);
   background-color: var(--base-container);
   box-shadow: 0px 0px 4px #ECE4C7;
   border-radius: 12px 12px 12px 12px;
@@ -886,6 +879,39 @@ input[type="radio"]  {
 input[type="radio"]:checked + .radio span {
   background-color: var(--base-container);
 }
+
+.light-toggle,
+.dark-toggle {
+  position: relative;
+  background-color: var(--secondary-txt-lt);
+  width: 40px;
+  height: 20px;
+  margin: 0 10px;
+  border-radius: 6px;
+  border: solid 2.55px #FFF;
+  cursor: pointer;
+}
+
+.toggle .switch {
+  position: absolute;
+  top: -2.55px;
+  display: flex;
+  background-color: var(--base-bg);
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: solid 2.55px #FFF;
+  transition: right 0.2s;
+}
+
+.dark-toggle .switch {
+  right: 17.55px;
+}
+
+.light-toggle .switch {
+  right: -2.55px;
+}
+
 
 button {
   border: none;
