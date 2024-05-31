@@ -17,23 +17,24 @@ const lightTheme = [
   ["--secondary-txt", "#867D64"],
   ["--secondary-txt-lt", "#CDC7AF"],
   ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
-  ["--shadow", "rgba(225, 217, 184, 0.2)"]
+  ["--shadow", "rgba(225, 217, 184, 1)"]
 ]
 
 const darkTheme = [
   ["--base-bg", "#1C202C"],
-  ["--base-container", "#171B28"],
+  ["--base-container", "#2C3245"],
   ["--base-txt", "#F6F6F6"],
   ["--secondary-txt", "#616A82"],
   ["--secondary-txt-lt", "#949AAA"],
-  ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
-  ["--shadow", "rgba(225, 217, 184, 0.2)"]
+  ["--subtle-border", "rgba(76, 91, 136, 0.15)"],
+  ["--shadow", "rgba(8, 13, 30, 0.2)"]
 ]
 
 export default function Home() {
 
   const [DrawerComponent, setDrawerComponent] = useState(null);
 
+  const dresser = useRef<HTMLDivElement>(null);
   const blurLayers = useRef<HTMLDivElement[]>([]);
   const searchRef = useRef(null);
   const bookmarkRef = useRef(null);
@@ -89,12 +90,14 @@ export default function Home() {
   }
 
   function setCSSTheme(theme: string) {
-      if (theme == "light") {
+      if (theme == "dark") {
+          dresser.current?.classList.add("dark-theme");
           darkTheme.forEach(item => {
               document.documentElement.style.setProperty(item[0], item[1]); 
           });
 
       } else {
+          dresser.current?.classList.add("light-theme");
           lightTheme.forEach(item => {
               document.documentElement.style.setProperty(item[0], item[1]); 
           });        
@@ -109,37 +112,11 @@ export default function Home() {
     }
   }
 
-  function findParent(child: any, parents: any) {
-    let featureParents = getParents(child);
-
-    for (let x = 0; x < parents.length; x++) {
-      for (let y = 0; y < featureParents.length; y++) {
-          if (parents[x] == featureParents[y]) {
-            return x;
-          }
-      }
-    } 
-
-  }
-
-  function getParents(el: any) {
-      var parents = [];
-      var p = el.parentNode;
-      
-      while (p !== mainWrapper.current) {
-          var o = p;
-          parents.push(o);
-          p = o.parentNode;
-      }
-      
-      return parents;
-  }
-
   function changeDrawer(drawer: any) {
     if (drawer != null) {
       Drawers.map((x: any) => {
         if (x.file == drawer) {
-          x.element = <x.tag />
+          x.element = <x.tag dresserRef={dresser.current} />
           setDrawerComponent(x.element);
         }
       });
@@ -161,16 +138,20 @@ export default function Home() {
         document.documentElement.style.setProperty('--accent1-lt', localSettings.accent1.split("%")[0] + "%");
         document.documentElement.style.setProperty('--accent2-lt', localSettings.accent2.split("%")[0] + "%");
         document.documentElement.style.setProperty('--accent3-lt', localSettings.accent3.split("%")[0] + "%");
-    
+
+        document.documentElement.style.setProperty('--accent1-dk', localSettings.accent1.split(",")[0]);
+        document.documentElement.style.setProperty('--accent2-dk', localSettings.accent2.split(",")[0]);
+        document.documentElement.style.setProperty('--accent3-dk', localSettings.accent3.split(",")[0]);
+
+        document.documentElement.style.setProperty('--accent1-txt', localSettings.accent1txt);
+
     } 
 
-}, []);  //   changeDrawer();
-
-  // }, [drawer]);
+}, []); 
 
   return (
     <>
-    <div id="dresser" className="accent1-bg">
+    <div ref={dresser} id="dresser" className="accent1-bg">
       <Head>
         <title>Home | Misha Lukova</title>
         <meta name="description" content="Misha Lukova's graphic and digital portfolio" />
@@ -181,7 +162,7 @@ export default function Home() {
 
       <div id="main-container" className="accent1-border">
   
-        <div /*ref={mainWrapper}*/ id="main-wrapper" >
+        <div id="main-wrapper" >
 
           <div className='col feature-group'>
             <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
@@ -222,34 +203,30 @@ export default function Home() {
             <ul className='guide'>
               <li>
                   <details>
-                      <summary>Change your search settings!</summary>
+                      <summary>Change your search settings! <button onClick={() => {highlightFeature(searchRef); clickFeature(searchRef);}}>Show me!</button></summary>
                       <p>Currently you can choose between setting your search engine to Google, DuckDuckGo, or Brave. You can also set what type of text you want to see every time you open the page.</p>
                   </details>
-                  <button onClick={() => {highlightFeature(searchRef); clickFeature(searchRef);}}>Show me!</button>
               </li>
               <li>
                   <details>
-                      <summary>Create a bookmark</summary>
+                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef);}}>Show me!</button></summary>
                       <p>You can enter as many bookmarks as you want so that you can have easy access to all of your websites. You can also delete and edit them.</p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
-                  <button onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef);}}>Show me!</button>
               </li>
               <li>
                   <details>
-                      <summary>Create a list</summary>
+                      <summary>Create a list <button onClick={() => {highlightFeature(listRef); clickFeature(listRef);}}>Show me!</button></summary>
                       <p>You can create up to five lists, and add as many todos as you want. You can also add links to each todo if you want, but that is not required. </p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
-                  <button onClick={() => {highlightFeature(listRef); clickFeature(listRef);}}>Show me!</button>
               </li>
               <li>
                   <details>
-                      <summary>Add a sticky!</summary>
+                      <summary>Add a sticky! <button onClick={() => {highlightFeature(dateRef); clickFeature(dateRef);}}>Show me!</button></summary>
                       <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>
-                  <button onClick={() => {highlightFeature(dateRef); clickFeature(dateRef);}}>Show me!</button>
               </li>
             </ul>
 

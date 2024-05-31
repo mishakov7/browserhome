@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { Colorful } from '@uiw/react-color';
-import { hsvaToHslString, hslStringToHsva } from '@uiw/color-convert';
+import {  hsvaToHex, hsvaToHslString, hslStringToHsva } from '@uiw/color-convert';
+import ColorContrastChecker from 'color-contrast-checker'; 
 
 interface ColorResult {
     h: number;
@@ -21,16 +22,17 @@ const lightTheme = [
 
 const darkTheme = [
     ["--base-bg", "#1C202C"],
-    ["--base-container", "#171B28"],
+    ["--base-container", "#2C3245"],
     ["--base-txt", "#F6F6F6"],
     ["--secondary-txt", "#616A82"],
     ["--secondary-txt-lt", "#949AAA"],
-    ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
-    ["--shadow", "rgba(225, 217, 184, 0.2)"]
+    ["--subtle-border", "rgba(76, 91, 136, 0.15)"],
+    ["--shadow", "rgba(8, 13, 30, 0.2)"]
 ]
 
 // document.documentElement.style.setProperty('--base',this.state.color);
 const Drawer = (props : any) => {
+    const contrastChecker = new ColorContrastChecker();
     const [theme, setTheme] = useState("light");
 
     const colorfulRef = useRef<HTMLDivElement>(null);
@@ -52,11 +54,33 @@ const Drawer = (props : any) => {
         return hsvaToHslString(hsl).split("(")[1].split(")")[0];
     }
 
+    function setAAText() {
+        let storageSettings = JSON.parse(String(localStorage.getItem('settings')));
+        let bg = contrastChecker.hexToLuminance(hsvaToHex(hsva1));
+        let light = contrastChecker.hexToLuminance("#FFFFFF");
+        let dark = contrastChecker.hexToLuminance("#1C202C");
+
+        let lightTxt = contrastChecker.getContrastRatio(bg, light);
+        let darkTxt = contrastChecker.getContrastRatio(bg, dark);
+
+        if (darkTxt > lightTxt) {
+            document.documentElement.style.setProperty(('--accent1-txt'), "28, 32, 44");
+            return "28, 32, 44";
+
+        } else {
+            document.documentElement.style.setProperty(('--accent1-txt'), "255, 255, 255");
+            return "255, 255, 255";
+        }
+    }
+
     function setCSSTheme() {
         let storageSettings = JSON.parse(String(localStorage.getItem('settings')));
+        props.dresserRef.classList.remove("light-theme");
+        props.dresserRef.classList.remove("dark-theme");
 
         if (theme == "light") {
             setTheme("dark");
+            props.dresserRef.classList.add("dark-theme");
             storageSettings.theme = "dark";
 
             darkTheme.forEach(item => {
@@ -65,6 +89,7 @@ const Drawer = (props : any) => {
 
         } else {
             setTheme("light");
+            props.dresserRef.classList.add("light-theme");
             storageSettings.theme = "light";
 
             lightTheme.forEach(item => {
@@ -80,10 +105,13 @@ const Drawer = (props : any) => {
     function setCSSAccent(accent: string) {
         let storageSettings = JSON.parse(String(localStorage.getItem('settings')));
         let color;
+        let text;
 
         switch(accent) {
             case "accent1":
                 color = accent1;
+                text = setAAText();
+                storageSettings["accent1txt"] = text;
                 break;
             
             case "accent2":
@@ -100,8 +128,10 @@ const Drawer = (props : any) => {
 
         document.documentElement.style.setProperty(('--' + accent), color);
         document.documentElement.style.setProperty(('--' + accent + '-lt'), color.split("%")[0] + "%");
-        
+        document.documentElement.style.setProperty(('--' + accent + '-dk'), color.split(",")[0]);
+    
         storageSettings[accent] = color;
+
         if (typeof window !== undefined) {
             localStorage.setItem('settings', JSON.stringify(storageSettings));
         }

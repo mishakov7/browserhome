@@ -5,7 +5,7 @@
   position: relative;
   padding: 20px;
   border-radius: 24px;
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
+  box-shadow: 0px 0px 22px 2px var(--shadow);
   z-index: 10;
 }
 
@@ -98,7 +98,7 @@ input[type=text] {
   height: 50px;
   background: hsl(var(--accent1));
   border-radius: 0 0 20px 20px;
-  color: #FFF;
+  color: rgb(var(--accent1-txt));
   font-family: var(--robo);
   font-size: 15px;
   text-align: center;
@@ -160,19 +160,21 @@ input[type=text] {
   font-size: 1.2em;
   font-weight: 400;
   text-transform: uppercase;
-  color: var(--base-bg);
+  color: rgb(var(--accent1-txt));
   padding: 15px 15px 0 15px;
   margin-right: 5px;
+  cursor: default;
 }
 
 .date span:last-of-type {
   font-family: "Plus Jakarta";
   font-size: 2.5em;
   font-weight: 800;
-  color: var(--base-bg);
+  color: rgb(var(--accent1-txt));
   margin: 10px 0;
   padding: 0 15px 15px 15px;
   margin-right: 5px;
+  cursor: default;
 }
 
 .stickies-wrapper {
@@ -208,7 +210,7 @@ input[type=text] {
   max-width: 350px;
   max-height: 350px;
   border-radius: 24px;
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
+  box-shadow: 0px 0px 22px 2px var(--shadow);
 }
 
 .sticky-1 {
@@ -260,16 +262,52 @@ input[type=text] {
   fill: var(--secondary-txt);
 }
 
-.sticky-accent1 {
+.light-theme .sticky-accent1 {
   background-color: hsl(var(--accent1-lt), 90%);
 }
 
-.sticky-accent2 {
+.light-theme .sticky-accent2 {
   background-color: hsl(var(--accent2-lt), 90%);
 }
 
-.sticky-accent3 {
+.light-theme .sticky-accent3 {
   background-color: hsl(var(--accent3-lt), 90%);
+}
+
+.dark-theme .sticky-accent1 {
+  background-color: hsl(var(--accent1-dk), 20%, 50%);
+}
+
+.dark-theme .sticky-accent2 {
+  background-color: hsl(var(--accent2-dk), 20%, 50%);
+}
+
+.dark-theme .sticky-accent3 {
+  background-color: hsl(var(--accent3-dk), 20%, 50%);
+}
+
+.dark-theme .sticky .accent1-fill path {
+  fill: hsl(var(--accent1-lt), 75%) !important;
+}
+
+.dark-theme .sticky button.accent1-bg {
+  background-color: hsl(var(--accent1-lt), 75%) !important;
+}
+
+.dark-theme .sticky .accent2-fill path {
+  fill: hsl(var(--accent2-lt), 75%) !important;
+}
+
+.dark-theme .sticky button.accent2-bg {
+  background-color: hsl(var(--accent2-lt), 75%) !important;
+}
+
+.dark-theme .sticky .accent3-fill path {
+  fill: hsl(var(--accent3-lt), 75%) !important;
+}
+
+.dark-theme .sticky button.accent3-bg {
+  background-color: hsl(var(--accent3-lt), 75%) !important;
 }
 
 .sticky .textarea,
@@ -383,7 +421,7 @@ input[type=text] {
 }
 
 .upload-button path {
-  fill: #FFF;
+  fill: var(--base-container);
   stroke: var(--secondary-txt);
   stroke-width: 2px;
 }
@@ -419,7 +457,7 @@ input[type=text] {
 
 .more-options-container .buttons-container button path {
   transition: fill 0.2s;
-  fill: #FFF;
+  fill: rgb(var(--accent1-txt));
 }
 
 .more-options-container .buttons-container button:hover path {
@@ -662,8 +700,8 @@ input[type=text] {
 }
 .bookmark {
   position: relative;
-  background-color: #FFF8E5;
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.2);
+  background-color: var(--base-container);
+  box-shadow: 0px 0px 22px 2px var(--shadow);
   min-width: 75px;
   min-height: 75px;
   border-radius: 20px;
@@ -770,14 +808,14 @@ input[type=text] {
 }
 
 .bookmark .edit-button {
-  background-color: hsla(var(--accent2), 0.7);
+  background-color: hsl(var(--accent2-lt), 50%);
   top: -20px;
   justify-content: center;
   align-items: center;
 }
 
 .bookmark .edit-button:hover {
-  background-color: hsla(var(--accent2), 1);
+  background-color: hsl(var(--accent2-lt), 60%);
 }
 
 .bookmark .edit-button path {
@@ -865,7 +903,7 @@ input[type=text] {
   font-size: 12px;
   border-radius: 16px;
   z-index: 100;
-  box-shadow: 0px 0px 22px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 22px 2px var(--shadow);
 }
 
 .creator::before {
@@ -943,11 +981,12 @@ input[type=text] {
 }
 
 .create-button path {
+  fill: var(--secondary-txt);
   transition: fill 0.2s;
 }
 
 .create-button:hover path {
-  fill: #9A9381;
+  fill: var(--secondary-txt-lt);
 }
 
 @keyframes appear-searchcreator {
@@ -999,7 +1038,7 @@ input[type=text] {
   display: flex;
   flex-direction: column;
   background-color: var(--base-container);
-  border: solid 2px hsl(var(--accent2));
+  border: solid 2px hsl(var(--accent1));
   border-radius: 8px;
   width: 100%;
   padding: 8px;
@@ -1012,6 +1051,7 @@ input[type=text] {
   align-items: center;
   text-transform: uppercase;
   font-size: 12px;
+  color: var(--base-txt);
   margin: 2px 0;
   cursor: pointer;
 }
@@ -1163,7 +1203,7 @@ input[type=text] {
   background-color: var(--base-container);
   border: solid 2.55px var(--base-container);
   border-radius: 24px;
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
+  box-shadow: 0px 0px 22px 2px var(--shadow);
   height: 500px;
   width: 400px;
   padding: 20px 30px;
@@ -1312,6 +1352,10 @@ div.list-container:nth-of-type(5):hover {
   width: 50%;
 }
 
+.dark-theme .list-container h3 {
+  color: var(--secondary-txt-lt);
+}
+
 .todo-list {
   padding: 0;
   overflow-y: scroll;
@@ -1392,6 +1436,30 @@ div.list-container:nth-of-type(5):hover {
     transform: rotate(360deg);
   }
 }
+.checkbox.accent1-bg {
+  background-color: hsla(var(--accent1), 10%) !important;
+}
+
+.checkbox.accent2-bg {
+  background-color: hsla(var(--accent2), 10%) !important;
+}
+
+.checkbox.accent3-bg {
+  background-color: hsla(var(--accent3), 10%) !important;
+}
+
+.dark-theme .checkbox.accent1-bg {
+  background-color: hsla(var(--accent1), 25%) !important;
+}
+
+.dark-theme .checkbox.accent2-bg {
+  background-color: hsla(var(--accent2), 25%) !important;
+}
+
+.dark-theme .checkbox.accent3-bg {
+  background-color: hsla(var(--accent3), 25%) !important;
+}
+
 .editing-todo .checkbox path {
   fill: var(--base-bg) !important;
   opacity: 0.7;
@@ -1442,7 +1510,7 @@ div.list-container:nth-of-type(5):hover {
   top: 3px;
 }
 
-.todo-item input:checked + label {
+.todo-item input:checked + label span {
   text-decoration: line-through;
 }
 

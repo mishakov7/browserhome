@@ -15,7 +15,7 @@
     background-color: var(--base-container);
     border: solid 2.55px var(--base-container);
     border-radius: 24px;
-    box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.6);
+    box-shadow: 0px 0px 22px 2px var(--shadow);
     height: 500px;
     width: 400px;
     padding: 20px 30px;
@@ -143,6 +143,10 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
     margin-bottom: 20px;
     width: 50%;
 }
+
+.dark-theme .list-container h3 {
+    color: var(--secondary-txt-lt);
+}
   
 .todo-list {
     padding: 0;
@@ -224,6 +228,30 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
     }
 }
 
+.checkbox.accent1-bg {
+    background-color: hsla(var(--accent1), 10%)!important;
+}
+
+.checkbox.accent2-bg {
+    background-color: hsla(var(--accent2), 10%)!important;
+}
+
+.checkbox.accent3-bg {
+    background-color: hsla(var(--accent3), 10%)!important;
+}
+
+.dark-theme .checkbox.accent1-bg {
+    background-color: hsla(var(--accent1), 25%)!important;
+}
+
+.dark-theme .checkbox.accent2-bg {
+    background-color: hsla(var(--accent2), 25%)!important;
+}
+
+.dark-theme .checkbox.accent3-bg {
+    background-color: hsla(var(--accent3), 25%)!important;
+}
+
 .editing-todo .checkbox path {
     fill: var(--base-bg)!important;
     opacity: 0.7;
@@ -287,7 +315,15 @@ div.list-container:nth-of-type(5):hover { transform: translate(-100px, 0) rotate
     top: 3px;
 }
   
-.todo-item input:checked + label {
+// .todo-item label::after {
+//     content: "";
+//     position: relative;
+//     display: flex;
+//     width: 100%;
+//     height: 2px;
+//     background-color: var(--secondary-txt);
+// }
+.todo-item input:checked + label span {
     text-decoration: line-through;
 }
   

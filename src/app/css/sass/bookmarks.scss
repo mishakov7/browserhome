@@ -102,8 +102,8 @@
 
 .bookmark {
   position: relative;
-  background-color: #FFF8E5;
-  box-shadow: 0px 0px 22px 2px rgba(225, 217, 184, 0.20);
+  background-color: var(--base-container);
+  box-shadow: 0px 0px 22px 2px var(--shadow);
   min-width: 75px;
   min-height: 75px;
   border-radius: 20px;
@@ -213,14 +213,14 @@
 }
 
 .bookmark .edit-button {
-  background-color: hsla(var(--accent2), 0.7);
+  background-color: hsl(var(--accent2-lt), 50%);
   top: -20px;
   justify-content: center;
   align-items: center;
 }
 
 .bookmark .edit-button:hover {
-  background-color: hsla(var(--accent2), 1.0);
+  background-color: hsl(var(--accent2-lt), 60%);
 }
 
 .bookmark .edit-button path {

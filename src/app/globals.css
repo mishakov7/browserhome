@@ -7,9 +7,15 @@
   --subtle-border: rgba(205, 199, 175, 0.15);
   --shadow: rgba(225, 217, 184, 0.2);
 
+  --accent1-txt: 255, 255, 255;
+
   --accent1: 259, 53%, 62%;
   --accent2: 151, 53%, 62%;
   --accent3: 349, 95%, 61%;
+  
+  --accent1-dk: 259;
+  --accent2-dk: 151;
+  --accent3-dk: 349;
 
   --accent1-lt: 259, 53%;
   --accent2-lt: 151, 53%;
@@ -187,6 +193,10 @@ input, textarea {
   width: 75vw;
 }
 
+#drawer .radio {
+  border-color: rgb(var(--accent1-txt));
+}
+
 #main-container {
   background-color: var(--base-bg);
   border-radius: 30px;
@@ -223,7 +233,7 @@ input, textarea {
 #drawer label,
 #drawer span, 
 #drawer p {
-  color: #FFF;
+  color: rgb(var(--accent1-txt));
 }
 
 .theme-drawer .row {
@@ -265,10 +275,6 @@ article {
 .accent3-bg   { background-color: hsl(var(--accent3))!important; }
 .alert-bg { background-color: var(--secondary-txt)!important; }
 .confirm-bg { background-color: var(--secondary-txt-lt)!important; }
-
-.accent1a-bg    { background-color: hsla(var(--accent1), 0.15)!important; }
-.accent2a-bg { background-color: hsla(var(--accent2), 0.15)!important; }
-.accent3a-bg   { background-color: hsla(var(--accent3), 0.15)!important; }
 
 .accent1-bg-hover:hover    { background-color: hsl(var(--accent1))!important; }
 .accent2-bg-hover:hover { background-color: hsl(var(--accent2))!important; }
@@ -571,7 +577,8 @@ input[type="text"],
 textarea {
   color: var(--base-txt);
   background-color: var(--base-container);
-  box-shadow: 0px 0px 4px #ECE4C7;
+  box-shadow: 0px 0px 4px var(--shadow);
+  /* box-shadow: 0px 0px 4px #ECE4C7; */
   border-radius: 12px 12px 12px 12px;
   border: none;
   
@@ -617,7 +624,7 @@ label {
 
 footer {
   width: 100%;
-  color: var(--base-container);
+  color: rgb(var(--accent1-txt));
   font-family: var(--overpass);
   font-size: 13px;
   letter-spacing: 0.5px;
@@ -648,13 +655,14 @@ footer .kofi-button {
 
 footer .cache-button path,
 footer .kofi-button path {
-  fill: hsl(var(--accent1-lt), 75%);
-  transition: fill 0.2s;
+  fill: rgb(var(--accent1-txt));
+  opacity: 0.2;
+  transition: opacity 0.2s;
 }
 
 footer .cache-button:hover path,
 footer .kofi-button:hover path {
-  fill: #FFF;
+  opacity: 1;
 }
 
 
@@ -706,6 +714,7 @@ footer .kofi-button::before {
   right: 45px;
 }
 
+
 footer .kofi-button::after {
   background-color: hsl(var(--accent2-lt), 75%);
   right: 38px;
@@ -734,7 +743,7 @@ footer .cache-button::before {
   display: flex;
   align-items: center;
   width: max-content;
-  border-bottom: solid 2px rgba(255, 255, 255, 0.2);
+  border-bottom: solid 2px rgba(var(--accent1-txt), 0.2);
   padding-bottom: 6px;
 }
 
@@ -758,7 +767,8 @@ footer .guide p {
   width: max-content;
   right: 0;
   top: 0;
-  background-color: var(--base-container);
+  background-color: rgb(var(--accent1-txt));
+  color: hsl(var(--accent1));
   border-radius: 4px;
   border: none;
   font-family: var(--robo);
@@ -767,7 +777,7 @@ footer .guide p {
   letter-spacing: 1px;
   padding: 2px 6px;
   margin-left: 10px;
-  opacity: 0.3;
+  opacity: 1;
   cursor: pointer;
   transition: opacity 0.4s;
 }
@@ -792,7 +802,7 @@ footer h4 {
 footer p {
   display: flex;
   align-items: center;
-  color: var(--base-container);
+  color: rgb(var(--accent1-txt));
   line-height: 20px;
 }
 
@@ -801,7 +811,7 @@ footer p.uppercase {
 }
 
 footer a {
-  color: var(--base-container);
+  color: rgb(var(--accent1-txt));
   margin-left: 5px;
 }
 
@@ -888,7 +898,7 @@ input[type="radio"]:checked + .radio span {
   height: 20px;
   margin: 0 10px;
   border-radius: 6px;
-  border: solid 2.55px #FFF;
+  border: solid 2.55px rgb(var(--accent1-txt));
   cursor: pointer;
 }
 
@@ -900,7 +910,7 @@ input[type="radio"]:checked + .radio span {
   width: 20px;
   height: 20px;
   border-radius: 6px;
-  border: solid 2.55px #FFF;
+  border: solid 2.55px rgb(var(--accent1-txt));
   transition: right 0.2s;
 }
 
@@ -1001,13 +1011,11 @@ button {
 @keyframes highlight-shadow {
   0% {
     box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
-    /* background: rgb(255, 255, 255, 0); */
   } 5% {
-    box-shadow: 0px 0px 30px 2px rgba(138, 133, 109, 0.8);
-    /* background: rgba(225, 217, 184, 0.5); */
+    box-shadow: 0px 0px 30px 2px var(--shadow);
+    /* box-shadow: 0px 0px 30px 2px rgba(138, 133, 109, 0.8); */
   } 100% {
     box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
-    /* background: rgb(255, 255, 255, 0); */
   }
 }
 
@@ -1015,7 +1023,8 @@ button {
   0% {
     background-color: rgba(255, 255, 255, 0);
   } 5% {
-    background-color: rgba(138, 133, 109, 0.3);
+    background-color: var(--shadow);
+    /* background-color: rgba(138, 133, 109, 0.3); */
   } 100% {
     background-color: rgba(255, 255, 255, 0);
   }
@@ -1023,7 +1032,7 @@ button {
 
 @keyframes blur-bg {
   from {
-    filter: blur(8px);
+    filter: blur(20px);
   } to {
     filter: blur(0px);
   }
