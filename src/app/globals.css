@@ -682,7 +682,6 @@ footer .kofi-button::before,
 footer .cache-button::after {
   position: absolute;
   opacity: 0;
-  color: var(--base-txt);
   font-family: var(--overpass);
   font-size: 12px;
   padding: 10px;
@@ -735,14 +734,16 @@ footer .cache-button::before {
 }
 
 .guide {
-  padding: 0;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
 }
 
 .guide li {
   /* position: relative; */
   display: flex;
   align-items: center;
-  width: max-content;
+  width: 100%;
   border-bottom: solid 2px rgba(var(--accent1-txt), 0.2);
   padding-bottom: 6px;
 }
@@ -753,8 +754,12 @@ footer .cache-button::before {
 
 .guide details,
 .guide summary {
-  max-width: 400px;
+  width: 100%;
   line-height: 24px;
+}
+
+.guide summary {
+  position: relative;
 }
 
 footer .guide p {
@@ -763,10 +768,10 @@ footer .guide p {
 }
 
 .guide li button {
-  /* position: absolute; */
-  width: max-content;
+  position: absolute;
   right: 0;
-  top: 0;
+  top: 4px;
+  width: max-content;
   background-color: rgb(var(--accent1-txt));
   color: hsl(var(--accent1));
   border-radius: 4px;
@@ -1047,10 +1052,6 @@ button {
 
 .highlight {
   animation: highlight-shadow 3s;
-}
-
-.more-options-container.highlight {
-  background: linear-gradient(180deg, hsl(var(--accent1)) 50%, hsl(var(--accent1-lt), 55%) 100%);
 }
 
 .sticky-date.highlight,

@@ -55,6 +55,18 @@
     z-index: -1;
 }
 
+.creator.accent1-bg label {
+    color: rgb(var(--accent1-txt));
+}
+
+.creator.accent2-bg label {
+    color: rgb(var(--accent2-txt));
+}
+
+.creator.accent3-bg label {
+    color: rgb(var(--accent3-txt));
+}
+
 .creator.alert-bg {
     margin: 0;
     padding-bottom: 0;

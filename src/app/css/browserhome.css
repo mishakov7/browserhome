@@ -125,7 +125,8 @@ input[type=text] {
   transition: top 0.2s;
 }
 
-.more-options-container:hover::before {
+.more-options-container:hover::before,
+.more-options-container.hovered::before {
   top: 30px;
 }
 
@@ -426,7 +427,8 @@ input[type=text] {
   stroke-width: 2px;
 }
 
-.more-options-container:hover .buttons-container {
+.more-options-container:hover .buttons-container,
+.more-options-container.hovered .buttons-container {
   bottom: -50px;
 }
 
@@ -915,6 +917,18 @@ input[type=text] {
   border-radius: 12px;
   transform: rotate(45deg);
   z-index: -1;
+}
+
+.creator.accent1-bg label {
+  color: rgb(var(--accent1-txt));
+}
+
+.creator.accent2-bg label {
+  color: rgb(var(--accent2-txt));
+}
+
+.creator.accent3-bg label {
+  color: rgb(var(--accent3-txt));
 }
 
 .creator.alert-bg {

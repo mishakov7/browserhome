@@ -52,7 +52,8 @@
   transition: top 0.2s;
 }
 
-.more-options-container:hover::before {
+.more-options-container:hover::before,
+.more-options-container.hovered::before  {
   top: 30px;
 }
 
@@ -370,7 +371,8 @@
   stroke-width: 2px;
 }
 
-.more-options-container:hover .buttons-container {
+.more-options-container:hover .buttons-container,
+.more-options-container.hovered .buttons-container {
   bottom: -50px;
 }
 

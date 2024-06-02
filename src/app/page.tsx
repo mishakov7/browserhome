@@ -17,7 +17,7 @@ const lightTheme = [
   ["--secondary-txt", "#867D64"],
   ["--secondary-txt-lt", "#CDC7AF"],
   ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
-  ["--shadow", "rgba(225, 217, 184, 1)"]
+  ["--shadow", "rgba(225, 217, 184, 0.2)"]
 ]
 
 const darkTheme = [
@@ -39,12 +39,18 @@ export default function Home() {
   const searchRef = useRef(null);
   const bookmarkRef = useRef(null);
   const listRef = useRef(null);
-  const dateRef = useRef(null);
+  const moreRef = useRef(null);
   
 
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
     ref.current.click();
+  }
+
+  const hoverFeature = (ref: any) => {
+    window.scrollTo({top: 0, behavior: "smooth"});
+
+    ref.current.classList.add("hovered");
   }
 
   const highlightFeature = (ref: any) => {   
@@ -57,7 +63,7 @@ export default function Home() {
         blurLayers.current[3].classList.add("blur");
         break;
       
-      case dateRef.current:
+      case moreRef.current:
         blurLayers.current[0].classList.add("blur");
         blurLayers.current[1].classList.add("blur");
         blurLayers.current[2].classList.add("blur");
@@ -85,7 +91,8 @@ export default function Home() {
       blurLayers.current[2].classList.remove("blur");
       blurLayers.current[3].classList.remove("blur");
       ref.current.classList.remove("highlight");
-    
+      ref.current.classList.remove("hovered");
+
     }, 4000);
   }
 
@@ -144,6 +151,8 @@ export default function Home() {
         document.documentElement.style.setProperty('--accent3-dk', localSettings.accent3.split(",")[0]);
 
         document.documentElement.style.setProperty('--accent1-txt', localSettings.accent1txt);
+        document.documentElement.style.setProperty('--accent2-txt', localSettings.accent2txt);
+        document.documentElement.style.setProperty('--accent3-txt', localSettings.accent3txt);
 
     } 
 
@@ -166,7 +175,7 @@ export default function Home() {
 
           <div className='col feature-group'>
             <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
-            <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={dateRef} openTheme={changeDrawer} />
+            <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={moreRef} openTheme={changeDrawer} />
             <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
           </div>
  
@@ -223,7 +232,7 @@ export default function Home() {
               </li>
               <li>
                   <details>
-                      <summary>Add a sticky! <button onClick={() => {highlightFeature(dateRef); clickFeature(dateRef);}}>Show me!</button></summary>
+                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef); hoverFeature(moreRef);}}>Show me!</button></summary>
                       <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>

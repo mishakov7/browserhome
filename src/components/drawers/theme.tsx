@@ -54,9 +54,8 @@ const Drawer = (props : any) => {
         return hsvaToHslString(hsl).split("(")[1].split(")")[0];
     }
 
-    function setAAText() {
-        let storageSettings = JSON.parse(String(localStorage.getItem('settings')));
-        let bg = contrastChecker.hexToLuminance(hsvaToHex(hsva1));
+    function setAAText(accent: string, color: ColorResult) {
+        let bg = contrastChecker.hexToLuminance(hsvaToHex(color));
         let light = contrastChecker.hexToLuminance("#FFFFFF");
         let dark = contrastChecker.hexToLuminance("#1C202C");
 
@@ -64,11 +63,11 @@ const Drawer = (props : any) => {
         let darkTxt = contrastChecker.getContrastRatio(bg, dark);
 
         if (darkTxt > lightTxt) {
-            document.documentElement.style.setProperty(('--accent1-txt'), "28, 32, 44");
+            document.documentElement.style.setProperty(('--' + accent + '-txt'), "28, 32, 44");
             return "28, 32, 44";
 
         } else {
-            document.documentElement.style.setProperty(('--accent1-txt'), "255, 255, 255");
+            document.documentElement.style.setProperty(('--' + accent + '-txt'), "255, 255, 255");
             return "255, 255, 255";
         }
     }
@@ -110,16 +109,20 @@ const Drawer = (props : any) => {
         switch(accent) {
             case "accent1":
                 color = accent1;
-                text = setAAText();
+                text = setAAText("accent1", hsva1);
                 storageSettings["accent1txt"] = text;
                 break;
             
             case "accent2":
                 color = accent2;
+                text = setAAText("accent2", hsva2);
+                storageSettings["accent2txt"] = text;
                 break;
 
             case "accent3":
                 color = accent3;
+                text = setAAText("accent3", hsva3);
+                storageSettings["accent3txt"] = text;
                 break;
 
             default:
