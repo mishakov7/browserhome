@@ -96,20 +96,20 @@
 
 @keyframes opendrawer {
   from {
-    right: -100vw;
+    /* right: -100vw; */
     width: 0%;
   } to {
-    right: 0;
+    /* right: 0; */
     width: 25vw;
   }
 }
 
 @keyframes closedrawer {
   from {
-    right: 0;
+    /* right: 0; */
     width: 25vw;
   } to {
-    right: -100vw;
+    /* right: -100vw; */
     width: 0%;
   }
 }
@@ -191,6 +191,7 @@ input, textarea {
 
 #drawer + #main-container {
   width: 75vw;
+  transition: width 0.2s;
 }
 
 #drawer .radio {
@@ -211,6 +212,8 @@ input, textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  transition: width 0.2s;
+
 }
 
 #main-wrapper {
@@ -223,6 +226,7 @@ input, textarea {
 }
 
 #drawer {
+  position: relative;
   width: 25vw;
   padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;

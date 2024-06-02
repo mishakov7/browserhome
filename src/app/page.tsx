@@ -123,7 +123,7 @@ export default function Home() {
     if (drawer != null) {
       Drawers.map((x: any) => {
         if (x.file == drawer) {
-          x.element = <x.tag dresserRef={dresser.current} />
+          x.element = <x.tag setDrawer={setDrawerComponent} dresserRef={dresser.current} />
           setDrawerComponent(x.element);
         }
       });

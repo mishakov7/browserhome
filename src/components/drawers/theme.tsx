@@ -238,6 +238,8 @@ const Drawer = (props : any) => {
                 }
             </div>
 
+            <button onClick={() => props.setDrawer(null) }>Go Back</button>
+
         </div>
 
         </>

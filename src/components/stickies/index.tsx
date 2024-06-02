@@ -203,7 +203,7 @@ export default function Stickies(props: any) {
   return (
     <>
     <div onClick={() => { if (opened == false) { setOpened(true); props.openTheme('theme') } else { setOpened(false); props.openTheme(null); }  }} ref={props.summonRef} className='more-options-container'>
-        More Options
+        <span></span>
         <div className='buttons-container'>
               {/* Reset Position */}
               <button onClick={resetStickies} className='reset-button'>
