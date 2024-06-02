@@ -134,8 +134,11 @@ export default function ToDoLists(props: any) {
     } 
 
     if (isEditing) {
+      console.log("toggle editing");
+      console.log(editTitleInput.current);
 
       if (editTitleInput.current) {
+        console.log(editTitleInput.current.value);
 
         if (editTitleInput.current.value != "") {
           confirmList(e, key);
@@ -148,6 +151,7 @@ export default function ToDoLists(props: any) {
   }
 
   const confirmList = (e: any, key: number) => {
+    console.log("confirmlist");
     let storageLists = lists;
 
     if (editTitleInput.current) {
@@ -311,6 +315,7 @@ export default function ToDoLists(props: any) {
                         trashDrop={trashcan}
                         allLists={lists}
                         setAllLists={setLists}
+                        listTitleRef={editTitleInput}
                         listTitle={list.title}
                         listKey={idx}
                         listColor={list.color}
