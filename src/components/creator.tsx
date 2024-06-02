@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, use } from 'react';
 
 const Creator = (props: any) => {
     const creatorRef = useRef<HTMLDivElement>(null);
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement[]>([]);
     const optionsRef = useRef<HTMLUListElement>(null);
     const [dropdownClicked, setDropdown] = useState(-1);
 
@@ -12,15 +12,15 @@ const Creator = (props: any) => {
     }
 
     const handleOutsideClick = (e: any) => {
-        if (creatorRef.current && optionsRef.current) {
-            if (!creatorRef.current.contains(e.target) && !optionsRef.current.contains(e.target)) {
-                props.toggleCreatorState();
-            }
-        } else if (creatorRef.current && dropdownRef.current) {
+
+        /** All Creators */
+        if (creatorRef.current && dropdownRef.current.length == 0) {
             if (!creatorRef.current.contains(e.target)) {
                 props.toggleCreatorState();
             }
-        } else if (creatorRef.current && dropdownRef.current == null) {
+
+        } else if (creatorRef.current && dropdownRef.current.length > 0) {
+
             if (!creatorRef.current.contains(e.target)) {
                 props.toggleCreatorState();
             }
@@ -28,10 +28,10 @@ const Creator = (props: any) => {
     }
 
     const toggleDropdown = (idx: number) => {
-        if (dropdownClicked == -1) {
+        if (dropdownClicked < 0) {
             setDropdown(idx);
         } else {
-            setDropdown(-1);  
+            setDropdown(-2);  
         }
     }
 
@@ -47,15 +47,20 @@ const Creator = (props: any) => {
 
     }
 
-    useEffect(() => {
-        
-        document.addEventListener("click", handleOutsideClick, false);
+    useEffect(() => {    
+
+        if (dropdownClicked != -2) {
+            document.addEventListener("click", handleOutsideClick, false);
+        } else {
+            setDropdown(-1);
+        }
+
         return() => {
           document.removeEventListener("click", handleOutsideClick, false);
 
         }
     
-    }, []);
+    }, [dropdownClicked]);
 
   return (
     <>
@@ -84,7 +89,7 @@ const Creator = (props: any) => {
 
                 { group.type == "dropdown" ? 
 
-                    <div ref={dropdownRef} className='col dropdown'>
+                    <div ref={(el: any) => { dropdownRef.current[gdx] = el; }} className='col dropdown'>
                         { group.options.map((option: any, odx: number) => (
 
                             option.selected ? 
@@ -93,15 +98,13 @@ const Creator = (props: any) => {
                             
                         ))}
 
-                        {
-                            dropdownClicked == gdx ? 
+                        { dropdownClicked == gdx ? 
                                 
-                                <ul ref={optionsRef} className='options'>
-                                { group.options.map((option: any, odx: number) => (
-                                    <li key={"option" + gdx + "-" + odx} className='row option' onClick={() => { assignSelections(gdx, option.value); setDropdown(-1); }}>{option.value}</li>
-                                ))}
-                                </ul>   
-
+                            <ul ref={optionsRef} className='options'>
+                            { group.options.map((option: any, odx: number) => (
+                                <li key={"option" + gdx + "-" + odx} className='row option' onClick={() => { assignSelections(gdx, option.value); setDropdown(-1); } }>{option.value}</li>
+                            ))}
+                            </ul>
                             : null
                         }
                     </div>
