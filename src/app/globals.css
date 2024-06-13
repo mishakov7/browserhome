@@ -1,5 +1,5 @@
 :root {
-  --base-bg: #F5F1E1;
+  --base-bg: hsl(259, 53%, 62%);
   --base-container: #FFF8E5;
   --base-txt: #1E1A35;
   --secondary-txt: #867D64;
@@ -11,7 +11,7 @@
 
   --accent1: 259, 53%, 62%;
   --accent2: 151, 53%, 62%;
-  --accent3: 349, 95%, 61%;
+  --accent3: 151, 53%, 62%;
   
   --accent1-dk: 259;
   --accent2-dk: 151;
@@ -94,26 +94,53 @@
   font-weight: 600;
 }
 
-@keyframes opendrawer {
+@keyframes opendrawer_right {
   from {
-    /* right: -100vw; */
+    right: -100vw;
     width: 0%;
   } to {
-    /* right: 0; */
+    right: 0;
     width: 25vw;
   }
 }
 
-@keyframes closedrawer {
+@keyframes closedrawer_right {
   from {
-    /* right: 0; */
+    right: 0;
     width: 25vw;
   } to {
-    /* right: -100vw; */
+    right: -100vw;
     width: 0%;
   }
 }
 
+@keyframes opendrawer_left {
+  from {
+    left: -100vw;
+    width: 0vw;
+  } to {
+    left: 0;
+    width: 25vw;
+  }
+}
+
+@keyframes closedrawer_left {
+  from {
+    left: 0;
+    width: 25vw;
+  } to {
+    left: -100vw;
+    width: 0vw;
+  }
+}
+
+@keyframes closecontainer_left {
+  from {
+    width: 100%;
+  } to {
+    width: 75vw;
+  }
+}
 
 /********************/
 /** GENERAL STYLES **/
@@ -135,6 +162,7 @@ body {
   margin: 0px;
   display: flex;
   flex-wrap: wrap;
+  transition: background-color 0.8s;
 }
 
 * {
@@ -189,9 +217,60 @@ input, textarea {
   font-size: 14px;
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.loader .container {
+  --uib-size: 37px;
+  --uib-color: hsl(var(--accent1));
+  --uib-speed: .9s;
+  --uib-bg-opacity: .1;
+  height: var(--uib-size);
+  width: var(--uib-size);
+  transform-origin: center;
+  overflow: visible;
+}
+
+.loader .car {
+  fill: none;
+  stroke: var(--uib-color);
+  stroke-dasharray: 15, 85;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: loadertravel var(--uib-speed) linear infinite;
+  will-change: stroke-dasharray, stroke-dashoffset;
+  transition: stroke 0.5s ease;
+}
+
+.loader .track {
+  stroke: var(--uib-color);
+  opacity: var(--uib-bg-opacity);
+  transition: stroke 0.5s ease;
+}
+
+@keyframes loadertravel {
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -100;
+  }
+}
+
 #drawer + #main-container {
   width: 75vw;
-  transition: width 0.2s;
+  transition: width 0.6s;
+  /* animation: closecontainer_left 0.6s; */
+}
+
+#drawer + #main-wrapper {
+  width: 100vw;
 }
 
 #drawer .radio {
@@ -203,7 +282,7 @@ input, textarea {
   border-radius: 30px;
   max-height: 100vh;
   width: 100%;
-
+  
   overflow-y: scroll;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -212,7 +291,7 @@ input, textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  transition: width 0.2s;
+  transition: width 0.6s, background-color 0.8s, border-color 0.8s;
 
 }
 
@@ -230,7 +309,7 @@ input, textarea {
   width: 25vw;
   padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;
-  animation: opendrawer 1s;
+  animation: opendrawer_left 0.6s;
 }
 
 #drawer h2,
@@ -247,7 +326,7 @@ input, textarea {
 .theme-drawer .w-color-colorful:not(.w-color-colorful .w-color-colorful) {
   top: 0;
   left: 175px;
-  z-index: 2;
+  z-index: 5;
 }
 
 ::-webkit-scrollbar {

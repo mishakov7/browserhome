@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
+import Pin from './pin';
 
 export default function Note(props: any) {
 
@@ -119,6 +120,8 @@ export default function Note(props: any) {
       onStop={(e, ui) => { changeCoordinates({x: ui.x, y: ui.y})}}
       onStart={(e) => props.changeLayer(props.idx)}>
         <div onClick={(e) => props.changeLayer(props.idx)} ref={nodeRef} className={'sticky note ' + (props.isSelected ? "top-sticky" : null)}>
+            <Pin color={noteColor} />
+            
             <div className={props.storage.rotation + ' note-wrapper sticky-' + noteColor}>
                 <div ref={textareaRef} suppressContentEditableWarning={true} contentEditable={true} onBlur={(e) => { changeText(e.target.textContent)}}className="textarea note-text">{notetext}</div>
                 <button onClick={() => changeColor(noteColor)} className={'color-button'}>

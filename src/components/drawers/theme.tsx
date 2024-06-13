@@ -32,6 +32,7 @@ const darkTheme = [
 
 // document.documentElement.style.setProperty('--base',this.state.color);
 const Drawer = (props : any) => {
+    const drawerRef = useRef<HTMLDivElement>(null);
     const contrastChecker = new ColorContrastChecker();
     const [theme, setTheme] = useState("light");
 
@@ -149,13 +150,23 @@ const Drawer = (props : any) => {
         }
     }
 
-
     const handleOutsideClick = (e: any) => {
         if (colorfulRef.current) {
             if (!colorfulRef.current.contains(e.target)) {
                 setColorful(-1);
             }
         }
+    }
+
+    const handleAnimation = () => {
+
+        if (drawerRef.current) {
+            drawerRef.current.style.animation = "closedrawer_left 0.6s forwards";
+        }
+    
+        setTimeout(() => {
+            props.setDrawer(null)
+        }, 600);
     }
 
     useEffect(() => {
@@ -197,8 +208,7 @@ const Drawer = (props : any) => {
     return(
         <>
 
-        <div id="drawer" className='theme-drawer'>
-            
+        <div ref={drawerRef} id="drawer" className='theme-drawer'>
             <h2>Choose Colors</h2>
 
             <div className='row'>
@@ -238,7 +248,7 @@ const Drawer = (props : any) => {
                 }
             </div>
 
-            <button onClick={() => props.setDrawer(null) }>Go Back</button>
+            <button onClick={() => handleAnimation() }>Go Back</button>
 
         </div>
 

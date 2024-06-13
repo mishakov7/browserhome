@@ -181,9 +181,10 @@ input[type=text] {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
-  z-index: 30;
+  z-index: 2;
   cursor: pointer;
   line-height: 12px;
+  animation: none !important;
 }
 
 #drawer button::after {
@@ -431,17 +432,65 @@ input[type=text] {
   border-radius: 10px;
 }
 
-.sticky::after {
+.accent0-pin,
+.accent1-pin,
+.accent2-pin,
+.accent3-pin {
   content: "";
   position: absolute;
-  background-image: url(https://cdn.pixabay.com/photo/2013/07/12/12/46/drawing-pin-146214_1280.png);
   background-size: 60px;
   background-repeat: no-repeat;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
   top: 0px;
-  right: 100%;
-  left: 40%;
+  left: 45%;
+  z-index: 2;
+}
+
+.pin-shadow {
+  filter: blur(2px);
+}
+
+.accent1-pin .pin {
+  fill: hsl(var(--accent1-lt), 62%);
+}
+
+.accent1-pin .pin-lighter {
+  fill: hsl(var(--accent1-lt), 75%);
+}
+
+.accent1-pin .pin-darker {
+  fill: hsl(var(--accent1-lt), 45%);
+  filter: blur(2px) drop-shadow(-4px 4px 2px hsl(var(--accent1-lt), 50%));
+}
+
+.accent0-pin .pin,
+.accent2-pin .pin {
+  fill: hsl(var(--accent2-lt), 62%);
+}
+
+.accent0-pin .pin-lighter,
+.accent2-pin .pin-lighter {
+  fill: hsl(var(--accent2-lt), 75%);
+}
+
+.accent0-pin .pin-darker,
+.accent2-pin .pin-darker {
+  fill: hsl(var(--accent2-lt), 45%);
+  filter: blur(2px) drop-shadow(-4px 4px 2px hsl(var(--accent2-lt), 50%));
+}
+
+.accent3-pin .pin {
+  fill: hsl(var(--accent3-lt), 62%);
+}
+
+.accent3-pin .pin-lighter {
+  fill: hsl(var(--accent3-lt), 75%);
+}
+
+.accent3-pin .pin-darker {
+  fill: hsl(var(--accent3-lt), 45%);
+  filter: blur(2px) drop-shadow(-4px 4px 2px hsl(var(--accent3-lt), 50%));
 }
 
 .polaroid img {

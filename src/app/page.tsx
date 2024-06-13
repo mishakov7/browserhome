@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import Head from 'next/head';
-
 import Drawers from '@/components/utilities/drawers';
+import Loader from '@/components/utilities/loader';
 
 // Each section of the site
 import Search from '@/components/search';
@@ -41,7 +41,6 @@ export default function Home() {
   const listRef = useRef(null);
   const moreRef = useRef(null);
   
-
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
     ref.current.click();
@@ -111,12 +110,11 @@ export default function Home() {
       }
   }
 
-  function blurAllLayers(layers: any, idx: number) {
-    for (let i = 0; i < layers.length; i++) {
-      if (i != idx) {
-          layers.current[i].classList.add("blur");
-      }
-    }
+  function setCSSAccent(accent: string, color: string) {
+    document.documentElement.style.setProperty(('--' + accent), color);
+    document.documentElement.style.setProperty(('--' + accent + '-lt'), color.split("%")[0] + "%");
+    document.documentElement.style.setProperty(('--' + accent + '-dk'), color.split(",")[0]);
+
   }
 
   function changeDrawer(drawer: any) {
@@ -138,56 +136,45 @@ export default function Home() {
 
     if (localSettings) {
         setCSSTheme(localSettings.theme);
-        document.documentElement.style.setProperty('--accent1', localSettings.accent1);
-        document.documentElement.style.setProperty('--accent2', localSettings.accent2);
-        document.documentElement.style.setProperty('--accent3', localSettings.accent3);
-    
-        document.documentElement.style.setProperty('--accent1-lt', localSettings.accent1.split("%")[0] + "%");
-        document.documentElement.style.setProperty('--accent2-lt', localSettings.accent2.split("%")[0] + "%");
-        document.documentElement.style.setProperty('--accent3-lt', localSettings.accent3.split("%")[0] + "%");
+        setCSSAccent("accent1", localSettings.accent1);
+        setCSSAccent("accent2", localSettings.accent2);
+        setCSSAccent("accent3", localSettings.accent3);
 
-        document.documentElement.style.setProperty('--accent1-dk', localSettings.accent1.split(",")[0]);
-        document.documentElement.style.setProperty('--accent2-dk', localSettings.accent2.split(",")[0]);
-        document.documentElement.style.setProperty('--accent3-dk', localSettings.accent3.split(",")[0]);
-
-        document.documentElement.style.setProperty('--accent1-txt', localSettings.accent1txt);
-        document.documentElement.style.setProperty('--accent2-txt', localSettings.accent2txt);
-        document.documentElement.style.setProperty('--accent3-txt', localSettings.accent3txt);
-
-    } 
+    } else {
+      setCSSTheme("light");
+      setCSSAccent("accent1", "259, 53%, 62%");
+      setCSSAccent("accent2", "151, 53%, 62%");
+      setCSSAccent("accent3", "151, 53%, 62%");
+    }
 
 }, []); 
 
   return (
     <>
     <div ref={dresser} id="dresser" className="accent1-bg">
-      <Head>
+    <Head>
         <title>Home | Misha Lukova</title>
         <meta name="description" content="Misha Lukova's graphic and digital portfolio" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       { DrawerComponent }
 
       <div id="main-container" className="accent1-border">
+
+        <Suspense fallback={<Loader />}>
+          <div id="main-wrapper" >
+
+            <div className='col feature-group'>
+              <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
+              <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={moreRef} opened={DrawerComponent} openTheme={changeDrawer} />
+              <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
+            </div>
   
-        <div id="main-wrapper" >
-
-          <div className='col feature-group'>
-            <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
-            <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={moreRef} openTheme={changeDrawer} />
-            <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
+            <Bookmarks parentRef={(el: any) => (blurLayers.current[3] = el)} summonRef={bookmarkRef} />
           </div>
- 
-          <Bookmarks parentRef={(el: any) => (blurLayers.current[3] = el)} summonRef={bookmarkRef} />
-        </div>
-      </div>
+        </Suspense>
 
-      {/* { 
-        drawer == "right" ? 
-        { DrawerComponent }
-        : null
-      } */}
+      </div>
 
       <footer>
         <div className='row'>

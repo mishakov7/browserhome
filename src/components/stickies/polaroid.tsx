@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
+import Pin from "./pin";
 
 export default function Polaroid(props: any) {
 
@@ -103,6 +104,7 @@ export default function Polaroid(props: any) {
       onStop={(e, ui) => { changeCoordinates({x: ui.x, y: ui.y})}}
       onStart={(e) => props.changeLayer(props.idx + props.notes)}>
         <div onClick={(e) => props.changeLayer(props.idx + props.notes)} ref={nodeRef} className={'sticky polaroid ' + (props.isSelected ? "top-sticky" : null)}>
+        <Pin color="accent1" />
         <div className={'polaroid-wrapper ' + props.storage.rotation}>
               <div className='polaroid-container'>
                     <img className={'img-align-' + alignment} src={image} width="275"/>          

@@ -24,7 +24,6 @@ export default function Stickies(props: any) {
     "ypos": 75
   }];
 
-  const [opened, setOpened] = useState(false);
   const [notes, setNotes] = useState([]);
   const [polaroids, setPolaroids] = useState([]);
   const [letterkey, setletterKey] = useState('a');
@@ -202,7 +201,7 @@ export default function Stickies(props: any) {
 
   return (
     <>
-    <div onClick={() => { if (opened == false) { setOpened(true); props.openTheme('theme') } else { setOpened(false); props.openTheme(null); }  }} ref={props.summonRef} className='more-options-container'>
+    <div onClick={() => { if (props.opened == null) { props.openTheme('theme') } else { props.openTheme(null); }  }} ref={props.summonRef} className='more-options-container'>
         <span></span>
         <div className='buttons-container'>
               {/* Reset Position */}
