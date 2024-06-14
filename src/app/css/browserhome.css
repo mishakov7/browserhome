@@ -1589,7 +1589,7 @@ button.list-container:hover::before {
 }
 .options-container {
   position: absolute;
-  left: 10px;
+  left: 20px;
   top: 50vh;
   z-index: 2;
 }
@@ -1606,13 +1606,13 @@ button.list-container:hover::before {
   content: "More Options";
   position: absolute;
   width: max-content;
-  color: var(--secondary-txt-lt);
+  color: rgb(var(--accent1-txt));
   font-family: var(--robo);
   font-size: 14px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transform: rotate(-90deg);
-  left: -20px;
+  left: -65px;
   top: 0px;
 }
 
@@ -1637,6 +1637,10 @@ button.list-container:hover::before {
 
 .options-container .settings-button:hover {
   left: 5px;
+}
+
+.options-container .settings-button:hover::before {
+  left: -70px;
 }
 
 .options-container:hover .buttons-container,
