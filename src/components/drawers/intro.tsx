@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 const Drawer = (props : any) => {
     const drawerRef = useRef<HTMLDivElement>(null);
 
-    const handleAnimation = (drawer: string, direction: string) => {
+    const handleAnimation = (drawer: any, direction: string) => {
 
         if (drawerRef.current) {
             drawerRef.current.style.animation = "closedrawer_left 2s forwards";
@@ -58,7 +58,7 @@ const Drawer = (props : any) => {
               </li>
             </ul>
 
-            <button className="close-drawer" onClick={() => handleAnimation() }>Go Back</button>
+            <button className="close-drawer" onClick={() => handleAnimation(null, "left") }>Go Back</button>
 
         </div>
 

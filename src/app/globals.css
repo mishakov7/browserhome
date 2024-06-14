@@ -105,7 +105,7 @@
 
   } 100% {
     right: 0;
-    width: 20vw;
+    width: 25vw;
     position: relative;
   }
 }
@@ -113,7 +113,7 @@
 @keyframes closedrawer_right {
   0% {
     right: 0;
-    width: 20vw;
+    width: 25vw;
     position: relative;
 
   } 50% {
@@ -137,7 +137,7 @@
 
   } 100% {
     left: 0;
-    width: 20vw;
+    width: 25vw;
     position: relative;
 
   }
@@ -146,7 +146,7 @@
 @keyframes closedrawer_left {
   0% {
     left: 0;
-    width: 20vw;
+    width: 25vw;
     position: relative;
 
   } 50% {
@@ -292,12 +292,14 @@ input, textarea {
   }
 }
 
-#main-container.drawer-opened {
+#main-container.opened-left,
+#main-container.opened-right {
   width: 75vw;
   transition: width 0.6s;
 }
 
-#main-container.drawer-opened #main-wrapper::before {
+#main-container.opened-left #main-wrapper::before,
+#main-container.opened-right #main-wrapper::before {
   content: "";
   position: absolute;
   width: 200px;
@@ -310,10 +312,6 @@ input, textarea {
   display: block;
   z-index: 99;
 }
-
-/* #drawer + #main-wrapper {
-  width: 100vw;
-}  */
 
 #drawer .radio {
   border-color: rgb(var(--accent1-txt));
@@ -351,8 +349,14 @@ input, textarea {
   padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;
   color: rgb(var(--accent1-txt));
-  animation: opendrawer_left 0.6s forwards;
+}
 
+.left-drawer {
+  animation: opendrawer_left 0.6s forwards;
+}
+
+.right-drawer {
+  animation: opendrawer_right 0.6s forwards;
 }
 
 #drawer .guide li {

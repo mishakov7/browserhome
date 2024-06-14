@@ -125,25 +125,27 @@ export default function Home() {
     if (drawer != null) {
       Drawers.map((x: any) => {
         x.element = <x.tag setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
-        mainContainer.current?.classList.add("drawer-opened");
 
         if (x.file == drawer && direction == "left") {
           setDrawerLeft(x.element);
           setDrawerRight(null);
+          mainContainer.current?.classList.add("opened-left");
 
         } else if (x.file == drawer && direction == "right") {
           setDrawerRight(x.element);
           setDrawerLeft(null);
+          mainContainer.current?.classList.add("opened-right");
+
         }
       });
     
     } else {
-      mainContainer.current?.classList.remove("drawer-opened");
-
       if (direction == "left") {
         setDrawerLeft(null);
+        mainContainer.current?.classList.remove("opened-left");
       } else {
         setDrawerRight(null);
+        mainContainer.current?.classList.remove("opened-right");
       }
     }
   }
