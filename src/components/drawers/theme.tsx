@@ -17,7 +17,7 @@ const lightTheme = [
     ["--secondary-txt", "#867D64"],
     ["--secondary-txt-lt", "#CDC7AF"],
     ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
-    ["--shadow", "rgba(225, 217, 184, 0.3)"]
+    ["--shadow", "rgba(197, 192, 172, 0.3)"]
 ]
 
 const darkTheme = [
