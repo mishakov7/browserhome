@@ -11,7 +11,7 @@
 
   --accent1: 259, 53%, 62%;
   --accent2: 151, 53%, 62%;
-  --accent3: 151, 53%, 62%;
+  --accent3: 349, 95%, 62%;
   
   --accent1-dk: 259;
   --accent2-dk: 151;
@@ -100,14 +100,14 @@
     width: 0%;
   } to {
     right: 0;
-    width: 25vw;
+    width: 24vw;
   }
 }
 
 @keyframes closedrawer_right {
   from {
     right: 0;
-    width: 25vw;
+    width: 24vw;
   } to {
     right: -100vw;
     width: 0%;
@@ -120,27 +120,27 @@
     width: 0vw;
   } to {
     left: 0;
-    width: 25vw;
+    width: 24vw;
   }
 }
 
 @keyframes closedrawer_left {
   from {
     left: 0;
-    width: 25vw;
+    width: 24vw;
   } to {
     left: -100vw;
     width: 0vw;
   }
 }
 
-@keyframes closecontainer_left {
+/* @keyframes closecontainer_left {
   from {
     width: 100%;
   } to {
     width: 75vw;
   }
-}
+} */
 
 /********************/
 /** GENERAL STYLES **/
@@ -266,7 +266,6 @@ input, textarea {
 #drawer + #main-container {
   width: 75vw;
   transition: width 0.6s;
-  /* animation: closecontainer_left 0.6s; */
 }
 
 #drawer + #main-wrapper {
@@ -306,7 +305,7 @@ input, textarea {
 
 #drawer {
   position: relative;
-  width: 25vw;
+  width: 24vw;
   padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;
   animation: opendrawer_left 0.6s;

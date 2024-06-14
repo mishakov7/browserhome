@@ -144,7 +144,7 @@ export default function Home() {
       setCSSTheme("light");
       setCSSAccent("accent1", "259, 53%, 62%");
       setCSSAccent("accent2", "151, 53%, 62%");
-      setCSSAccent("accent3", "151, 53%, 62%");
+      setCSSAccent("accent3", "349, 95%, 62%");
     }
 
 }, []); 

@@ -39,15 +39,15 @@ const Drawer = (props : any) => {
     const colorfulRef = useRef<HTMLDivElement>(null);
     const [colorful, setColorful] = useState(-1);
 
-    const default1 = "141, 108, 210";
+    const default1 = "259, 53%, 62%";
     const [hsva1, setHsva1] = useState({ h: 259, s: 0.49, v: 0.821, a: 1 });
     const [accent1, setAccent1] = useState(default1);
 
-    const default2 = "108, 210, 161";
+    const default2 = "151, 53%, 62%";
     const [hsva2, setHsva2] = useState({ h: 150, s: 0.49, v: 0.821, a: 1 });
     const [accent2, setAccent2] = useState(default2);
 
-    const default3 = "250, 63, 97";
+    const default3 = "349, 95%, 62%";
     const [hsva3, setHsva3] = useState({ h: 349, s: 0.755, v: 0.9805, a: 1 });
     const [accent3, setAccent3] = useState(default3);
 
