@@ -5,8 +5,10 @@
   --secondary-txt: #867D64;
   --secondary-txt-lt: #CDC7AF;
   --subtle-border: rgba(205, 199, 175, 0.15);
-  --shadow: rgba(225, 217, 184, 0.2);
+  --shadow: rgba(225, 217, 184, 0.3);
 
+  --accent1-txt: 255, 255, 255;
+  --accent1-txt: 255, 255, 255;
   --accent1-txt: 255, 255, 255;
 
   --accent1: 259, 53%, 62%;
@@ -100,14 +102,14 @@
     width: 0%;
   } to {
     right: 0;
-    width: 24vw;
+    width: 20vw;
   }
 }
 
 @keyframes closedrawer_right {
   from {
     right: 0;
-    width: 24vw;
+    width: 20vw;
   } to {
     right: -100vw;
     width: 0%;
@@ -124,7 +126,7 @@
 
   } 100% {
     left: 0;
-    width: 24vw;
+    width: 20vw;
     position: relative;
 
   }
@@ -133,7 +135,7 @@
 @keyframes closedrawer_left {
   0% {
     left: 0;
-    width: 24vw;
+    width: 20vw;
     position: relative;
 
   } 50% {
@@ -185,6 +187,7 @@ body {
   margin: 0px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   transition: background-color 0.8s;
 }
 
@@ -328,7 +331,7 @@ input, textarea {
 #drawer {
   width: 0vw;
   position: absolute;
-  /* width: 24vw; */
+  /* width: 20vw; */
   padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;
   animation: opendrawer_left 0.6s forwards;
@@ -817,7 +820,8 @@ footer .cache-button::before {
 
 footer .kofi-button::before {
   content: "Want to donate? Get me some kofi!";
-  background-color: hsl(var(--accent2-lt), 75%);
+  background-color: hsl(var(--accent2));
+  color: rgb(var(--accent2-txt));
   width: 200px;
   top: -20px;
   right: 45px;
@@ -825,21 +829,22 @@ footer .kofi-button::before {
 
 
 footer .kofi-button::after {
-  background-color: hsl(var(--accent2-lt), 75%);
+  background-color: hsl(var(--accent2));
   right: 38px;
   top: 0;
 }
 
 footer .cache-button::after {
   content: "Be careful when you clear your cache! You could delete all your storage off this site.";
-  background-color: hsl(var(--accent3-lt), 75%);
+  background-color: hsl(var(--accent3));
+  color: rgb(var(--accent3-txt));
   width: 300px;
   top: -20px;
   left: 50px;
 }
 
 footer .cache-button::before {
-  background-color: hsl(var(--accent3-lt), 75%);
+  background-color: hsl(var(--accent3));
   left: 42px;
 }
 
@@ -1019,7 +1024,7 @@ input[type="radio"]:checked + .radio span {
 
 .toggle .switch {
   position: absolute;
-  top: -2.55px;
+  top: -2px;
   display: flex;
   background-color: var(--base-bg);
   width: 20px;

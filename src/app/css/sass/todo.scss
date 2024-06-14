@@ -2,14 +2,12 @@
     position: relative;
     display: inline-block;
     scrollbar-width: none;
-    max-height: max-content;
-    max-width: max-content;
-    // right: -95vw;
-    // bottom: 0vh;
-    right: -240%;
-    bottom: 25%;
+    max-height: 50vh;
+    max-width: 50vw;
+    right: -135%;
+    bottom: -125px;
 }
-  
+
 .list-container {
     position: absolute;
     background-color: var(--base-container);

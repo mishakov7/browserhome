@@ -198,7 +198,7 @@ input[type=text] {
   height: 100px;
   position: absolute;
   z-index: 2;
-  right: 7vw;
+  right: 85px;
   top: -2%;
 }
 
@@ -311,26 +311,32 @@ input[type=text] {
 
 .light-theme .sticky-accent1 {
   background-color: hsl(var(--accent1-lt), 90%);
+  border: solid 1px hsla(var(--accent1), 6%);
 }
 
 .light-theme .sticky-accent2 {
   background-color: hsl(var(--accent2-lt), 90%);
+  border: solid 1px hsla(var(--accent2), 6%);
 }
 
 .light-theme .sticky-accent3 {
   background-color: hsl(var(--accent3-lt), 90%);
+  border: solid 1px hsla(var(--accent3), 6%);
 }
 
 .dark-theme .sticky-accent1 {
   background-color: hsl(var(--accent1-dk), 20%, 50%);
+  border: solid 1px hsla(var(--accent1), 6%);
 }
 
 .dark-theme .sticky-accent2 {
   background-color: hsl(var(--accent2-dk), 20%, 50%);
+  border: solid 1px hsla(var(--accent2), 6%);
 }
 
 .dark-theme .sticky-accent3 {
   background-color: hsl(var(--accent3-dk), 20%, 50%);
+  border: solid 1px hsla(var(--accent3), 6%);
 }
 
 .dark-theme .sticky .accent1-fill path {
@@ -841,7 +847,6 @@ input[type=text] {
   width: 6px;
   height: 80%;
   background-color: var(--secondary-txt-lt);
-  opacity: 0.4;
   border-radius: 10px;
 }
 
@@ -1308,10 +1313,10 @@ input[type=text] {
   position: relative;
   display: inline-block;
   scrollbar-width: none;
-  max-height: max-content;
-  max-width: max-content;
-  right: -240%;
-  bottom: 25%;
+  max-height: 50vh;
+  max-width: 50vw;
+  right: -135%;
+  bottom: -125px;
 }
 
 .list-container {
