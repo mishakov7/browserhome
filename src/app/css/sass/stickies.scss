@@ -19,15 +19,15 @@
 
 .more-options-container {
   position: relative;
-  top: 0vh;
-  left: -135px;
+  top: 35%;
+  left: -160px;
   width: 24vh;
   height: 50px;
   background: hsl(var(--accent1));
-  border-radius: 0 0 20px 20px;
-  padding: 20px;
+  border-radius: 0 0 24px 24px;
+  display: flex;
+  justify-content: center;
   transform: rotate(-90deg);
-  text-align: center;
   z-index: 30;
   cursor: pointer;
 }
@@ -52,26 +52,19 @@
   top: 30px;
 }
 
-.more-options-container::after {
-  content: "";
-  position: relative;
-  display: block;
-  width: 150px;
-  height: 20px;
-  background: transparent;
-  bottom: -10px;
-  left: -5px;
-  z-index: -1;
-}
+// .more-options-container::after {
+//   content: "";
+//   position: relative;
+//   display: block;
+//   width: 150px;
+//   height: 20px;
+//   background: transparent;
+//   bottom: -10px;
+//   left: -5px;
+//   z-index: -1;
+// }
 
 .more-options-container span {
-  position: relative;
-  display: block;
-  width: 100%;
-  top: -5px;
-}
-
-.more-options-container span::before {
   content: "More Options";
   color: rgb(var(--accent1-txt));
   font-family: var(--robo);
@@ -79,6 +72,10 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
+  display: flex;
+  width: max-content;
+  position: relative;
+  top: 15px;
 }
 
 #drawer + #main-container .more-options-container {
@@ -489,7 +486,7 @@
   flex-direction: row;
   justify-content: center;
   position: absolute;
-  bottom: 100px;
+  bottom: 50px;
   transition: bottom 0.4s;
   left: 0;
   width: 100%;
@@ -528,7 +525,7 @@
   font-size: 12px;
   color: var(--secondary-txt);
   background: transparent;
-  backdrop-filter: blur(10px);
+  // backdrop-filter: blur(10px);
   transform: rotate(90deg);
   top: 104px;
   width: 150px;

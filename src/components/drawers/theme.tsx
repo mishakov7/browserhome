@@ -168,8 +168,7 @@ const Drawer = (props : any) => {
         setTimeout(() => {
             props.setDrawer(null)
             props.contentRef.style = [];
-            console.log("timeout done");
-        }, 3000);
+        }, 2000);
     }
 
     useEffect(() => {
