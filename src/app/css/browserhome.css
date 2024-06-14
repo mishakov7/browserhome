@@ -25,9 +25,13 @@
   position: relative;
 }
 
-input[type=text] {
+.search-container [type=text] {
   width: 100%;
   padding: 10px 50px;
+}
+
+.search-container ::placeholder {
+  opacity: 0.1;
 }
 
 .inputGroup .se-icon {
