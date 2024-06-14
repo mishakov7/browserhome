@@ -101,10 +101,6 @@ export default function Home() {
     }, 4000);
   }
 
-  function randomIdx(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min; 
-  }
-
   // Themes
   function setCSSTheme(theme: string) {
       if (theme == "dark") {
@@ -226,11 +222,11 @@ export default function Home() {
               </div>
           </div>
           
-          <div id="main-wrapper" >
+          <div ref={moreRef} id="main-wrapper" >
 
             <div className='col feature-group'>
               <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
-              <Stickies command={stickyCommand} setCommand={setStickyCommand} parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={moreRef} opened={LeftDrawer} openTheme={changeDrawer} />
+              <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} command={stickyCommand} setCommand={setStickyCommand} />
               <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
             </div>
   
@@ -271,21 +267,21 @@ export default function Home() {
               </li>
               <li>
                   <details>
-                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef); removeHighlight(searchRef);}}>Show me!</button></summary>
+                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef); removeHighlight(bookmarkRef);}}>Show me!</button></summary>
                       <p>You can enter as many bookmarks as you want so that you can have easy access to all of your websites. You can also delete and edit them.</p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Create a list <button onClick={() => {highlightFeature(listRef); clickFeature(listRef); removeHighlight(searchRef);}}>Show me!</button></summary>
+                      <summary>Create a list <button onClick={() => {highlightFeature(listRef); clickFeature(listRef); removeHighlight(listRef);}}>Show me!</button></summary>
                       <p>You can create up to five lists, and add as many todos as you want. You can also add links to each todo if you want, but that is not required. </p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef); hoverFeature(moreRef); removeHighlight(searchRef);}}>Show me!</button></summary>
+                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef); hoverFeature(moreRef); removeHighlight(moreRef);}}>Show me!</button></summary>
                       <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>
