@@ -71,6 +71,10 @@
     left: calc(25vw + 30px);
 }
 
+.opened-right .options-container {
+  display: none;
+}
+
 .opened-left .options-container .settings-button::before {
     content: "Go Back";
     color: var(--base-txt);

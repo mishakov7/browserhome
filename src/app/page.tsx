@@ -44,7 +44,10 @@ export default function Home() {
   const bookmarkRef = useRef(null);
   const listRef = useRef(null);
   const moreRef = useRef(null);
+
+  const [searchTutorial, setSearchTutorial] = useState(0);
   
+
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
     ref.current.click();
@@ -124,10 +127,33 @@ export default function Home() {
 
   }
 
+  function updateDrawer(drawer: any) {
+    let component;
+    if (drawer != null) {
+      Drawers.map((x: any) => {
+        if (x.file == drawer) {
+          switch (drawer) {
+            case "search":
+              component = <x.tag steps={searchTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+              break;
+  
+            default: 
+              component = <x.tag setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+          }
+        }
+
+      });
+    }
+
+    return component;
+
+  }
+
   function changeDrawer(drawer: any, direction: string) {
     if (drawer != null) {
       Drawers.map((x: any) => {
-        x.element = <x.tag setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+
+        x.element = updateDrawer(drawer);
 
         if (x.file == drawer && direction == "left") {
           setDrawerLeft(x.element);
@@ -156,26 +182,35 @@ export default function Home() {
   useEffect(() => {
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
 
-    if (localSettings) {
+    if (LeftDrawer == null && RightDrawer == null) {
+      if (localSettings) {
         setCSSTheme(localSettings.theme);
         setCSSAccent("accent1", localSettings.accent1);
         setCSSAccent("accent2", localSettings.accent2);
         setCSSAccent("accent3", localSettings.accent3);
 
-        // if (!localSettings.tutorial) {
-        //   changeDrawer("intro", "left");
-        // }
+        if (!localSettings.tutorial) {
+          changeDrawer("intro", "left");
+        }
 
-    } else {
-      setCSSTheme("light");
-      setCSSAccent("accent1", "259, 53%, 62%");
-      setCSSAccent("accent2", "151, 53%, 62%");
-      setCSSAccent("accent3", "349, 95%, 62%");
+      } else {
+        setCSSTheme("light");
+        setCSSAccent("accent1", "259, 53%, 62%");
+        setCSSAccent("accent2", "151, 53%, 62%");
+        setCSSAccent("accent3", "349, 95%, 62%");
 
-      // changeDrawer("intro", "left");
+        changeDrawer("intro", "left");
+      }
     }
 
-}, []); 
+    if (RightDrawer && searchTutorial > 0) {
+      // RightDrawer.steps = searchTutorial;
+      // console.log(RightDrawer.props);
+      setDrawerRight(updateDrawer("search"));
+      console.log("updated drawer?");
+    }
+
+}, [searchTutorial]); 
 
   return (
     <>
@@ -225,7 +260,7 @@ export default function Home() {
           <div ref={moreRef} id="main-wrapper" >
 
             <div className='col feature-group'>
-              <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
+              <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} setTutorial={setSearchTutorial} steps={searchTutorial} />
               <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} command={stickyCommand} setCommand={setStickyCommand} />
               <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
             </div>
@@ -245,7 +280,7 @@ export default function Home() {
                 <svg width="28" height="28" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24.2188 12.1094C24.2188 18.7987 18.7967 24.2188 12.1094 24.2188C5.42202 24.2188 0 18.7987 0 12.1094C0 5.42397 5.42202 0 12.1094 0C18.7967 0 24.2188 5.42397 24.2188 12.1094ZM12.1094 14.5508C10.8689 14.5508 9.86328 15.5564 9.86328 16.7969C9.86328 18.0374 10.8689 19.043 12.1094 19.043C13.3499 19.043 14.3555 18.0374 14.3555 16.7969C14.3555 15.5564 13.3499 14.5508 12.1094 14.5508ZM9.9769 6.47725L10.3391 13.1179C10.3561 13.4286 10.613 13.6719 10.9242 13.6719H13.2946C13.6058 13.6719 13.8627 13.4286 13.8796 13.1179L14.2418 6.47725C14.2602 6.1416 13.9929 5.85938 13.6568 5.85938H10.5619C10.2258 5.85938 9.95859 6.1416 9.9769 6.47725Z" fill="#FFF8E5"/></svg>
             </button>
 
-            <p className='uppercase'>Built by <a href='https://mishalukova.com/' target='_blank'>Misha Lukova</a></p>
+            <p className='uppercase'>Built by <a href='https://mishalukova.com/' target='_blank'>Misha Lukova</a> </p>
 
             <a className="kofi-button" href="https://ko-fi.com/mlukova" target="_blank">
               {/*"Get me some Kofi*/}

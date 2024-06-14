@@ -1620,6 +1620,10 @@ button.list-container:hover::before {
   left: calc(25vw + 30px);
 }
 
+.opened-right .options-container {
+  display: none;
+}
+
 .opened-left .options-container .settings-button::before {
   content: "Go Back";
   color: var(--base-txt);
@@ -1744,6 +1748,10 @@ button.list-container:hover::before {
 
 .options-container .reset-button::after {
   content: "Reset Placement";
+}
+
+.checkmark-button path {
+  transition: fill 0.2s;
 }
 
 /*# sourceMappingURL=browserhome.css.map */
