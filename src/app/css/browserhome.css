@@ -64,7 +64,6 @@ input[type=text] {
   .search-container {
     width: 90%;
   }
-
   .search-query {
     font-size: 2em;
   }
@@ -91,118 +90,6 @@ input[type=text] {
     border-radius: 14px 16px 14px 12px;
   }
 }
-.more-options-container {
-  position: relative;
-  top: 35%;
-  left: -160px;
-  width: 24vh;
-  height: 50px;
-  background: hsl(var(--accent1));
-  border-radius: 0 0 24px 24px;
-  display: flex;
-  justify-content: center;
-  transform: rotate(-90deg);
-  transition: left 0.6s;
-  z-index: 30;
-  cursor: pointer;
-}
-
-.more-options-container::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 30px;
-  height: 30px;
-  background: hsl(var(--accent1));
-  top: 0px;
-  left: 50%;
-  border-radius: 0 0 12px 0;
-  transform: rotate(45deg);
-  z-index: -1;
-  transition: top 0.2s;
-}
-
-.more-options-container:hover::before,
-.more-options-container.hovered::before {
-  top: 30px;
-}
-
-.more-options-container span {
-  content: "More Options";
-  color: rgb(var(--accent1-txt));
-  font-family: var(--robo);
-  font-size: 15px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: flex;
-  width: max-content;
-  position: relative;
-  top: 15px;
-}
-
-#drawer + #main-container .more-options-container {
-  background: transparent;
-  left: -110px;
-  transform: rotate(90deg);
-}
-
-#drawer + #main-container .more-options-container {
-  left: -300px;
-}
-
-@keyframes showreturn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.left-drawer .close-drawer,
-.right-drawer .close-drawer {
-  position: absolute;
-  width: 24vh;
-  height: 50px;
-  top: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: none;
-  opacity: 0;
-  color: var(--base-txt);
-  font-family: var(--robo);
-  font-size: 15px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  z-index: 99;
-  animation: showreturn 0.6s forwards;
-  cursor: pointer;
-}
-
-.left-drawer .close-drawer {
-  right: calc(0% - 12.5vw);
-  transform: rotate(-90deg);
-}
-
-.left-drawer .close-drawer::before,
-.right-drawer .close-drawer::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 30px;
-  height: 30px;
-  background: var(--base-bg);
-  top: -15px;
-  left: 45%;
-  border-radius: 0 0 12px 0;
-  transform: rotate(225deg);
-  z-index: -1;
-  transition: top 0.2s;
-}
-
 .date {
   display: flex;
   flex-direction: column;
@@ -542,77 +429,6 @@ input[type=text] {
   stroke-width: 2px;
 }
 
-.more-options-container:hover .buttons-container,
-.more-options-container.hovered .buttons-container {
-  bottom: -50px;
-}
-
-.more-options-container .buttons-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  position: absolute;
-  bottom: 50px;
-  transition: bottom 0.4s;
-  left: 0;
-  width: 100%;
-  z-index: -1;
-}
-
-.more-options-container .buttons-container button {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  background-color: hsl(var(--accent1));
-  padding: 8px;
-  border-radius: 12px;
-  max-width: 30px;
-  max-height: 30px;
-  margin: 0 4px;
-  cursor: pointer;
-}
-
-.more-options-container .buttons-container button path {
-  transition: fill 0.2s;
-  fill: rgb(var(--accent1-txt));
-}
-
-.more-options-container .buttons-container button:hover path {
-  fill: hsl(var(--accent1-lt), 98%);
-}
-
-.more-options-container .buttons-container button::after {
-  position: absolute;
-  display: flex;
-  min-width: max-content;
-  font-family: "Roboto Slab";
-  text-transform: uppercase;
-  font-size: 12px;
-  color: var(--secondary-txt);
-  background: transparent;
-  transform: rotate(90deg);
-  top: 104px;
-  width: 150px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.more-options-container .buttons-container button:hover::after {
-  opacity: 1;
-}
-
-.more-options-container .note-button::after {
-  content: "+ Add Note";
-}
-
-.more-options-container .polaroid-button::after {
-  content: "+ Add Polaroid";
-}
-
-.more-options-container .reset-button::after {
-  content: "Reset Sticky Position";
-}
-
 .stickies-wrapper .polaroid-container .buttons-container {
   display: none;
   position: absolute;
@@ -714,7 +530,6 @@ input[type=text] {
     width: max-content;
     margin-right: 25px;
   }
-
   .date {
     position: relative;
   }
@@ -956,41 +771,33 @@ input[type=text] {
     width: 100%;
     max-height: none;
   }
-
   .bookmarks-list {
     overflow-x: visible;
     flex-wrap: wrap;
     width: 100%;
     padding: 40px 0;
   }
-
   .arrows-container {
     display: none !important;
   }
-
   .bookmarks-list:not(.bookmarks-list-creator):hover {
     padding: 40px 0;
   }
-
   .bookmark {
     min-width: 50px;
     min-height: 50px;
     border-radius: 12px;
   }
-
   .bookmark img {
     width: 30px;
   }
-
   .bookmark:hover .remove-button,
-.bookmark:hover .edit-button {
+  .bookmark:hover .edit-button {
     display: none;
   }
-
   .bookmark:hover::before {
     display: none;
   }
-
   .bookmarks-container .create-button svg {
     width: 18px;
   }
@@ -1757,30 +1564,167 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
-
   button.list-container {
     left: 500px;
   }
-
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
-
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
-
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
-
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
-
   div.list-container:nth-of-type(5) {
     left: 200px;
   }
+}
+.options-container {
+  position: absolute;
+  left: 10px;
+  top: 50vh;
+  z-index: 2;
+}
+
+.options-container .settings-button {
+  position: relative;
+  background: none;
+  left: 0;
+  transition: left 0.2s;
+  cursor: pointer;
+}
+
+.options-container .settings-button::before {
+  content: "More Options";
+  position: absolute;
+  width: max-content;
+  color: var(--secondary-txt-lt);
+  font-family: var(--robo);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transform: rotate(-90deg);
+  left: -20px;
+  top: 0px;
+}
+
+.opened-left .options-container {
+  left: calc(25vw + 30px);
+}
+
+.opened-left .options-container .settings-button::before {
+  content: "Go Back";
+  color: var(--base-txt);
+}
+
+.opened-left .options-container .settings-button svg {
+  position: relative;
+  transform: rotate(180deg);
+  left: -30px;
+}
+
+.opened-left .options-container .settings-button .accent1-fill path {
+  fill: var(--base-bg) !important;
+}
+
+.options-container .settings-button:hover {
+  left: 5px;
+}
+
+.options-container:hover .buttons-container,
+.options-container.hovered .buttons-container {
+  left: 35px;
+}
+
+.opened-right .options-container .buttons-container,
+.opened-left .options-container .buttons-container {
+  display: none;
+}
+
+#main-container.opened-left #main-wrapper::before,
+#main-container.opened-right #main-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 300px;
+  top: 25vh;
+  left: -150px;
+  background-color: var(--base-bg);
+  border-radius: 200px;
+  filter: blur(25px);
+  display: block;
+  z-index: 99;
+}
+
+.options-container .buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  z-index: -1;
+  top: -40px;
+  left: -50px;
+  transition: left 0.2s;
+}
+
+.options-container .buttons-container button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.options-container .buttons-container button svg {
+  background-color: hsl(var(--accent1));
+  padding: 8px;
+  border-radius: 12px;
+  width: 30px;
+  height: 30px;
+  margin: 4px 0;
+}
+
+.options-container .buttons-container button path {
+  transition: fill 0.2s;
+  fill: rgb(var(--accent1-txt));
+}
+
+.options-container .buttons-container button:hover path {
+  fill: hsl(var(--accent1-lt), 98%);
+}
+
+.options-container .buttons-container button::after {
+  opacity: 0;
+  transition: opacity 0.2s;
+  color: var(--secondary-txt);
+  font-family: var(--robo);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+.options-container .buttons-container button:hover::after {
+  opacity: 1;
+}
+
+.options-container .note-button::after {
+  content: "+ Add Note";
+}
+
+.options-container .polaroid-button::after {
+  content: "+ Add Polaroid";
+}
+
+.options-container .reset-button::after {
+  content: "Reset Placement";
 }
 
 /*# sourceMappingURL=browserhome.css.map */

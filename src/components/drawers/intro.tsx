@@ -58,8 +58,6 @@ const Drawer = (props : any) => {
               </li>
             </ul>
 
-            <button className="close-drawer" onClick={() => handleAnimation(null, "left") }>Go Back</button>
-
         </div>
 
         </>

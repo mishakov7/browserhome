@@ -250,8 +250,6 @@ const Drawer = (props : any) => {
                 }
             </div>
 
-            <button className="close-drawer" onClick={() => handleAnimation() }>Go Back</button>
-
         </div>
 
         </>

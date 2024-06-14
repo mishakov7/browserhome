@@ -1,0 +1,185 @@
+// .left-drawer .close-drawer,
+// .right-drawer .close-drawer {
+//   position: absolute;
+//   width: 24vh;
+//   height: 50px;
+//   top: 50%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   background: none;
+//   opacity: 0;
+
+//   color: var(--base-txt);
+//   font-family: var(--robo);
+//   font-size: 15px;
+//   text-align: center;
+//   text-transform: uppercase;
+//   letter-spacing: 1px;
+//   z-index: 99;
+//   animation: showreturn 0.6s forwards;
+//   cursor: pointer;
+// }
+
+// .left-drawer .close-drawer {
+//   right: calc(0% - 12.5vw);
+//   transform: rotate(-90deg);
+// }
+
+// @keyframes showreturn {
+//     from {
+//       opacity: 0;  
+        
+//     } to {
+//       opacity: 1;
+//     }
+// }
+
+.options-container {
+    position: absolute;
+    left: 10px;
+    top: 50vh;
+    z-index: 2;
+}
+
+.options-container .settings-button {
+    position: relative;
+    background: none;
+    left: 0;
+    transition: left 0.2s;
+    cursor: pointer;
+}
+
+.options-container .settings-button::before {
+    content: "More Options";
+    position: absolute;
+    width: max-content;
+
+    color: var(--secondary-txt-lt);
+    font-family: var(--robo);
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    transform: rotate(-90deg);
+    left: -20px;
+    top: 0px;
+}
+
+.opened-left .options-container {
+    left: calc(25vw + 30px);
+}
+
+.opened-left .options-container .settings-button::before {
+    content: "Go Back";
+    color: var(--base-txt);
+} 
+
+.opened-left .options-container .settings-button svg {
+    position: relative;
+    transform: rotate(180deg);
+    left: -30px;
+}
+
+.opened-left .options-container .settings-button .accent1-fill path {
+    fill: var(--base-bg)!important;
+}
+
+.options-container .settings-button:hover {
+    left: 5px;
+}
+
+.options-container:hover .buttons-container,
+.options-container.hovered .buttons-container {
+  left: 35px;
+}
+
+.opened-right .options-container .buttons-container,
+.opened-left .options-container .buttons-container {
+    display: none;
+}
+
+#main-container.opened-left #main-wrapper::before,
+#main-container.opened-right #main-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 300px;
+  top: 25vh;
+  left: -150px;
+  background-color: var(--base-bg);
+  border-radius: 200px;
+  filter: blur(25px);
+  display: block;
+  z-index: 99;
+}
+
+.options-container .buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  z-index: -1;
+  top: -40px;
+  left: -50px;
+  transition: left 0.2s;
+}
+
+.options-container .buttons-container button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+
+}
+
+.options-container .buttons-container button svg {
+  background-color: hsl(var(--accent1));
+  padding: 8px;
+  border-radius: 12px;
+  width: 30px;
+  height: 30px;
+  margin: 4px 0;
+}
+
+.options-container .buttons-container button path {
+  transition: fill 0.2s;
+  fill: rgb(var(--accent1-txt));
+}
+
+.options-container .buttons-container button:hover path {
+  fill: hsl(var(--accent1-lt), 98%);
+}
+
+.options-container .buttons-container button::after {
+  opacity: 0;
+  transition: opacity 0.2s;
+  
+  color: var(--secondary-txt);
+  font-family: var(--robo);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+.options-container .buttons-container button:hover::after {
+  opacity: 1;
+}
+
+.options-container .note-button::after {
+  content: "+ Add Note";
+}
+
+.options-container .polaroid-button::after {
+  content: "+ Add Polaroid";
+}
+
+.options-container .reset-button::after {
+  content: "Reset Placement";
+}

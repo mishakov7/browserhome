@@ -32,8 +32,6 @@ const Drawer = (props : any) => {
               <li>Change Search Settings</li>
             </ol>
 
-            <button className="close-drawer" onClick={() => handleAnimation() }>Go Back</button>
-
         </div>
 
         </>
