@@ -161,12 +161,15 @@ const Drawer = (props : any) => {
     const handleAnimation = () => {
 
         if (drawerRef.current) {
-            drawerRef.current.style.animation = "closedrawer_left 0.6s forwards";
+            drawerRef.current.style.animation = "closedrawer_left 2s forwards";
+            props.contentRef.style.animation = "opencontainer_left 2s forwards";
         }
     
         setTimeout(() => {
             props.setDrawer(null)
-        }, 600);
+            props.contentRef.style = [];
+            console.log("timeout done");
+        }, 3000);
     }
 
     useEffect(() => {

@@ -115,32 +115,55 @@
 }
 
 @keyframes opendrawer_left {
-  from {
+  0% {
     left: -100vw;
     width: 0vw;
-  } to {
+  
+  } 50% {
+    position: relative;
+
+  } 100% {
     left: 0;
     width: 24vw;
+    position: relative;
+
   }
 }
 
 @keyframes closedrawer_left {
-  from {
+  0% {
     left: 0;
     width: 24vw;
-  } to {
+    position: relative;
+
+  } 50% {
+    position: relative;
+
+  } 100% {
     left: -100vw;
     width: 0vw;
+    position: absolute;
+
   }
 }
 
-/* @keyframes closecontainer_left {
+@keyframes closecontainer_left {
   from {
     width: 100%;
   } to {
     width: 75vw;
   }
-} */
+}
+
+@keyframes opencontainer_left {
+  0% {
+    width: 75vw;
+  } 25% {
+    width: 75vw;
+  } 100% {
+    width: 100%;
+  }
+}
 
 /********************/
 /** GENERAL STYLES **/
@@ -268,9 +291,9 @@ input, textarea {
   transition: width 0.6s;
 }
 
-#drawer + #main-wrapper {
+ #drawer + #main-wrapper {
   width: 100vw;
-}
+} 
 
 #drawer .radio {
   border-color: rgb(var(--accent1-txt));
@@ -280,7 +303,7 @@ input, textarea {
   background-color: var(--base-bg);
   border-radius: 30px;
   max-height: 100vh;
-  width: 100%;
+  width: 99vw;
   
   overflow-y: scroll;
   overflow-x: hidden;
@@ -291,7 +314,6 @@ input, textarea {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   transition: width 0.6s, background-color 0.8s, border-color 0.8s;
-
 }
 
 #main-wrapper {
@@ -304,11 +326,17 @@ input, textarea {
 }
 
 #drawer {
-  position: relative;
-  width: 24vw;
+  width: 0vw;
+  position: absolute;
+  /* width: 24vw; */
   padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;
-  animation: opendrawer_left 0.6s;
+  animation: opendrawer_left 0.6s forwards;
+}
+
+.theme-drawer,
+.left-drawer {
+  left: -100vw;
 }
 
 #drawer h2,

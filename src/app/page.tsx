@@ -34,6 +34,7 @@ export default function Home() {
 
   const [DrawerComponent, setDrawerComponent] = useState(null);
 
+  const mainContainer = useRef<HTMLDivElement>(null);
   const dresser = useRef<HTMLDivElement>(null);
   const blurLayers = useRef<HTMLDivElement[]>([]);
   const searchRef = useRef(null);
@@ -121,7 +122,7 @@ export default function Home() {
     if (drawer != null) {
       Drawers.map((x: any) => {
         if (x.file == drawer) {
-          x.element = <x.tag setDrawer={setDrawerComponent} dresserRef={dresser.current} />
+          x.element = <x.tag setDrawer={setDrawerComponent} dresserRef={dresser.current} contentRef={mainContainer.current} />
           setDrawerComponent(x.element);
         }
       });
@@ -159,7 +160,7 @@ export default function Home() {
       </Head>
       { DrawerComponent }
 
-      <div id="main-container" className="accent1-border">
+      <div ref={mainContainer} id="main-container" className="accent1-border">
 
         <Suspense fallback={<Loader />}>
           <div id="main-wrapper" >
