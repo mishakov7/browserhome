@@ -32,7 +32,8 @@ const darkTheme = [
 
 export default function Home() {
 
-  const [DrawerComponent, setDrawerComponent] = useState(null);
+  const [LeftDrawer, setDrawerLeft] = useState(null);
+  const [RightDrawer, setDrawerRight] = useState(null);
 
   const mainContainer = useRef<HTMLDivElement>(null);
   const dresser = useRef<HTMLDivElement>(null);
@@ -84,7 +85,9 @@ export default function Home() {
     }
 
     ref.current.classList.add("highlight");
+  }
 
+  const removeHighlight = (ref: any) => {
     setTimeout(() => {
       blurLayers.current[0].classList.remove("blur");
       blurLayers.current[1].classList.remove("blur");
@@ -118,17 +121,30 @@ export default function Home() {
 
   }
 
-  function changeDrawer(drawer: any) {
+  function changeDrawer(drawer: any, direction: string) {
     if (drawer != null) {
       Drawers.map((x: any) => {
-        if (x.file == drawer) {
-          x.element = <x.tag setDrawer={setDrawerComponent} dresserRef={dresser.current} contentRef={mainContainer.current} />
-          setDrawerComponent(x.element);
+        x.element = <x.tag setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+        mainContainer.current?.classList.add("drawer-opened");
+
+        if (x.file == drawer && direction == "left") {
+          setDrawerLeft(x.element);
+          setDrawerRight(null);
+
+        } else if (x.file == drawer && direction == "right") {
+          setDrawerRight(x.element);
+          setDrawerLeft(null);
         }
       });
     
     } else {
-      setDrawerComponent(null);
+      mainContainer.current?.classList.remove("drawer-opened");
+
+      if (direction == "left") {
+        setDrawerLeft(null);
+      } else {
+        setDrawerRight(null);
+      }
     }
   }
 
@@ -141,11 +157,17 @@ export default function Home() {
         setCSSAccent("accent2", localSettings.accent2);
         setCSSAccent("accent3", localSettings.accent3);
 
+        if (!localSettings.tutorial) {
+          changeDrawer("intro", "left");
+        }
+
     } else {
       setCSSTheme("light");
       setCSSAccent("accent1", "259, 53%, 62%");
       setCSSAccent("accent2", "151, 53%, 62%");
       setCSSAccent("accent3", "349, 95%, 62%");
+
+      changeDrawer("intro", "left");
     }
 
 }, []); 
@@ -158,7 +180,8 @@ export default function Home() {
         <meta name="description" content="Misha Lukova's graphic and digital portfolio" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      { DrawerComponent }
+
+      { LeftDrawer }
 
       <div ref={mainContainer} id="main-container" className="accent1-border">
 
@@ -167,7 +190,7 @@ export default function Home() {
 
             <div className='col feature-group'>
               <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} />
-              <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={moreRef} opened={DrawerComponent} openTheme={changeDrawer} />
+              <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} summonRef={moreRef} opened={LeftDrawer} openTheme={changeDrawer} />
               <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
             </div>
   
@@ -176,6 +199,8 @@ export default function Home() {
         </Suspense>
 
       </div>
+
+      { RightDrawer }
 
       <footer>
         <div className='row'>
@@ -200,27 +225,27 @@ export default function Home() {
             <ul className='guide'>
               <li>
                   <details>
-                      <summary>Change your search settings! <button onClick={() => {highlightFeature(searchRef); clickFeature(searchRef);}}>Show me!</button></summary>
+                      <summary>Change your search settings! <button onClick={() => {highlightFeature(searchRef); clickFeature(searchRef); removeHighlight(searchRef);}}>Show me!</button></summary>
                       <p>Currently you can choose between setting your search engine to Google, DuckDuckGo, or Brave. You can also set what type of text you want to see every time you open the page.</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef);}}>Show me!</button></summary>
+                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef); removeHighlight(searchRef);}}>Show me!</button></summary>
                       <p>You can enter as many bookmarks as you want so that you can have easy access to all of your websites. You can also delete and edit them.</p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Create a list <button onClick={() => {highlightFeature(listRef); clickFeature(listRef);}}>Show me!</button></summary>
+                      <summary>Create a list <button onClick={() => {highlightFeature(listRef); clickFeature(listRef); removeHighlight(searchRef);}}>Show me!</button></summary>
                       <p>You can create up to five lists, and add as many todos as you want. You can also add links to each todo if you want, but that is not required. </p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef); hoverFeature(moreRef);}}>Show me!</button></summary>
+                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef); hoverFeature(moreRef); removeHighlight(searchRef);}}>Show me!</button></summary>
                       <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>

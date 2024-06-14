@@ -97,22 +97,33 @@
 }
 
 @keyframes opendrawer_right {
-  from {
+  0% {
     right: -100vw;
     width: 0%;
-  } to {
+  } 50% {
+    position: relative;
+
+  } 100% {
     right: 0;
     width: 20vw;
+    position: relative;
   }
 }
 
 @keyframes closedrawer_right {
-  from {
+  0% {
     right: 0;
     width: 20vw;
-  } to {
+    position: relative;
+
+  } 50% {
+    position: relative;
+
+  } 100% {
     right: -100vw;
-    width: 0%;
+    width: 0vw;
+    position: absolute;
+
   }
 }
 
@@ -149,15 +160,7 @@
   }
 }
 
-@keyframes closecontainer_left {
-  from {
-    width: 100%;
-  } to {
-    width: 75vw;
-  }
-}
-
-@keyframes opencontainer_left {
+@keyframes opencontainer {
   0% {
     width: 75vw;
   } 50% {
@@ -289,12 +292,12 @@ input, textarea {
   }
 }
 
-#drawer + #main-container {
+#main-container.drawer-opened {
   width: 75vw;
   transition: width 0.6s;
 }
 
-#drawer + #main-container #main-wrapper::before {
+#main-container.drawer-opened #main-wrapper::before {
   content: "";
   position: absolute;
   width: 200px;
@@ -308,9 +311,9 @@ input, textarea {
   z-index: 99;
 }
 
- #drawer + #main-wrapper {
+/* #drawer + #main-wrapper {
   width: 100vw;
-} 
+}  */
 
 #drawer .radio {
   border-color: rgb(var(--accent1-txt));
@@ -345,10 +348,15 @@ input, textarea {
 #drawer {
   width: 0vw;
   position: absolute;
-  /* width: 20vw; */
   padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;
+  color: rgb(var(--accent1-txt));
   animation: opendrawer_left 0.6s forwards;
+
+}
+
+#drawer .guide li {
+  cursor: pointer;
 }
 
 .theme-drawer,
@@ -546,12 +554,12 @@ article {
     width: 100%!important;
   }
 
-  footer .guide details,
-  footer .guide summary {
+  .guide details,
+  .guide summary {
     max-width: 100%!important;
   }
 
-  footer .guide li {
+  .guide li {
     width: 100%;
   }
 
@@ -889,9 +897,12 @@ footer .cache-button::before {
 
 .guide summary {
   position: relative;
+  font-family: var(--robo);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-footer .guide p {
+.guide p {
   font-size: 16px!important;
   margin-top: 10px;
 }

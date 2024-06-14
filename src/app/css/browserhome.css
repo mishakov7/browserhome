@@ -159,17 +159,16 @@ input[type=text] {
     opacity: 1;
   }
 }
-#drawer button {
+.left-drawer .close-drawer,
+.right-drawer .close-drawer {
   position: absolute;
   width: 24vh;
   height: 50px;
-  right: calc(0% - 12.5vw);
   top: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: rotate(-90deg);
   background: none;
   opacity: 0;
   color: var(--base-txt);
@@ -183,7 +182,13 @@ input[type=text] {
   cursor: pointer;
 }
 
-#drawer button::before {
+.left-drawer .close-drawer {
+  right: calc(0% - 12.5vw);
+  transform: rotate(-90deg);
+}
+
+.left-drawer .close-drawer::before,
+.right-drawer .close-drawer::before {
   content: "";
   position: absolute;
   display: block;

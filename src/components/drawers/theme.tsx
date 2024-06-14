@@ -162,11 +162,11 @@ const Drawer = (props : any) => {
 
         if (drawerRef.current) {
             drawerRef.current.style.animation = "closedrawer_left 2s forwards";
-            props.contentRef.style.animation = "opencontainer_left 2s forwards";
+            props.contentRef.style.animation = "opencontainer 2s forwards";
         }
     
         setTimeout(() => {
-            props.setDrawer(null)
+            props.setDrawer(null, 'left')
             props.contentRef.style = [];
         }, 2000);
     }
@@ -210,7 +210,7 @@ const Drawer = (props : any) => {
     return(
         <>
 
-        <div ref={drawerRef} id="drawer" className='theme-drawer'>
+        <div ref={drawerRef} id="drawer" className='left-drawer theme-drawer'>
             <h2>Choose Colors</h2>
 
             <div className='row'>
@@ -250,7 +250,7 @@ const Drawer = (props : any) => {
                 }
             </div>
 
-            <button onClick={() => handleAnimation() }>Go Back</button>
+            <button className="close-drawer" onClick={() => handleAnimation() }>Go Back</button>
 
         </div>
 
