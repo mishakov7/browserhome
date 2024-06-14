@@ -105,7 +105,7 @@
 
   } 100% {
     right: 0;
-    width: 25vw;
+    width: 24vw;
     position: relative;
   }
 }
@@ -113,7 +113,7 @@
 @keyframes closedrawer_right {
   0% {
     right: 0;
-    width: 25vw;
+    width: 24vw;
     position: relative;
 
   } 50% {
@@ -137,7 +137,7 @@
 
   } 100% {
     left: 0;
-    width: 25vw;
+    width: 24vw;
     position: relative;
 
   }
@@ -146,7 +146,7 @@
 @keyframes closedrawer_left {
   0% {
     left: 0;
-    width: 25vw;
+    width: 24vw;
     position: relative;
 
   } 50% {
@@ -331,16 +331,17 @@ input, textarea {
 #drawer {
   width: 0vw;
   position: absolute;
-  padding: 3rem 1rem 3rem 3rem;
   margin: 2rem 0;
   color: rgb(var(--accent1-txt));
 }
 
 .left-drawer {
+  padding: 3rem 1rem 3rem 3rem;
   animation: opendrawer_left 0.6s forwards;
 }
 
 .right-drawer {
+  padding: 3rem 3rem 3rem 1rem;
   animation: opendrawer_right 0.6s forwards;
 }
 

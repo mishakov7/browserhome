@@ -46,7 +46,7 @@ export default function Home() {
   const moreRef = useRef(null);
 
   const [searchTutorial, setSearchTutorial] = useState(0);
-  
+  const [bookmarkTutorial, setBookmarkTutorial] = useState(0);  
 
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
@@ -104,6 +104,19 @@ export default function Home() {
     }, 4000);
   }
 
+  // Tutorial
+  function skipTutorial() {
+    console.log("skipping tut?");
+    const localSettings = JSON.parse(String(localStorage.getItem('settings')));
+    localSettings.tutorial = true;
+
+    if (typeof window !== undefined) {
+      localStorage.setItem('settings', JSON.stringify(localSettings));
+    }
+
+    setDrawerRight(null);
+  }
+
   // Themes
   function setCSSTheme(theme: string) {
       if (theme == "dark") {
@@ -134,9 +147,13 @@ export default function Home() {
         if (x.file == drawer) {
           switch (drawer) {
             case "search":
-              component = <x.tag steps={searchTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+              component = <x.tag skip={skipTutorial} step={searchTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
               break;
   
+            case "bookmark":
+              component = <x.tag skip={skipTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+              break;
+
             default: 
               component = <x.tag setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
           }
@@ -204,13 +221,14 @@ export default function Home() {
     }
 
     if (RightDrawer && searchTutorial > 0) {
-      // RightDrawer.steps = searchTutorial;
-      // console.log(RightDrawer.props);
       setDrawerRight(updateDrawer("search"));
-      console.log("updated drawer?");
+    }
+    
+    if (RightDrawer && bookmarkTutorial > 0) {
+      setDrawerRight(updateDrawer("bookmark"));
     }
 
-}, [searchTutorial]); 
+}, [searchTutorial, bookmarkTutorial]); 
 
   return (
     <>
@@ -260,12 +278,12 @@ export default function Home() {
           <div ref={moreRef} id="main-wrapper" >
 
             <div className='col feature-group'>
-              <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} setTutorial={setSearchTutorial} steps={searchTutorial} />
+              <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} setTutorial={setSearchTutorial} step={searchTutorial} />
               <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} command={stickyCommand} setCommand={setStickyCommand} />
               <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
             </div>
   
-            <Bookmarks parentRef={(el: any) => (blurLayers.current[3] = el)} summonRef={bookmarkRef} />
+            <Bookmarks parentRef={(el: any) => (blurLayers.current[3] = el)} summonRef={bookmarkRef} setTutorial={setBookmarkTutorial} step={bookmarkTutorial} />
           </div>
         </Suspense>
 

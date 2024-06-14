@@ -1,3 +1,78 @@
-.checkmark-button path {
-    transition: fill 0.2s;
+.tutorial-heading {
+    display: flex;
+    align-items: center;
+}
+
+.skip-button {
+   font-family: "Kalam";
+   font-size: 18px;
+   letter-spacing: 1px;
+   text-transform: lowercase;
+   margin-left: 20px;
+   margin-top: 5px;
+   color: rgba(var(--accent1-txt), 0.5);
+   background: none;
+   padding: 0;
+   cursor: pointer;
+}
+
+.checkmark-button {
+    background-color: hsl(var(--accent1-lt), 90%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.checkmark-button:hover,
+.checkmark-button.ready {
+    background-color: rgb(var(--accent1-txt));
+}
+
+.checkmark-button svg {
+    width: 40px;
+}
+
+#drawer .checkmark-button {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+#drawer .checkmark-button::after {
+    content: "Next Feature";
+    position: absolute;
+    top: 0px;
+    left: 155%;
+    width: max-content;
+
+    font-family: var(--robo);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgb(var(--accent1-txt));
+
+    transition: left 0.4s, letter-spacing 0.8s;
+}
+
+#drawer .checkmark-button:hover::after {
+    letter-spacing: 1px;
+    left: -210%;
+}
+
+#drawer ol {
+    padding-left: 20px;
+}
+
+#drawer ol li {
+    font-family: var(--robo);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.crossed {
+    text-decoration: line-through;
 }
