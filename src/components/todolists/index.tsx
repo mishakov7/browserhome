@@ -28,7 +28,6 @@ export default function ToDoLists(props: any) {
   const colorInput3 = useRef<HTMLInputElement>(null);
   const colorInputs = [colorInput1, colorInput2, colorInput3];
   const editTitleInput = useRef<HTMLInputElement>(null);
-
   
   const creatorInputs = [{
     "ref": titleInput,

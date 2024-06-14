@@ -24,6 +24,9 @@ export default function Stickies(props: any) {
     "ypos": 75
   }];
 
+  const maxNotes = 10;
+  const maxPolaroids = 3;
+
   const [notes, setNotes] = useState([]);
   const [polaroids, setPolaroids] = useState([]);
   const [letterkey, setletterKey] = useState('a');
@@ -205,11 +208,16 @@ export default function Stickies(props: any) {
           break;
   
         case 2:
-          createNote();
+          if (notes.length < maxNotes) {
+            createNote();
+          }
+
           break;
   
         case 3:
-          createPolaroid();
+          if (polaroids.length < maxPolaroids) {
+            createPolaroid();
+          }
           break;
   
         default:
