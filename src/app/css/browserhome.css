@@ -1862,8 +1862,7 @@ button.list-container:hover::before {
 }
 
 .checkmark-button:hover,
-.tutorial-button:hover,
-.checkmark-button.ready {
+.tutorial-button:hover {
   background-color: rgb(var(--accent1-txt));
 }
 
@@ -1875,6 +1874,9 @@ button.list-container:hover::before {
   position: absolute;
   bottom: 2rem;
   right: 2rem;
+  background: linear-gradient(45deg, rgb(var(--accent1-txt)) 50%, hsl(var(--accent1-lt), 90%) 50%);
+  background-size: 250%;
+  background-position: right bottom;
 }
 
 #drawer .checkmark-button::after {
@@ -1905,10 +1907,48 @@ button.list-container:hover::before {
   letter-spacing: 1px;
 }
 
+.opened-right > * {
+  filter: blur(0px);
+  transition: filter 0.4s;
+}
+
 .opened-right .blur > *:not(.highlight, .highlight + .creator) {
-  animation: none !important;
-  filter: blur(4px);
-  /* transition: filter 0.2s; */
+  animation: tut-blur 4s forwards;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scale {
+  0% {
+    transform: scale(100%);
+  }
+  50% {
+    transform: scale(125%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+@keyframes celebrate {
+  0% {
+    background-position: right bottom;
+  }
+  100% {
+    background-position: left bottom;
+  }
+}
+.checkmark-button.ready {
+  animation: celebrate 2s forwards;
+}
+
+.opened-right .search-container .hotspot {
+  animation: scale 2s;
 }
 
 .crossed {

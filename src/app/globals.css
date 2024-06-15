@@ -1187,6 +1187,15 @@ button {
   }
 }
 
+@keyframes tut-blur {
+  from {
+    filter: blur(0px);
+  } to {
+    filter: blur(50px);
+  }
+}
+
+
 .blur > *:not(.highlight, .highlight + .creator) {
   animation: blur-bg 4s;
   /* filter: blur(4px); */
