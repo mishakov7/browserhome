@@ -1,6 +1,10 @@
 .tutorial-heading {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+}
+
+.tutorial-heading h2 {
+    margin-bottom: 10px;
 }
 
 .skip-button {
@@ -8,15 +12,20 @@
    font-size: 18px;
    letter-spacing: 1px;
    text-transform: lowercase;
-   margin-left: 20px;
-   margin-top: 5px;
+   width: max-content;
    color: rgba(var(--accent1-txt), 0.5);
    background: none;
    padding: 0;
+   transition: letter-spacing 0.6s;
    cursor: pointer;
 }
 
-.checkmark-button {
+.skip-button:hover {
+    letter-spacing: 2px;
+}
+
+.checkmark-button,
+.tutorial-button {
     background-color: hsl(var(--accent1-lt), 90%);
     display: flex;
     align-items: center;
@@ -29,6 +38,7 @@
 }
 
 .checkmark-button:hover,
+.tutorial-button:hover,
 .checkmark-button.ready {
     background-color: rgb(var(--accent1-txt));
 }
@@ -73,6 +83,17 @@
     letter-spacing: 1px;
 }
 
+.opened-right .blur > *:not(.highlight, .highlight + .creator) {
+    animation: none!important;
+    filter: blur(4px);
+    /* transition: filter 0.2s; */
+  }
+  
+
 .crossed {
     text-decoration: line-through;
+}
+
+.intro-drawer {
+    padding: 10rem 3rem;
 }

@@ -30,18 +30,28 @@ const Drawer = (props : any) => {
         let finishedSteps = (step1 ? 1 : 0) + (step2 ? 1 : 0);
 
         setOldGradient(gradient);
-        setGradient(gradient - ((100 / totalSteps) / 100));
-        gradientRef.current?.beginElement();
+        
+        if (finishedSteps == totalSteps - 1) {
+            setGradient(0);
 
-        if (finishedSteps == totalSteps) {
             setTimeout(() => {
+                props.unblur(props.blurRef.current);
                 // props.setDrawer("bookmark", "right")
                 console.log("switching to bookmartk");                    
             }, 2000);
+
+        } else {
+            setGradient(gradient - ((100 / totalSteps) / 100));
         }
+        
+        gradientRef.current?.beginElement();
     }
 
     useEffect(() => {
+        if (props.step == 0) {
+            props.blur(props.blurRef.current);
+        }
+
         switch(props.step) {
             case 1:
                 setStep1(true);

@@ -27,14 +27,15 @@
 //   transform: rotate(-90deg);
 // }
 
-// @keyframes showreturn {
-//     from {
-//       opacity: 0;  
-        
-//     } to {
-//       opacity: 1;
-//     }
-// }
+@keyframes showreturn {
+    from {
+      opacity: 0;  
+      left: 0;
+    } to {
+      opacity: 1;
+      left: -25px;
+    }
+}
 
 .options-container {
     position: absolute;
@@ -67,26 +68,71 @@
     top: 0px;
 }
 
-.opened-left .options-container {
+.theme-drawer + .opened-left .options-container {
     left: calc(25vw + 30px);
 }
 
-.opened-right .options-container {
+.opened-left .options-container:not(.theme-drawer + .opened-left .options-container) {
   display: none;
 }
 
-.opened-left .options-container .settings-button::before {
+.theme-drawer + .opened-left .options-container .settings-button::before {
     content: "Go Back";
+    opacity: 0;
+    left: 0;
     color: var(--base-txt);
+    animation: showreturn 0.4s forwards;
 } 
 
-.opened-left .options-container .settings-button svg {
+@media only screen and (max-width: 2500px) {
+  .theme-drawer + .opened-left .options-container {
+    left: 26.9vw;
+  } 
+}
+
+@media only screen and (max-width: 2200px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(27vw + 5px);
+  } 
+}
+
+@media only screen and (max-width: 2200px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(28vw - 30px);
+  } 
+}
+
+@media only screen and (max-width: 1840px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(27vw + 10px);
+  } 
+}
+
+@media only screen and (max-width: 1600px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(27vw + 15px);
+  } 
+}
+
+@media only screen and (max-width: 1360px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(27vw + 20px);
+  } 
+}
+
+@media only screen and (max-width: 1080px) {
+  .options-container {
+    display: none;
+  } 
+}
+
+.theme-drawer + .opened-left .options-container .settings-button svg {
     position: relative;
     transform: rotate(180deg);
     left: -30px;
 }
 
-.opened-left .options-container .settings-button .accent1-fill path {
+.theme-drawer + .opened-left .options-container .settings-button .accent1-fill path {
     fill: var(--base-bg)!important;
 }
 
@@ -103,7 +149,6 @@
   left: 35px;
 }
 
-.opened-right .options-container .buttons-container,
 .opened-left .options-container .buttons-container {
     display: none;
 }
@@ -121,7 +166,7 @@
   border-radius: 200px;
   filter: blur(25px);
   display: block;
-  z-index: 99;
+  z-index: 2;
 }
 
 #main-wrapper.highlight::before {

@@ -1603,6 +1603,16 @@ button.list-container:hover::before {
     left: 200px;
   }
 }
+@keyframes showreturn {
+  from {
+    opacity: 0;
+    left: 0;
+  }
+  to {
+    opacity: 1;
+    left: -25px;
+  }
+}
 .options-container {
   position: absolute;
   left: 20px;
@@ -1632,26 +1642,64 @@ button.list-container:hover::before {
   top: 0px;
 }
 
-.opened-left .options-container {
+.theme-drawer + .opened-left .options-container {
   left: calc(25vw + 30px);
 }
 
-.opened-right .options-container {
+.opened-left .options-container:not(.theme-drawer + .opened-left .options-container) {
   display: none;
 }
 
-.opened-left .options-container .settings-button::before {
+.theme-drawer + .opened-left .options-container .settings-button::before {
   content: "Go Back";
+  opacity: 0;
+  left: 0;
   color: var(--base-txt);
+  animation: showreturn 0.4s forwards;
 }
 
-.opened-left .options-container .settings-button svg {
+@media only screen and (max-width: 2500px) {
+  .theme-drawer + .opened-left .options-container {
+    left: 26.9vw;
+  }
+}
+@media only screen and (max-width: 2200px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(27vw + 5px);
+  }
+}
+@media only screen and (max-width: 2200px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(28vw - 30px);
+  }
+}
+@media only screen and (max-width: 1840px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(27vw + 10px);
+  }
+}
+@media only screen and (max-width: 1600px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(27vw + 15px);
+  }
+}
+@media only screen and (max-width: 1360px) {
+  .theme-drawer + .opened-left .options-container {
+    left: calc(27vw + 20px);
+  }
+}
+@media only screen and (max-width: 1080px) {
+  .options-container {
+    display: none;
+  }
+}
+.theme-drawer + .opened-left .options-container .settings-button svg {
   position: relative;
   transform: rotate(180deg);
   left: -30px;
 }
 
-.opened-left .options-container .settings-button .accent1-fill path {
+.theme-drawer + .opened-left .options-container .settings-button .accent1-fill path {
   fill: var(--base-bg) !important;
 }
 
@@ -1668,7 +1716,6 @@ button.list-container:hover::before {
   left: 35px;
 }
 
-.opened-right .options-container .buttons-container,
 .opened-left .options-container .buttons-container {
   display: none;
 }
@@ -1686,7 +1733,7 @@ button.list-container:hover::before {
   border-radius: 200px;
   filter: blur(25px);
   display: block;
-  z-index: 99;
+  z-index: 2;
 }
 
 #main-wrapper.highlight::before {
@@ -1768,7 +1815,11 @@ button.list-container:hover::before {
 
 .tutorial-heading {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.tutorial-heading h2 {
+  margin-bottom: 10px;
 }
 
 .skip-button {
@@ -1776,15 +1827,20 @@ button.list-container:hover::before {
   font-size: 18px;
   letter-spacing: 1px;
   text-transform: lowercase;
-  margin-left: 20px;
-  margin-top: 5px;
+  width: max-content;
   color: rgba(var(--accent1-txt), 0.5);
   background: none;
   padding: 0;
+  transition: letter-spacing 0.6s;
   cursor: pointer;
 }
 
-.checkmark-button {
+.skip-button:hover {
+  letter-spacing: 2px;
+}
+
+.checkmark-button,
+.tutorial-button {
   background-color: hsl(var(--accent1-lt), 90%);
   display: flex;
   align-items: center;
@@ -1797,6 +1853,7 @@ button.list-container:hover::before {
 }
 
 .checkmark-button:hover,
+.tutorial-button:hover,
 .checkmark-button.ready {
   background-color: rgb(var(--accent1-txt));
 }
@@ -1839,8 +1896,18 @@ button.list-container:hover::before {
   letter-spacing: 1px;
 }
 
+.opened-right .blur > *:not(.highlight, .highlight + .creator) {
+  animation: none !important;
+  filter: blur(4px);
+  /* transition: filter 0.2s; */
+}
+
 .crossed {
   text-decoration: line-through;
+}
+
+.intro-drawer {
+  padding: 10rem 3rem;
 }
 
 /*# sourceMappingURL=browserhome.css.map */

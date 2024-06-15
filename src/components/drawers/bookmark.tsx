@@ -5,7 +5,12 @@ const Drawer = (props : any) => {
     const drawerRef = useRef<HTMLDivElement>(null);
     const gradientRef = useRef<SVGAnimateElement>(null);
 
-    const totalSteps = 4;
+    const totalSteps = 3;
+
+    const [step1, setStep1] = useState(false);
+    const [step2, setStep2] = useState(false);
+    const [step3, setStep3] = useState(false);
+
     const [oldGradient, setOldGradient] = useState(1.0);
     const [gradient, setGradient] = useState(1.0);
 
@@ -22,21 +27,45 @@ const Drawer = (props : any) => {
         }, 2000);
     }
 
-    useEffect(() => {
-        if (props.steps > 0) {
-            setOldGradient(gradient);
-            setGradient(gradient - ((100 / totalSteps) / 100));
-            gradientRef.current?.beginElement();
+    const animateGradient = () => {
+        let finishedSteps = (step1 ? 1 : 0) + (step2 ? 1 : 0) + (step3 ? 1 : 0);
 
-            if (props.steps == totalSteps) {
-                setTimeout(() => {
-                    // props.setDrawer("list", "right")
-                    console.log("switching to list");                    
-                }, 2000);
-            }
+        setOldGradient(gradient);
+
+        if (finishedSteps == totalSteps - 1) {
+            setGradient(0);
+
+            setTimeout(() => {
+                // props.setDrawer("bookmark", "right")
+                console.log("switching to bookmartk");                    
+            }, 2000);
+
+        } else {
+            setGradient(gradient - ((100 / totalSteps) / 100));
         }
 
-    }, [props.steps]);
+        gradientRef.current?.beginElement();
+    }
+
+    useEffect(() => {
+        switch(props.step) {
+            case 1:
+                setStep1(true);
+                animateGradient();
+                break;
+
+            case 2:
+                setStep2(true);
+                animateGradient();
+                break;
+
+            case 3:
+                setStep3(true);
+                animateGradient();
+                break;
+        }
+
+    }, [props.step]);
 
     return(
         <>
@@ -47,13 +76,13 @@ const Drawer = (props : any) => {
                 <button onClick={() => props.skip()} className='skip-button'>Skip Tutorial</button>
             </span>
 
+
             <p>To get you familiarized here, let's go through this brief tutorial! You'll learn how to use the following features:</p>
             
             <ol>
-              <li>Add a bookmark</li>
-              <li>Add a bookmark</li>
-              <li>Delete a bookmark</li>
-              <li>Move a bookmark</li>
+              <li className={step1 ? "crossed" : ""}>Add a bookmark</li>
+              <li className={step2 ? "crossed" : ""}>Edit a bookmark</li>
+              <li className={step3 ? "crossed" : ""}>Delete a bookmark</li>
             </ol>
 
             <button onClick={() => props.setDrawer("list", "right") } className={'checkmark-button ' + (gradient == 0.0 ? 'ready' : null)}>

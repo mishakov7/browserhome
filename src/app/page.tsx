@@ -50,19 +50,19 @@ export default function Home() {
 
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
-    ref.current.click();
+    ref.click();
   }
 
   const hoverFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
 
-    ref.current.classList.add("hovered");
+    ref.classList.add("hovered");
   }
 
   const highlightFeature = (ref: any) => {   
     window.scrollTo({top: 0, behavior: "smooth"});
 
-    switch(ref.current) {
+    switch(ref) {
       case searchRef.current:
         blurLayers.current[1].classList.add("blur");
         blurLayers.current[2].classList.add("blur");
@@ -89,7 +89,7 @@ export default function Home() {
         break;
     }
 
-    ref.current.classList.add("highlight");
+    ref.classList.add("highlight");
   }
 
   const removeHighlight = (ref: any) => {
@@ -98,8 +98,8 @@ export default function Home() {
       blurLayers.current[1].classList.remove("blur");
       blurLayers.current[2].classList.remove("blur");
       blurLayers.current[3].classList.remove("blur");
-      ref.current.classList.remove("highlight");
-      ref.current.classList.remove("hovered");
+      ref.classList.remove("highlight");
+      ref.classList.remove("hovered");
 
     }, 4000);
   }
@@ -147,11 +147,11 @@ export default function Home() {
         if (x.file == drawer) {
           switch (drawer) {
             case "search":
-              component = <x.tag skip={skipTutorial} step={searchTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+              component = <x.tag skip={skipTutorial} step={searchTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={searchRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
   
             case "bookmark":
-              component = <x.tag skip={skipTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+              component = <x.tag skip={skipTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
             default: 
@@ -176,11 +176,13 @@ export default function Home() {
           setDrawerLeft(x.element);
           setDrawerRight(null);
           mainContainer.current?.classList.add("opened-left");
+          mainContainer.current?.classList.remove("opened-right");
 
         } else if (x.file == drawer && direction == "right") {
           setDrawerRight(x.element);
           setDrawerLeft(null);
           mainContainer.current?.classList.add("opened-right");
+          mainContainer.current?.classList.remove("opened-left");
 
         }
       });
@@ -314,27 +316,27 @@ export default function Home() {
             <ul className='guide'>
               <li>
                   <details>
-                      <summary>Change your search settings! <button onClick={() => {highlightFeature(searchRef); clickFeature(searchRef); removeHighlight(searchRef);}}>Show me!</button></summary>
+                      <summary>Change your search settings! <button onClick={() => {highlightFeature(searchRef.current); clickFeature(searchRef.current); removeHighlight(searchRef.current);}}>Show me!</button></summary>
                       <p>Currently you can choose between setting your search engine to Google, DuckDuckGo, or Brave. You can also set what type of text you want to see every time you open the page.</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef); clickFeature(bookmarkRef); removeHighlight(bookmarkRef);}}>Show me!</button></summary>
+                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef.current); clickFeature(bookmarkRef.current); removeHighlight(bookmarkRef.current);}}>Show me!</button></summary>
                       <p>You can enter as many bookmarks as you want so that you can have easy access to all of your websites. You can also delete and edit them.</p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Create a list <button onClick={() => {highlightFeature(listRef); clickFeature(listRef); removeHighlight(listRef);}}>Show me!</button></summary>
+                      <summary>Create a list <button onClick={() => {highlightFeature(listRef.current); clickFeature(listRef.current); removeHighlight(listRef.current);}}>Show me!</button></summary>
                       <p>You can create up to five lists, and add as many todos as you want. You can also add links to each todo if you want, but that is not required. </p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef); hoverFeature(moreRef); removeHighlight(moreRef);}}>Show me!</button></summary>
+                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef.current); hoverFeature(moreRef.current); removeHighlight(moreRef);}}>Show me!</button></summary>
                       <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>
