@@ -1158,6 +1158,16 @@ button {
   }
 }
 
+@keyframes highlight-list {
+  0% {
+    box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
+  } 50% {
+    box-shadow: 0px 0px 20px 2px hsla(var(--accent3-lt), 70%, 0.6);;
+  } 100% {
+    box-shadow: 0px 0px 20px 2px rgb(--shadow);
+  }
+}
+
 @keyframes highlight-bg {
   0% {
     background-color: rgba(255, 255, 255, 0);
@@ -1185,6 +1195,10 @@ button {
 
 .highlight {
   animation: highlight-shadow 3s;
+}
+
+.list-container.highlight {
+  animation: highlight-list 3s;
 }
 
 .sticky-date.highlight,

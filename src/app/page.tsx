@@ -44,6 +44,7 @@ export default function Home() {
   const bookmarkRef = useRef(null);
   const listRef = useRef(null);
   const moreRef = useRef(null);
+  const optionsRef = useRef(null);
 
   const [searchTutorial, setSearchTutorial] = useState(0);
   const [bookmarkTutorial, setBookmarkTutorial] = useState(0);  
@@ -55,7 +56,6 @@ export default function Home() {
 
   const hoverFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
-
     ref.classList.add("hovered");
   }
 
@@ -246,7 +246,7 @@ export default function Home() {
       <div ref={mainContainer} id="main-container" className="accent1-border">
 
         <Suspense fallback={<Loader />}>
-          <div className='options-container'>
+          <div ref={optionsRef} className='options-container'>
               <button className='settings-button' onClick={ () => { if (LeftDrawer == null) { changeDrawer("theme", "left") } else { changeDrawer(null, "left") } }}>
                   <svg className="accent1-fill" width="16" height="37" viewBox="0 0 16 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11.0781 9.31566C16.7805 14.1109 16.7805 22.8891 11.0781 27.6843L4.4122e-07 37L0 0L11.0781 9.31566Z"/>
@@ -336,7 +336,7 @@ export default function Home() {
               </li>
               <li>
                   <details>
-                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef.current); hoverFeature(moreRef.current); removeHighlight(moreRef);}}>Show me!</button></summary>
+                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef.current); hoverFeature(optionsRef.current); removeHighlight(optionsRef.current); removeHighlight(moreRef.current);}}>Show me!</button></summary>
                       <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>
