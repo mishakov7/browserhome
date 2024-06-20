@@ -11,6 +11,8 @@ const Drawer = (props : any) => {
     const [step2, setStep2] = useState(false);
     const [step3, setStep3] = useState(false);
     const [step4, setStep4] = useState(false);
+    const [step5, setStep5] = useState(false);
+    const [step6, setStep6] = useState(false);
 
     const [oldGradient, setOldGradient] = useState(1.0);
     const [gradient, setGradient] = useState(1.0);
@@ -40,7 +42,7 @@ const Drawer = (props : any) => {
             if (skip) {
                 props.skip();
             } else {
-                props.setDrawer("sticky", "right");
+                props.setDrawer("conclude", "right");
             }
 
         }, 1500);
@@ -48,7 +50,7 @@ const Drawer = (props : any) => {
 
 
     const animateGradient = () => {
-        let finishedSteps = (step1 ? 1 : 0) + (step2 ? 1 : 0) + (step3 ? 1 : 0) + (step4 ? 1 : 0);
+        let finishedSteps = step1 + step2 + step3 + step4 + step5 + step6;
 
         setOldGradient(gradient);
         
@@ -90,6 +92,16 @@ const Drawer = (props : any) => {
                     setStep4(true);
                     animateGradient();
                     break;
+
+                case 5:
+                    setStep5(true);
+                    animateGradient();
+                    break;
+
+                case 6:
+                    setStep6(true);
+                    animateGradient();
+                    break;
             }
         }
 
@@ -100,7 +112,7 @@ const Drawer = (props : any) => {
 
         <div ref={drawerRef} id="drawer" className='right-drawer'>
             <span className='tutorial-heading'>
-                <h2>Tutorial — Lists</h2>
+                <h2>Tutorial — Stickies</h2>
                 <button onClick={() => handleBlur(true)} className='skip-button'>Skip Tutorial</button>
             </span>
 
@@ -108,10 +120,12 @@ const Drawer = (props : any) => {
             <p>To get you familiarized here, let's go through this brief tutorial! You'll learn how to use the following features:</p>
             
             <ol>
-              <li className={step1 ? "crossed" : ""}>Create your list</li>
-              <li className={step2 ? "crossed" : ""}>Edit your list</li>
-              <li className={step3 ? "crossed" : ""}>Add an item to your list</li>
-              <li className={step4 ? "crossed" : ""}>Toss an item from your list</li>
+              <li className={step1 ? "crossed" : ""}>Move around your sticky note or polaroid</li>
+              <li className={step2 ? "crossed" : ""}>Edit the text on your sticky note</li>
+              <li className={step3 ? "crossed" : ""}>Edit the image on your polaroid</li>
+              <li className={step4 ? "crossed" : ""}>Add a new sticky note</li>
+              <li className={step5 ? "crossed" : ""}>Add a new polaroid</li>
+              <li className={step6 ? "crossed" : ""}>Reset the positions of your stickies</li>
             </ol>
 
             <button onClick={() => handleBlur(false) } className={'checkmark-button ' + (gradient == 0.0 ? 'ready' : null)}>

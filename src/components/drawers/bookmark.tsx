@@ -39,8 +39,7 @@ const Drawer = (props : any) => {
             if (skip) {
                 props.skip();
             } else {
-                console.log("supposed to switch");
-                // props.setDrawer("bookmark", "right");
+                props.setDrawer("list", "right");
             }
 
         }, 1500);
@@ -64,8 +63,6 @@ const Drawer = (props : any) => {
     }
 
     useEffect(() => {
-
-        console.log(props);
 
         if (props.step == 0) {
             props.blur(props.blurRef.current, "blur");

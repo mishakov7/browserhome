@@ -49,6 +49,7 @@ export default function Home() {
   const [searchTutorial, setSearchTutorial] = useState(0);
   const [bookmarkTutorial, setBookmarkTutorial] = useState(0);  
   const [listTutorial, setListTutorial] = useState(0);  
+  const [stickyTutorial, setStickyTutorial] = useState(0);  
 
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
@@ -113,18 +114,19 @@ export default function Home() {
 
   // Tutorial
   function finishTutorial() {
-    console.log("skipping tut?");
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
     localSettings.tutorial = true;
-
+    
     if (typeof window !== undefined) {
       localStorage.setItem('settings', JSON.stringify(localSettings));
     }
 
     setSearchTutorial(-1);
     setBookmarkTutorial(-1);
+    setListTutorial(-1);
+    setStickyTutorial(-1);
 
-    setDrawerRight(null);
+    changeDrawer(null, "right");
   }
 
   // Themes
@@ -162,6 +164,10 @@ export default function Home() {
   
             case "bookmark":
               component = <x.tag skip={finishTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
+              break;
+
+            case "list":
+              component = <x.tag skip={finishTutorial} step={listTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={listRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
             default: 
@@ -211,24 +217,31 @@ export default function Home() {
   useEffect(() => {
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
 
-    if (LeftDrawer == null && RightDrawer == null) {
-      if (localSettings) {
-        setCSSTheme(localSettings.theme);
-        setCSSAccent("accent1", localSettings.accent1);
-        setCSSAccent("accent2", localSettings.accent2);
-        setCSSAccent("accent3", localSettings.accent3);
+    if (RightDrawer == null) {
+      if (!localSettings) {
+        changeDrawer("intro", "left");
 
-        if (!localSettings.tutorial) {
-          changeDrawer("intro", "left");
-        }
-
-      } else {
         setCSSTheme("light");
         setCSSAccent("accent1", "259, 53%, 62%");
         setCSSAccent("accent2", "151, 53%, 62%");
         setCSSAccent("accent3", "349, 95%, 62%");
 
-        changeDrawer("intro", "left");
+        let settings = {
+          "theme": "light",
+          "accent1": document.documentElement.style.getPropertyValue("--accent1"),
+          "accent2": document.documentElement.style.getPropertyValue("--accent2"),
+          "accent3": document.documentElement.style.getPropertyValue("--accent3")
+        }
+
+        if (typeof window !== undefined) {
+          localStorage.setItem('settings', JSON.stringify(settings));
+        }
+
+      } else {
+        setCSSTheme(localSettings.theme);
+        setCSSAccent("accent1", localSettings.accent1);
+        setCSSAccent("accent2", localSettings.accent2);
+        setCSSAccent("accent3", localSettings.accent3);
       }
     }
 
@@ -240,7 +253,11 @@ export default function Home() {
       setDrawerRight(updateDrawer("bookmark"));
     }
 
-}, [searchTutorial, bookmarkTutorial]); 
+    if (RightDrawer && listTutorial > 0) {
+      setDrawerRight(updateDrawer("list"));
+    }
+
+}, [searchTutorial, bookmarkTutorial, listTutorial]); 
 
   return (
     <>
@@ -292,7 +309,7 @@ export default function Home() {
             <div className='col feature-group'>
               <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} setTutorial={setSearchTutorial} step={searchTutorial} />
               <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} command={stickyCommand} setCommand={setStickyCommand} />
-              <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} />
+              <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} setTutorial={setListTutorial} step={listTutorial} />
             </div>
   
             <Bookmarks parentRef={(el: any) => (blurLayers.current[3] = el)} summonRef={bookmarkRef} setTutorial={setBookmarkTutorial} step={bookmarkTutorial} />

@@ -91,7 +91,7 @@ export default function Bookmarks(props: any) {
     }
 
     setBookmarkList(storageBookmarks);
-    props.setTutorial(3);
+    // props.setTutorial(3);
   }
 
   const editBookmark = (e:any, key: number, refs: any) => {
@@ -246,6 +246,9 @@ export default function Bookmarks(props: any) {
                     handleDelete={() => deleteBookmark(idx)}
                     handleEdit={editBookmark}
                     handleMove={moveBookmark}
+
+                    step={props.step}
+                    handleStep={props.setTutorial}
                   />
               )) 
               

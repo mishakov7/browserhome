@@ -77,6 +77,7 @@ const List = (props: any) => {
     }
 
     toggleCreator();
+    props.handleStep(3);
   }
 
   const moveTodo = (initial: number, target: number) => {
@@ -137,6 +138,8 @@ const List = (props: any) => {
     if (typeof window !== undefined) {
       localStorage.setItem('lists', JSON.stringify(allStorageLists));
     }
+
+    props.handleStep(4);
 
   }
 

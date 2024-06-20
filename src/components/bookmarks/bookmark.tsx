@@ -17,6 +17,7 @@ const Bookmark = (props: any) => {
   const linkRef = useRef<HTMLInputElement>(null);
   const editButton = useRef<HTMLButtonElement>(null);
 
+  const bookmarkAnchor = useRef<HTMLAnchorElement>(null);
   const bookmarkRef = useRef(null);
 
   const editorInputs = [{
@@ -64,6 +65,16 @@ const Bookmark = (props: any) => {
     }
   }
 
+  const openBackgroundTab = (ev: MouseEvent) => {
+    if (bookmarkAnchor.current && props.step >= 0) {
+      ev.preventDefault();
+      let event = new MouseEvent("click", {ctrlKey: true});
+
+      bookmarkAnchor.current.dispatchEvent(event);
+
+      props.handleStep(3);
+    }
+  }
 
   const [{ handlerId }, drop] = useDrop<
     DragItem,
@@ -170,7 +181,7 @@ const Bookmark = (props: any) => {
           </svg>
       </button>
 
-      <a href={props.link} target="_blank">
+      <a ref={bookmarkAnchor} onClick={(e) => { openBackgroundTab(e) }} href={props.link} target="_blank">
         <img src={props.image} width="40"/>
       </a>
 

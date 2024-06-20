@@ -32,7 +32,7 @@ const Drawer = (props : any) => {
     }
 
     const animateGradient = () => {
-        let finishedSteps = (step1 ? 1 : 0) + (step2 ? 1 : 0);
+        let finishedSteps = step1 + step2;
 
         setOldGradient(gradient);
         
