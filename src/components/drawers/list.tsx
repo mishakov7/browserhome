@@ -15,19 +15,6 @@ const Drawer = (props : any) => {
     const [oldGradient, setOldGradient] = useState(1.0);
     const [gradient, setGradient] = useState(1.0);
 
-    const handleAnimation = () => {
-
-        if (drawerRef.current) {
-            drawerRef.current.style.animation = "closedrawer_right 2s forwards";
-            props.contentRef.style.animation = "opencontainer 2s forwards";
-        }
-    
-        setTimeout(() => {
-            props.setDrawer(null)
-            props.contentRef.style = [];
-        }, 2000);
-    }
-
     const handleBlur = (skip: boolean) => {
         props.blur(props.blurRef.current, "reverse-blur");
 
@@ -98,14 +85,11 @@ const Drawer = (props : any) => {
     return(
         <>
 
-        <div ref={drawerRef} id="drawer" className='right-drawer'>
+        <div ref={drawerRef} id="drawer" className='right-drawer list-drawer'>
             <span className='tutorial-heading'>
                 <h2>Tutorial — Lists</h2>
                 <button onClick={() => handleBlur(true)} className='skip-button'>Skip Tutorial</button>
             </span>
-
-
-            <p>To get you familiarized here, let's go through this brief tutorial! You'll learn how to use the following features:</p>
             
             <ol>
               <li className={step1 ? "crossed" : ""}>Create your list</li>
@@ -114,7 +98,11 @@ const Drawer = (props : any) => {
               <li className={step4 ? "crossed" : ""}>Toss an item from your list</li>
             </ol>
 
-            <button onClick={() => handleBlur(false) } className={'checkmark-button ' + (gradient == 0.0 ? 'ready' : null)}>
+            <p>We've got bills to pay, homework to do, things to get done that we do every time we get on our computer. Might as well keep track of those things with a tool you use everyday!</p>
+
+            <p>Currently, you can have up to 5 lists, with an unlimited number of items. To delete items, drag it over to the trashcan.</p>
+
+            <button onClick={() => handleBlur(false) } className={'checkmark-button ' + (gradient == 0.0 ? 'ready' : '')}>
                 <svg width="44" height="34" viewBox="0 0 44 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill={"url(#dynamic-gradient)"} fillRule="evenodd" clipRule="evenodd" d="M4.47731 10.8532L1.81425 13.5164C0.0984672 15.2323 0.0982755 18.0145 1.81427 19.7305L14.0548 31.971C15.7708 33.6871 18.553 33.6869 20.2689 31.9711L41.9254 10.3146C43.6412 8.59864 43.6413 5.81655 41.9253 4.10055L39.2622 1.43735C37.5462 -0.278596 34.764 -0.278596 33.0481 1.43735L17.1619 17.3235L10.6915 10.8531C8.97556 9.13713 6.19325 9.1372 4.47731 10.8532Z" />
                     <defs>
@@ -123,7 +111,7 @@ const Drawer = (props : any) => {
                         <stop offset={oldGradient} stopColor={"hsl(" + document.documentElement.style.getPropertyValue("--accent1-lt") + ", 80%)"}>
                             <animate id="gradientRef" ref={gradientRef} attributeName='offset' dur="0.6s" to={gradient} repeatCount="0" begin="indefinite" fill="freeze"/>
                         </stop>
-                        <stop offset="0" stopColor={"hsl(" + document.documentElement.style.getPropertyValue("--accent1") + ""}/>
+                        <stop offset="0" stopColor={"hsl(" + document.documentElement.style.getPropertyValue("--accent1") + ")"}/>
                         </linearGradient>
                     </defs>
                 </svg>

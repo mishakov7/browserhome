@@ -93,6 +93,8 @@ const EditList = (props: any) => {
       localStorage.setItem('lists', JSON.stringify(allStorageLists));
     }
 
+    props.setDrag(false);
+
   }
 
   const deleteTodo = (key: number) => {
@@ -111,6 +113,7 @@ const EditList = (props: any) => {
     }
 
     props.handleStep(4);
+    props.setDrag(false);
 
   }
 
@@ -179,7 +182,6 @@ const EditList = (props: any) => {
                       isChecked={todo.checked}
                       handleMove={moveTodo}
                       handleDelete={deleteTodo}
-                      trashRef={props.trashDrop.current[idx]}
                       handleCheck={editTodo}
                       handleChange={null}
                       listColor={props.listColor}
@@ -188,6 +190,7 @@ const EditList = (props: any) => {
                       link={todo.link}
 
                       isEditing={true}
+                      isDragging={props.setDrag}
                   />
                  
                 ))

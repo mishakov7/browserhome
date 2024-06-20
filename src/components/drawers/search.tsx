@@ -76,13 +76,14 @@ const Drawer = (props : any) => {
                 <h2>Tutorial — Search</h2>
                 <button onClick={() => handleBlur(true) } className='skip-button'>Skip Tutorial</button>
             </span>
-
-            <p>To get you familiarized here, let's go through this brief tutorial! You'll learn how to use the following features:</p>
             
             <ol>
               <li className={step1 ? "crossed" : ""}>Search Something</li>
               <li className={step2 ? "crossed" : ""}>Change Search Settings</li>
             </ol>
+
+            <p>Instead of using your browser's default search engine, you can choose to change your search engine all on one page.</p>
+            <p>Along with that, you can set the text you might see on a daily basis to be random thoughts, inspirational quotes, or positive affirmations.</p>
 
             <button onClick={() => handleBlur(false) } className={'checkmark-button ' + (gradient == 0.0 ? 'ready' : '')}>
                 <svg width="44" height="34" viewBox="0 0 44 34" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -253,6 +253,7 @@ export default function Stickies(props: any) {
                     changeLayer={setTopSticky}
                     handleChange={editNote}
                     handleDelete={deleteNote}
+                    handleStep={props.setTutorial}
                 />
                 
               ))
@@ -269,6 +270,7 @@ export default function Stickies(props: any) {
                     changeLayer={setTopSticky}
                     handleChange={editPolaroid}
                     handleDelete={deletePolaroid}
+                    handleStep={props.setTutorial}
 
                 />
               ))

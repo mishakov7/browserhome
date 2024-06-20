@@ -31,6 +31,8 @@ export default function Note(props: any) {
     }
 
     props.handleChange(updatedNote, props.idx);
+    props.handleStep(1);
+
   }
 
   const changeColor = (color: string) => {
@@ -108,6 +110,7 @@ export default function Note(props: any) {
     }
 
     props.handleChange(updatedNote, props.idx);
+    props.handleStep(2);
   }
 
   return (

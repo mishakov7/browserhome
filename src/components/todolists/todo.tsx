@@ -78,6 +78,8 @@ const Todo = (props: any) => {
                 return;
             }
 
+            props.isDragging(true);
+
             // Determine rectangle on screen
             const hoverBoundingRect = props.allRefs.current[props.idx].getBoundingClientRect();
             const hoverMiddle = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
@@ -116,7 +118,7 @@ const Todo = (props: any) => {
             }
             
             props.setMoving(null);
-
+            props.isDragging(false);
         }
     });
 

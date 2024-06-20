@@ -12,6 +12,7 @@ import { title } from 'process';
 
 export default function ToDoLists(props: any) {
 
+  const [todoDragging, setTodoDragging] = useState(false);
   const [lists, setLists] : any = useState([]);
   const [selectedColor, setColor] = useState("");
   const [isEditing, setEditing] = useState(false);
@@ -21,7 +22,6 @@ export default function ToDoLists(props: any) {
 
   const maxLists = 5;
 
-  const trashcan = useRef<HTMLButtonElement[]>([]);
   const titleInput = useRef<HTMLInputElement>(null);
   const colorInput1 = useRef<HTMLInputElement>(null);
   const colorInput2 = useRef<HTMLInputElement>(null);
@@ -279,7 +279,7 @@ export default function ToDoLists(props: any) {
                         }
                     </button>
 
-                    <Trashcan handleClick={toggleAlert} color={list.color} />
+                    <Trashcan isDragging={todoDragging} handleClick={toggleAlert} color={list.color} />
 
                     <button onClick={() => toggleColor(idx, list.color)} className={'color-button ' + list.color + "-fill"}>
                         <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -308,7 +308,6 @@ export default function ToDoLists(props: any) {
                     isEditing && idx == 0 ? 
 
                     <EditList 
-                        trashDrop={trashcan}
                         allLists={lists}
                         setAllLists={setLists}
                         listTitleRef={editTitleInput}
@@ -316,18 +315,19 @@ export default function ToDoLists(props: any) {
                         listKey={idx}
                         listColor={list.color}
                         handleStep={props.setTutorial}
+                        setDrag={setTodoDragging}
                     />
 
                     :
 
                     <List 
-                        trashDrop={trashcan}
                         allLists={lists}
                         setAllLists={setLists}
                         listTitle={list.title}
                         listKey={idx}
                         listColor={list.color}
                         handleStep={props.setTutorial}
+                        setDrag={setTodoDragging}
                     />
 
                   }

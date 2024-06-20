@@ -73,7 +73,6 @@ export default function Home() {
       
       case moreRef.current:
         blurLayers.current[0].classList.add(cssclass);
-        blurLayers.current[1].classList.add(cssclass);
         blurLayers.current[2].classList.add(cssclass);
         blurLayers.current[3].classList.add(cssclass);
         break;
@@ -113,10 +112,10 @@ export default function Home() {
   }
 
   // Tutorial
-  function finishTutorial() {
+  function finishTutorial(lastStep: Boolean) {
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
     localSettings.tutorial = true;
-    
+
     if (typeof window !== undefined) {
       localStorage.setItem('settings', JSON.stringify(localSettings));
     }
@@ -126,7 +125,11 @@ export default function Home() {
     setListTutorial(-1);
     setStickyTutorial(-1);
 
-    changeDrawer(null, "right");
+    if (lastStep) {
+      changeDrawer("theme", "left");
+    } else {
+      changeDrawer(null, "right");
+    }
   }
 
   // Themes
@@ -159,15 +162,23 @@ export default function Home() {
         if (x.file == drawer) {
           switch (drawer) {
             case "search":
-              component = <x.tag skip={finishTutorial} step={searchTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={searchRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} step={searchTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={searchRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
   
             case "bookmark":
-              component = <x.tag skip={finishTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
             case "list":
-              component = <x.tag skip={finishTutorial} step={listTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={listRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} step={listTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={listRef} blur={highlightFeature} unblur={removeHighlight}/>
+              break;
+
+            case "sticky":
+              component = <x.tag skip={finishTutorial} step={stickyTutorial} setDrawer={changeDrawer} interact={hoverFeature} blurRef={moreRef} blur={highlightFeature} unblur={removeHighlight}/>
+              break;
+
+            case "conclude":
+              component = <x.tag finish={finishTutorial} />
               break;
 
             default: 
@@ -238,6 +249,10 @@ export default function Home() {
         }
 
       } else {
+        if (!localSettings.tutorial) {
+          changeDrawer("intro", "left");
+        }
+
         setCSSTheme(localSettings.theme);
         setCSSAccent("accent1", localSettings.accent1);
         setCSSAccent("accent2", localSettings.accent2);
@@ -257,7 +272,11 @@ export default function Home() {
       setDrawerRight(updateDrawer("list"));
     }
 
-}, [searchTutorial, bookmarkTutorial, listTutorial]); 
+    if (RightDrawer && stickyTutorial > 0) {
+      setDrawerRight(updateDrawer("sticky"));
+    }
+
+}, [searchTutorial, bookmarkTutorial, listTutorial, stickyTutorial]); 
 
   return (
     <>
@@ -281,7 +300,7 @@ export default function Home() {
               </button>
               <div className='buttons-container'>
                     {/* Reset Position */}
-                    <button onClick={() => setStickyCommand(1)} className='reset-button'>
+                    <button onClick={() => { setStickyCommand(1); stickyTutorial >= 0 ? setStickyTutorial(6) : null }} className='reset-button'>
                         <svg width="15" height="15" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M32.5 27C29.1863 27 26.5 29.6863 26.5 33V36C26.5 39.3137 29.1863 42 32.5 42H35.5C38.8137 42 41.5 39.3137 41.5 36V33C41.5 29.6863 38.8137 27 35.5 27H32.5Z"/>
                             <path fillRule="evenodd" clipRule="evenodd" d="M35 0C37.2092 0 39 1.79083 39 4V9.50006C48.7957 11.4885 56.5115 19.2043 58.4999 29H64C66.2092 29 68 30.7908 68 33V35C68 37.2092 66.2092 39 64 39H58.4999C56.5115 48.7957 48.7957 56.5115 39 58.4999V64C39 66.2092 37.2092 68 35 68H33C30.7908 68 29 66.2092 29 64V58.4999C19.2043 56.5115 11.4885 48.7957 9.50006 39H4C1.79083 39 0 37.2092 0 35V33C0 30.7908 1.79083 29 4 29H9.50006C11.4885 19.2043 19.2043 11.4885 29 9.50006V4C29 1.79083 30.7908 0 33 0H35ZM50 34C50 42.8365 42.8365 50 34 50C25.1635 50 18 42.8365 18 34C18 25.1635 25.1635 18 34 18C42.8365 18 50 25.1635 50 34Z" />
@@ -289,14 +308,14 @@ export default function Home() {
                     </button>
 
                     {/* Create Note */}
-                    <button onClick={() => setStickyCommand(2)} className='note-button'>
+                    <button onClick={() => { setStickyCommand(2); stickyTutorial >= 0 ? setStickyTutorial(4) : null }} className='note-button'>
                         <svg width="15" height="15" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M14.8314 12.937H20.9355V1.08795C20.9355 0.491004 20.4552 0.0107574 19.8583 0.0107574H1.90513C1.30819 0.0107574 0.827942 0.491004 0.827942 1.08795V19.0411C0.827942 19.638 1.30819 20.1183 1.90513 20.1183H13.7542V14.0142C13.7542 13.4218 14.2389 12.937 14.8314 12.937ZM20.6213 15.4056L16.2228 19.8041C16.0208 20.0061 15.747 20.1183 15.4598 20.1183H15.1905V14.3733H20.9355V14.6471C20.9355 14.9298 20.8233 15.2036 20.6213 15.4056Z" fill="#FEF7E3"/>
                         </svg>
                     </button>
 
                     {/* Create Polaroid */}
-                    <button onClick={() => setStickyCommand(3)} className='polaroid-button'>
+                    <button onClick={() => { setStickyCommand(3); stickyTutorial >= 0 ? setStickyTutorial(5) : null }} className='polaroid-button'>
                         <svg width="15" height="15" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path fillRule="evenodd" clipRule="evenodd" d="M13.7542 6.93203L13.7542 0.827957L1.90513 0.827958C1.30819 0.827958 0.827942 1.3082 0.827942 1.90515L0.827944 19.8583C0.827944 20.4552 1.30819 20.9355 1.90513 20.9355H19.8583C20.4552 20.9355 20.9355 20.4552 20.9355 19.8583L20.9355 8.00922H14.8314C14.2389 8.00922 13.7542 7.52448 13.7542 6.93203ZM16.2228 1.14214L20.6213 5.54066C20.8233 5.74263 20.9355 6.01642 20.9355 6.30367V6.57296L15.1905 6.57296V0.827957L15.4642 0.827957C15.747 0.827957 16.0208 0.940164 16.2228 1.14214ZM18.5699 14.2602L16.1292 11.8196C15.6673 11.3576 14.9184 11.3576 14.4565 11.8196L9.4536 16.8223L7.46226 14.8309C7.00037 14.369 6.25145 14.369 5.78956 14.8309L4.37633 16.2441V18.5699H18.5699V14.2602ZM6.15052 11.4731C7.13038 11.4731 7.92472 10.6788 7.92472 9.69893C7.92472 8.71907 7.13038 7.92473 6.15052 7.92473C5.17066 7.92473 4.37633 8.71907 4.37633 9.69893C4.37633 10.6788 5.17066 11.4731 6.15052 11.4731Z" fill="#FFF8E5"/>
                         </svg>
@@ -308,7 +327,7 @@ export default function Home() {
 
             <div className='col feature-group'>
               <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} setTutorial={setSearchTutorial} step={searchTutorial} />
-              <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} command={stickyCommand} setCommand={setStickyCommand} />
+              <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} command={stickyCommand} setCommand={setStickyCommand} setTutorial={setStickyTutorial} step={stickyTutorial} />
               <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} setTutorial={setListTutorial} step={listTutorial} />
             </div>
   

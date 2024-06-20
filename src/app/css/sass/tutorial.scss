@@ -128,7 +128,23 @@
 }
 
 .checkmark-button.ready {
-    animation: celebrate 2s forwards;
+    animation: celebrate 3s forwards;
+}
+
+.checkmark-button svg stop:last-child{
+    transition: stop-color 0.4s;
+}
+
+.list-drawer .checkmark-button.ready svg stop:last-child {
+    stop-color: hsl(var(--accent3));
+}
+
+.bookmark-drawer .checkmark-button.ready svg stop:last-child {
+    stop-color: hsl(var(--accent2));
+}
+
+.sticky-drawer .checkmark-button.ready svg stop:last-child {
+    stop-color: (var(--secondary-txt));
 }
 
 .opened-right .search-container .hotspot {

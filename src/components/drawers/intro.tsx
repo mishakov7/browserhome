@@ -25,7 +25,7 @@ const Drawer = (props : any) => {
         <div ref={drawerRef} id="drawer" className='left-drawer intro-drawer'>
             <h2>Welcome to Homebase!</h2>
 
-            <p>This site is intended to be your browser “home screen”. You can do many things here! Lemme show you.</p>
+            <p>This site is intended to be your browser “home page”. Imagine your desk... but as the first page you go to. You can do many things here!</p>
 
             <button onClick={() => handleAnimation("search", "right")} className='tutorial-button'>
                 <svg width="32" height="31" viewBox="0 0 32 31" fill="none" xmlns="http://www.w3.org/2000/svg">

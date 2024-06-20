@@ -98,7 +98,8 @@ const List = (props: any) => {
     if (typeof window !== undefined) {
       localStorage.setItem('lists', JSON.stringify(allStorageLists));
     }
-
+    
+    props.setDrag(false);
 
   }
 
@@ -139,8 +140,8 @@ const List = (props: any) => {
       localStorage.setItem('lists', JSON.stringify(allStorageLists));
     }
 
+    props.setDrag(false);
     props.handleStep(4);
-
   }
 
   useEffect(() => {
@@ -170,13 +171,13 @@ const List = (props: any) => {
                         handleCheck={checkTodo}
                         handleChange={changeChecked}
                         handleDelete={deleteTodo}
-                        trashRef={props.trashDrop.current[idx]}
                         listColor={props.listColor}
                         checkboxes={checkboxRefs}
                         label={todo.label}
                         link={todo.link}
 
                         isEditing={false}
+                        isDragging={props.setDrag}
                     /> 
                 ))
               }

@@ -47,6 +47,7 @@ export default function Polaroid(props: any) {
     }
 
     props.handleChange(updatedPolaroid, props.idx);
+    props.handleStep(1);
   }
 
   const changePolaroid = (dataimage: any) => {
@@ -62,7 +63,8 @@ export default function Polaroid(props: any) {
     }
 
     props.handleChange(updatedPolaroid, props.idx);
-    
+    props.handleStep(3);
+
   }
 
   const changeAlignment = (algnment: string) => {
