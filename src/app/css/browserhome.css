@@ -481,6 +481,28 @@
   bottom: 20px;
 }
 
+.copy-button::after {
+  content: attr(data-after);
+  opacity: 0;
+  transition: opacity 0.2s;
+  position: absolute;
+  width: max-content;
+  top: -35px;
+  left: -50px;
+  font-size: 12px;
+  font-family: var(--robo);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--secondary-txt);
+  background-color: var(--secondary-txt-lt);
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
+.copy-button:hover::after {
+  opacity: 1;
+}
+
 .note .copy-button:hover path:nth-of-type(2),
 .note .copy-button:hover path:nth-of-type(3) {
   animation: copy 0.4s;
@@ -1827,6 +1849,36 @@ button.list-container:hover::before {
   content: "Reset Placement";
 }
 
+.drawer-button {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 6px;
+  text-align: left;
+  font-family: var(--robo);
+  font-size: 16px;
+  text-decoration: none;
+  color: hsl(var(--accent1-lt), 25%);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+  background: hsl(var(--accent1-lt), 90%);
+  transition: background 0.2s;
+}
+
+.drawer-button:hover {
+  background: rgb(var(--accent1-txt));
+}
+
+.drawer-button svg {
+  margin-right: 10px;
+}
+
+.drawer-button path {
+  fill: hsl(var(--accent1));
+}
+
 .tutorial-heading {
   display: flex;
   flex-direction: column;
@@ -1877,29 +1929,28 @@ button.list-container:hover::before {
 
 #drawer .checkmark-button {
   position: absolute;
+  top: 5rem;
+  left: -4rem;
+  background: linear-gradient(45deg, rgb(var(--accent1-txt)) 50%, hsl(var(--accent1-lt), 90%) 50%);
+  background-size: 300%;
+  background-position: right bottom;
+  box-shadow: 0px 0px 10px 10px hsla(var(--accent1-lt), 25%, 0.05);
+  z-index: 10;
+}
+
+#drawer .navigation {
+  position: absolute;
   bottom: 2rem;
   right: 2rem;
-  background: linear-gradient(45deg, rgb(var(--accent1-txt)) 50%, hsl(var(--accent1-lt), 90%) 50%);
-  background-size: 250%;
-  background-position: right bottom;
+  width: 100%;
+  justify-content: space-between;
+  z-index: 10;
 }
 
-#drawer .checkmark-button::after {
-  content: "Next Feature";
-  position: absolute;
-  top: 0px;
-  left: 300%;
-  width: max-content;
-  font-family: var(--robo);
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: rgb(var(--accent1-txt));
-  transition: left 0.4s, letter-spacing 0.8s;
-}
-
-#drawer .checkmark-button:hover::after {
-  letter-spacing: 1px;
-  left: -210%;
+#drawer .navigation button:first-child {
+  position: relative;
+  left: -2rem;
+  box-shadow: 0px 0px 10px 10px hsla(var(--accent1-lt), 25%, 0.05);
 }
 
 #drawer ol {
@@ -1921,8 +1972,16 @@ button.list-container:hover::before {
   animation: tut-blur 4s forwards;
 }
 
+.opened-right .todolists-container.blur > *:not(.highlight, .highlight + .creator) {
+  animation: tut-blurlists 4s forwards;
+}
+
 .opened-right .reverse-blur > *:not(.highlight, .highlight + .creator) {
   animation: tut-unblur 0.6s forwards;
+}
+
+.opened-right .todolists-container.reverse-blur > *:not(.highlight, .highlight + .creator) {
+  animation: tut-unblurlists 0.6s forwards;
 }
 
 @keyframes fade {

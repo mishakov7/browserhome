@@ -46,10 +46,10 @@ export default function Home() {
   const moreRef = useRef(null);
   const optionsRef = useRef(null);
 
-  const [searchTutorial, setSearchTutorial] = useState(0);
-  const [bookmarkTutorial, setBookmarkTutorial] = useState(0);  
-  const [listTutorial, setListTutorial] = useState(0);  
-  const [stickyTutorial, setStickyTutorial] = useState(0);  
+  const [searchTutorial, setSearchTutorial] = useState(-1);
+  const [bookmarkTutorial, setBookmarkTutorial] = useState(-1);  
+  const [listTutorial, setListTutorial] = useState(-1);  
+  const [stickyTutorial, setStickyTutorial] = useState(-1);  
 
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});

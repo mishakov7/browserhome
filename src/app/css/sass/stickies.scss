@@ -417,6 +417,32 @@
   bottom: 20px;
 }
 
+.copy-button::after {
+  content: attr(data-after);
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  position: absolute;
+  width: max-content;
+  top: -35px;
+  left: -50px;
+
+  font-size: 12px;
+  font-family: var(--robo);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--secondary-txt);
+
+  background-color: var(--secondary-txt-lt);
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
+.copy-button:hover::after {
+  opacity: 1;
+
+}
+
 .note .copy-button:hover path:nth-of-type(2),
 .note .copy-button:hover path:nth-of-type(3) {
   animation: copy 0.4s;

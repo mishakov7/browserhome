@@ -8,6 +8,7 @@ export default function Note(props: any) {
   const [coordinates, setCoordinates] = useState({x: props.storage.xpos, y: props.storage.ypos});
   const [notetext, setNotetext] = useState(props.storage.note);
   const [noteColor, setNoteColor] = useState(props.storage.color);
+  const [dataAfter, setAfter] = useState("Copy Text");
 
   const nodeRef = React.useRef(null);
   const textareaRef = useRef<HTMLDivElement>(null);
@@ -140,7 +141,7 @@ export default function Note(props: any) {
                     </svg>
                 </button>
 
-                <button onClick={(e) => { copyNoteText(e)}} className={'copy-button ' + noteColor + '-fill'}>
+                <button data-after={dataAfter} onMouseLeave={() => setAfter("Copy Text")} onClick={(e) => { copyNoteText(e); setAfter("Copied!");}} className={'copy-button ' + noteColor + '-fill'}>
                     <svg width="22" height="22" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M4 7C1.79086 7 0 8.79083 0 11V25C0 27.2092 1.79086 29 4 29H18C20.2091 29 22 27.2092 22 25H8C5.79086 25 4 23.2092 4 21V7Z" fill="#8D6CD2"/>
                         <path d="M7 4C7 1.79083 8.79086 0 11 0H18C19.1046 0 20 0.89543 20 2V7C20 8.10457 20.8954 9 22 9H27C28.1046 9 29 9.89543 29 11V18C29 20.2092 27.2091 22 25 22H11C8.79086 22 7 20.2092 7 18V4Z" fill="#8D6CD2"/>
