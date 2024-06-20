@@ -324,6 +324,7 @@ export default function ToDoLists(props: any) {
                         step={props.step}
                         handleStep={props.setTutorial}
                         setDrag={setTodoDragging}
+                        setEditing={toggleEditing}
                     />
 
                     :

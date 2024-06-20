@@ -172,7 +172,7 @@ const EditList = (props: any) => {
 
   return (
     <>
-      <input ref={props.listTitleRef} type="text" name="list-title" placeholder={props.listTitle} />
+      <input ref={props.listTitleRef} type="text" name="list-title" placeholder={props.listTitle} onKeyDown={(e: any) => { if (e.key === "Enter") { props.setEditing(e, 0); } }}/>
       <ul className='todo-list'>
               {
                 todoList.length < 1 ? null :

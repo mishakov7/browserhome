@@ -259,6 +259,7 @@
 .faq-group {
   height: 360px;
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--accent1-txt), 0.1) rgba(var(--accent1-txt), 0.05);
   padding-right: 25px;
