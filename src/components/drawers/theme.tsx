@@ -31,8 +31,8 @@ const darkTheme = [
     ["--shadow", "rgba(8, 13, 30, 0.2)"]
 ]
 
-// document.documentElement.style.setProperty('--base',this.state.color);
 const Drawer = (props : any) => {
+
     const drawerRef = useRef<HTMLDivElement>(null);
     const [browserPage, setLink] = useState("");
 
@@ -174,6 +174,20 @@ const Drawer = (props : any) => {
         }, 2000);
     }
 
+    const restartTutorial = () => {
+        const localSettings = JSON.parse(String(localStorage.getItem('settings')));
+
+        if (localSettings) {
+            localSettings.tutorial = 0;
+            
+            if (typeof window !== undefined) {
+                localStorage.setItem('settings', JSON.stringify(localSettings));
+            }
+        } 
+
+        props.setDrawer("intro", "left");
+    }
+
     useEffect(() => {
         const localSettings = JSON.parse(String(localStorage.getItem('settings')));
             
@@ -292,7 +306,7 @@ const Drawer = (props : any) => {
                 <h2>Help</h2>
 
                 <div className='faq-group'>                
-                    <button className='faq-button'>
+                    <button onClick={() => restartTutorial()} className='faq-button'>
                         Restart tutorial
                     </button>
                     
@@ -300,7 +314,7 @@ const Drawer = (props : any) => {
                         How do I set my browser home page?
                     </a>
 
-                    <a className='faq-button' href={browserPage} target="_blank">
+                    <a className='faq-button' href="#feedback">
                         Can I report a bug or provide feedback?
                     </a>
 

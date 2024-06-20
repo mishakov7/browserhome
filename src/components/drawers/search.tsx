@@ -128,7 +128,7 @@ const Drawer = (props : any) => {
               <li className={step2 ? "crossed" : ""}>Change Search Settings</li>
             </ol>
 
-            <p>Instead of using your browser's default <span className="vocab" data-after="a service that provides links to pages and other info on the internet e.g. google, bing">search engine</span>, you can choose to change your search engine all on one page.</p>
+            <p>Instead of using your browser's default <span className="vocab" data-after="A service that provides links to pages and other info on the internet e.g. google, bing">search engine</span>, you can choose to change your search engine all on one page.</p>
             <p>Along with that, you can set the text you might see on a daily basis to be random thoughts, inspirational quotes, or positive affirmations.</p>
 
             <button /*onClick={() => handleBlur(false) }*/ className={'checkmark-button ' + (gradient == 0.0 ? 'ready' : '')}>

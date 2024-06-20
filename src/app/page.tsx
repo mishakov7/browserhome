@@ -177,10 +177,6 @@ export default function Home() {
               component = <x.tag skip={finishTutorial} tutorial={setStickyTutorial} step={stickyTutorial} setDrawer={changeDrawer} interact={hoverFeature} blurRef={moreRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
-            case "conclude":
-              component = <x.tag finish={finishTutorial} />
-              break;
-
             default: 
               component = <x.tag setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
           }

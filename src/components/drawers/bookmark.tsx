@@ -120,7 +120,7 @@ const Drawer = (props : any) => {
               <li className={step3 ? "crossed" : ""}>Click on your bookmark</li>
             </ol>
 
-            <p>Instead of going through a million clicks to get to that one <span className="vocab" data-after="a browser feature used to save a web site's URL for future reference">bookmark</span>, you can create them here at your homebase.</p>
+            <p>Instead of going through a million clicks to get to that one <span className="vocab" data-after="A browser feature used to save a website's link for future reference">bookmark</span>, you can create them here at your homebase.</p>
             <p>In addition to these features, you can drag and drop the bookmarks to change the placements.</p>
             <p>**If you do not see an icon for your page, you may have entered it incorrectly, or that website does not have a <span className="vocab" data-after="A favicon is a small image displayed next to the page title in the browser tab.">favicon</span> set.</p>
 

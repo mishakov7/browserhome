@@ -2,6 +2,21 @@ import { setgroups } from 'process';
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 
 const Drawer = (props : any) => {
+    const confetti = require('canvas-confetti').default;
+
+    var count = 200;
+    var defaults = {
+    origin: { y: 0.6, x: 0.9 }
+    };
+
+    function fire(particleRatio: number, opts: any) {
+    confetti({
+        ...defaults,
+        ...opts,
+        particleCount: Math.floor(count * particleRatio)
+    });
+    }
+
     const drawerRef = useRef<HTMLDivElement>(null);
     const gradientRef = useRef<SVGAnimateElement>(null);
 
@@ -37,6 +52,16 @@ const Drawer = (props : any) => {
 
         setTimeout(() => {
             props.unblur(props.blurRef.current, 600);
+
+            if (navigator >= 0) {
+                fire(0.25, {
+                    spread: 120,
+                    startVelocity: 25,
+                    decay: 0.92,
+                    scalar: 1.2
+                });
+            }
+
         }, 600);
 
         setTimeout(() => {
@@ -57,7 +82,7 @@ const Drawer = (props : any) => {
 
                 case 0:
                 case 1:
-                    props.skip(true);
+                    props.skip(true);                        
                     break;
             }
 
