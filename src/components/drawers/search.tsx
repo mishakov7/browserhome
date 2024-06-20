@@ -15,6 +15,8 @@ const Drawer = (props : any) => {
 
     const handleBlur = (navigator: number) => {
 
+        const localSettings = JSON.parse(String(localStorage.getItem('settings')));
+
         if (navigator > -1) {
             props.blur(props.blurRef.current, "reverse-blur");
 
@@ -26,6 +28,14 @@ const Drawer = (props : any) => {
                 switch(navigator) {
                     case -1:
                         props.tutorial(-1);
+
+                        if (localSettings) {
+                            localSettings.tutorial = 0;
+                            if (typeof window !== undefined) {
+                                localStorage.setItem('settings', JSON.stringify(localSettings));
+                            }
+                        } 
+                        
                         props.setDrawer("intro", "left");
                         break;
     
@@ -36,6 +46,14 @@ const Drawer = (props : any) => {
                     case 1:
                         props.tutorial(-1);
                         props.setDrawer("bookmark", "right");
+
+                        if (localSettings) {
+                            localSettings.tutorial = 2;
+                            if (typeof window !== undefined) {
+                                localStorage.setItem('settings', JSON.stringify(localSettings));
+                            }
+                        } 
+                        
                         break;
                 }
     
@@ -63,6 +81,16 @@ const Drawer = (props : any) => {
     }
 
     useEffect(() => {
+        const localSettings = JSON.parse(String(localStorage.getItem('settings')));
+
+        if (localSettings) {
+            localSettings.tutorial = 1;
+            
+            if (typeof window !== undefined) {
+                localStorage.setItem('settings', JSON.stringify(localSettings));
+            }
+        } 
+
         if (props.step == -1) {
             props.blur(props.blurRef.current, "blur");
             props.interact(props.blurRef.current);    

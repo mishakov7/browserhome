@@ -16,6 +16,7 @@ const Drawer = (props : any) => {
     const [gradient, setGradient] = useState(1.0);
 
     const handleBlur = (navigator: number) => {
+        const localSettings = JSON.parse(String(localStorage.getItem('settings')));
 
         props.blur(props.blurRef.current, "reverse-blur");
 
@@ -27,6 +28,15 @@ const Drawer = (props : any) => {
             switch(navigator) {
                 case -1:
                     props.tutorial(-1);
+
+                    if (localSettings) {
+                        localSettings.tutorial = 2;
+                        
+                        if (typeof window !== undefined) {
+                            localStorage.setItem('settings', JSON.stringify(localSettings));
+                        }
+                    } 
+
                     props.setDrawer("bookmark", "right");
                     break;
 
@@ -36,6 +46,15 @@ const Drawer = (props : any) => {
 
                 case 1:
                     props.tutorial(-1);
+
+                    if (localSettings) {
+                        localSettings.tutorial = 4;
+                        
+                        if (typeof window !== undefined) {
+                            localStorage.setItem('settings', JSON.stringify(localSettings));
+                        }
+                    } 
+
                     props.setDrawer("sticky", "right");
                     break;
             }

@@ -114,7 +114,7 @@ export default function Home() {
   // Tutorial
   function finishTutorial(lastStep: Boolean) {
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
-    localSettings.tutorial = true;
+    localSettings.tutorial = 5;
 
     if (typeof window !== undefined) {
       localStorage.setItem('settings', JSON.stringify(localSettings));
@@ -251,6 +251,29 @@ export default function Home() {
       } else {
         if (!localSettings.tutorial) {
           changeDrawer("intro", "left");
+
+        } else if (localSettings.tutorial < 5) {
+          switch(localSettings.tutorial) {
+            case 0:
+              changeDrawer("intro", "left");
+              break;
+
+            case 1:
+              changeDrawer("search", "right");
+              break;
+
+            case 2:
+              changeDrawer("bookmark", "right");
+              break;
+
+            case 3:
+              changeDrawer("list", "right");
+              break;
+
+            case 4:
+              changeDrawer("sticky", "right");
+              break;
+          }
         }
 
         setCSSTheme(localSettings.theme);

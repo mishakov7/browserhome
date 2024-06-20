@@ -11,13 +11,23 @@ const Drawer = (props : any) => {
         }
     
         setTimeout(() => {
+            
             props.setDrawer(drawer, direction)
         }, 400);
     }
 
-    // useEffect(() => {
+    useEffect(() => {
+        const localSettings = JSON.parse(String(localStorage.getItem('settings')));
 
-    // }, []);
+        if (localSettings) {
+            localSettings.tutorial = 0;
+            
+            if (typeof window !== undefined) {
+                localStorage.setItem('settings', JSON.stringify(localSettings));
+            }
+        } 
+
+    }, []);
 
     return(
         <>
