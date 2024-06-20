@@ -48,6 +48,7 @@ export default function Home() {
 
   const [searchTutorial, setSearchTutorial] = useState(0);
   const [bookmarkTutorial, setBookmarkTutorial] = useState(0);  
+  const [listTutorial, setListTutorial] = useState(0);  
 
   const clickFeature = (ref: any) => {
     window.scrollTo({top: 0, behavior: "smooth"});
@@ -59,53 +60,59 @@ export default function Home() {
     ref.classList.add("hovered");
   }
 
-  const highlightFeature = (ref: any) => {   
+  const highlightFeature = (ref: any, cssclass: string) => {   
     window.scrollTo({top: 0, behavior: "smooth"});
 
     switch(ref) {
       case searchRef.current:
-        blurLayers.current[1].classList.add("blur");
-        blurLayers.current[2].classList.add("blur");
-        blurLayers.current[3].classList.add("blur");
+        blurLayers.current[1].classList.add(cssclass);
+        blurLayers.current[2].classList.add(cssclass);
+        blurLayers.current[3].classList.add(cssclass);
         break;
       
       case moreRef.current:
-        blurLayers.current[0].classList.add("blur");
-        blurLayers.current[1].classList.add("blur");
-        blurLayers.current[2].classList.add("blur");
-        blurLayers.current[3].classList.add("blur");
+        blurLayers.current[0].classList.add(cssclass);
+        blurLayers.current[1].classList.add(cssclass);
+        blurLayers.current[2].classList.add(cssclass);
+        blurLayers.current[3].classList.add(cssclass);
         break;
 
       case listRef.current:
-        blurLayers.current[0].classList.add("blur");
-        blurLayers.current[1].classList.add("blur");
-        blurLayers.current[3].classList.add("blur");
+        blurLayers.current[0].classList.add(cssclass);
+        blurLayers.current[1].classList.add(cssclass);
+        blurLayers.current[3].classList.add(cssclass);
         break;
 
       case bookmarkRef.current:
-        blurLayers.current[0].classList.add("blur");
-        blurLayers.current[1].classList.add("blur");
-        blurLayers.current[2].classList.add("blur");
+        blurLayers.current[0].classList.add(cssclass);
+        blurLayers.current[1].classList.add(cssclass);
+        blurLayers.current[2].classList.add(cssclass);
         break;
     }
 
     ref.classList.add("highlight");
   }
 
-  const removeHighlight = (ref: any) => {
+  const removeHighlight = (ref: any, timeout: number) => {
     setTimeout(() => {
       blurLayers.current[0].classList.remove("blur");
       blurLayers.current[1].classList.remove("blur");
       blurLayers.current[2].classList.remove("blur");
       blurLayers.current[3].classList.remove("blur");
+
+      blurLayers.current[0].classList.remove("reverse-blur");
+      blurLayers.current[1].classList.remove("reverse-blur");
+      blurLayers.current[2].classList.remove("reverse-blur");
+      blurLayers.current[3].classList.remove("reverse-blur");
+
       ref.classList.remove("highlight");
       ref.classList.remove("hovered");
 
-    }, 4000);
+    }, timeout);
   }
 
   // Tutorial
-  function skipTutorial() {
+  function finishTutorial() {
     console.log("skipping tut?");
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
     localSettings.tutorial = true;
@@ -113,6 +120,9 @@ export default function Home() {
     if (typeof window !== undefined) {
       localStorage.setItem('settings', JSON.stringify(localSettings));
     }
+
+    setSearchTutorial(-1);
+    setBookmarkTutorial(-1);
 
     setDrawerRight(null);
   }
@@ -147,11 +157,11 @@ export default function Home() {
         if (x.file == drawer) {
           switch (drawer) {
             case "search":
-              component = <x.tag skip={skipTutorial} step={searchTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={searchRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} step={searchTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={searchRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
   
             case "bookmark":
-              component = <x.tag skip={skipTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
             default: 
@@ -316,27 +326,27 @@ export default function Home() {
             <ul className='guide'>
               <li>
                   <details>
-                      <summary>Change your search settings! <button onClick={() => {highlightFeature(searchRef.current); clickFeature(searchRef.current); removeHighlight(searchRef.current);}}>Show me!</button></summary>
+                      <summary>Change your search settings! <button onClick={() => {highlightFeature(searchRef.current, "blur"); clickFeature(searchRef.current); removeHighlight(searchRef.current, 4000);}}>Show me!</button></summary>
                       <p>Currently you can choose between setting your search engine to Google, DuckDuckGo, or Brave. You can also set what type of text you want to see every time you open the page.</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef.current); clickFeature(bookmarkRef.current); removeHighlight(bookmarkRef.current);}}>Show me!</button></summary>
+                      <summary>Create a bookmark <button onClick={() => {highlightFeature(bookmarkRef.current, "blur"); clickFeature(bookmarkRef.current); removeHighlight(bookmarkRef.current, 4000);}}>Show me!</button></summary>
                       <p>You can enter as many bookmarks as you want so that you can have easy access to all of your websites. You can also delete and edit them.</p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Create a list <button onClick={() => {highlightFeature(listRef.current); clickFeature(listRef.current); removeHighlight(listRef.current);}}>Show me!</button></summary>
+                      <summary>Create a list <button onClick={() => {highlightFeature(listRef.current, "blur"); clickFeature(listRef.current); removeHighlight(listRef.current, 4000);}}>Show me!</button></summary>
                       <p>You can create up to five lists, and add as many todos as you want. You can also add links to each todo if you want, but that is not required. </p>
                       <p>** More will be planned for this feature in the future!</p>
                   </details>
               </li>
               <li>
                   <details>
-                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef.current); hoverFeature(optionsRef.current); removeHighlight(optionsRef.current); removeHighlight(moreRef.current);}}>Show me!</button></summary>
+                      <summary>Add a sticky! <button onClick={() => {highlightFeature(moreRef.current, "blur"); hoverFeature(optionsRef.current); removeHighlight(optionsRef.current, 4000); removeHighlight(moreRef.current, 4000);}}>Show me!</button></summary>
                       <p>You can either add polaroids or notes to your homebase, allowing you the ability to personalize to your heart&apos;s content. If you happen to lose a sticky and you can&apos;t click on it, that&apos;s what the reset button is for!</p>
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>

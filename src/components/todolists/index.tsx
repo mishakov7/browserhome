@@ -198,6 +198,8 @@ export default function ToDoLists(props: any) {
     }
 
     toggleCreator();
+    // props.setTutorial(1);
+
   }
 
   const deleteList = () => {
@@ -242,7 +244,7 @@ export default function ToDoLists(props: any) {
   useEffect(() => {
     const localLists = JSON.parse(String(localStorage.getItem('lists')));
   
-    if (localLists) {
+    if (localLists && localLists.length > 0) {
       setLists(localLists);
       setColor(localLists[0].color);
     }

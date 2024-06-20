@@ -8,6 +8,11 @@
     bottom: -125px;
 }
 
+.opened-left .todolists-container,
+.opened-right .todolists-container {
+    right: -75%;
+}
+
 .list-container {
     position: absolute;
     background-color: var(--base-container);

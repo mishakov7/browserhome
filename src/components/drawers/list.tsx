@@ -5,10 +5,12 @@ const Drawer = (props : any) => {
     const drawerRef = useRef<HTMLDivElement>(null);
     const gradientRef = useRef<SVGAnimateElement>(null);
 
-    const totalSteps = 2;
+    const totalSteps = 1;
 
     const [step1, setStep1] = useState(false);
-    const [step2, setStep2] = useState(false);
+    // const [step2, setStep2] = useState(false);
+    // const [step3, setStep3] = useState(false);
+    // const [step4, setStep4] = useState(false);
 
     const [oldGradient, setOldGradient] = useState(1.0);
     const [gradient, setGradient] = useState(1.0);
@@ -59,10 +61,10 @@ const Drawer = (props : any) => {
                     animateGradient();
                     break;
     
-                case 2:
-                    setStep2(true);
-                    animateGradient();
-                    break;
+                // case 2:
+                //     setStep2(true);
+                //     animateGradient();
+                //     break;
             }
         }
 
@@ -73,15 +75,18 @@ const Drawer = (props : any) => {
 
         <div ref={drawerRef} id="drawer" className='right-drawer'>
             <span className='tutorial-heading'>
-                <h2>Tutorial — Search</h2>
+                <h2>Tutorial — List</h2>
                 <button onClick={() => handleBlur(true) } className='skip-button'>Skip Tutorial</button>
             </span>
 
             <p>To get you familiarized here, let's go through this brief tutorial! You'll learn how to use the following features:</p>
             
             <ol>
-              <li className={step1 ? "crossed" : ""}>Search Something</li>
-              <li className={step2 ? "crossed" : ""}>Change Search Settings</li>
+              <li className={step1 ? "crossed" : ""}>Create a list</li>
+              {/* <li className={step2 ? "crossed" : ""}>Create an item in your list</li>
+              <li className={step3 ? "crossed" : ""}>Toss an item in the trash</li>
+              <li className={step4 ? "crossed" : ""}>Edit your list</li> */}
+
             </ol>
 
             <button onClick={() => handleBlur(false) } className={'checkmark-button ' + (gradient == 0.0 ? 'ready' : '')}>

@@ -60,7 +60,7 @@
     content: "Next Feature";
     position: absolute;
     top: 0px;
-    left: 155%;
+    left: 300%;
     width: max-content;
 
     font-family: var(--robo);
@@ -93,6 +93,10 @@
 
 .opened-right .blur > *:not(.highlight, .highlight + .creator) {
     animation: tut-blur 4s forwards;
+}
+
+.opened-right .reverse-blur > *:not(.highlight, .highlight + .creator) {
+    animation: tut-unblur 0.6s forwards;
 }
 
 @keyframes fade {
@@ -128,7 +132,13 @@
 }
 
 .opened-right .search-container .hotspot {
+    transform: scale(100%);
     animation: scale 2s;
+    transition: transform 0.4s;
+}
+
+.opened-right .search-container .hotspot:hover {
+    transform: scale(125%);
 }
 
 // .opened-right .hotspot1::after,

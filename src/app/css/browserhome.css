@@ -1156,6 +1156,11 @@
   bottom: -125px;
 }
 
+.opened-left .todolists-container,
+.opened-right .todolists-container {
+  right: -75%;
+}
+
 .list-container {
   position: absolute;
   background-color: var(--base-container);
@@ -1883,7 +1888,7 @@ button.list-container:hover::before {
   content: "Next Feature";
   position: absolute;
   top: 0px;
-  left: 155%;
+  left: 300%;
   width: max-content;
   font-family: var(--robo);
   letter-spacing: 5px;
@@ -1914,6 +1919,10 @@ button.list-container:hover::before {
 
 .opened-right .blur > *:not(.highlight, .highlight + .creator) {
   animation: tut-blur 4s forwards;
+}
+
+.opened-right .reverse-blur > *:not(.highlight, .highlight + .creator) {
+  animation: tut-unblur 0.6s forwards;
 }
 
 @keyframes fade {
@@ -1948,7 +1957,13 @@ button.list-container:hover::before {
 }
 
 .opened-right .search-container .hotspot {
+  transform: scale(100%);
   animation: scale 2s;
+  transition: transform 0.4s;
+}
+
+.opened-right .search-container .hotspot:hover {
+  transform: scale(125%);
 }
 
 .crossed {

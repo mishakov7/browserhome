@@ -7,14 +7,12 @@ const Drawer = (props : any) => {
     const handleAnimation = (drawer: any, direction: string) => {
 
         if (drawerRef.current) {
-            drawerRef.current.style.animation = "closedrawer_left 2s forwards";
-            props.contentRef.style.animation = "opencontainer 2s forwards";
+            drawerRef.current.style.animation = "closedrawer_left 0.4s forwards ease-in";
         }
     
         setTimeout(() => {
             props.setDrawer(drawer, direction)
-            props.contentRef.style = [];
-        }, 2000);
+        }, 400);
     }
 
     // useEffect(() => {
