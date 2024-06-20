@@ -79,7 +79,9 @@ export default function Bookmarks(props: any) {
     localStorage.setItem('bookmarks', JSON.stringify(storageBookmarks));  
     toggleCreator();
 
-    props.setTutorial(1);
+    if (props.step >= 0) {
+      props.setTutorial(1);
+    }
   }
 
   const deleteBookmark = (key: number) => {
@@ -91,7 +93,6 @@ export default function Bookmarks(props: any) {
     }
 
     setBookmarkList(storageBookmarks);
-    // props.setTutorial(3);
   }
 
   const editBookmark = (e:any, key: number, refs: any) => {
@@ -114,7 +115,10 @@ export default function Bookmarks(props: any) {
     }
 
     setBookmarkList(storageBookmarks);
-    props.setTutorial(2);
+
+    if (props.step >= 0) {
+      props.setTutorial(2);
+    }
   }
 
   const moveBookmark = (initial: number, target: number) => {

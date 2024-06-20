@@ -1095,6 +1095,99 @@ button {
   align-items: center;
 }
 
+.h2-help {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.h2-help::after {
+  content: attr(data-after);
+  position: absolute;
+  background-color: hsl(var(--accent2-lt), 80%);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 10px hsla(var(--accent1-lt), 10%, 5%);
+  color: hsl(var(--accent2-lt), 25%);
+  padding: 8px;
+  z-index: 2;
+
+  font-size: 14px;
+  font-family: var(--overpass);
+  font-weight: 300;
+  text-transform: none;
+  line-height: 18px;
+
+  width: 12vw;
+  right: -120px;
+  opacity: 0;
+  top: -15px;
+  transition: right 0.2s, opacity 0.2s;
+
+}
+
+.h2-help::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: block;
+  border-radius: 0 20px 0 10px;
+  background-color: hsl(var(--accent2-lt), 80%);
+
+  right: 118px;
+
+  transform: rotate(45deg);
+  z-index: 3;
+  opacity: 0;
+  transition: right 0.2s, opacity 0.2s;
+}
+
+.h2-help:hover::after {
+  opacity: 1;
+  right: -115px;
+}
+
+.h2-help:hover::before {
+  opacity: 1;
+  right: 120px;
+}
+
+.h2-help svg {
+  cursor: help;
+  margin-left: 10px;
+}
+
+.data-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(var(--accent1-lt), 90%);
+  padding: 6px 8px;
+  margin: 10px 0;
+  border-radius: 8px;
+
+  font-family: var(--robo);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: hsl(var(--accent1-lt), 25%);
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+}
+
+.data-button:hover {
+  background-color: hsl(var(--accent1-lt), 100%);
+
+}
+
+.data-button svg {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.data-button path {
+  fill: hsl(var(--accent1-lt), 25%);
+}
 
 .edit-button svg {
   transform: rotate(0deg);

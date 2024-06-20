@@ -130,7 +130,10 @@ export default function ToDoLists(props: any) {
   const toggleEditing = (e: any, key: number) => {
     if (!isEditing) {
       setEditing(true);
-      props.setTutorial(2);
+
+      if (props.step >= 0) {
+        props.setTutorial(2);
+      }
     } 
 
     if (isEditing) {
@@ -199,7 +202,10 @@ export default function ToDoLists(props: any) {
     }
 
     toggleCreator();
-    props.setTutorial(1);
+
+    if (props.step >= 0) {
+      props.setTutorial(1);
+    }
 
   }
 
@@ -314,6 +320,8 @@ export default function ToDoLists(props: any) {
                         listTitle={list.title}
                         listKey={idx}
                         listColor={list.color}
+
+                        step={props.step}
                         handleStep={props.setTutorial}
                         setDrag={setTodoDragging}
                     />
@@ -326,6 +334,8 @@ export default function ToDoLists(props: any) {
                         listTitle={list.title}
                         listKey={idx}
                         listColor={list.color}
+
+                        step={props.step}
                         handleStep={props.setTutorial}
                         setDrag={setTodoDragging}
                     />

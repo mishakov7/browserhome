@@ -438,6 +438,18 @@
   border-radius: 10px;
 }
 
+// .copy-button.accent1-fill::after {
+//   color: hsl(var(--accent1));
+// }
+
+// .copy-button.accent2-fill::after {
+//   color: hsl(var(--accent2));
+// }
+
+// .copy-button.accent3-fill::after {
+//   color: hsl(var(--accent3));
+// }
+
 .copy-button:hover::after {
   opacity: 1;
 

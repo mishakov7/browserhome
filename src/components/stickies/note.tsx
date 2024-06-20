@@ -32,7 +32,10 @@ export default function Note(props: any) {
     }
 
     props.handleChange(updatedNote, props.idx);
-    props.handleStep(1);
+
+    if (props.step >= 0) {
+      props.handleStep(1);
+    }
 
   }
 

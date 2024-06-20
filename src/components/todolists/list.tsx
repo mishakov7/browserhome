@@ -77,7 +77,10 @@ const List = (props: any) => {
     }
 
     toggleCreator();
-    props.handleStep(3);
+
+    if (props.step >= 0) {
+      props.handleStep(3);
+    }
   }
 
   const moveTodo = (initial: number, target: number) => {
@@ -141,7 +144,10 @@ const List = (props: any) => {
     }
 
     props.setDrag(false);
-    props.handleStep(4);
+
+    if (props.step >= 0) {
+      props.handleStep(4);
+    }
   }
 
   useEffect(() => {

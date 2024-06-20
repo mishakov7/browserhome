@@ -47,7 +47,10 @@ export default function Polaroid(props: any) {
     }
 
     props.handleChange(updatedPolaroid, props.idx);
-    props.handleStep(1);
+
+    if (props.step >= 0) {
+      props.handleStep(1);
+    }
   }
 
   const changePolaroid = (dataimage: any) => {
@@ -63,7 +66,10 @@ export default function Polaroid(props: any) {
     }
 
     props.handleChange(updatedPolaroid, props.idx);
-    props.handleStep(3);
+
+    if (props.step >= 0) {
+      props.handleStep(3);
+    }
 
   }
 

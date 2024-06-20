@@ -162,19 +162,19 @@ export default function Home() {
         if (x.file == drawer) {
           switch (drawer) {
             case "search":
-              component = <x.tag skip={finishTutorial} step={searchTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={searchRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} tutorial={setSearchTutorial} step={searchTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={searchRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
   
             case "bookmark":
-              component = <x.tag skip={finishTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} tutorial={setBookmarkTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
             case "list":
-              component = <x.tag skip={finishTutorial} step={listTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={listRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} tutorial={setListTutorial} step={listTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={listRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
             case "sticky":
-              component = <x.tag skip={finishTutorial} step={stickyTutorial} setDrawer={changeDrawer} interact={hoverFeature} blurRef={moreRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} tutorial={setStickyTutorial} step={stickyTutorial} setDrawer={changeDrawer} interact={hoverFeature} blurRef={moreRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
             case "conclude":

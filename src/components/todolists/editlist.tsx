@@ -70,7 +70,10 @@ const EditList = (props: any) => {
     }
 
     toggleCreator();
-    props.handleStep(3);
+
+    if (props.step >= 0) {
+      props.handleStep(3);
+    }
 
   }
 
@@ -112,7 +115,9 @@ const EditList = (props: any) => {
       localStorage.setItem('lists', JSON.stringify(allStorageLists));
     }
 
-    props.handleStep(4);
+    if (props.step >= 0) {
+      props.handleStep(4);
+    }
     props.setDrag(false);
 
   }

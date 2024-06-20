@@ -1849,34 +1849,59 @@ button.list-container:hover::before {
   content: "Reset Placement";
 }
 
-.drawer-button {
+.faq-group {
+  height: 360px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--accent1-txt), 0.1) rgba(var(--accent1-txt), 0.05);
+  padding-right: 25px;
+}
+
+.faq-button > summary {
+  list-style: none;
+  position: relative;
+}
+
+.faq-button summary svg {
+  position: absolute;
+  left: 0px;
+  top: -2px;
+}
+
+.faq-button {
   cursor: pointer;
   border-radius: 10px;
-  padding: 6px;
+  padding: 8px 12px;
   text-align: left;
   font-family: var(--robo);
   font-size: 16px;
   text-decoration: none;
-  color: hsl(var(--accent1-lt), 25%);
+  color: rgb(var(--accent1-txt));
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
   margin: 10px 0;
-  background: hsl(var(--accent1-lt), 90%);
+  background-color: rgba(0, 0, 0, 0.05);
   transition: background 0.2s;
 }
 
-.drawer-button:hover {
-  background: rgb(var(--accent1-txt));
+.faq-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
-.drawer-button svg {
+.faq-button svg {
   margin-right: 10px;
 }
 
-.drawer-button path {
+.faq-button path {
   fill: hsl(var(--accent1));
+}
+
+.faq-button summary + p {
+  color: rgb(var(--accent1-txt)) !important;
+  font-size: 15px;
+  line-height: 20px;
 }
 
 .tutorial-heading {
@@ -2047,6 +2072,58 @@ button.list-container:hover::before {
 
 .intro-drawer {
   padding: 10rem 3rem;
+}
+
+.vocab {
+  position: relative;
+  font-size: 1em;
+  color: hsl(var(--accent2-lt), 90%) !important;
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  cursor: help;
+}
+
+.vocab::after {
+  content: attr(data-after);
+  position: absolute;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: hsl(var(--accent2-lt), 80%);
+  box-shadow: 0px 0px 10px 10px hsla(var(--accent1-lt), 10%, 5%);
+  color: hsl(var(--accent2-lt), 25%);
+  width: 10vw;
+  left: -100%;
+  top: -350%;
+  opacity: 0;
+  transition: top 0.2s, opacity 0.2s;
+}
+
+.vocab::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: block;
+  border-radius: 20px 0 10px 0;
+  background-color: hsl(var(--accent2-lt), 80%);
+  left: 25%;
+  top: -20px;
+  transform: rotate(45deg);
+  z-index: 2;
+  opacity: 0;
+  transition: top 0.2s, opacity 0.2s;
+}
+
+.vocab:hover::after {
+  opacity: 1;
+  top: -400%;
+}
+
+.vocab:hover::before {
+  opacity: 1;
+  top: -22px;
 }
 
 /*# sourceMappingURL=browserhome.css.map */

@@ -109,7 +109,9 @@ export default function Search(props: any) {
     assignSearchState(String(newSearch.engine), String(newSearch.theme));
     toggleCreator();
 
-    props.setTutorial(2);
+    if (props.step >= 0) {
+      props.setTutorial(2);
+    }
 
   }
 
