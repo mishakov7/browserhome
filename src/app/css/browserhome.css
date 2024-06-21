@@ -1642,14 +1642,14 @@ button.list-container:hover::before {
   }
   100% {
     right: 0;
-    width: 25vw;
+    width: 20vw;
     position: relative;
   }
 }
 @keyframes closedrawer_right {
   0% {
     right: 0;
-    width: 25vw;
+    width: 20vw;
     position: relative;
   }
   50% {
@@ -1671,14 +1671,14 @@ button.list-container:hover::before {
   }
   100% {
     left: 0;
-    width: 25vw;
+    width: 20vw;
     position: relative;
   }
 }
 @keyframes closedrawer_left {
   0% {
     left: 0;
-    width: 25vw;
+    width: 20vw;
     position: relative;
   }
   50% {
@@ -1702,12 +1702,13 @@ button.list-container:hover::before {
 }
 
 .left-drawer {
-  padding: 1rem;
+  padding: 3rem 1rem 3rem 3rem;
   animation: opendrawer_left 0.6s forwards;
 }
 
 .right-drawer {
   padding: 1rem;
+  padding: 3rem 3rem 3rem 1rem;
   animation: opendrawer_right 0.6s forwards;
 }
 
@@ -1792,7 +1793,7 @@ button.list-container:hover::before {
 }
 
 .theme-drawer + .opened-left .options-container {
-  left: calc(25vw + 40px);
+  left: calc(20vw + 40px);
 }
 
 .opened-left .options-container:not(.theme-drawer + .opened-left .options-container) {
@@ -1936,7 +1937,7 @@ button.list-container:hover::before {
 }
 
 .faq-group {
-  height: 360px;
+  height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;

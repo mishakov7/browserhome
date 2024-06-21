@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef, Suspense } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, Suspense } from 'react';
 import Head from 'next/head';
 import Drawers from '@/components/utilities/drawers';
 import Loader from '@/components/utilities/loader';
@@ -220,7 +220,7 @@ export default function Home() {
       }
     }
   }
-
+  
   useEffect(() => {
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
 

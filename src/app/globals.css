@@ -220,7 +220,8 @@ input, textarea {
 
 #main-container.opened-left,
 #main-container.opened-right {
-  width: 75vw;
+  width: auto;
+  flex-grow: 1;
   transition: width 0.6s;
 }
 
@@ -407,6 +408,11 @@ article {
 
   #main-wrapper {
     justify-content: flex-start!important;
+  }
+
+  #drawer,
+  .options-container {
+    display: none!important;
   }
 
 }
