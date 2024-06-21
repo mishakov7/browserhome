@@ -18,6 +18,10 @@
         "name": "next"
       }
     ],
+    "types": [
+      "node",
+      "webpack-env"
+    ],
     "paths": {
       "@/*": ["./src/*"]
     }

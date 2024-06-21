@@ -12,7 +12,6 @@
     "@uiw/react-color": "^2.3.0",
     "babel": "^6.23.0",
     "canvas-confetti": "^1.9.3",
-    "color-contrast-checker": "^2.1.0",
     "immutability-helper": "^3.1.1",
     "ldrs": "^1.0.2",
     "next": "^14.2.2",
@@ -27,6 +26,8 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/webpack-env": "^1.18.5",
+    "color-contrast-checker": "^2.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "typescript": "^5"

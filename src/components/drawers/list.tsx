@@ -127,7 +127,7 @@ const Drawer = (props : any) => {
               <li className={step4 ? "crossed" : ""}>Toss an item from your list</li>
             </ol>
 
-            <p>We've got bills to pay, homework to do, things to get done that we do every time we get on our computer. Might as well keep track of those things with a tool you use everyday!</p>
+            <p>We&apos;ve got bills to pay, homework to do, things to get done that we do every time we get on our computer. Might as well keep track of those things with a tool you use everyday!</p>
 
             <p>Currently, you can have up to 5 lists, with an unlimited number of items. To delete items, drag it over to the trashcan.</p>
 

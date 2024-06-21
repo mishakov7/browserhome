@@ -93,7 +93,7 @@ const Creator = (props: any) => {
                         { group.options.map((option: any, odx: number) => (
 
                             option.selected ? 
-                            <span onClick={() => { toggleDropdown(gdx) }} className='selected-option'>{option.value}</span>
+                            <span key={odx} onClick={() => { toggleDropdown(gdx) }} className='selected-option'>{option.value}</span>
                             : null
                             
                         ))}

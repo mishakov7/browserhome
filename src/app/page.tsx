@@ -32,8 +32,8 @@ const darkTheme = [
 
 export default function Home() {
 
-  const [LeftDrawer, setDrawerLeft] = useState(null);
-  const [RightDrawer, setDrawerRight] = useState(null);
+  const [LeftDrawer, setDrawerLeft] : any = useState(null);
+  const [RightDrawer, setDrawerRight] : any = useState(null);
   const [stickyCommand, setStickyCommand] = useState(0);
 
   const mainContainer = useRef<HTMLDivElement>(null);

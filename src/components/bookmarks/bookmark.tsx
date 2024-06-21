@@ -18,7 +18,7 @@ const Bookmark = (props: any) => {
   const editButton = useRef<HTMLButtonElement>(null);
 
   const bookmarkAnchor = useRef<HTMLAnchorElement>(null);
-  const bookmarkRef = useRef(null);
+  const bookmarkRef = useRef<HTMLLIElement>(null);
 
   const editorInputs = [{
     "ref": linkRef,
@@ -181,7 +181,7 @@ const Bookmark = (props: any) => {
           </svg>
       </button>
 
-      <a ref={bookmarkAnchor} onClick={(e) => { openBackgroundTab(e) }} href={props.link} target="_blank">
+      <a ref={bookmarkAnchor} onClick={(e: any) => { openBackgroundTab(e) }} href={props.link} target="_blank">
         <img src={props.image} width="40"/>
       </a>
 

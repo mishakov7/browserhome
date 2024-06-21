@@ -92,7 +92,7 @@ const Drawer = (props : any) => {
 
 
     const animateGradient = () => {
-        let finishedSteps = step1 + step2 + step3 + step4 + step5 + step6;
+        let finishedSteps = (step1 ? 1 : 0) + (step2 ? 1 : 0) + (step3 ? 1 : 0) + (step4 ? 1 : 0) + (step5 ? 1 : 0) + (step6 ? 1 : 0);
 
         setOldGradient(gradient);
         
@@ -168,7 +168,7 @@ const Drawer = (props : any) => {
               <li className={step6 ? "crossed" : ""}>Reset the positions of your stickies</li>
             </ol>
 
-            <p>We all need to leave a reminder, or have a motivating picture of our loved ones sitting around when you're working. Why not have it digitally?</p>
+            <p>We all need to leave a reminder, or have a motivating picture of our loved ones sitting around when you&apos;re working. Why not have it digitally?</p>
             <p>Currently, you can have a limit of 2 polaroids and 10 sticky notes.</p>
 
             <button /*onClick={() => handleBlur(false) }*/ className={'checkmark-button ' + (gradient == 0.0 ? 'ready' : '')}>
