@@ -52,6 +52,7 @@ const Drawer = (props : any) => {
 
         setTimeout(() => {
             props.unblur(props.blurRef.current, 600);
+            props.unblur(props.hoverRef.current, 600);
 
             if (navigator >= 0) {
                 fire(0.25, {
@@ -110,7 +111,7 @@ const Drawer = (props : any) => {
 
         if (props.step == -1) {
             props.blur(props.blurRef.current, "blur");
-            props.interact(props.blurRef.current);     
+            props.interact(props.hoverRef.current);     
             props.tutorial(0);           
         
         } else {

@@ -174,7 +174,7 @@ export default function Home() {
               break;
 
             case "sticky":
-              component = <x.tag skip={finishTutorial} tutorial={setStickyTutorial} step={stickyTutorial} setDrawer={changeDrawer} interact={hoverFeature} blurRef={moreRef} blur={highlightFeature} unblur={removeHighlight}/>
+              component = <x.tag skip={finishTutorial} tutorial={setStickyTutorial} step={stickyTutorial} setDrawer={changeDrawer} interact={hoverFeature} hoverRef={optionsRef} blurRef={moreRef} blur={highlightFeature} unblur={removeHighlight}/>
               break;
 
             default: 
