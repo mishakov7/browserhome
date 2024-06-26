@@ -1125,19 +1125,18 @@ button {
 .color-button:hover svg {
   animation: turn-palette 0.6s;
 }
-
+/* 
 @keyframes highlight-shadow {
   0% {
     box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
   } 5% {
     box-shadow: 0px 0px 30px 2px var(--shadow);
-    /* box-shadow: 0px 0px 30px 2px rgba(138, 133, 109, 0.8); */
   } 100% {
     box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
   }
-}
+} */
 
-@keyframes highlight-list {
+/* @keyframes highlight-list {
   0% {
     box-shadow: 0px 0px 20px 2px rgb(255, 255, 255, 0);
   } 50% {
@@ -1145,45 +1144,44 @@ button {
   } 100% {
     box-shadow: 0px 0px 20px 2px rgb(--shadow);
   }
-}
+} */
 
-@keyframes highlight-bg {
+/* @keyframes highlight-bg {
   0% {
     background-color: rgba(255, 255, 255, 0);
   } 5% {
     background-color: var(--shadow);
-    /* background-color: rgba(138, 133, 109, 0.3); */
   } 100% {
     background-color: rgba(255, 255, 255, 0);
   }
-}
+} */
 
-@keyframes blur-bg {
+/* @keyframes blur-bg {
   from {
     filter: blur(20px);
   } to {
     filter: blur(0px);
   }
-}
+} */
 
-@keyframes tut-blur {
+/* @keyframes tut-blur {
   from {
     filter: blur(0px);
   } to {
     filter: blur(50px);
   }
-}
+} */
 
-@keyframes tut-unblur {
+/* @keyframes tut-unblur {
   from {
     filter: blur(50px);
   } to {
     filter: blur(0px);
   }
-}
+} */
 
 
-@keyframes tut-blurlists {
+/* @keyframes tut-blurlists {
   0% {
     filter: blur(0px);
     opacity: 1;
@@ -1194,9 +1192,9 @@ button {
     opacity: 0.25;
 
   }
-}
+} */
 
-@keyframes tut-unblurlists {
+/* @keyframes tut-unblurlists {
   0% {
     filter: blur(50px);
     opacity: 0.25;
@@ -1208,7 +1206,7 @@ button {
     opacity: 1;
 
   }
-}
+} */
 
 .blur > *:not(.highlight, .highlight + .creator) {
   animation: blur-bg 4s;

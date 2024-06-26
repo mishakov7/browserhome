@@ -72,6 +72,9 @@
   position: absolute;
   margin: 2rem 0;
   color: rgb(var(--accent1-txt));
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .left-drawer {
@@ -266,13 +269,13 @@
   z-index: 2;
 }
 
-@keyframes blur-options {
-  from {
-    background-color: hsl(var(--accent1-lt), 70%);
-  } to {
-    background-color: rgba(255, 255, 255, 0);
-  }
-}
+// @keyframes blur-options {
+//   from {
+//     background-color: hsl(var(--accent1-lt), 70%);
+//   } to {
+//     background-color: rgba(255, 255, 255, 0);
+//   }
+// }
 
 #main-wrapper.highlight::before {
   width: 100px;
