@@ -1,0 +1,102 @@
+// #dresser {
+//     display: flex;
+//     justify-content: flex-start;
+//     position: relative;
+//     width: 100%;
+//     height: 100vh;
+// }
+
+#main-container::before,
+#main-container,
+#main-container::after {
+    position: relative;
+    background: var(--base-bg);
+    display: flex;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+#main-container::before,
+#main-container::after {
+    content: "";
+    width: 50px;
+    position: absolute;
+}
+
+#main-container::before {
+    border-radius: 60px 0 0 60px;
+    left: 0px;
+}
+
+#main-container::after {
+    border-radius: 0 60px 60px 0;
+    right: 0px;
+}
+
+#main-container {
+    margin: 32px;
+    // border: solid 32px hsl(var(--accent1));
+    height: calc(100vh - (2 * 36px));
+    width: 100%;
+    border-radius: 60px;
+    transform: none;
+    transform-origin: right;
+    transition: transform 0.3s;
+}
+
+#main-container.opened-left {
+    transform: scaleX(50%);
+    transform-origin: right;
+}
+
+#main-container > * {
+    z-index: 10;
+    transition: transform 0.3s;
+}
+
+#main-wrapper {
+    padding: 5rem;
+}
+
+#main-container.opened-left > * {
+    transform: scaleX(200%);
+}
+
+#main-container > .options-container {
+    position: absolute;
+    transform: rotate(270deg)!important;
+    left: -20px;
+    top: 50%;
+    cursor: pointer;
+}
+
+#main-container.opened-left > .options-container {
+    transform: scaleX(200%) rotate(270deg)!important;
+}
+
+#main-container.opened-left::before,
+#main-container.opened-left::after {
+    transform: scaleX(200%);
+}
+
+#main-container img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+}
+
+#main-container span {
+    background-color: lightyellow;
+    display: block;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+
+    right: 0;
+    top: 50%;
+}
