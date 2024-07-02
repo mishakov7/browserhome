@@ -1,10 +1,9 @@
-// #dresser {
-//     display: flex;
-//     justify-content: flex-start;
-//     position: relative;
-//     width: 100%;
-//     height: 100vh;
-// }
+#dresser {
+    display: flex;
+    justify-content: flex-start;
+    // position: relative;
+    flex-wrap: nowrap;
+}
 
 #main-container::before,
 #main-container,
@@ -22,6 +21,7 @@
     content: "";
     width: 50px;
     position: absolute;
+    z-index: -1;
 }
 
 #main-container::before {
@@ -43,10 +43,12 @@
     transform: none;
     transform-origin: right;
     transition: transform 0.3s;
+    // overflow: hidden;
+
 }
 
 #main-container.opened-left {
-    transform: scaleX(50%);
+    transform: scaleX(95%);
     transform-origin: right;
 }
 
@@ -56,47 +58,42 @@
 }
 
 #main-wrapper {
+    position: relative;
     padding: 5rem;
+
+    height: calc(100vh - (2 * 36px));
+    width: 100%;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+    overflow: hidden;
 }
 
-#main-container.opened-left > * {
-    transform: scaleX(200%);
+#main-container.opened-left #main-wrapper > *,
+#main-container.opened-right #main-wrapper > * {    
+    transform: scaleX(105%);
 }
 
 #main-container > .options-container {
     position: absolute;
-    transform: rotate(270deg)!important;
-    left: -20px;
+    left: -12px;
     top: 50%;
+    transform: none;
     cursor: pointer;
+    transition: transform 0.2s;
 }
 
-#main-container.opened-left > .options-container {
-    transform: scaleX(200%) rotate(270deg)!important;
+#main-container.opened-left > .options-container,
+#main-container.opened-right > .options-container {
+    transform: scaleX(105%) translateX(20px)!important;
 }
 
 #main-container.opened-left::before,
-#main-container.opened-left::after {
-    transform: scaleX(200%);
-}
-
-#main-container img {
-    display: block;
-    width: 200px;
-    height: 200px;
-    position: absolute;
-
-    left: 50%;
-    bottom: 0;
-}
-
-#main-container span {
-    background-color: lightyellow;
-    display: block;
-    width: 200px;
-    height: 200px;
-    position: absolute;
-
-    right: 0;
-    top: 50%;
+#main-container.opened-left::after,
+#main-container.opened-right::before,
+#main-container.opened-right::after {
+    transform: scaleX(105%);
 }
