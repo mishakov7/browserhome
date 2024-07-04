@@ -626,7 +626,7 @@ footer .kofi-button:hover::after {
 
 footer .kofi-button:hover::before,
 footer .cache-button:hover::after {
-  top: -10px;
+  transform: translateY(10px);
 }
 
 footer .kofi-button::before,
@@ -638,8 +638,9 @@ footer .cache-button::after {
   padding: 10px;
   text-transform: uppercase;
   text-align: left;
+  transform: none;
   border-radius: 12px;
-  transition: opacity 0.2s, top 0.2s;
+  transition: opacity 0.2s, transform 0.2s;
 }
 
 footer .kofi-button::after,
@@ -874,15 +875,17 @@ input[type="radio"]:checked + .radio span {
   height: 20px;
   border-radius: 6px;
   border: solid 2.55px rgb(var(--accent1-txt));
-  transition: right 0.2s;
+  transition: transform 0.2s;
 }
 
 .dark-toggle .switch {
-  right: 17.55px;
+  /* right: 17.55px; */
+  transform: translateX(17.55px);
 }
 
 .light-toggle .switch {
-  right: -2.55px;
+  /* right: -2.55px; */
+  transform: translateX(-2.55px);
 }
 
 
@@ -935,7 +938,7 @@ button {
   right: -120px;
   opacity: 0;
   top: -15px;
-  transition: right 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 
 }
 
@@ -953,17 +956,19 @@ button {
   transform: rotate(45deg);
   z-index: 3;
   opacity: 0;
-  transition: right 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .h2-help:hover::after {
   opacity: 1;
-  right: -115px;
+  /* right: -115px; */
+  transform: translateX(5px);
 }
 
 .h2-help:hover::before {
   opacity: 1;
-  right: 120px;
+  /* right: 120px; */
+  transform: translateX(2px);
 }
 
 .h2-help svg {

@@ -39,7 +39,7 @@
     // border: solid 32px hsl(var(--accent1));
     height: calc(100vh - (2 * 36px));
     width: 100%;
-    border-radius: 60px;
+    border-radius: 50px;
     transform: none;
     transform-origin: right;
     transition: transform 0.3s;
@@ -48,7 +48,7 @@
 }
 
 #main-container.opened-left {
-    transform: scaleX(95%);
+    transform: scaleX(99%);
     transform-origin: right;
 }
 

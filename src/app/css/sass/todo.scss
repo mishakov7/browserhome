@@ -6,12 +6,13 @@
     max-width: 50vw;
     right: -135%;
     bottom: -125px;
-    transition: right 0.6s;
+    transition: transform 0.6s;
 }
 
 .opened-left .todolists-container,
 .opened-right .todolists-container {
-    right: -75%;
+    // right: -75%;
+    transform: translateX(-75%);
 }
 
 .list-container {

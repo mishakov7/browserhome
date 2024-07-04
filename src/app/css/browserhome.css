@@ -68,7 +68,6 @@
   .search-container {
     width: 90%;
   }
-
   .search-query {
     font-size: 2em;
   }
@@ -105,8 +104,8 @@
   height: 100px;
   position: absolute;
   z-index: 2;
-  right: 85px;
-  top: -2%;
+  right: 8rem;
+  top: -2rem;
 }
 
 .date span:first-of-type {
@@ -557,7 +556,6 @@
     width: max-content;
     margin-right: 25px;
   }
-
   .date {
     position: relative;
   }
@@ -668,7 +666,7 @@
   margin: 6px;
   list-style-type: none;
   bottom: 0;
-  transition: bottom 0.2s, margin 0.2s;
+  transition: transform 0.2s, margin 0.2s;
   /* animation: hop 0.4s backwards; */
   display: flex;
   flex-direction: row;
@@ -729,7 +727,7 @@
 }
 
 .bookmark:hover {
-  bottom: 12px;
+  transform: translateY(-12px);
 }
 
 .bookmark a {
@@ -799,41 +797,33 @@
     width: 100%;
     max-height: none;
   }
-
   .bookmarks-list {
     overflow-x: visible;
     flex-wrap: wrap;
     width: 100%;
     padding: 40px 0;
   }
-
   .arrows-container {
     display: none !important;
   }
-
   .bookmarks-list:not(.bookmarks-list-creator):hover {
     padding: 40px 0;
   }
-
   .bookmark {
     min-width: 50px;
     min-height: 50px;
     border-radius: 12px;
   }
-
   .bookmark img {
     width: 30px;
   }
-
   .bookmark:hover .remove-button,
-.bookmark:hover .edit-button {
+  .bookmark:hover .edit-button {
     display: none;
   }
-
   .bookmark:hover::before {
     display: none;
   }
-
   .bookmarks-container .create-button svg {
     width: 18px;
   }
@@ -1176,12 +1166,12 @@
   max-width: 50vw;
   right: -135%;
   bottom: -125px;
-  transition: right 0.6s;
+  transition: transform 0.6s;
 }
 
 .opened-left .todolists-container,
 .opened-right .todolists-container {
-  right: -75%;
+  transform: translateX(-75%);
 }
 
 .list-container {
@@ -1607,27 +1597,21 @@ button.list-container:hover::before {
   .todolists-container {
     width: 60vw;
   }
-
   button.list-container {
     left: 500px;
   }
-
   div.list-container:nth-of-type(1) {
     left: 300px;
   }
-
   div.list-container:nth-of-type(2) {
     left: 275px;
   }
-
   div.list-container:nth-of-type(3) {
     left: 250px;
   }
-
   div.list-container:nth-of-type(4) {
     left: 225px;
   }
-
   div.list-container:nth-of-type(5) {
     left: 200px;
   }
@@ -1671,14 +1655,14 @@ button.list-container:hover::before {
   margin: 32px;
   height: calc(100vh - 72px);
   width: 100%;
-  border-radius: 60px;
+  border-radius: 50px;
   transform: none;
   transform-origin: right;
   transition: transform 0.3s;
 }
 
 #main-container.opened-left {
-  transform: scaleX(95%);
+  transform: scaleX(99%);
   transform-origin: right;
 }
 
@@ -1796,6 +1780,8 @@ button.list-container:hover::before {
   max-height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--accent1-txt), 0.1) rgba(var(--accent1-txt), 0.05);
 }
 
 .left-drawer {
@@ -1871,7 +1857,7 @@ button.list-container:hover::before {
   position: relative;
   background: none;
   left: 5px;
-  transition: left 0.2s;
+  transition: transform 0.2s;
   cursor: pointer;
 }
 
@@ -1925,7 +1911,7 @@ button.list-container:hover::before {
 
 .options-container:hover .buttons-container,
 .options-container.hovered .buttons-container {
-  left: 35px;
+  transform: translateX(75px);
 }
 
 .opened-left .options-container .buttons-container {
@@ -1967,7 +1953,7 @@ button.list-container:hover::before {
   z-index: -1;
   top: -40px;
   left: -50px;
-  transition: left 0.2s;
+  transition: transform 0.2s;
 }
 
 .options-container .buttons-container button {
@@ -2025,15 +2011,6 @@ button.list-container:hover::before {
   content: "Reset Placement";
 }
 
-.faq-group {
-  height: 250px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(var(--accent1-txt), 0.1) rgba(var(--accent1-txt), 0.05);
-  padding-right: 25px;
-}
-
 .faq-button > summary {
   list-style: none;
   position: relative;
@@ -2060,7 +2037,7 @@ button.list-container:hover::before {
   width: 100%;
   margin: 10px 0;
   background-color: rgba(0, 0, 0, 0.05);
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 
 .faq-button:hover {
@@ -2274,7 +2251,7 @@ button.list-container:hover::before {
   left: -100%;
   top: -350%;
   opacity: 0;
-  transition: top 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .vocab::before {
@@ -2290,17 +2267,17 @@ button.list-container:hover::before {
   transform: rotate(45deg);
   z-index: 2;
   opacity: 0;
-  transition: top 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .vocab:hover::after {
   opacity: 1;
-  top: -400%;
+  transform: translateY(-50%);
 }
 
 .vocab:hover::before {
   opacity: 1;
-  top: -22px;
+  transform: translateY(2px) rotate(45deg);
 }
 
 /*# sourceMappingURL=browserhome.css.map */

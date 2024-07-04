@@ -110,7 +110,7 @@
   margin: 6px;
   list-style-type: none;
   bottom: 0;
-  transition: bottom 0.2s, margin 0.2s;
+  transition: transform 0.2s, margin 0.2s;
   /* animation: hop 0.4s backwards; */
   display: flex;
   flex-direction: row;
@@ -175,7 +175,8 @@
 }
 
 .bookmark:hover {
-  bottom: 12px;
+  // bottom: 12px;
+  transform: translateY(-12px);
 }
 
 .bookmark a {
