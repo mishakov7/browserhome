@@ -641,6 +641,7 @@ footer .cache-button::after {
   transform: none;
   border-radius: 12px;
   transition: opacity 0.2s, transform 0.2s;
+  will-change: transform;
 }
 
 footer .kofi-button::after,
@@ -876,6 +877,7 @@ input[type="radio"]:checked + .radio span {
   border-radius: 6px;
   border: solid 2.55px rgb(var(--accent1-txt));
   transition: transform 0.2s;
+  will-change: transform;
 }
 
 .dark-toggle .switch {

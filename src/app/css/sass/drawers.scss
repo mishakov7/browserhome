@@ -32,15 +32,15 @@
 
 @keyframes opendrawer_left {
   0% {
-    left: -100vw;
-    width: 0vw;
+    // left: -100vw;
+    transform: translateX(-100vw);
   
   } 50% {
     position: relative;
 
   } 100% {
-    left: 0;
-    width: 20vw;
+    // left: 0;
+    transform: translateX(100vw);
     position: relative;
 
   }
@@ -48,16 +48,16 @@
 
 @keyframes closedrawer_left {
   0% {
-    left: 0;
-    width: 20vw;
+    // left: 0;
+    transform: translateX(100vw);
     position: relative;
 
   } 50% {
     position: relative;
 
   } 100% {
-    left: -100vw;
-    width: 0vw;
+    // left: -100vw;
+    transform: translateX(-100vw);
     position: absolute;
 
   }
@@ -77,17 +77,18 @@
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--accent1-txt), 0.1) rgba(var(--accent1-txt), 0.05);
+  will-change: scroll-position, transform;
 }
 
 .left-drawer {
   padding: 3rem 1rem 3rem 3rem;
-  animation: opendrawer_left 0.6s forwards;
+  animation: opendrawer_left 0.4s forwards;
 }
 
 .right-drawer {
   padding: 1rem;
   padding: 3rem 3rem 3rem 1rem;
-  animation: opendrawer_right 0.6s forwards;
+  animation: opendrawer_right 0.4s forwards;
 }
 
 .theme-drawer,
@@ -259,6 +260,7 @@
   top: -40px;
   left: -50px;
   transition: transform 0.2s;
+  will-change: transform;
 }
 
 .options-container .buttons-container button {

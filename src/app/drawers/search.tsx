@@ -1,7 +1,10 @@
 import { setgroups } from 'process';
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef, useLayoutEffect } from 'react';
+import DrawerContext from '@/app/utilities/reducers';
 
 const Drawer = (props : any) => {
+    const { ctx, setCtx } = useContext(DrawerContext);
+
     const drawerRef = useRef<HTMLDivElement>(null);
     const gradientRef = useRef<SVGAnimateElement>(null);
 
@@ -27,7 +30,8 @@ const Drawer = (props : any) => {
             setTimeout(() => {
                 switch(navigator) {
                     case -1:
-                        props.tutorial(-1);
+                        // props.tutorial(-1);
+                        setCtx({ type: "tutorial_search", step: -1 });
 
                         if (localSettings) {
                             localSettings.tutorial = 0;
@@ -44,7 +48,8 @@ const Drawer = (props : any) => {
                         break;
     
                     case 1:
-                        props.tutorial(-1);
+                        // props.tutorial(-1);
+                        setCtx({ type: "tutorial_search", step: -1 });
                         props.setDrawer("bookmark", "right");
 
                         if (localSettings) {
@@ -91,14 +96,14 @@ const Drawer = (props : any) => {
             }
         } 
 
-        if (props.step == -1) {
+        if (ctx.t_search == -1) {
             props.blur(props.blurRef.current, "blur");
             props.interact(props.blurRef.current);    
             
             props.tutorial(0);
         
         } else {
-            switch(props.step) {
+            switch(ctx.t_search) {
                 case 1:
                     setStep1(true);
                     animateGradient();
@@ -111,7 +116,7 @@ const Drawer = (props : any) => {
             }
         }
 
-    }, [props.step]);
+    }, [ctx.t_search]);
 
     return(
         <>

@@ -1,9 +1,11 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import Draggable from 'react-draggable';
 import Pin from './pin';
+import DrawerContext from '@/app/utilities/reducers';
 
 export default function Note(props: any) {
+  const { ctx, setCtx } = useContext(DrawerContext);
 
   const [coordinates, setCoordinates] = useState({x: props.storage.xpos, y: props.storage.ypos});
   const [notetext, setNotetext] = useState(props.storage.note);
@@ -33,8 +35,8 @@ export default function Note(props: any) {
 
     props.handleChange(updatedNote, props.idx);
 
-    if (props.step >= 0) {
-      props.handleStep(1);
+    if (ctx.t_sticky >= 0) {
+      setCtx({ type: "tutorial_sticky", step: 1 });
     }
 
   }
@@ -114,7 +116,10 @@ export default function Note(props: any) {
     }
 
     props.handleChange(updatedNote, props.idx);
-    props.handleStep(2);
+
+    if (ctx.t_sticky > 0) {
+      setCtx({ type: "tutorial_sticky", step: 2 });
+    }
   }
 
   return (

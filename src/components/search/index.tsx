@@ -1,12 +1,14 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import Creator from '../creator';
+import DrawerContext from '@/app/utilities/reducers';
 
 import affirmations from  './affirmations';
 import random from './random';
 import inspirational from './inspirational';
 
 export default function Search(props: any) {
+  const { ctx, setCtx } = useContext(DrawerContext);
 
   const google = 'https://www.google.com/search?q=';
   const duckduckgo = 'https://www.duckduckgo.com/?q=';
@@ -109,8 +111,8 @@ export default function Search(props: any) {
     assignSearchState(String(newSearch.engine), String(newSearch.theme));
     toggleCreator();
 
-    if (props.step >= 0) {
-      props.setTutorial(2);
+    if (ctx.t_search >= 0) {
+      setCtx({ type: "tutorial_search", step: 2 });
     }
 
   }
@@ -150,13 +152,13 @@ export default function Search(props: any) {
   }
 
   const openBackgroundTab = (ev: MouseEvent) => {
-    if (searchAnchor.current && props.step >= 0) {
+    if (searchAnchor.current && ctx.t_search >= 0) {
       ev.preventDefault();
       let event = new MouseEvent("click", {ctrlKey: true});
 
       searchAnchor.current.dispatchEvent(event);
 
-      props.setTutorial(1);
+      setCtx({ type: "tutorial_search", step: 1 });
     }
   }
 
@@ -184,11 +186,11 @@ export default function Search(props: any) {
 
   return (
     <>
-    <div ref={props.parentRef} className='search-container'>
+    <div className='search-container'>
         <p className="search-query">{quoteSearch}</p>
         <div className="inputGroup">
           
-          <button ref={props.summonRef} onClick={toggleCreator} className={'se-icon se-icon-' + searchEngine.split(".")[1]}>
+          <button onClick={toggleCreator} className={'se-icon se-icon-' + searchEngine.split(".")[1]}>
           </button> 
           
           <input type="text" placeholder={quoteSearch} onChange={e => setSearch(e.target.value)}/>

@@ -1,10 +1,8 @@
 "use client";
-import React, { useReducer, useState, useEffect, useRef, Suspense } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, Suspense } from 'react';
 import Head from 'next/head';
 import Drawers from '@/app/utilities/drawers';
 import Loader from '@/app/utilities/loader';
-import { lightTheme, darkTheme, setCSSAccent, setCSSTheme } from './types/themes';
-import { DrawerContext, drawerManager, initialState } from './utilities/reducers';
 
 // Each section of the site
 import Search from '@/components/search';
@@ -12,15 +10,106 @@ import Stickies from '@/components/stickies';
 import ToDoLists from '@/components/todolists';
 import Bookmarks from '@/components/bookmarks';
 
+const lightTheme = [
+  ["--base-bg", "#F5F1E1"],
+  ["--base-container", "#FFF8E5"],
+  ["--base-txt", "#1E1A35"],
+  ["--secondary-txt", "#867D64"],
+  ["--secondary-txt-lt", "#CDC7AF"],
+  ["--subtle-border", "rgba(205, 199, 175, 0.15)"],
+  ["--shadow", "rgba(197, 192, 172, 0.3)"]
+]
+
+const darkTheme = [
+  ["--base-bg", "#1C202C"],
+  ["--base-container", "#2C3245"],
+  ["--base-txt", "#F6F6F6"],
+  ["--secondary-txt", "#616A82"],
+  ["--secondary-txt-lt", "#949AAA"],
+  ["--subtle-border", "rgba(76, 91, 136, 0.15)"],
+  ["--shadow", "rgba(8, 13, 30, 0.2)"]
+]
+
 export default function Home() {
-  const [state, dispatch] = useReducer(drawerManager, initialState); 
+
+  const [LeftDrawer, setDrawerLeft] : any = useState(null);
+  const [RightDrawer, setDrawerRight] : any = useState(null);
+  const [stickyCommand, setStickyCommand] = useState(0);
 
   const mainContainer = useRef<HTMLDivElement>(null);
   const dresser = useRef<HTMLDivElement>(null);
   const blurLayers = useRef<HTMLDivElement[]>([]);
 
+  const searchRef = useRef(null);
+  const bookmarkRef = useRef(null);
+  const listRef = useRef(null);
   const moreRef = useRef(null);
   const optionsRef = useRef(null);
+
+  const [searchTutorial, setSearchTutorial] = useState(-1);
+  const [bookmarkTutorial, setBookmarkTutorial] = useState(-1);  
+  const [listTutorial, setListTutorial] = useState(-1);  
+  const [stickyTutorial, setStickyTutorial] = useState(-1);  
+
+  const clickFeature = (ref: any) => {
+    window.scrollTo({top: 0, behavior: "smooth"});
+    ref.click();
+  }
+
+  const hoverFeature = (ref: any) => {
+    window.scrollTo({top: 0, behavior: "smooth"});
+    ref.classList.add("hovered");
+  }
+
+  const highlightFeature = (ref: any, cssclass: string) => {   
+    window.scrollTo({top: 0, behavior: "smooth"});
+
+    switch(ref) {
+      case searchRef.current:
+        blurLayers.current[1].classList.add(cssclass);
+        blurLayers.current[2].classList.add(cssclass);
+        blurLayers.current[3].classList.add(cssclass);
+        break;
+      
+      case moreRef.current:
+        blurLayers.current[0].classList.add(cssclass);
+        blurLayers.current[2].classList.add(cssclass);
+        blurLayers.current[3].classList.add(cssclass);
+        break;
+
+      case listRef.current:
+        blurLayers.current[0].classList.add(cssclass);
+        blurLayers.current[1].classList.add(cssclass);
+        blurLayers.current[3].classList.add(cssclass);
+        break;
+
+      case bookmarkRef.current:
+        blurLayers.current[0].classList.add(cssclass);
+        blurLayers.current[1].classList.add(cssclass);
+        blurLayers.current[2].classList.add(cssclass);
+        break;
+    }
+
+    ref.classList.add("highlight");
+  }
+
+  const removeHighlight = (ref: any, timeout: number) => {
+    setTimeout(() => {
+      blurLayers.current[0].classList.remove("blur");
+      blurLayers.current[1].classList.remove("blur");
+      blurLayers.current[2].classList.remove("blur");
+      blurLayers.current[3].classList.remove("blur");
+
+      blurLayers.current[0].classList.remove("reverse-blur");
+      blurLayers.current[1].classList.remove("reverse-blur");
+      blurLayers.current[2].classList.remove("reverse-blur");
+      blurLayers.current[3].classList.remove("reverse-blur");
+
+      ref.classList.remove("highlight");
+      ref.classList.remove("hovered");
+
+    }, timeout);
+  }
 
   // Tutorial
   function finishTutorial(lastStep: Boolean) {
@@ -31,7 +120,10 @@ export default function Home() {
       localStorage.setItem('settings', JSON.stringify(localSettings));
     }
 
-    dispatch({ type: "tutorial_finish" });
+    setSearchTutorial(-1);
+    setBookmarkTutorial(-1);
+    setListTutorial(-1);
+    setStickyTutorial(-1);
 
     if (lastStep) {
       changeDrawer("theme", "left");
@@ -40,12 +132,54 @@ export default function Home() {
     }
   }
 
+  // Themes
+  function setCSSTheme(theme: string) {
+      if (theme == "dark") {
+          dresser.current?.classList.add("dark-theme");
+          darkTheme.forEach(item => {
+              document.documentElement.style.setProperty(item[0], item[1]); 
+          });
+
+      } else {
+          dresser.current?.classList.add("light-theme");
+          lightTheme.forEach(item => {
+              document.documentElement.style.setProperty(item[0], item[1]); 
+          });        
+      }
+  }
+
+  function setCSSAccent(accent: string, color: string) {
+    document.documentElement.style.setProperty(('--' + accent), color);
+    document.documentElement.style.setProperty(('--' + accent + '-lt'), color.split("%")[0] + "%");
+    document.documentElement.style.setProperty(('--' + accent + '-dk'), color.split(",")[0]);
+
+  }
+
   function updateDrawer(drawer: any) {
     let component;
     if (drawer != null) {
       Drawers.map((x: any) => {
         if (x.file == drawer) {
-            component = <x.tag setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+          switch (drawer) {
+            case "search":
+              component = <x.tag skip={finishTutorial} tutorial={setSearchTutorial} step={searchTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={searchRef} blur={highlightFeature} unblur={removeHighlight}/>
+              break;
+  
+            case "bookmark":
+              component = <x.tag skip={finishTutorial} tutorial={setBookmarkTutorial} step={bookmarkTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={bookmarkRef} blur={highlightFeature} unblur={removeHighlight}/>
+              break;
+
+            case "list":
+              component = <x.tag skip={finishTutorial} tutorial={setListTutorial} step={listTutorial} setDrawer={changeDrawer} interact={clickFeature} blurRef={listRef} blur={highlightFeature} unblur={removeHighlight}/>
+              break;
+
+            case "sticky":
+              component = <x.tag skip={finishTutorial} tutorial={setStickyTutorial} step={stickyTutorial} setDrawer={changeDrawer} interact={hoverFeature} hoverRef={optionsRef} blurRef={moreRef} blur={highlightFeature} unblur={removeHighlight}/>
+              break;
+
+            default: 
+              component = <x.tag setDrawer={changeDrawer} dresserRef={dresser.current} contentRef={mainContainer.current} />
+          }
         }
 
       });
@@ -58,25 +192,43 @@ export default function Home() {
   function changeDrawer(drawer: any, direction: string) {
     if (drawer != null) {
       Drawers.map((x: any) => {
-        if (x.file == drawer) {
-          x.element = updateDrawer(drawer);
-          dispatch({ type: "open_drawer", drawer: x.element, direction: direction});
+
+        x.element = updateDrawer(drawer);
+
+        if (x.file == drawer && direction == "left") {
+          setDrawerLeft(x.element);
+          setDrawerRight(null);
+          mainContainer.current?.classList.add("opened-left");
+          mainContainer.current?.classList.remove("opened-right");
+
+        } else if (x.file == drawer && direction == "right") {
+          setDrawerRight(x.element);
+          setDrawerLeft(null);
+          mainContainer.current?.classList.add("opened-right");
+          mainContainer.current?.classList.remove("opened-left");
+
         }
       });
     
     } else {
-      dispatch({ type: "close_drawer"});
+      if (direction == "left") {
+        setDrawerLeft(null);
+        mainContainer.current?.classList.remove("opened-left");
+      } else {
+        setDrawerRight(null);
+        mainContainer.current?.classList.remove("opened-right");
+      }
     }
   }
   
   useEffect(() => {
     const localSettings = JSON.parse(String(localStorage.getItem('settings')));
 
-    if (state.direction != "right") {
+    if (RightDrawer == null) {
       if (!localSettings) {
         changeDrawer("intro", "left");
 
-        setCSSTheme(dresser.current, "light");
+        setCSSTheme("light");
         setCSSAccent("accent1", "259, 53%, 62%");
         setCSSAccent("accent2", "151, 53%, 62%");
         setCSSAccent("accent3", "349, 95%, 62%");
@@ -120,37 +272,33 @@ export default function Home() {
           }
         }
 
-        setCSSTheme(dresser.current, localSettings.theme);
+        setCSSTheme(localSettings.theme);
         setCSSAccent("accent1", localSettings.accent1);
         setCSSAccent("accent2", localSettings.accent2);
         setCSSAccent("accent3", localSettings.accent3);
       }
     }
 
-    if (state.direction == "right" && state.t_search > 0) {
-      // setDrawerRight(updateDrawer("search"));
-      changeDrawer("search", "right");
+    if (RightDrawer && searchTutorial > 0) {
+      setDrawerRight(updateDrawer("search"));
     }
     
-    if (state.direction == "right" && state.t_bookmark > 0) {
-      // setDrawerRight(updateDrawer("bookmark"));
-      changeDrawer("bookmark", "right");
+    if (RightDrawer && bookmarkTutorial > 0) {
+      setDrawerRight(updateDrawer("bookmark"));
     }
 
-    if (state.direction == "right" && state.t_list > 0) {
-      // setDrawerRight(updateDrawer("list"));
-      changeDrawer("list", "right");
+    if (RightDrawer && listTutorial > 0) {
+      setDrawerRight(updateDrawer("list"));
     }
 
-    if (state.direction == "right" && state.t_sticky > 0) {
-      // setDrawerRight(updateDrawer("sticky"));
-      changeDrawer("sticky", "right");
+    if (RightDrawer && stickyTutorial > 0) {
+      setDrawerRight(updateDrawer("sticky"));
     }
 
-}, [state.t_bookmark, state.t_list, state.t_search, state.t_sticky]); 
+}, [searchTutorial, bookmarkTutorial, listTutorial, stickyTutorial]); 
 
   return (
-    <DrawerContext.Provider value={{ ctx: state, setCtx: dispatch as any }}>
+    <>
       <div ref={dresser} id="dresser" className="accent1-bg">
       <Head>
           <title>Home | Misha Lukova</title>
@@ -158,13 +306,13 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        { state.direction == "left" ? state.drawer : null }
+        { LeftDrawer }
 
-        <div ref={mainContainer} id="main-container" className={(state.direction == "left" ? "opened-left " : "") + (state.direction == "right" ? "opened-right " : "") + "accent1-border"}>
+        <div ref={mainContainer} id="main-container" className="accent1-border">
 
           <Suspense fallback={<Loader />}>
             <div ref={optionsRef} className='options-container'>
-                <button className='settings-button' onClick={ () => { if (state.direction != "left") { changeDrawer("theme", "left") } else { changeDrawer(null, "left") } }}>
+                <button className='settings-button' onClick={ () => { if (LeftDrawer == null) { changeDrawer("theme", "left") } else { changeDrawer(null, "left") } }}>
                     <svg className="accent1-fill" width="16" height="37" viewBox="0 0 16 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.0781 9.31566C16.7805 14.1109 16.7805 22.8891 11.0781 27.6843L4.4122e-07 37L0 0L11.0781 9.31566Z"/>
                     </svg>
@@ -197,19 +345,18 @@ export default function Home() {
             <div ref={moreRef} id="main-wrapper" >
 
               <div className='col feature-group'>
-                <Search />
-                <Stickies />
-                <ToDoLists />
+                <Search parentRef={(el: any) => (blurLayers.current[0] = el)} summonRef={searchRef} setTutorial={setSearchTutorial} step={searchTutorial} />
+                <Stickies parentRef={(el: any) => (blurLayers.current[1] = el)} command={stickyCommand} setCommand={setStickyCommand} setTutorial={setStickyTutorial} step={stickyTutorial} />
+                <ToDoLists parentRef={(el: any) => (blurLayers.current[2] = el)} summonRef={listRef} setTutorial={setListTutorial} step={listTutorial} />
               </div>
     
-              <Bookmarks />
+              <Bookmarks parentRef={(el: any) => (blurLayers.current[3] = el)} summonRef={bookmarkRef} setTutorial={setBookmarkTutorial} step={bookmarkTutorial} />
             </div>
           </Suspense>
 
         </div>
 
-        { state.direction == "right" ? state.drawer : null }
-
+        { RightDrawer }
       </div>
 
       <footer>
@@ -232,7 +379,7 @@ export default function Home() {
             <p>Welcome to your homebase! </p>
             <p>If you&apos;ve gotten ahold of this link, congrats! You are one of my beta testers. If you experience any issues with a feature, please report it.</p>
             <p>Here are some of the fun things you can do here: </p>
-            {/* <ul className='guide'>
+            <ul className='guide'>
               <li>
                   <details>
                       <summary>Change your search settings! <button onClick={() => {highlightFeature(searchRef.current, "blur"); clickFeature(searchRef.current); removeHighlight(searchRef.current, 4000);}}>Show me!</button></summary>
@@ -260,7 +407,7 @@ export default function Home() {
                       <p>** If you are a beta tester, please test polaroids.. I am wondering if I need to set a limit.</p>
                   </details>
               </li>
-            </ul> */}
+            </ul>
 
             <p>This page is intended to be your browser home screen, meaning that every time you click on your browser, this will be the first page that appears. If you need it, here are some guides on how to change your browser startup page:</p>
             <ul>
@@ -276,6 +423,6 @@ export default function Home() {
         </div>
       </footer>
 
-    </DrawerContext.Provider>
+    </>
   )
 }

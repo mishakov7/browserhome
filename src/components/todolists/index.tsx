@@ -7,7 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import Creator from '../creator';
 import List from './list';
 import EditList from './editlist';
-import Trashcan from "../utilities/trashcan";
+import Trashcan from "../../app/utilities/trashcan";
 import { title } from 'process';
 
 export default function ToDoLists(props: any) {

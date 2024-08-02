@@ -44,6 +44,7 @@
     transform-origin: right;
     transition: transform 0.3s;
     // overflow: hidden;
+    will-change: transform;
 
 }
 
@@ -55,11 +56,13 @@
 #main-container > * {
     z-index: 10;
     transition: transform 0.3s;
+    will-change: transform;
 }
 
 #main-wrapper {
     position: relative;
     padding: 5rem;
+    border-radius: 50px;
 
     height: calc(100vh - (2 * 36px));
     width: 100%;
@@ -84,12 +87,14 @@
     transform: none;
     cursor: pointer;
     transition: transform 0.2s;
+    will-change: transform;
+
 }
 
-#main-container.opened-left > .options-container,
-#main-container.opened-right > .options-container {
+#main-container.opened-left > .options-container {
     transform: scaleX(105%) translateX(20px)!important;
 }
+
 
 #main-container.opened-left::before,
 #main-container.opened-left::after,

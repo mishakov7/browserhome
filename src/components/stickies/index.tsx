@@ -1,12 +1,13 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 // import Draggable from 'react-draggable';
 import Polaroid from './polaroid';
 import Note from './note';
-import { create } from 'domain';
-
+import DrawerContext from '@/app/utilities/reducers';
 
 export default function Stickies(props: any) {
+  const { ctx, setCtx } = useContext(DrawerContext);
+
   const defaultNote = [{
     "note": "Change what this note says!",
     "color": "accent" + randomIdx(0, 3),
@@ -201,8 +202,8 @@ export default function Stickies(props: any) {
       // localStorage.setItem('polaroids', JSON.stringify(polaroids));
     }
 
-    if (props.command != 0) {
-      switch(props.command) {
+    if (ctx.t_sticky != 0) {
+      switch(ctx.t_sticky) {
         case 1:
           resetStickies();
           break;
@@ -225,12 +226,12 @@ export default function Stickies(props: any) {
   
       }
       
-      props.setCommand(0);
+      setCtx({ type: "tutorial_sticky", step: 0 });
     }
 
 
 
-  }, [props.command/*notes, polaroids*/]);
+  }, [ctx.t_sticky]);
 
   return (
     <>
@@ -253,9 +254,6 @@ export default function Stickies(props: any) {
                     changeLayer={setTopSticky}
                     handleChange={editNote}
                     handleDelete={deleteNote}
-
-                    step={props.step}
-                    handleStep={props.setTutorial}
                 />
                 
               ))
@@ -272,10 +270,6 @@ export default function Stickies(props: any) {
                     changeLayer={setTopSticky}
                     handleChange={editPolaroid}
                     handleDelete={deletePolaroid}
-
-                    step={props.step}
-                    handleStep={props.setTutorial}
-
                 />
               ))
             }
